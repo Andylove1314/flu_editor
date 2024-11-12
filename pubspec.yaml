@@ -1,0 +1,115 @@
+name: flu_editor
+description: "local editor"
+version: 0.0.1
+homepage: http://gitlab.bigwinepot.com:8888/app/flu_editor.git
+
+environment:
+  sdk: ^3.5.2
+  flutter: '>=3.3.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+  flutter_gpu_filters_interface: ^0.0.18
+  exif: ^3.3.0
+  collection: ^1.16.0
+
+  flutter_bloc: ^8.1.6
+  equatable: ^2.0.5
+  rxdart: ^0.27.7
+
+  flutter_cache_manager: ^3.4.1
+  photo_view: ^0.15.0
+
+  auto_size_text: ^3.0.0
+  image: ^4.3.0
+  extended_image: ^9.0.4
+  image_cropper: ^8.0.2
+  vibration: ^2.0.1
+  haptic_feedback: ^0.5.1+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter packages.
+flutter:
+  # This section identifies this Flutter project as a plugin project.
+  # The 'pluginClass' specifies the class (in Java, Kotlin, Swift, Objective-C, etc.)
+  # which should be registered in the plugin registry. This is required for
+  # using method channels.
+  # The Android 'package' specifies package in which the registered class is.
+  # This is required for using method channels on Android.
+  # The 'ffiPlugin' specifies that native code should be built and bundled.
+  # This is required for using `dart:ffi`.
+  # All these are used by the tooling to maintain consistency when
+  # adding or updating assets for this project.
+  plugin:
+    platforms:
+      android:
+        package: com.example.flu_editor
+        pluginClass: FluEditorPlugin
+      ios:
+        pluginClass: FluEditorPlugin
+
+  shaders:
+#    - shaders/lookup2.frag
+#    - shaders/hald_lookup2.frag
+    - shaders/lookup_noise.frag
+    - shaders/colors_mulit.frag
+    - shaders/none2.frag
+#    - shaders/sharpen.frag
+#    - shaders/temperature.frag
+#    - shaders/shadow.frag
+#    - shaders/noise.frag
+#    - shaders/vignette2.frag
+#    - shaders/whitebalance2.frag
+#    - shaders/vibrance2.frag
+#    - shaders/contrast2.frag
+#    - shaders/exposure2.frag
+#    - shaders/brightness2.frag
+#    - shaders/saturation2.frag
+#    - shaders/hue2.frag
+#    - shaders/highlight.frag
+
+  assets:
+    - images/
+    - images/colors/
+    - images/crop/
+    - images/filters/
+    - luts/
+  # To add assets to your plugin package, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  #
+  # For details regarding assets in packages, see
+  # https://flutter.dev/to/asset-from-package
+  #
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/to/resolution-aware-images
+
+  # To add custom fonts to your plugin package, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts in packages, see
+  # https://flutter.dev/to/font-from-package
