@@ -29,6 +29,8 @@ dependencies:
   vibration: ^2.0.1
   haptic_feedback: ^0.5.1+1
 
+  path_provider: ^2.1.4
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
