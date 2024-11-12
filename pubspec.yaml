@@ -1,7 +1,7 @@
 name: flu_editor
 description: "local editor"
-version: 0.0.1
-homepage: http://gitlab.bigwinepot.com:8888/app/flu_editor.git
+version: 1.0.0
+homepage: https://github.com/Andylove1314/flu_editors.git
 
 environment:
   sdk: ^3.5.2
