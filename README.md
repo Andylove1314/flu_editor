@@ -1,7 +1,7 @@
 
 # **flu_editor**
 
-![Banner](https://example.com/banner-image.png)
+![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 
 `flu_editor` 是一个用于照片和视频的颜色滤镜编辑插件。
 
