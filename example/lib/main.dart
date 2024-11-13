@@ -144,7 +144,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _goEditor(BuildContext context) async {
-    EditorUtil.pushHome(context,
+    EditorUtil.goFluEditor(context,
         orignal: _currentImage,
         vipStatusCb: () {
           debugPrint('get vip status: $isVipUser');
@@ -186,7 +186,8 @@ class _MyAppState extends State<MyApp> {
         filtersCb: () => _fetchLJ(),
         stickersCb: () => _fetchStickers(),
         fontsCb: () => _fetchFonts(),
-        framesCb: () => _fetchFrames());
+        framesCb: () => _fetchFrames(),
+        closeEditorCb: (after) => debugPrint('last image = $after'));
   }
 
   Future<List<EffectData>> _fetchPF() async {

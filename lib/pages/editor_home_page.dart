@@ -25,15 +25,15 @@ class EditorHomePage extends StatelessWidget {
             !context.read<EditorHomeCubit>().saved) {
           showSaveImagePop(context, onSave: () {
             context.read<EditorHomeCubit>().saveImage();
-            EditorUtil.clearTmpObject();
+            EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
             Navigator.pop(context);
           }, onCancel: () {
-            EditorUtil.clearTmpObject();
+            EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
             Navigator.pop(context);
           });
           return Future.value(false);
         }
-        EditorUtil.clearTmpObject();
+        EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
         return Future.value(true);
       },
       child: Scaffold(
