@@ -21,6 +21,7 @@ class EditorUtil {
   static StickersCallback? stickersCallback;
   static FontsCallback? fontsCallback;
   static FramesCallback? framesCallback;
+  static CloseEditorCallback? closeEditorCallback;
 
   static EditorHomeCubit? _homeCubit;
   static List<FilterData> filterList = [];
@@ -72,7 +73,7 @@ class EditorUtil {
     ));
   }
 
-  static void pushHome(BuildContext context,
+  static void goFluEditor(BuildContext context,
       {required String orignal,
       VipStatusCallback? vipStatusCb,
       VipActionCallback? vipActionCb,
@@ -85,7 +86,8 @@ class EditorUtil {
       FiltersCallback? filtersCb,
       StickersCallback? stickersCb,
       FontsCallback? fontsCb,
-      FramesCallback? framesCb}) {
+      FramesCallback? framesCb,
+      CloseEditorCallback? closeEditorCb}) {
     _registerMultGlsl();
 
     vipStatusCallback = vipStatusCb;
@@ -100,6 +102,7 @@ class EditorUtil {
     stickersCallback = stickersCb;
     fontsCallback = fontsCb;
     framesCallback = framesCb;
+    closeEditorCallback = closeEditorCb;
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
@@ -389,7 +392,7 @@ class EditorUtil {
     return await deleteEffectCallback?.call(id);
   }
 
-  static void clearTmpObject() {
+  static void clearTmpObject(String after) {
     vipStatusCallback = null;
     vipActionCallback = null;
     saveCallback = null;
@@ -404,6 +407,11 @@ class EditorUtil {
     stickerList.clear();
     fontList.clear();
     frameList.clear();
+    closeEditorCallback?.call(after);
+    Future.delayed(const Duration(milliseconds: 200), (){
+      closeEditorCallback = null;
+    });
+
   }
 
   static Future<Uint8List> loadSourceImage(String afterPath) async {
