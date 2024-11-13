@@ -65,6 +65,9 @@ part 'configuration/colors/saturation_configuration2.dart';
 part 'configuration/filters/lookup_configuration2.dart';
 
 part 'models/filter_config_data.dart';
+part 'models/sticker_data.dart';
+part 'models/font_data.dart';
+part 'models/frame_data.dart';
 
 part 'base/configuration.dart';
 part 'base/parameters.dart';
