@@ -12,15 +12,19 @@ typedef ToastActionCallback = void Function(String msg);
 typedef SaveEffectCallback = Future<bool> Function(EffectData effect);
 typedef DeleteEffectCallback = Future<bool> Function(dynamic effectId);
 typedef EffectsCallback = Future<List<EffectData>> Function(int page);
+typedef FiltersCallback = Future<List<FilterData>> Function();
+typedef StickersCallback = Future<List<StickerData>> Function();
+typedef FontsCallback = Future<List<FontsData>> Function();
+typedef FramesCallback = Future<List<FrameData>> Function();
 
 final mainActions = [
   ActionData(type: 0, name: '裁剪', icon: 'icon_caijian_edit@3x'.imagePng),
   ActionData(type: 1, name: '颜色', icon: 'icon_color_edit@3x'.imagePng),
   ActionData(type: 2, name: '滤镜', icon: 'icon_lut_edit@3x'.imagePng),
   // ActionData(type: 3, name: '模糊', icon: 'icon_blur_edit@3x'.imagePng),
-  // ActionData(type: 4, name: '贴纸', icon: 'icon_tiezhi_edit@3x'.imagePng),
-  // ActionData(type: 5, name: '文字', icon: 'icon_word_edit@3x'.imagePng),
-  // ActionData(type: 6, name: '边框', icon: 'icon_biankuang_edit@3x'.imagePng)
+  ActionData(type: 4, name: '贴纸', icon: 'icon_tiezhi_edit@3x'.imagePng),
+  ActionData(type: 5, name: '文字', icon: 'icon_word_edit@3x'.imagePng),
+  ActionData(type: 6, name: '边框', icon: 'icon_biankuang_edit@3x'.imagePng)
 ];
 
 final Map<String, double> filterParamInitValues = {

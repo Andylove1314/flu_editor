@@ -144,44 +144,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _goEditor(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Material(
-            color: Colors.transparent,
-            child: Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.black,
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '加载滤镜中',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-    List<FilterData> groups = await _fetchLJ();
-
-    Navigator.pop(context);
-
     EditorUtil.pushHome(context,
         orignal: _currentImage,
-        fs: groups,
         vipStatusCb: () {
           debugPrint('get vip status: $isVipUser');
           return isVipUser;
@@ -218,7 +182,11 @@ class _MyAppState extends State<MyApp> {
         deleteEffectCb: (id) async {
           debugPrint('删除配方：$id');
           return await true;
-        });
+        },
+        filtersCb: () => _fetchLJ(),
+        stickersCb: () => _fetchStickers(),
+        fontsCb: () => _fetchFonts(),
+        framesCb: () => _fetchFrames());
   }
 
   Future<List<EffectData>> _fetchPF() async {
@@ -252,13 +220,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<List<FilterData>> _fetchLJ() async {
-
     FilterDetail detail1 = FilterDetail();
     detail1.id = 1;
     detail1.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail1.filterImage =
-    'luts/01-x.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
+    detail1.filterImage = 'luts/01-x.png';
     detail1.name = '滤镜1';
     detail1.noise = 0.2;
     detail1.vip = 1;
@@ -267,13 +233,83 @@ class _MyAppState extends State<MyApp> {
     FilterDetail detail2 = FilterDetail();
     detail2.id = 2;
     detail2.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail2.filterImage =
-    'luts/03-x.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
+    detail2.filterImage = 'luts/03-x.png';
     detail2.name = '滤镜2';
     detail2.lutFrom = 0;
 
     FilterData group1 = FilterData();
+    group1.groupName = '分类1';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<StickerData>> _fetchStickers() async {
+    StickDetail detail1 = StickDetail();
+    detail1.id = 1;
+    detail1.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    detail1.name = 'sticker1';
+    detail1.vip = 1;
+
+    StickDetail detail2 = StickDetail();
+    detail1.id = 2;
+    detail1.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    detail1.name = 'sticker2';
+    detail1.vip = 0;
+
+    StickerData group1 = StickerData();
+    group1.groupName = '分类1';
+    group1.groupImage =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FontsData>> _fetchFonts() async {
+    FontDetail detail1 = FontDetail();
+    detail1.id = 1;
+    detail1.file =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
+    detail1.name = 'font1';
+    detail1.vip = 1;
+
+    FontDetail detail2 = FontDetail();
+    detail1.id = 2;
+    detail1.file =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
+    detail1.name = 'font2';
+    detail1.vip = 0;
+
+    FontsData group1 = FontsData();
+    group1.groupName = '分类1';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FrameData>> _fetchFrames() async {
+    FrameDetail detail1 = FrameDetail();
+    detail1.id = 1;
+    detail1.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/dd5455a4941a43208dc7562f541fb16b.png';
+    detail1.name = 'frame1';
+    detail1.vip = 1;
+
+    FrameDetail detail2 = FrameDetail();
+    detail1.id = 2;
+    detail1.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/dd5455a4941a43208dc7562f541fb16b.png';
+    detail1.name = 'frame2';
+    detail1.vip = 0;
+
+    FrameData group1 = FrameData();
     group1.groupName = '分类1';
 
     group1.list = [detail1, detail2];

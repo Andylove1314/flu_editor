@@ -89,7 +89,7 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
                       paramMap: filterParamInitValues,
                       paramNames: ['Intensity']),
                 FiltersPan(
-                  fds: EditorUtil.lutSquareImagesUrls,
+                  fds: EditorUtil.filterList,
                   sourceFiltersConfig: _currentConfig,
                   usingDetail: _filterDetail,
                   onChanged: ({FilterDetail? item}) {

@@ -17,8 +17,16 @@ class EditorUtil {
   static DeleteEffectCallback? deleteEffectCallback;
   static EffectsCallback? effectsCallback;
 
+  static FiltersCallback? filtersCallback;
+  static StickersCallback? stickersCallback;
+  static FontsCallback? fontsCallback;
+  static FramesCallback? framesCallback;
+
   static EditorHomeCubit? _homeCubit;
-  static List<FilterData> lutSquareImagesUrls = [];
+  static List<FilterData> filterList = [];
+  static List<StickerData> stickerList = [];
+  static List<FontsData> fontList = [];
+  static List<FrameData> frameList = [];
 
   static Widget _transAnim(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
@@ -66,7 +74,6 @@ class EditorUtil {
 
   static void pushHome(BuildContext context,
       {required String orignal,
-      List<FilterData>? fs,
       VipStatusCallback? vipStatusCb,
       VipActionCallback? vipActionCb,
       SaveCallback? saveCb,
@@ -74,9 +81,12 @@ class EditorUtil {
       ToastActionCallback? toastActionCb,
       SaveEffectCallback? saveEffectCb,
       DeleteEffectCallback? deleteEffectCb,
-      EffectsCallback? effectsCb}) {
+      EffectsCallback? effectsCb,
+      FiltersCallback? filtersCb,
+      StickersCallback? stickersCb,
+      FontsCallback? fontsCb,
+      FramesCallback? framesCb}) {
     _registerMultGlsl();
-    _initFilters(fs ?? []);
 
     vipStatusCallback = vipStatusCb;
     vipActionCallback = vipActionCb;
@@ -86,6 +96,10 @@ class EditorUtil {
     saveEffectCallback = saveEffectCb;
     deleteEffectCallback = deleteEffectCb;
     effectsCallback = effectsCb;
+    filtersCallback = filtersCb;
+    stickersCallback = stickersCb;
+    fontsCallback = fontsCb;
+    framesCallback = framesCb;
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
@@ -101,29 +115,6 @@ class EditorUtil {
         );
       },
     ));
-  }
-
-  /// 初始化滤镜
-  static void _initFilters(List<FilterData> filters) {
-    ///配置滤镜
-    lutSquareImagesUrls = [];
-    for (FilterData f in filters) {
-      /// 插入空滤镜
-      List<FilterDetail> lists = f.list ?? [];
-      if (filters.indexOf(f) == 0 && lists.isNotEmpty) {
-        lists.insert(
-            0,
-            FilterDetail(
-                id: -1,
-                filterImage: 'neutral_color_luts'.lutPng,
-                image: lists[0].image,
-                name: '无滤镜',
-                lutFrom: 0));
-      }
-
-      f.list = lists;
-      lutSquareImagesUrls.add(f);
-    }
   }
 
   /// 颜色组合滤镜 着色器语言
@@ -360,12 +351,15 @@ class EditorUtil {
   }
 
   static void showLoadingdialog(BuildContext context, {bool isLight = true}) {
-    showDialog(context: context, builder: (con) => loadingWidget(context, isLight:isLight));
+    showDialog(
+        context: context,
+        builder: (con) => loadingWidget(context, isLight: isLight));
   }
 
   static Widget loadingWidget(BuildContext context, {bool isLight = true}) {
     return Center(
-      child: loadingWidgetCallback?.call(isLight) ?? const CircularProgressIndicator(),
+      child: loadingWidgetCallback?.call(isLight) ??
+          const CircularProgressIndicator(),
     );
   }
 
@@ -406,7 +400,10 @@ class EditorUtil {
     effectsCallback = null;
 
     _homeCubit = null;
-    lutSquareImagesUrls.clear();
+    filterList.clear();
+    stickerList.clear();
+    fontList.clear();
+    frameList.clear();
   }
 
   static Future<Uint8List> loadSourceImage(String afterPath) async {
@@ -418,5 +415,59 @@ class EditorUtil {
   static Future<Uint8List> _loadFileBytes(String filePath) async {
     final file = File(filePath);
     return await file.readAsBytes();
+  }
+
+  static Future<List<FilterData>> fetchFilterList(BuildContext context) async {
+    showLoadingdialog(context);
+    var filters = await filtersCallback?.call() ?? [];
+
+    ///配置滤镜
+    filterList = [];
+    for (FilterData f in filters) {
+      /// 插入空滤镜
+      List<FilterDetail> lists = f.list ?? [];
+      if (filters.indexOf(f) == 0 && lists.isNotEmpty) {
+        lists.insert(
+            0,
+            FilterDetail(
+                id: -1,
+                filterImage: 'neutral_color_luts'.lutPng,
+                image: lists[0].image,
+                name: '无滤镜',
+                lutFrom: 0));
+      }
+
+      f.list = lists;
+      filterList.add(f);
+    }
+    Navigator.pop(context);
+    return filterList;
+  }
+
+  static Future<List<StickerData>> fetchStickerList(
+      BuildContext context) async {
+    showLoadingdialog(context);
+    var stickers = await stickersCallback?.call() ?? [];
+
+    stickerList = stickers;
+    Navigator.pop(context);
+
+    return stickerList;
+  }
+
+  static Future<List<FontsData>> fetchFontList(BuildContext context) async {
+    showLoadingdialog(context);
+    var fonts = await fontsCallback?.call() ?? [];
+    fontList = fonts;
+    Navigator.pop(context);
+    return fontList;
+  }
+
+  static Future<List<FrameData>> fetchFrameList(BuildContext context) async {
+    showLoadingdialog(context);
+    var frames = await framesCallback?.call() ?? [];
+    frameList = frames;
+    Navigator.pop(context);
+    return frameList;
   }
 }
