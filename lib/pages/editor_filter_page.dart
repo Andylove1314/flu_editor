@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
 import '../utils/constant.dart';
@@ -98,13 +99,19 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
                     setState(() {});
                   },
                   onEffectSave: () async {
-
-                    if(_filterDetail == null){
+                    if (_filterDetail == null) {
                       return;
                     }
 
                     EditorUtil.showLoadingdialog(context);
-                    await EditorUtil.exportImage(context, _currentConfig);
+                    String after =
+                        await EditorUtil.exportImage(context, _currentConfig);
+
+                    /// 更新 home after
+                    EditorUtil.homeCubit?.emit(
+                      EditorHomeState(after),
+                    );
+
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },

@@ -16,12 +16,20 @@ class StickerSourceImageInitial extends StickerSourceImageState {
   List<Object?> get props => [...super.props];
 }
 
-class StickerSourceImageReady extends StickerSourceImageState {
-
-  StickerSourceImageReady(
+class StickerSourceImageCaching extends StickerSourceImageState {
+  StickerSourceImageCaching(
     super.stickerDetail,
   );
 
   @override
   List<Object?> get props => [...super.props];
+}
+
+class StickerSourceImageCached extends StickerSourceImageState {
+  String path;
+
+  StickerSourceImageCached(super.stickerDetail, this.path);
+
+  @override
+  List<Object?> get props => [...super.props, path];
 }

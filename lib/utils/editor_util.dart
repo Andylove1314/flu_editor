@@ -23,7 +23,7 @@ class EditorUtil {
   static FramesCallback? framesCallback;
   static CloseEditorCallback? closeEditorCallback;
 
-  static EditorHomeCubit? _homeCubit;
+  static EditorHomeCubit? homeCubit;
   static List<FilterData> filterList = [];
   static List<StickerData> stickerList = [];
   static List<FontsData> fontList = [];
@@ -121,8 +121,8 @@ class EditorUtil {
         return MultiBlocProvider(
           providers: [
             BlocProvider<EditorHomeCubit>(create: (context) {
-              _homeCubit = EditorHomeCubit(orignal);
-              return _homeCubit!;
+              homeCubit = EditorHomeCubit(orignal);
+              return homeCubit!;
             }),
             // ...
           ],
@@ -241,11 +241,6 @@ class EditorUtil {
     String exportPath = output.path;
     debugPrint('Exported: $exportPath');
 
-    /// 更新 home after
-    _homeCubit?.emit(
-      EditorHomeState(exportPath),
-    );
-
     return exportPath;
   }
 
@@ -268,11 +263,11 @@ class EditorUtil {
     return image;
   }
 
-  static Future<void> cropImage(ImageEditorController croperController) async {
+  static Future<String> cropImage(ImageEditorController croperController) async {
     var state = croperController.state;
 
     if (state == null || state.getCropRect() == null) {
-      return;
+      return '';
     }
 
     // 仅处理剪裁参数，不涉及 UI 操作
@@ -293,10 +288,7 @@ class EditorUtil {
     String exportPath = output.path;
     debugPrint('Exported: $exportPath');
 
-    /// 更新 home after
-    _homeCubit?.emit(
-      EditorHomeState(exportPath),
-    );
+    return exportPath;
   }
 
   // 图片剪裁所需参数的封装
@@ -371,10 +363,16 @@ class EditorUtil {
         builder: (con) => loadingWidget(context, isLight: isLight));
   }
 
-  static Widget loadingWidget(BuildContext context, {bool isLight = true}) {
+  static Widget loadingWidget(BuildContext context,
+      {bool isLight = true, double size = 30.0, double stroke = 2.0}) {
     return Center(
-      child: loadingWidgetCallback?.call(isLight) ??
-          const CircularProgressIndicator(),
+      child: loadingWidgetCallback?.call(isLight, size, stroke) ??
+          SizedBox(
+              width: size,
+              height: size,
+              child: CircularProgressIndicator(
+                strokeWidth: stroke,
+              )),
     );
   }
 
@@ -414,16 +412,19 @@ class EditorUtil {
     deleteEffectCallback = null;
     effectsCallback = null;
 
-    _homeCubit = null;
+    filtersCallback = null;
+    stickersCallback = null;
+    fontsCallback = null;
+
+    homeCubit = null;
     filterList.clear();
     stickerList.clear();
     fontList.clear();
     frameList.clear();
     closeEditorCallback?.call(after);
-    Future.delayed(const Duration(milliseconds: 200), (){
+    Future.delayed(const Duration(milliseconds: 200), () {
       closeEditorCallback = null;
     });
-
   }
 
   static Future<Uint8List> loadSourceImage(String afterPath) async {
@@ -489,5 +490,9 @@ class EditorUtil {
     frameList = frames;
     Navigator.pop(context);
     return frameList;
+  }
+
+  static Future<String> addSticker(String input) async {
+    return input;//todo
   }
 }

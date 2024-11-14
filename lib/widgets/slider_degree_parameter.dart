@@ -7,9 +7,10 @@ import 'custom_track_shape.dart';
 class SliderDegreeParameterWidget extends StatefulWidget {
   double degree;
   final Function(double value) onChanged;
+  final int showNumber;
 
   SliderDegreeParameterWidget(
-      {super.key, required this.degree, required this.onChanged});
+      {super.key, required this.degree, required this.onChanged, this.showNumber = 90});
 
   @override
   State<StatefulWidget> createState() {
@@ -60,7 +61,7 @@ class _SliderDegreeParameterWidgetState
             valueIndicatorColor: Colors.white,
           ),
           child: Slider(
-            divisions: 90,
+            divisions: widget.showNumber,
             label: '${_value.toStringAsFixed(0)}°',
             value: _value,
             max: 45.0,

@@ -163,13 +163,13 @@ class _MyAppState extends State<MyApp> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
-        loadWidgetCb: (islight) => Container(
-              width: 50,
-              height: 50,
-              padding: const EdgeInsets.all(10),
+        loadWidgetCb: (islight, size, stroke) => Container(
+              width: size,
+              height: size,
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 color: islight ? Colors.white : Colors.black,
+                strokeWidth: stroke,
               ),
             ),
         toastActionCb: (msg) => ScaffoldMessenger.of(context)

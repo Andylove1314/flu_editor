@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibration/vibration.dart';
 
 import '../blocs/cut_bloc_cubit/cut_cubit.dart';
+import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
 import '../utils/constant.dart';
 import '../widgets/crop/crop_pan.dart';
@@ -211,7 +212,13 @@ class _EditorCropPageState extends State<EditorCropPage> {
           },
           onConfirm: () async {
             EditorUtil.showLoadingdialog(context);
-            await EditorUtil.cropImage(_imageEditorController);
+            String after = await EditorUtil.cropImage(_imageEditorController);
+
+            /// 更新 home after
+            EditorUtil.homeCubit?.emit(
+              EditorHomeState(after),
+            );
+
             Navigator.pop(context);
             Navigator.pop(context);
           },
