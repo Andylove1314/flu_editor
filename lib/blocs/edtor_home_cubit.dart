@@ -38,10 +38,12 @@ class EditorHomeCubit extends Cubit<EditorHomeState> {
       if (EditorUtil.fontList.isEmpty) {
         await EditorUtil.fetchFontList(context);
       }
+      EditorUtil.goFontPage(context, this.state.afterPath);
     } else if (type == 6) {
       if (EditorUtil.frameList.isEmpty) {
         await EditorUtil.fetchFrameList(context);
       }
+      EditorUtil.goFontPage(context, this.state.afterPath);
     }
   }
 }

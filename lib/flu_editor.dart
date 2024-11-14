@@ -6,6 +6,8 @@ import 'dart:ui';
 import 'package:flu_editor/pages/editor_colors_page.dart';
 import 'package:flu_editor/pages/editor_crop_page.dart';
 import 'package:flu_editor/pages/editor_filter_page.dart';
+import 'package:flu_editor/pages/editor_font_page.dart';
+import 'package:flu_editor/pages/editor_frame_page.dart';
 import 'package:flu_editor/pages/editor_home_page.dart';
 import 'package:flu_editor/pages/editor_sticker_page.dart';
 import 'package:image/image.dart' as img;
