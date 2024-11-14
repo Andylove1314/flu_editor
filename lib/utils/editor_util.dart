@@ -73,6 +73,18 @@ class EditorUtil {
     ));
   }
 
+  static void goStickerPage(BuildContext context, String afterPath) {
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
+        create: (_) => SourceImageCubit(afterPath),
+        child: const EditorStickerPage(),
+      ),
+      transitionDuration: _transDur,
+      // You can adjust the duration
+      transitionsBuilder: _transAnim,
+    ));
+  }
+
   static void goFluEditor(BuildContext context,
       {required String orignal,
       VipStatusCallback? vipStatusCb,

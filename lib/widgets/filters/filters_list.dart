@@ -126,7 +126,7 @@ class _FiltersListState extends State<FiltersList> {
                       borderRadius:
                           const BorderRadius.only(topRight: Radius.circular(4)),
                       child: Image.asset(
-                        'icon_vip_lvjing'.imageFiltersPng,
+                        'icon_vip_lvjing'.imagePng,
                         width: 21,
                       ),
                     ),

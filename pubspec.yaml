@@ -84,6 +84,7 @@ flutter:
     - images/colors/
     - images/crop/
     - images/filters/
+    - images/stickers/
     - luts/
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

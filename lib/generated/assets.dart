@@ -52,13 +52,12 @@ class Assets {
   static const String cropIconZxzS = 'images/crop/icon_zxz_s.png';
   static const String cropIconZyfzN = 'images/crop/icon_zyfz_n.png';
   static const String cropIconZyfzS = 'images/crop/icon_zyfz_s.png';
-  static const String filtersIconVipLvjing = 'images/filters/icon_vip_lvjing.png';
-  static const String filtersIconVipTip = 'images/filters/icon_vip_tip.png';
   static const String filtersPicLvjingSEdit = 'images/filters/pic_lvjing_s_edit.png';
   static const String imagesIconBiankuangEdit3x = 'images/icon_biankuang_edit@3x.png';
   static const String imagesIconBlurEdit3x = 'images/icon_blur_edit@3x.png';
   static const String imagesIconCaijianEdit3x = 'images/icon_caijian_edit@3x.png';
   static const String imagesIconCancelEdit = 'images/icon_cancel_edit.png';
+  static const String imagesIconClose3x = 'images/icon_close@3x.png';
   static const String imagesIconColorEdit3x = 'images/icon_color_edit@3x.png';
   static const String imagesIconDeletePeifang = 'images/icon_delete_peifang.png';
   static const String imagesIconDiffEdit = 'images/icon_diff_edit.png';
@@ -67,7 +66,10 @@ class Assets {
   static const String imagesIconQuxiaoEdit = 'images/icon_quxiao_edit.png';
   static const String imagesIconSave = 'images/icon_save.png';
   static const String imagesIconTiezhiEdit3x = 'images/icon_tiezhi_edit@3x.png';
+  static const String imagesIconVipLvjing = 'images/icon_vip_lvjing.png';
+  static const String imagesIconVipTip = 'images/icon_vip_tip.png';
   static const String imagesIconWordEdit3x = 'images/icon_word_edit@3x.png';
   static const String lutsNeutralColorLuts = 'luts/neutral_color_luts.png';
+  static const String stickersIconCloud = 'images/stickers/icon_cloud.png';
 
 }
