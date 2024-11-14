@@ -1,10 +1,10 @@
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flu_editor/widgets/filters/filters_list.dart';
-import 'package:flu_editor/widgets/filters/vip_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
 import '../confirm_bar.dart';
+import '../vip_bar.dart';
 import 'filter_class_widget.dart';
 
 class FiltersPan extends StatefulWidget {

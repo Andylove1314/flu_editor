@@ -6,8 +6,12 @@ class StickerData {
   String? groupImage;
   int? status;
   List<StickDetail>? list;
+  int? vip;
 
-  StickerData({this.id, this.groupName, this.groupImage, this.status, this.list});
+
+  bool get isVipGroup => vip == 1;
+
+  StickerData({this.id, this.groupName, this.groupImage, this.status, this.list, this.vip});
 
   /// fromJson 方法
   StickerData.fromJson(Map json) {
@@ -16,6 +20,7 @@ class StickerData {
       groupName = json['groupName'] as String?;
       groupImage = json['groupImage'] as String?;
       status = json['status'] as int?;
+      vip = json['vip'] as int?;
       list = (json['list'] as List<dynamic>?)
           ?.map((e) => StickDetail.fromJson(e as Map<String, dynamic>))
           .toList();
@@ -29,6 +34,7 @@ class StickerData {
     data['groupName'] = groupName;
     data['groupImage'] = groupImage;
     data['status'] = status;
+    data['vip'] = vip;
     if (list != null) {
       data['list'] = list?.map((v) => v?.toJson()).toList();
     }
@@ -46,7 +52,7 @@ class StickDetail {
   String? image;
   int? groupId;
 
-  bool get isVipFilter => vip == 1;
+  bool get isVipSticker => vip == 1;
 
   StickDetail(
       {this.id,

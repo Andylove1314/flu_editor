@@ -33,6 +33,7 @@ class EditorHomeCubit extends Cubit<EditorHomeState> {
       if (EditorUtil.stickerList.isEmpty) {
         await EditorUtil.fetchStickerList(context);
       }
+      EditorUtil.goStickerPage(context, this.state.afterPath);
     } else if (type == 5) {
       if (EditorUtil.fontList.isEmpty) {
         await EditorUtil.fetchFontList(context);
