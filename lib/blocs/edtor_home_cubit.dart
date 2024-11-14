@@ -43,7 +43,7 @@ class EditorHomeCubit extends Cubit<EditorHomeState> {
       if (EditorUtil.frameList.isEmpty) {
         await EditorUtil.fetchFrameList(context);
       }
-      EditorUtil.goFontPage(context, this.state.afterPath);
+      EditorUtil.goFramePage(context, this.state.afterPath);
     }
   }
 }

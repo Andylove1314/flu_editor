@@ -53,11 +53,33 @@ class Assets {
   static const String cropIconZyfzN = 'images/crop/icon_zyfz_n.png';
   static const String cropIconZyfzS = 'images/crop/icon_zyfz_s.png';
   static const String filtersPicLvjingSEdit = 'images/filters/pic_lvjing_s_edit.png';
+  static const String fontsIconBtnhuaganEdit3x = 'images/fonts/icon_btnhuagan_edit@3x.png';
+  static const String fontsIconCancleColor3x = 'images/fonts/icon_cancle_color@3x.png';
+  static const String fontsIconClosetextEdit3x = 'images/fonts/icon_closetext_edit@3x.png';
+  static const String fontsIconCoarseN3x = 'images/fonts/icon_coarse_n@3x.png';
+  static const String fontsIconCoarseS3x = 'images/fonts/icon_coarse_s@3x.png';
+  static const String fontsIconEdittextEdit3x = 'images/fonts/icon_edittext_edit@3x.png';
+  static const String fontsIconInclinedN3x = 'images/fonts/icon_inclined_n@3x.png';
+  static const String fontsIconInclinedS3x = 'images/fonts/icon_inclined_s@3x.png';
+  static const String fontsIconLeftalignmentN3x = 'images/fonts/icon_leftalignment_n@3x.png';
+  static const String fontsIconLeftalignmentS3x = 'images/fonts/icon_leftalignment_s@3x.png';
+  static const String fontsIconMidstN3x = 'images/fonts/icon_midst_n@3x.png';
+  static const String fontsIconMidstS3x = 'images/fonts/icon_midst_s@3x.png';
+  static const String fontsIconRevolvetextEdit3x = 'images/fonts/icon_revolvetext_edit@3x.png';
+  static const String fontsIconRightalignmentN3x = 'images/fonts/icon_rightalignment_n@3x.png';
+  static const String fontsIconRightalignmentS3x = 'images/fonts/icon_rightalignment_s@3x.png';
+  static const String fontsIconStrawColorN3x = 'images/fonts/icon_straw_color_n@3x.png';
+  static const String fontsIconStrawColorS2x = 'images/fonts/icon_straw_color_s@2x.png';
+  static const String fontsIconStrawColorS3x = 'images/fonts/icon_straw_color_s@3x.png';
+  static const String fontsIconStrawchooseColorS3x = 'images/fonts/icon_strawchoose_color_s@3x.png';
+  static const String fontsIconUnderlineN3x = 'images/fonts/icon_underline_n@3x.png';
+  static const String fontsIconUnderlineS3x = 'images/fonts/icon_underline_s@3x.png';
   static const String imagesIconBiankuangEdit3x = 'images/icon_biankuang_edit@3x.png';
   static const String imagesIconBlurEdit3x = 'images/icon_blur_edit@3x.png';
   static const String imagesIconCaijianEdit3x = 'images/icon_caijian_edit@3x.png';
   static const String imagesIconCancelEdit = 'images/icon_cancel_edit.png';
   static const String imagesIconClose3x = 'images/icon_close@3x.png';
+  static const String imagesIconCloud = 'images/icon_cloud.png';
   static const String imagesIconColorEdit3x = 'images/icon_color_edit@3x.png';
   static const String imagesIconDeletePeifang = 'images/icon_delete_peifang.png';
   static const String imagesIconDiffEdit = 'images/icon_diff_edit.png';
@@ -70,6 +92,5 @@ class Assets {
   static const String imagesIconVipTip = 'images/icon_vip_tip.png';
   static const String imagesIconWordEdit3x = 'images/icon_word_edit@3x.png';
   static const String lutsNeutralColorLuts = 'luts/neutral_color_luts.png';
-  static const String stickersIconCloud = 'images/stickers/icon_cloud.png';
 
 }

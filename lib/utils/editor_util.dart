@@ -520,4 +520,9 @@ class EditorUtil {
   static Future<String> addSticker(String input) async {
     return input;//todo
   }
+
+
+  static Future<String> addFrame(String input) async {
+    return input;//todo
+  }
 }

@@ -1,13 +1,12 @@
 import 'dart:io';
 
-import 'package:flu_editor/widgets/stickers/sticker_pan.dart';
+import 'package:flu_editor/widgets/frames/frame_pan.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
-import '../widgets/slider_aloha_parameter.dart';
 
 class EditorFramePage extends StatefulWidget {
   const EditorFramePage({super.key});
@@ -17,8 +16,10 @@ class EditorFramePage extends StatefulWidget {
 }
 
 class _EditorFramePageState extends State<EditorFramePage> {
-  /// current sticker
-  StickDetail? _stickerDetail;
+  /// current frame
+  FrameDetail? _frameDetail;
+
+  String? _currentFrame;
 
   @override
   void initState() {
@@ -33,57 +34,55 @@ class _EditorFramePageState extends State<EditorFramePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
+      body: Column(
         children: [
-          Align(
-            alignment: Alignment.center,
-            child: BlocBuilder<SourceImageCubit, SourceImageReady>(
-              builder: (context, state) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 150),
-                  child: Image.file(File(state.afterPath)),
-                );
-              },
-            ),
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                SliderAlphaParameterWidget(
-                  alpha: 0.0,
-                  initValue: 1.0,
-                  onChanged: (double value) {
-                    debugPrint('alpha = $value');
+          Expanded(
+              child: Stack(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: BlocBuilder<SourceImageCubit, SourceImageReady>(
+                  builder: (context, state) {
+                    return Image.file(File(state.afterPath));
                   },
                 ),
-                StickerPan(
-                  sts: EditorUtil.stickerList,
-                  usingDetail: _stickerDetail,
-                  onChanged: ({StickDetail? item, String? path}) {
-                    _stickerDetail = item;
-                    setState(() {});
-                    EditorUtil.showToast('select $path');
-                  },
-                  onEffectSave: () async {
-                    if (_stickerDetail == null) {
-                      return;
-                    }
+              ),
+              Align(
+                alignment: Alignment.center,
+                child: _currentFrame == null
+                    ? const SizedBox()
+                    : Image.file(File(_currentFrame ?? '')),
+              ),
+            ],
+          )),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              FramePan(
+                frs: EditorUtil.frameList,
+                usingDetail: _frameDetail,
+                onChanged: ({FrameDetail? item, String? path}) {
+                  _frameDetail = item;
+                  _currentFrame = path;
+                  setState(() {});
+                },
+                onEffectSave: () async {
+                  if (_frameDetail == null) {
+                    return;
+                  }
 
-                    EditorUtil.addSticker(
-                            context.read<SourceImageCubit>().state.afterPath)
-                        .then((after) {
-                      /// 更新 home after
-                      EditorUtil.homeCubit?.emit(
-                        EditorHomeState(after),
-                      );
-                      Navigator.pop(context);
-                    });
-                  },
-                )
-              ],
-            ),
+                  EditorUtil.addFrame(
+                          context.read<SourceImageCubit>().state.afterPath)
+                      .then((after) {
+                    /// 更新 home after
+                    EditorUtil.homeCubit?.emit(
+                      EditorHomeState(after),
+                    );
+                    Navigator.pop(context);
+                  });
+                },
+              )
+            ],
           )
         ],
       ),
