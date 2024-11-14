@@ -51,13 +51,6 @@ class _EditorFontPageState extends State<EditorFontPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                SliderAlphaParameterWidget(
-                  alpha: 0.0,
-                  initValue: 1.0,
-                  onChanged: (double value) {
-                    debugPrint('alpha = $value');
-                  },
-                ),
                 StickerPan(
                   sts: EditorUtil.stickerList,
                   usingDetail: _stickerDetail,

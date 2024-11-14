@@ -4,12 +4,14 @@ import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class StickerWidget extends StatelessWidget {
-  StickDetail stickerDetail;
+import '../../blocs/frame_image_bloc/frame_bloc.dart';
 
-  Function(StickDetail? item, String? stickerPath)? onSelect;
+class FrameWidget extends StatelessWidget {
+  FrameDetail frameDetail;
 
-  StickerWidget({super.key, required this.stickerDetail, this.onSelect});
+  Function(FrameDetail? item, String? framePath)? onSelect;
+
+  FrameWidget({super.key, required this.frameDetail, this.onSelect});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +20,12 @@ class StickerWidget extends StatelessWidget {
       fit: StackFit.expand,
       children: [
         ExtendedImage.network(
-          stickerDetail.image ?? '',
+          frameDetail.image ?? '',
           fit: BoxFit.contain,
         ),
         BlocProvider(
-          create: (context) => StickerSourceImageCubit(stickerDetail),
-          child: BlocBuilder<StickerSourceImageCubit, StickerSourceImageState>(
+          create: (context) => FrameSourceImageCubit(frameDetail),
+          child: BlocBuilder<FrameSourceImageCubit, FrameSourceImageState>(
               builder: (context, state) {
             Widget icon = Image.asset(
               width: 12,
@@ -31,30 +33,30 @@ class StickerWidget extends StatelessWidget {
               fit: BoxFit.fitWidth,
             );
 
-            if (state is StickerSourceImageCaching) {
+            if (state is FrameSourceImageCaching) {
               icon = SizedBox(
                 width: 12,
                 height: 12,
                 child:
                     EditorUtil.loadingWidget(context, isLight: false, size: 12),
               );
-            } else if (state is StickerSourceImageCached) {
+            } else if (state is FrameSourceImageCached) {
               icon = const SizedBox();
             }
 
             return GestureDetector(
               onTap: () {
                 debugPrint('000000');
-                if (state is StickerSourceImageCached) {
+                if (state is FrameSourceImageCached) {
                   debugPrint('cached: ${state.path}');
-                  onSelect?.call(stickerDetail, state.path);
+                  onSelect?.call(frameDetail, state.path);
                 } else {
                   context
-                      .read<StickerSourceImageCubit>()
-                      .cacheSticker(stickerDetail)
+                      .read<FrameSourceImageCubit>()
+                      .cacheFrame(frameDetail)
                       .then((path) {
                     debugPrint('cached: $path');
-                    onSelect?.call(stickerDetail, path);
+                    onSelect?.call(frameDetail, path);
                   });
                 }
               },

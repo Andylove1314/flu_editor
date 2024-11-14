@@ -42,18 +42,20 @@ class FrameDetail {
   String? className;
   String? image;
   int? groupId;
+  FrameSize? params;
 
-  bool get isVipFilter => vip == 1;
+  bool get isVipFrame => vip == 1;
 
   FrameDetail(
       {this.id,
-        this.name,
-        this.classId,
-        this.vip,
-        this.status,
-        this.className,
-        this.image,
-        this.groupId});
+      this.name,
+      this.classId,
+      this.vip,
+      this.status,
+      this.className,
+      this.image,
+      this.groupId,
+      this.params});
 
   /// fromJson 方法
   FrameDetail.fromJson(Map<String, dynamic> json)
@@ -64,7 +66,8 @@ class FrameDetail {
         status = json['status'] as int?,
         className = json['className'] as String?,
         image = json['image'] as String?,
-        groupId = json['groupId'] as int?;
+        groupId = json['groupId'] as int?,
+        params = FrameSize.fromJson(json['params']);
 
   /// toJson 方法
   Map<String, dynamic> toJson() {
@@ -77,6 +80,45 @@ class FrameDetail {
     data['className'] = className;
     data['image'] = image;
     data['groupId'] = groupId;
+    data['params'] = params?.toJson();
+    return data;
+  }
+}
+
+class FrameSize {
+  var frameWidth;
+  var frameHeight;
+  var frameLeft;
+  var frameTop;
+  var frameRight;
+  var frameBottom;
+
+  FrameSize(
+      {this.frameWidth,
+      this.frameHeight,
+      this.frameLeft,
+      this.frameTop,
+      this.frameRight,
+      this.frameBottom});
+
+  /// fromJson 方法
+  FrameSize.fromJson(Map<String, dynamic> json)
+      : frameWidth = json['frameWidth'],
+        frameHeight = json['frameHeight'],
+        frameLeft = json['frameLeft'],
+        frameTop = json['frameTop'],
+        frameRight = json['frameRight'],
+        frameBottom = json['frameBottom'];
+
+  /// toJson 方法
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['frameWidth'] = frameWidth;
+    data['frameHeight'] = frameHeight;
+    data['frameLeft'] = frameLeft;
+    data['frameTop'] = frameTop;
+    data['frameRight'] = frameRight;
+    data['frameBottom'] = frameBottom;
     return data;
   }
 }
