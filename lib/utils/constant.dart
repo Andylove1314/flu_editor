@@ -7,7 +7,7 @@ import '../models/action_data.dart';
 typedef VipStatusCallback = bool Function();
 typedef VipActionCallback = void Function();
 typedef SaveCallback = void Function(String tmpPath);
-typedef LoadingWidgetCallback = Widget Function(bool isLight);
+typedef LoadingWidgetCallback = Widget Function(bool isLight, double size, double stroke);
 typedef ToastActionCallback = void Function(String msg);
 typedef SaveEffectCallback = Future<bool> Function(EffectData effect);
 typedef DeleteEffectCallback = Future<bool> Function(dynamic effectId);

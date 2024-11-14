@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 class VipTipPopWidget extends StatelessWidget {
   Function() onSave;
   Function() onCancel;
+  final String content;
 
-  VipTipPopWidget({super.key, required this.onSave, required this.onCancel});
+  VipTipPopWidget(
+      {super.key,
+      required this.onSave,
+      required this.onCancel,
+      required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +39,12 @@ class VipTipPopWidget extends StatelessWidget {
                     )),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 30),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 30),
               child: Text(
-                '您使用了VIP滤镜，请在开通会员后保存滤镜效果？',
-                style: TextStyle(
+                content,
+                style: const TextStyle(
                     color: Color(0xff19191A),
                     fontSize: 18,
                     fontWeight: FontWeight.w600),

@@ -6,7 +6,7 @@ import '../../flu_editor.dart';
 class StickersList extends StatefulWidget {
   final List<StickDetail> sts;
 
-  final Function({StickDetail? item}) onChanged;
+  final Function({StickDetail? item, String? path}) onChanged;
   Function()? onScrollNext;
   Function()? onScrollPre;
 
@@ -61,22 +61,13 @@ class _StickersListState extends State<StickersList> {
               children: [
                 StickerWidget(
                   stickerDetail: item,
-                  onSelect: (fd) {
-                    if (fd == null) {
+                  onSelect: (st, path) {
+                    if (st == null) {
                       return;
                     }
-                    widget.onChanged.call(item: item);
+                    widget.onChanged.call(item: item, path:path);
                   },
                   // ),
-                ),
-                Positioned(
-                  right: 3,
-                  bottom: 3,
-                  child: Image.asset(
-                    width: 12,
-                    'icon_cloud'.imageStickersPng,
-                    fit: BoxFit.fitWidth,
-                  ),
                 ),
                 if (vipSticker)
                   Positioned(

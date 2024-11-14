@@ -110,7 +110,7 @@ class _FiltersPanState extends State<FiltersPan>
           },
           confirm: () async {
             if (showVipBg) {
-              showVipPop(context, onSave: () {
+              showVipPop(context, content:'您使用了VIP滤镜，请在开通会员后保存滤镜效果？',onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});
               return;

@@ -12,7 +12,7 @@ class StickerPan extends StatefulWidget {
 
   StickDetail? usingDetail;
 
-  final Function({StickDetail? item}) onChanged;
+  final Function({StickDetail? item, String? path}) onChanged;
 
   final Function() onEffectSave;
 
@@ -78,11 +78,11 @@ class _StickerPanState extends State<StickerPan>
                 .map((item) => StickersList(
                     usingDetail: widget.usingDetail,
                     sts: item.list ?? [],
-                    onChanged: ({StickDetail? item}) {
+                    onChanged: ({StickDetail? item, String? path}) {
                       setState(() {
                         vipSticker = item?.isVipSticker ?? false;
                       });
-                      widget.onChanged(item: item);
+                      widget.onChanged(item: item, path: path);
                     }))
                 .toList(),
           ),
@@ -102,7 +102,7 @@ class _StickerPanState extends State<StickerPan>
           },
           confirm: () async {
             if (showVipBg) {
-              showVipPop(context, onSave: () {
+              showVipPop(context, content: '您使用了VIP素材，请在开通会员后保存效果？',onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});
               return;

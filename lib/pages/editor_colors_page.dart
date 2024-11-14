@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart';
 
+import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
 import '../models/action_data.dart';
@@ -224,6 +225,12 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                       await Future.delayed(const Duration(milliseconds: 500));
                       String effectImagePath =
                           await EditorUtil.exportImage(context, _currentConfig);
+
+                      /// 更新 home after
+                      EditorUtil.homeCubit?.emit(
+                        EditorHomeState(effectImagePath),
+                      );
+
                       Navigator.pop(context);
                       if (saveEffect) {
                         bool? successed = await EditorUtil.saveColorEffectParam(

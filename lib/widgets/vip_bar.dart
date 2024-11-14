@@ -19,7 +19,7 @@ class VipBar extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('icon_vip_tip'.imageFiltersPng),
+                    image: AssetImage('icon_vip_tip'.imagePng),
                     fit: BoxFit.fill)),
             padding: const EdgeInsets.only(left: 15, right: 12),
             child: Row(
