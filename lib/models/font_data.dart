@@ -41,9 +41,10 @@ class FontDetail {
   int? status;
   String? className;
   String? file;
+  String? image;
   int? groupId;
 
-  bool get isVipFilter => vip == 1;
+  bool get isVipFont => vip == 1;
 
   FontDetail(
       {this.id,
@@ -53,7 +54,8 @@ class FontDetail {
         this.status,
         this.className,
         this.file,
-        this.groupId});
+        this.groupId,
+      this.image});
 
   /// fromJson 方法
   FontDetail.fromJson(Map<String, dynamic> json)
@@ -64,6 +66,7 @@ class FontDetail {
         status = json['status'] as int?,
         className = json['className'] as String?,
         file = json['file'] as String?,
+        image = json['image'] as String?,
         groupId = json['groupId'] as int?;
 
   /// toJson 方法
@@ -77,6 +80,7 @@ class FontDetail {
     data['className'] = className;
     data['file'] = file;
     data['groupId'] = groupId;
+    data['image'] = image;
     return data;
   }
 }

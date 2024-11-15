@@ -20,6 +20,8 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
   /// current sticker
   StickDetail? _stickerDetail;
 
+  String? _stickerPath;
+
   @override
   void initState() {
     super.initState();
@@ -47,6 +49,19 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
             ),
           ),
           Align(
+            alignment: Alignment.topCenter,
+            child: BlocBuilder<SourceImageCubit, SourceImageReady>(
+              builder: (context, state) {
+                return Container(
+                  margin: const EdgeInsets.only(top: 150),
+                  child: _stickerPath == null
+                      ? const SizedBox()
+                      : Image.file(File(_stickerPath ?? ''), width: 150, height: 150,),
+                );
+              },
+            ),
+          ),
+          Align(
             alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -62,6 +77,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                   usingDetail: _stickerDetail,
                   onChanged: ({StickDetail? item, String? path}) {
                     _stickerDetail = item;
+                    _stickerPath = path;
                     setState(() {});
                     EditorUtil.showToast('select $path');
                   },

@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
+import '../widgets/fonts/font_pan.dart';
 import '../widgets/slider_aloha_parameter.dart';
 
 class EditorFontPage extends StatefulWidget {
@@ -18,7 +19,8 @@ class EditorFontPage extends StatefulWidget {
 
 class _EditorFontPageState extends State<EditorFontPage> {
   /// current sticker
-  StickDetail? _stickerDetail;
+  FontDetail? _fontDetail;
+  String? ttfFilePath;
 
   @override
   void initState() {
@@ -51,20 +53,21 @@ class _EditorFontPageState extends State<EditorFontPage> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                StickerPan(
-                  sts: EditorUtil.stickerList,
-                  usingDetail: _stickerDetail,
-                  onChanged: ({StickDetail? item, String? path}) {
-                    _stickerDetail = item;
+                FontPan(
+                  fons: EditorUtil.fontList,
+                  usingDetail: _fontDetail,
+                  onChanged: ({FontDetail? item, String? path}) {
+                    _fontDetail = item;
+                    ttfFilePath = path;
                     setState(() {});
                     EditorUtil.showToast('select $path');
                   },
                   onEffectSave: () async {
-                    if (_stickerDetail == null) {
+                    if (_fontDetail == null) {
                       return;
                     }
 
-                    EditorUtil.addSticker(
+                    EditorUtil.addText(
                             context.read<SourceImageCubit>().state.afterPath)
                         .then((after) {
                       /// 更新 home after
