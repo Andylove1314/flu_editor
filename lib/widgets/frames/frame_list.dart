@@ -24,6 +24,7 @@ class FrameList extends StatefulWidget {
 
 class _FrameListState extends State<FrameList> {
   late ScrollController _scrollController;
+  int currentIndex = -1;
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _FrameListState extends State<FrameList> {
           // 设置为横向滚动
           itemCount: widget.sts.length,
           itemBuilder: (c, i) {
+            bool selected = currentIndex == i;
             FrameDetail item = widget.sts[i];
             bool vipFrame = item.isVipFrame;
             Widget child = Stack(
@@ -66,6 +68,9 @@ class _FrameListState extends State<FrameList> {
                       return;
                     }
                     widget.onChanged.call(item: item, path: path);
+                    setState(() {
+                      currentIndex = i;
+                    });
                   },
                   // ),
                 ),
@@ -88,8 +93,16 @@ class _FrameListState extends State<FrameList> {
             return Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  border: Border.all(color: const Color(0xffF4F4F4), width: 1)),
-              child: child,
+                  border: Border.all(
+                      color: selected
+                          ? const Color(0xffFF4679)
+                          : const Color(0xffF4F4F4),
+                      width: 1),
+                  borderRadius: BorderRadius.circular(4.0)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: child,
+              ),
             );
           },
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
