@@ -260,3 +260,45 @@ final _cropRotateActions = [
       icon: 'icon_yxz_n'.imageCropPng,
       rotateAngle: 90.0),
 ];
+
+final fontActions = [
+  ActionData(type: 0, name: '字体', icon: ''),
+  ActionData(type: 1, name: '样式', icon: '', subActions: _fontStyleActions),
+  ActionData(type: 2, name: '对齐', icon: '', subActions: _fontAlignActions),
+];
+
+final _fontStyleActions = [
+  ActionData(
+      type: 0,
+      name: '粗体',
+      icon: 'icon_coarse_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_coarse_s@3x'.imageFontsPng),
+  ActionData(
+      type: 1,
+      name: '斜体',
+      icon: 'icon_inclined_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_inclined_s@3x'.imageFontsPng),
+  ActionData(
+      type: 2,
+      name: '下划线',
+      icon: 'icon_underline_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_underline_s@3x'.imageFontsPng),
+];
+
+final _fontAlignActions = [
+  ActionData(
+      type: 0,
+      name: '居左',
+      icon: 'icon_leftalignment_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_leftalignment_s@3x'.imageFontsPng),
+  ActionData(
+      type: 1,
+      name: '居中',
+      icon: 'icon_midst_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_midst_s@3x'.imageFontsPng),
+  ActionData(
+      type: 2,
+      name: '居右',
+      icon: 'icon_rightalignment_n@3x'.imageFontsPng,
+      selectedIcon: 'icon_rightalignment_s@3x'.imageFontsPng),
+];
