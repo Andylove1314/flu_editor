@@ -6,14 +6,12 @@ import 'custom_track_shape.dart';
 
 ///透明度调节（100）
 class SliderAlphaParameterWidget extends StatefulWidget {
-  double alpha;
   final Function(double value) onChanged;
   final double initValue;
   final int showNumber;
 
   SliderAlphaParameterWidget(
       {super.key,
-      required this.alpha,
       required this.onChanged,
       this.initValue = 0,
       this.showNumber = 100});
@@ -32,18 +30,8 @@ class _SliderDegreeParameterWidgetState
 
   @override
   void initState() {
-    _value = widget.alpha;
+    _value = widget.initValue;
     super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant SliderAlphaParameterWidget oldWidget) {
-    if (widget.alpha != oldWidget.alpha) {
-      setState(() {
-        _value = widget.alpha;
-      });
-    }
-    super.didUpdateWidget(oldWidget);
   }
 
   @override

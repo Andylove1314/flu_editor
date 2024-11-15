@@ -22,6 +22,8 @@ class _EditorFramePageState extends State<EditorFramePage> {
   FrameDetail? _frameDetail;
   String? _currentFrame;
 
+  final PhotoViewController _photoViewController = PhotoViewController();
+
   @override
   void initState() {
     super.initState();
@@ -48,6 +50,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
                   _frameDetail = item;
                   _currentFrame = path;
                   setState(() {});
+                  _initInputPosition();
                 },
                 onEffectSave: () async {
                   if (_frameDetail == null) {
@@ -134,40 +137,56 @@ class _EditorFramePageState extends State<EditorFramePage> {
       debugPrint(
           '图片Widget镂边距: $imageLeft - $imageTop - $imageRight - $imageBottom');
 
+      double bgLeft = imageLeft + (bgWidth - displayWidth) / 2;
+      double bgTop = imageTop + (bgHeight - displayHeight) / 2;
+      double bgRight = imageRight + (bgWidth - displayWidth) / 2;
+      double bgBottom = imageBottom + (bgHeight - displayHeight) / 2;
+      debugPrint('容器Widget镂边距: $bgLeft - $bgTop - $bgRight - $bgBottom');
+
       return Stack(
         alignment: Alignment.center,
         children: [
           Align(
             alignment: Alignment.center,
             child: PhotoView.customChild(
+              controller: _photoViewController,
+              enableRotation: true,
               backgroundDecoration: const BoxDecoration(color: Colors.white),
               child: input,
             ),
           ),
           Align(
               alignment: Alignment.center,
-              child:IgnorePointer(child:  _currentFrame == null
-                  ? const SizedBox()
-                  : FrameBgContainerWidget(
-                frameLeft: imageLeft,
-                frameTop: imageTop + (bgHeight - displayHeight) / 2,
-                frameRight: imageRight + (bgWidth - displayWidth) / 2,
-                frameBottom: imageBottom + (bgHeight - displayHeight) / 2,
-                containerW: bgWidth,
-                containerH: bgHeight,
-              ),)),
+              child: IgnorePointer(
+                child: _currentFrame == null
+                    ? const SizedBox()
+                    : FrameBgContainerWidget(
+                        frameLeft: bgLeft,
+                        frameTop: bgTop,
+                        frameRight: bgRight,
+                        frameBottom: bgBottom,
+                        containerW: bgWidth,
+                        containerH: bgHeight,
+                      ),
+              )),
           Align(
             alignment: Alignment.center,
-            child: IgnorePointer(child: SizedBox(
-              width: displayWidth,
-              height: displayHeight,
-              child: Image.file(
-                File(_currentFrame ?? ''),
+            child: IgnorePointer(
+              child: SizedBox(
+                width: displayWidth,
+                height: displayHeight,
+                child: Image.file(
+                  File(_currentFrame ?? ''),
+                ),
               ),
-            ),),
+            ),
           )
         ],
       );
     });
+  }
+
+  void _initInputPosition() {
+    _photoViewController.reset();
   }
 }

@@ -52,7 +52,6 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 SliderAlphaParameterWidget(
-                  alpha: 0.0,
                   initValue: 1.0,
                   onChanged: (double value) {
                     debugPrint('alpha = $value');

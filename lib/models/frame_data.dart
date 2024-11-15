@@ -42,6 +42,7 @@ class FrameDetail {
   String? className;
   String? image;
   int? groupId;
+  var color;
   FrameSize? params;
 
   bool get isVipFrame => vip == 1;
@@ -55,7 +56,8 @@ class FrameDetail {
       this.className,
       this.image,
       this.groupId,
-      this.params});
+      this.params,
+      this.color});
 
   /// fromJson 方法
   FrameDetail.fromJson(Map<String, dynamic> json)
@@ -66,6 +68,7 @@ class FrameDetail {
         status = json['status'] as int?,
         className = json['className'] as String?,
         image = json['image'] as String?,
+        color = json['color'],
         groupId = json['groupId'] as int?,
         params = FrameSize.fromJson(json['params']);
 
@@ -79,6 +82,7 @@ class FrameDetail {
     data['status'] = status;
     data['className'] = className;
     data['image'] = image;
+    data['color'] = color;
     data['groupId'] = groupId;
     data['params'] = params?.toJson();
     return data;

@@ -85,7 +85,20 @@ class _StickersListState extends State<StickersList> {
               ],
             );
 
-            return child;
+            return Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                  color: (item.color != null &&
+                      '${item.color}'.isNotEmpty &&
+                      '${item.color}' != 'null')
+                      ? Color(int.parse(item.color)) // example: 0xffababab
+                      : Colors.transparent,
+                  borderRadius: BorderRadius.circular(4.0)),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(4.0),
+                child: child,
+              ),
+            );
           },
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 4, mainAxisSpacing: 11, crossAxisSpacing: 11),
