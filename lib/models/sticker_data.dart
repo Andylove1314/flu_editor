@@ -51,6 +51,7 @@ class StickDetail {
   String? className;
   String? image;
   int? groupId;
+  var color;
 
   bool get isVipSticker => vip == 1;
 
@@ -62,7 +63,8 @@ class StickDetail {
         this.status,
         this.className,
         this.image,
-        this.groupId});
+        this.groupId,
+      this.color});
 
   /// fromJson 方法
   StickDetail.fromJson(Map<String, dynamic> json)
@@ -73,6 +75,7 @@ class StickDetail {
         status = json['status'] as int?,
         className = json['className'] as String?,
         image = json['image'] as String?,
+        color = json['color'],
         groupId = json['groupId'] as int?;
 
   /// toJson 方法
@@ -86,6 +89,7 @@ class StickDetail {
     data['className'] = className;
     data['image'] = image;
     data['groupId'] = groupId;
+    data['color'] = color;
     return data;
   }
 }

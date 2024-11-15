@@ -93,6 +93,11 @@ class _FrameListState extends State<FrameList> {
             return Container(
               alignment: Alignment.center,
               decoration: BoxDecoration(
+                  color: (item.color != null &&
+                          '${item.color}'.isNotEmpty &&
+                          '${item.color}' != 'null')
+                      ? Color(int.parse(item.color)) // example: 0xffababab
+                      : Colors.transparent,
                   border: Border.all(
                       color: selected
                           ? const Color(0xffFF4679)
