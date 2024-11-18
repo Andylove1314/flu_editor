@@ -27,6 +27,7 @@ import 'package:flu_editor/models/effect_data.dart';
 import 'package:flu_editor/utils/constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart';
+import 'package:lindi_sticker_widget/lindi_controller.dart';
 
 import 'blocs/edtor_home_cubit.dart';
 import 'blocs/source_image_bloc/source_image_bloc.dart';

@@ -85,7 +85,6 @@ class EditorUtil {
     ));
   }
 
-
   static void goFontPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -288,7 +287,8 @@ class EditorUtil {
     return image;
   }
 
-  static Future<String> cropImage(ImageEditorController croperController) async {
+  static Future<String> cropImage(
+      ImageEditorController croperController) async {
     var state = croperController.state;
 
     if (state == null || state.getCropRect() == null) {
@@ -517,17 +517,23 @@ class EditorUtil {
     return frameList;
   }
 
-  static Future<String> addSticker(String input) async {
-    return input;//todo
-  }
+  static Future<String> addSticker(LindiController stickerController) async {
+    Uint8List? image = await stickerController.saveAsUint8List();
 
+    if (image != null) {
+      File output =
+          await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
+      await output.writeAsBytes(image);
+      return output.path;
+    }
+    return '';
+  }
 
   static Future<String> addFrame(String input) async {
-    return input;//todo
+    return input; //todo
   }
 
-
   static Future<String> addText(String input) async {
-    return input;//todo
+    return input; //todo
   }
 }
