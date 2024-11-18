@@ -7,7 +7,6 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
 import '../widgets/fonts/sticker_view.dart';
-import '../widgets/slider_aloha_parameter.dart';
 
 class EditorStickerPage extends StatefulWidget {
   final String afterPath;
@@ -19,9 +18,6 @@ class EditorStickerPage extends StatefulWidget {
 }
 
 class _EditorStickerPageState extends State<EditorStickerPage> {
-  /// current sticker
-  StickDetail? _stickerDetail;
-
   late LindiController _stickerController;
 
   var _contentW = 0.0;
@@ -64,41 +60,24 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                   return EditorUtil.loadingWidget(context);
                 },
               ),
-              SizedBox(
-                width: _contentW,
-                height: _contentH,
-                child: StikerView(
-                  bgChild: Container(
-                    width: _contentW,
-                    height: _contentH,
-                    color: Colors.transparent,
-                  ),
-                  onInited: (LindiController stickerController) {
-                    _stickerController = stickerController;
-                  },
+              StikerView(
+                stvWidth: _contentW,
+                stvHeight: _contentH,
+                bgChild: Container(
+                  width: _contentW,
+                  height: _contentH,
+                  color: Colors.transparent,
                 ),
-              ),
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: SliderAlphaParameterWidget(
-                  initValue: 1.0,
-                  onChanged: (double value) {
-                    debugPrint('alpha = $value');
-                  },
-                ),
+                onInited: (LindiController stickerController) {
+                  _stickerController = stickerController;
+                },
               ),
             ],
           )),
           StickerPan(
             sts: EditorUtil.stickerList,
-            usingDetail: _stickerDetail,
             onChanged: ({StickDetail? item, String? path}) {
-              setState(() {
-                _stickerDetail = item;
-              });
-
+              setState(() {});
               _stickerController.add(SizedBox(
                 width: _stickerSize,
                 height: _stickerSize,
@@ -106,9 +85,10 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
               ));
             },
             onEffectSave: () async {
-              if (_stickerDetail == null) {
+              if (_stickerController.widgets.isEmpty) {
                 return;
               }
+
               EditorUtil.showLoadingdialog(context);
               EditorUtil.addSticker(widget.afterPath, _stickerController)
                   .then((after) {
