@@ -486,6 +486,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.1"
+  lindi_sticker_widget:
+    dependency: transitive
+    description:
+      name: lindi_sticker_widget
+      sha256: "39e5c511e2e34cf7dcc2dd5a1f4eed0c2e28d451353b9470d7611a5845b4674c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   lints:
     dependency: transitive
     description:
