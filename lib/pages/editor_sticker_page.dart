@@ -108,12 +108,14 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
   }
 
   void _getImageWidgetSize() {
-    var renderBox = _imageKey.currentContext?.findRenderObject();
-
-    if (renderBox == null) {
+    if (_contentW != 0.0 && _contentH != 0.0) {
       return;
     }
 
+    var renderBox = _imageKey.currentContext?.findRenderObject();
+    if (renderBox == null) {
+      return;
+    }
     var size = (renderBox as RenderBox).size; // 获取 widget 的宽高
 
     WidgetsBinding.instance.addPostFrameCallback((s) {
@@ -121,7 +123,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
         _contentW = size.width;
         _contentH = size.height;
       });
+      debugPrint('Image width: $_contentW, height: $_contentW');
     });
-    debugPrint('Image width: $_contentW, height: $_contentW');
   }
 }
