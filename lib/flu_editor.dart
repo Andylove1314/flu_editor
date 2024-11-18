@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flu_editor/pages/editor_colors_page.dart';
 import 'package:flu_editor/pages/editor_crop_page.dart';
