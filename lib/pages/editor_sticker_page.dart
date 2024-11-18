@@ -7,6 +7,7 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
 import '../widgets/fonts/sticker_view.dart';
+import '../widgets/stickers/sticker_added_widget.dart';
 
 class EditorStickerPage extends StatefulWidget {
   final String afterPath;
@@ -26,6 +27,8 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
   final GlobalKey _imageKey = GlobalKey();
 
   late final _stickerSize;
+
+  List<GlobalKey> stickers = [];
 
   @override
   void initState() {
@@ -70,18 +73,21 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                 ),
                 onInited: (LindiController stickerController) {
                   _stickerController = stickerController;
-                },
+                }, stickerKeys: stickers,
               ),
             ],
           )),
           StickerPan(
             sts: EditorUtil.stickerList,
             onChanged: ({StickDetail? item, String? path}) {
+              GlobalKey newKey = GlobalKey();
+              stickers.add(newKey);
               setState(() {});
+
               _stickerController.add(SizedBox(
                 width: _stickerSize,
                 height: _stickerSize,
-                child: Image.file(File(path ?? '')),
+                child: StickerAddedWidget(stickerPath: path ?? '', stickerKey: newKey,),
               ));
             },
             onEffectSave: () async {
