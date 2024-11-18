@@ -81,10 +81,7 @@ class _StikerViewState extends State<StikerView> {
   Widget build(BuildContext context) {
     return LindiStickerWidget(
       controller: _controller,
-      child: SizedBox(
-          width: double.infinity,
-          height: double.infinity,
-          child: widget.bgChild),
+      child: widget.bgChild,
     );
   }
 }

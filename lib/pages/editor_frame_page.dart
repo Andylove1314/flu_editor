@@ -11,7 +11,9 @@ import '../flu_editor.dart';
 import '../widgets/frames/frame_bg_container_widget.dart';
 
 class EditorFramePage extends StatefulWidget {
-  const EditorFramePage({super.key});
+
+  final String afterPath;
+  const EditorFramePage({super.key, required this.afterPath});
 
   @override
   State<EditorFramePage> createState() => _EditorFramePageState();
@@ -57,8 +59,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
                     return;
                   }
 
-                  EditorUtil.addFrame(
-                          context.read<SourceImageCubit>().state.afterPath)
+                  EditorUtil.addFrame(widget.afterPath)
                       .then((after) {
                     /// 更新 home after
                     EditorUtil.homeCubit?.emit(
@@ -78,12 +79,8 @@ class _EditorFramePageState extends State<EditorFramePage> {
 
   /// 相框预览
   Widget _getPre() {
-    Widget input = BlocBuilder<SourceImageCubit, SourceImageReady>(
-      builder: (context, state) {
-        return Image.file(
-          File(state.afterPath),
-        );
-      },
+    Widget input = Image.file(
+      File(widget.afterPath),
     );
     if (_frameDetail == null) {
       return input;

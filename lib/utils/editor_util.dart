@@ -75,10 +75,8 @@ class EditorUtil {
 
   static void goStickerPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-        create: (_) => SourceImageCubit(afterPath),
-        child: const EditorStickerPage(),
-      ),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          EditorStickerPage(afterPath: afterPath),
       transitionDuration: _transDur,
       // You can adjust the duration
       transitionsBuilder: _transAnim,
@@ -87,9 +85,8 @@ class EditorUtil {
 
   static void goFontPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-        create: (_) => SourceImageCubit(afterPath),
-        child: const EditorFontPage(),
+      pageBuilder: (context, animation, secondaryAnimation) => EditorFontPage(
+        afterPath: afterPath,
       ),
       transitionDuration: _transDur,
       // You can adjust the duration
@@ -99,9 +96,8 @@ class EditorUtil {
 
   static void goFramePage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
-        create: (_) => SourceImageCubit(afterPath),
-        child: const EditorFramePage(),
+      pageBuilder: (context, animation, secondaryAnimation) => EditorFramePage(
+        afterPath: afterPath,
       ),
       transitionDuration: _transDur,
       // You can adjust the duration
@@ -517,7 +513,8 @@ class EditorUtil {
     return frameList;
   }
 
-  static Future<String> addSticker(LindiController stickerController) async {
+  static Future<String> addSticker(
+      String input, LindiController stickerController) async {
     Uint8List? image = await stickerController.saveAsUint8List();
 
     if (image != null) {
@@ -526,6 +523,7 @@ class EditorUtil {
       await output.writeAsBytes(image);
       return output.path;
     }
+
     return '';
   }
 
