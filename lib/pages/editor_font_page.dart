@@ -11,7 +11,9 @@ import '../widgets/fonts/font_pan.dart';
 import '../widgets/slider_aloha_parameter.dart';
 
 class EditorFontPage extends StatefulWidget {
-  const EditorFontPage({super.key});
+  final String afterPath;
+
+  const EditorFontPage({super.key, required this.afterPath});
 
   @override
   State<EditorFontPage> createState() => _EditorFontPageState();
@@ -39,13 +41,9 @@ class _EditorFontPageState extends State<EditorFontPage> {
         children: [
           Align(
             alignment: Alignment.center,
-            child: BlocBuilder<SourceImageCubit, SourceImageReady>(
-              builder: (context, state) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 150),
-                  child: Image.file(File(state.afterPath)),
-                );
-              },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 150),
+              child: Image.file(File(widget.afterPath)),
             ),
           ),
           Align(
@@ -67,9 +65,7 @@ class _EditorFontPageState extends State<EditorFontPage> {
                       return;
                     }
 
-                    EditorUtil.addText(
-                            context.read<SourceImageCubit>().state.afterPath)
-                        .then((after) {
+                    EditorUtil.addText(widget.afterPath).then((after) {
                       /// 更新 home after
                       EditorUtil.homeCubit?.emit(
                         EditorHomeState(after),
