@@ -349,24 +349,25 @@ class _MyAppState extends State<MyApp> {
 
 ## 感谢
 
-plugin_platform_interface: ^2.0.2
-flutter_gpu_filters_interface: ^0.0.18
-exif: ^3.3.0
-collection: ^1.16.0
+- plugin_platform_interface: ^2.0.2
+- flutter_gpu_filters_interface: ^0.0.18
+- exif: ^3.3.0
+- collection: ^1.16.0
 
-flutter_bloc: ^8.1.6
-equatable: ^2.0.5
-rxdart: ^0.27.7
+- flutter_bloc: ^8.1.6
+- equatable: ^2.0.5
+- rxdart: ^0.27.7
 
-flutter_cache_manager: ^3.4.1
-photo_view: ^0.15.0
+- flutter_cache_manager: ^3.4.1
+- photo_view: ^0.15.0
 
-auto_size_text: ^3.0.0
-image: ^4.3.0
-extended_image: ^9.0.4
-image_cropper: ^8.0.2
-vibration: ^2.0.1
-haptic_feedback: ^0.5.1+1
+- auto_size_text: ^3.0.0
+- image: ^4.3.0
+- extended_image: ^9.0.4
+- image_cropper: ^8.0.2
+- vibration: ^2.0.1
+- haptic_feedback: ^0.5.1+1
+- lindi_sticker_widget: ^1.0.1
 
 
 ## 结语
