@@ -1,14 +1,10 @@
 import 'dart:io';
 
-import 'package:flu_editor/widgets/stickers/sticker_pan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/edtor_home_cubit.dart';
-import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
 import '../widgets/fonts/font_pan.dart';
-import '../widgets/slider_aloha_parameter.dart';
 
 class EditorFontPage extends StatefulWidget {
   final String afterPath;

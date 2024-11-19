@@ -2,11 +2,9 @@ import 'dart:io';
 
 import 'package:flu_editor/widgets/frames/frame_pan.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:photo_view/photo_view.dart';
 
 import '../blocs/edtor_home_cubit.dart';
-import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
 import '../widgets/frames/frame_bg_container_widget.dart';
 
