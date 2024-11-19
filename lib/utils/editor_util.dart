@@ -553,7 +553,6 @@ class EditorUtil {
       Paint(),
     );
 
-    // canvas.drawImage(stickerImage, Offset.zero, paint);
     canvas.save();
 
     // 将画布内容转换为图片
@@ -574,8 +573,76 @@ class EditorUtil {
     return output.path;
   }
 
-  static Future<String> addFrame(String input) async {
-    return input; //todo
+  static Future<String> addFrame(GlobalKey imgkey, String input, String frame,
+      double frameAspectRatio) async {
+    /// 输入图
+    img.Image inputImage = (await fileToUint8ListAndImage(input))[0];
+
+    /// 生成底图
+    // 获取RepaintBoundary对应的RenderObject
+    RenderRepaintBoundary boundary =
+        imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    // 渲染为图片
+    ui.Image baseImage = await boundary.toImage(pixelRatio: 3.0);
+
+    /// 获取相框图
+    var inputBytes = (await fileToUint8ListAndImage(frame))[1];
+    final ui.Codec codec = await ui.instantiateImageCodec(inputBytes);
+    final ui.FrameInfo frameInfo = await codec.getNextFrame();
+    final ui.Image frameImage = frameInfo.image;
+
+    /// 获取输入图片的宽高
+    final int inputWidth = baseImage.width;
+    final int inputHeight = baseImage.height;
+
+    /// 计算画布大小
+    double canvasWidth, canvasHeight;
+    if (inputWidth / inputHeight > frameAspectRatio) {
+      canvasWidth = inputWidth.toDouble();
+      canvasHeight = inputWidth / frameAspectRatio;
+    } else {
+      canvasHeight = inputHeight.toDouble();
+      canvasWidth = inputHeight * frameAspectRatio;
+    }
+
+    /// 创建画布并绘制图片
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas =
+        Canvas(recorder, Rect.fromLTWH(0, 0, canvasWidth, canvasHeight));
+    final Paint paint = Paint();
+
+    // 计算居中位置
+    double inputOffsetX = (canvasWidth - inputWidth) / 2;
+    double inputOffsetY = (canvasHeight - inputHeight) / 2;
+
+    // 绘制输入图片
+    canvas.drawImage(baseImage, Offset(inputOffsetX, inputOffsetY), paint);
+
+    // 绘制相框图片
+    double frameWidth = frameImage.width.toDouble();
+    double frameHeight = frameImage.height.toDouble();
+
+    // 将相框适应到画布大小
+    final Rect frameRect = Rect.fromLTWH(0, 0, canvasWidth, canvasHeight);
+    final Rect srcRect = Rect.fromLTWH(0, 0, frameWidth, frameHeight);
+
+    canvas.drawImageRect(frameImage, srcRect, frameRect, paint);
+    canvas.restore();
+
+    /// 将合成的图片保存为PNG格式
+    final ui.Image finalImage = await recorder
+        .endRecording()
+        .toImage(canvasWidth.toInt(), canvasHeight.toInt());
+    final ByteData? byteData =
+        await finalImage.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+    /// 保存图片
+    File output =
+        await _createTmp('${DateTime.now().millisecondsSinceEpoch}.png');
+    await output.writeAsBytes(pngBytes);
+
+    return output.path;
   }
 
   static Future<String> addText(String input) async {
