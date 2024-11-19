@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:flu_editor/blocs/sticker_added_bloc/sticker_added_bloc.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class StickerAddedWidget extends StatelessWidget {
   GlobalKey stickerKey;
@@ -17,19 +15,12 @@ class StickerAddedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) {
-        return StickerAddedCubit(StickerAddedState(initOpacity));
-      },
-      child: BlocBuilder<StickerAddedCubit, StickerAddedState>(
-          builder: (cubit, state) {
-        return Opacity(
-            key: stickerKey,
-            opacity: state.opacity,
-            child: Image.file(
-              File(stickerPath ?? ''),
-            ));
-      }),
-    );
+    debugPrint('StickerAddedWidget build');
+    return Opacity(
+        key: stickerKey,
+        opacity: initOpacity,
+        child: Image.file(
+          File(stickerPath ?? ''),
+        ));
   }
 }

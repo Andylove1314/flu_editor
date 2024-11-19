@@ -8,12 +8,14 @@ import 'custom_track_shape.dart';
 class SliderAlphaParameterWidget extends StatefulWidget {
   final Function(double value) onChanged;
   final double initValue;
+  final double value;
   final int showNumber;
 
   SliderAlphaParameterWidget(
       {super.key,
       required this.onChanged,
-      this.initValue = 0,
+      this.initValue = 1.0,
+      required this.value,
       this.showNumber = 100});
 
   @override
@@ -30,7 +32,7 @@ class _SliderDegreeParameterWidgetState
 
   @override
   void initState() {
-    _value = widget.initValue;
+    _value = widget.value;
     super.initState();
   }
 
