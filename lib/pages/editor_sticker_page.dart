@@ -6,7 +6,7 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
-import '../widgets/stickers/sticker_view.dart';
+import '../widgets/stickers/sticker_pre_view.dart';
 
 class EditorStickerPage extends StatefulWidget {
   final String afterPath;
@@ -54,7 +54,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                   return EditorUtil.loadingWidget(context);
                 },
               ),
-              StikerView(
+              StikerPreView(
                 stvWidth: _contentW,
                 stvHeight: _contentH,
                 bgChild: Container(
