@@ -178,7 +178,7 @@ class _StikerViewState extends State<StikerPreView> {
         create: (BuildContext context) {
           ///初始化 透明度
           double initOpacity = 1.0;
-          if (newIndex <= _stickerOpacitys.length - 1) {
+          if (newIndex >= 0 && newIndex < _stickerOpacitys.length) {
             initOpacity = _stickerOpacitys[newIndex];
           }
           return StickerAddedCubit(StickerAddedState(initOpacity));
