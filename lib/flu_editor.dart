@@ -11,6 +11,7 @@ import 'package:flu_editor/pages/editor_font_page.dart';
 import 'package:flu_editor/pages/editor_frame_page.dart';
 import 'package:flu_editor/pages/editor_home_page.dart';
 import 'package:flu_editor/pages/editor_sticker_page.dart';
+import 'package:flutter/rendering.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/cupertino.dart' hide Image;

@@ -24,6 +24,10 @@ class _EditorFramePageState extends State<EditorFramePage> {
 
   final PhotoViewController _photoViewController = PhotoViewController();
 
+  final GlobalKey _imageKey = GlobalKey();
+
+  late double frameAspectRatio;
+
   @override
   void initState() {
     super.initState();
@@ -56,12 +60,15 @@ class _EditorFramePageState extends State<EditorFramePage> {
                   if (_frameDetail == null) {
                     return;
                   }
-
-                  EditorUtil.addFrame(widget.afterPath).then((after) {
+                  EditorUtil.showLoadingdialog(context);
+                  EditorUtil.addFrame(_imageKey, widget.afterPath,
+                          _currentFrame ?? '', frameAspectRatio)
+                      .then((after) {
                     /// 更新 home after
                     EditorUtil.homeCubit?.emit(
                       EditorHomeState(after),
                     );
+                    Navigator.pop(context);
                     Navigator.pop(context);
                   });
                 },
@@ -98,23 +105,24 @@ class _EditorFramePageState extends State<EditorFramePage> {
       double frameTopPixel = _frameDetail?.params?.frameTop * 1.0;
       double frameRightPixel = _frameDetail?.params?.frameRight * 1.0;
       double frameBottomPixel = _frameDetail?.params?.frameBottom * 1.0;
+      debugPrint('图片pix宽高: $imagePixelWidth - $imagePixelHeight');
 
       // 计算图片的宽高比
-      double imageAspectRatio = imagePixelWidth / imagePixelHeight;
+      frameAspectRatio = imagePixelWidth / imagePixelHeight;
 
       // 计算容器的宽高比
       double containerAspectRatio = bgWidth / bgHeight;
 
       double displayWidth, displayHeight;
       // 判断是按宽度还是按高度来适应
-      if (imageAspectRatio > containerAspectRatio) {
+      if (frameAspectRatio > containerAspectRatio) {
         // 图片宽高比大，按宽度适应容器
         displayWidth = bgWidth;
-        displayHeight = bgWidth / imageAspectRatio;
+        displayHeight = bgWidth / frameAspectRatio;
       } else {
         // 图片高宽比大，按高度适应容器
         displayHeight = bgHeight;
-        displayWidth = bgHeight * imageAspectRatio;
+        displayWidth = bgHeight * frameAspectRatio;
       }
 
       debugPrint('图片Widget宽高: $displayWidth - $displayHeight');
@@ -142,12 +150,20 @@ class _EditorFramePageState extends State<EditorFramePage> {
         children: [
           Align(
             alignment: Alignment.center,
-            child: PhotoView.customChild(
-              enablePanAlways: true,
-              controller: _photoViewController,
-              enableRotation: true,
-              backgroundDecoration: const BoxDecoration(color: Colors.white),
-              child: input,
+            child: SizedBox(
+              width: displayWidth,
+              height: displayHeight,
+              child: RepaintBoundary(
+                key: _imageKey,
+                child: PhotoView.customChild(
+                  enablePanAlways: true,
+                  controller: _photoViewController,
+                  enableRotation: true,
+                  backgroundDecoration:
+                      const BoxDecoration(color: Colors.white),
+                  child: input,
+                ),
+              ),
             ),
           ),
           Align(
