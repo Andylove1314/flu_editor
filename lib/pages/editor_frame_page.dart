@@ -9,8 +9,8 @@ import '../flu_editor.dart';
 import '../widgets/frames/frame_bg_container_widget.dart';
 
 class EditorFramePage extends StatefulWidget {
-
   final String afterPath;
+
   const EditorFramePage({super.key, required this.afterPath});
 
   @override
@@ -57,8 +57,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
                     return;
                   }
 
-                  EditorUtil.addFrame(widget.afterPath)
-                      .then((after) {
+                  EditorUtil.addFrame(widget.afterPath).then((after) {
                     /// 更新 home after
                     EditorUtil.homeCubit?.emit(
                       EditorHomeState(after),
@@ -144,6 +143,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
           Align(
             alignment: Alignment.center,
             child: PhotoView.customChild(
+              enablePanAlways: true,
               controller: _photoViewController,
               enableRotation: true,
               backgroundDecoration: const BoxDecoration(color: Colors.white),
