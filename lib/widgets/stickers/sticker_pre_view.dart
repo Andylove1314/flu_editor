@@ -167,6 +167,7 @@ class _StikerViewState extends State<StikerPreView> {
     double newOpacity = 1.0;
     _stickerOpacitys.add(newOpacity);
 
+    /// 新添加的sticker index
     int newIndex = _stickerOpacitys.length - 1;
 
     /// add bloc sticker widget
