@@ -22,7 +22,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
   FrameDetail? _frameDetail;
   String? _currentFrame;
 
-  final PhotoViewController _photoViewController = PhotoViewController();
+  PhotoViewController? _photoViewController;
 
   final GlobalKey _imageKey = GlobalKey();
 
@@ -54,7 +54,6 @@ class _EditorFramePageState extends State<EditorFramePage> {
                   _frameDetail = item;
                   _currentFrame = path;
                   setState(() {});
-                  _initInputPosition();
                 },
                 onEffectSave: () async {
                   if (_frameDetail == null) {
@@ -145,23 +144,29 @@ class _EditorFramePageState extends State<EditorFramePage> {
       double bgBottom = imageBottom + (bgHeight - displayHeight) / 2;
       debugPrint('容器Widget镂边距: $bgLeft - $bgTop - $bgRight - $bgBottom');
 
+      _initInputPosition((displayWidth - imageLeft - imageLeft) / displayWidth);
+      // _initInputPosition(
+      //     (displayHeight - imageTop - imageBottom) / displayHeight);
+
       return Stack(
         alignment: Alignment.center,
         children: [
           Align(
             alignment: Alignment.center,
-            child: SizedBox(
-              width: displayWidth,
-              height: displayHeight,
-              child: RepaintBoundary(
-                key: _imageKey,
-                child: PhotoView.customChild(
-                  enablePanAlways: true,
-                  controller: _photoViewController,
-                  enableRotation: true,
-                  backgroundDecoration:
-                      const BoxDecoration(color: Colors.white),
-                  child: input,
+            child: ClipRRect(
+              child: SizedBox(
+                width: displayWidth,
+                height: displayHeight,
+                child: RepaintBoundary(
+                  key: _imageKey,
+                  child: PhotoView.customChild(
+                    enablePanAlways: true,
+                    controller: _photoViewController,
+                    enableRotation: true,
+                    backgroundDecoration:
+                        const BoxDecoration(color: Colors.white),
+                    child: input,
+                  ),
                 ),
               ),
             ),
@@ -183,12 +188,13 @@ class _EditorFramePageState extends State<EditorFramePage> {
           Align(
             alignment: Alignment.center,
             child: IgnorePointer(
-              child: SizedBox(
+              child: Container(
                 width: displayWidth,
                 height: displayHeight,
-                child: Image.file(
-                  File(_currentFrame ?? ''),
-                ),
+                // color: Colors.transparent.withOpacity(0.5),
+                // child: Image.file(
+                //   File(_currentFrame ?? ''),
+                // ),
               ),
             ),
           )
@@ -197,7 +203,17 @@ class _EditorFramePageState extends State<EditorFramePage> {
     });
   }
 
-  void _initInputPosition() {
-    _photoViewController.reset();
+  void _initInputPosition(double scale) {
+    debugPrint('refresh position');
+    Duration dur = const Duration(milliseconds: 0);
+    if (_photoViewController == null) {
+      _photoViewController = PhotoViewController();
+      dur = const Duration(milliseconds: 80);
+    }
+    Future.delayed(dur, () {
+      _photoViewController?.reset();
+      _photoViewController?.scale = scale;
+      _photoViewController?.position = Offset.zero;
+    });
   }
 }

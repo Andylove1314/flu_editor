@@ -17,7 +17,7 @@ class FrameBgContainerWidget extends StatelessWidget {
       required this.frameBottom,
       required this.containerW,
       required this.containerH,
-      this.bgColor = Colors.black});
+      this.bgColor = Colors.green});
 
   @override
   Widget build(BuildContext context) {
