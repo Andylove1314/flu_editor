@@ -188,13 +188,12 @@ class _EditorFramePageState extends State<EditorFramePage> {
           Align(
             alignment: Alignment.center,
             child: IgnorePointer(
-              child: Container(
+              child: SizedBox(
                 width: displayWidth,
                 height: displayHeight,
-                // color: Colors.transparent.withOpacity(0.5),
-                // child: Image.file(
-                //   File(_currentFrame ?? ''),
-                // ),
+                child: Image.file(
+                  File(_currentFrame ?? ''),
+                ),
               ),
             ),
           )
