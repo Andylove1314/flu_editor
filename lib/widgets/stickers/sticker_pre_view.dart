@@ -144,7 +144,9 @@ class _StikerViewState extends State<StikerPreView> {
                   .map((opacity) => SliderAlphaParameterWidget(
                         value: opacity,
                         onChanged: (double value) {
+                          /// 更新sticker opacity
                           sticker?.updateOpacity(value);
+                          /// 更新slider opacity
                           _stickerOpacitys[currentIndex] = value;
                         },
                       ))
