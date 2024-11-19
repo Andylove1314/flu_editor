@@ -146,6 +146,7 @@ class _StikerViewState extends State<StikerPreView> {
                         onChanged: (double value) {
                           /// 更新sticker opacity
                           sticker?.updateOpacity(value);
+
                           /// 更新slider opacity
                           _stickerOpacitys[currentIndex] = value;
                         },
@@ -181,6 +182,9 @@ class _StikerViewState extends State<StikerPreView> {
           ///初始化 透明度
           double initOpacity = 1.0;
           if (newIndex >= 0 && newIndex < _stickerOpacitys.length) {
+            initOpacity = _stickerOpacitys[newIndex];
+          } else {
+            newIndex = newIndex - 1;
             initOpacity = _stickerOpacitys[newIndex];
           }
           return StickerAddedCubit(StickerAddedState(initOpacity));
