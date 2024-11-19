@@ -161,7 +161,6 @@ class _StikerViewState extends State<StikerPreView> {
     GlobalKey newKey = GlobalKey();
     _stickerKeys.add(newKey);
     _stickerOpacitys.add(1.0);
-    currentIndex = _stickerKeys.length - 1;
 
     /// add bloc sticker widget
     _controller.add(SizedBox(
@@ -169,8 +168,11 @@ class _StikerViewState extends State<StikerPreView> {
       height: widget.stickerSize,
       child: BlocProvider(
         create: (BuildContext context) {
-          return StickerAddedCubit(
-              StickerAddedState(_stickerOpacitys[currentIndex]));
+          double initOpacity = 1.0;
+          if (currentIndex != -1) {
+            initOpacity = _stickerOpacitys[currentIndex];
+          }
+          return StickerAddedCubit(StickerAddedState(initOpacity));
         },
         child: BlocBuilder<StickerAddedCubit, StickerAddedState>(
             builder: (cubit, state) {
