@@ -8,7 +8,7 @@ import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
 import '../slider_aloha_parameter.dart';
 import 'sticker_added_widget.dart';
 
-class StikerView extends StatefulWidget {
+class StikerPreView extends StatefulWidget {
   double stvWidth;
   double stvHeight;
   Widget bgChild;
@@ -20,7 +20,7 @@ class StikerView extends StatefulWidget {
 
   Function(LindiController stickerController) onInited;
 
-  StikerView(
+  StikerPreView(
       {super.key,
       required this.bgChild,
       required this.stvWidth,
@@ -36,7 +36,7 @@ class StikerView extends StatefulWidget {
   }
 }
 
-class _StikerViewState extends State<StikerView> {
+class _StikerViewState extends State<StikerPreView> {
   ///贴纸控制器
   late LindiController _controller;
 
@@ -59,7 +59,7 @@ class _StikerViewState extends State<StikerView> {
   }
 
   @override
-  void didUpdateWidget(covariant StikerView oldWidget) {
+  void didUpdateWidget(covariant StikerPreView oldWidget) {
     if (widget.addCount != oldWidget.addCount) {
       _addSticker(widget.addStickerPath);
     }
