@@ -88,6 +88,7 @@ API 参考。
 以下是如何使用 `flu_editor` 进行图像编辑的示例：
 
 ```dart
+
 void main() {
   runApp(const MyApp());
 }
@@ -102,7 +103,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _fluEditorPlugin = FluEditor();
+
+  /// 当前输入图
   String _currentImage = '';
+
   bool isVipUser = false;
 
   @override
@@ -111,14 +115,21 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
+  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
     try {
-      platformVersion = await _fluEditorPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _fluEditorPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
 
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -211,48 +222,14 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<void> _goEditor(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Material(
-            color: Colors.transparent,
-            child: Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.black,
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '加载滤镜中',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-    List<FilterData> groups = await _fetchLJ();
-
-    Navigator.pop(context);
-
-    EditorUtil.pushHome(context,
+    EditorUtil.goFluEditor(context,
         orignal: _currentImage,
-        fs: groups,
         vipStatusCb: () {
+          debugPrint('get vip status: $isVipUser');
           return isVipUser;
         },
         vipActionCb: () {
+          debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return const RoutePage();
@@ -264,26 +241,31 @@ class _MyAppState extends State<MyApp> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
-        loadWidgetCb: (islight) =>
-            Container(
-              width: 50,
-              height: 50,
-              padding: const EdgeInsets.all(10),
-              alignment: Alignment.center,
-              child: CircularProgressIndicator(
-                color: islight ? Colors.white : Colors.black,
-              ),
-            ),
-        toastActionCb: (msg) =>
-            ScaffoldMessenger.of(context)
-                .showSnackBar(SnackBar(content: Text(msg))),
+        loadWidgetCb: (islight, size, stroke) => Container(
+          width: size,
+          height: size,
+          alignment: Alignment.center,
+          child: CircularProgressIndicator(
+            color: islight ? Colors.white : Colors.black,
+            strokeWidth: stroke,
+          ),
+        ),
+        toastActionCb: (msg) => ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(msg))),
         effectsCb: (page) async => await _fetchPF(),
         saveEffectCb: (effect) async {
+          debugPrint('保存配方：${effect.toJson()}');
           return await true;
         },
         deleteEffectCb: (id) async {
+          debugPrint('删除配方：$id');
           return await true;
-        });
+        },
+        filtersCb: () => _fetchLJ(),
+        stickersCb: () => _fetchStickers(),
+        fontsCb: () => _fetchFonts(),
+        framesCb: () => _fetchFrames(),
+        closeEditorCb: (after) => debugPrint('last image = $after'));
   }
 
   Future<List<EffectData>> _fetchPF() async {
@@ -321,8 +303,7 @@ class _MyAppState extends State<MyApp> {
     detail1.id = 1;
     detail1.image =
     'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail1.filterImage =
-    'luts/01-x.png';
+    detail1.filterImage = 'luts/01-x.png';
     detail1.name = '滤镜1';
     detail1.noise = 0.2;
     detail1.vip = 1;
@@ -332,14 +313,83 @@ class _MyAppState extends State<MyApp> {
     detail2.id = 2;
     detail2.image =
     'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail2.filterImage =
-    'luts/03-x.png';
+    detail2.filterImage = 'luts/03-x.png';
     detail2.name = '滤镜2';
     detail2.lutFrom = 0;
 
     FilterData group1 = FilterData();
     group1.groupName = '分类1';
 
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<StickerData>> _fetchStickers() async {
+    StickDetail detail1 = StickDetail();
+    detail1.id = 1;
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    detail1.name = 'sticker1';
+    detail1.vip = 1;
+
+    StickDetail detail2 = StickDetail();
+    detail2.id = 1;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    detail2.name = 'sticker2';
+    detail2.vip = 0;
+
+    StickerData group1 = StickerData();
+    group1.groupName = '分类1';
+    group1.groupImage =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FontsData>> _fetchFonts() async {
+    FontDetail detail1 = FontDetail();
+    detail1.id = 1;
+    detail1.file =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/9e7605d28b114f60adc4b63b66f91bfa.jpg';
+    detail1.name = 'font1';
+    detail1.vip = 1;
+
+    FontsData group1 = FontsData();
+    group1.groupName = '分类1';
+
+    FontDetail detail2 = detail1;
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FrameData>> _fetchFrames() async {
+    FrameDetail detail1 = FrameDetail();
+    detail1.id = 1;
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
+    detail1.name = 'frame1';
+    detail1.vip = 1;
+
+    FrameSize size = FrameSize();
+    size.frameWidth = 560;
+    size.frameHeight = 1000;
+    size.frameLeft = 94.0;
+    size.frameTop = 142.0;
+    size.frameRight = 88.0;
+    size.frameBottom = 114.0;
+    detail1.params = size;
+
+    FrameData group1 = FrameData();
+    group1.groupName = '分类1';
+
+    FrameDetail detail2 = detail1;
     group1.list = [detail1, detail2];
 
     return [group1];
