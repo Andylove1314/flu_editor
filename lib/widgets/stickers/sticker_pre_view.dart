@@ -99,7 +99,8 @@ class _StikerViewState extends State<StikerPreView> {
       debugPrint(
           "widgets size: ${_controller.widgets.length}, current index: $index");
 
-      if(_controller.deleted){
+      if (_controller.deleted) {
+        debugPrint(" $currentIndex deleted");
         _stickerKeys.removeAt(currentIndex);
         _stickerOpacitys.removeAt(currentIndex);
       }
@@ -107,7 +108,6 @@ class _StikerViewState extends State<StikerPreView> {
       setState(() {
         currentIndex = index;
       });
-
     });
 
     widget.onInited.call(_controller);
@@ -162,7 +162,6 @@ class _StikerViewState extends State<StikerPreView> {
     _stickerKeys.add(newKey);
     _stickerOpacitys.add(1.0);
     currentIndex = _stickerKeys.length - 1;
-    setState(() {});
 
     /// add bloc sticker widget
     _controller.add(SizedBox(
