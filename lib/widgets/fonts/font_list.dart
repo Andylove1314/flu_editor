@@ -64,7 +64,7 @@ class _FrameListState extends State<FontList> {
                 FontWidget(
                   fontDetail: item,
                   onSelect: (st, path) {
-                    if (st == null) {
+                    if (st == null || currentIndex == i) {
                       return;
                     }
                     widget.onChanged.call(item: item, path: path);

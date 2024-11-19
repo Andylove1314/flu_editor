@@ -64,7 +64,7 @@ class _FrameListState extends State<FrameList> {
                 FrameWidget(
                   frameDetail: item,
                   onSelect: (st, path) {
-                    if (st == null) {
+                    if (st == null || currentIndex == i) {
                       return;
                     }
                     widget.onChanged.call(item: item, path: path);
