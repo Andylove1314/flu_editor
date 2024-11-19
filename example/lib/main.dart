@@ -256,11 +256,11 @@ class _MyAppState extends State<MyApp> {
     detail1.vip = 1;
 
     StickDetail detail2 = StickDetail();
-    detail1.id = 2;
-    detail1.image =
+    detail2.id = 1;
+    detail2.image =
         'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
-    detail1.name = 'sticker2';
-    detail1.vip = 0;
+    detail2.name = 'sticker2';
+    detail2.vip = 0;
 
     StickerData group1 = StickerData();
     group1.groupName = '分类1';
@@ -277,19 +277,15 @@ class _MyAppState extends State<MyApp> {
     detail1.id = 1;
     detail1.file =
         'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
+    detail1.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/9e7605d28b114f60adc4b63b66f91bfa.jpg';
     detail1.name = 'font1';
     detail1.vip = 1;
-
-    FontDetail detail2 = FontDetail();
-    detail1.id = 2;
-    detail1.file =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
-    detail1.name = 'font2';
-    detail1.vip = 0;
 
     FontsData group1 = FontsData();
     group1.groupName = '分类1';
 
+    FontDetail detail2 = detail1;
     group1.list = [detail1, detail2];
 
     return [group1];
@@ -299,20 +295,23 @@ class _MyAppState extends State<MyApp> {
     FrameDetail detail1 = FrameDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/dd5455a4941a43208dc7562f541fb16b.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
     detail1.name = 'frame1';
     detail1.vip = 1;
 
-    FrameDetail detail2 = FrameDetail();
-    detail1.id = 2;
-    detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/dd5455a4941a43208dc7562f541fb16b.png';
-    detail1.name = 'frame2';
-    detail1.vip = 0;
+    FrameSize size = FrameSize();
+    size.frameWidth = 560;
+    size.frameHeight = 1000;
+    size.frameLeft = 94.0;
+    size.frameTop = 142.0;
+    size.frameRight = 88.0;
+    size.frameBottom = 114.0;
+    detail1.params = size;
 
     FrameData group1 = FrameData();
     group1.groupName = '分类1';
 
+    FrameDetail detail2 = detail1;
     group1.list = [detail1, detail2];
 
     return [group1];
