@@ -117,6 +117,8 @@ class _StikerViewState extends State<StikerPreView> {
   @override
   Widget build(BuildContext context) {
     debugPrint('StikerView build');
+
+    debugPrint("opacitys: ${_stickerOpacitys}");
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -160,28 +162,36 @@ class _StikerViewState extends State<StikerPreView> {
     /// add sticker key
     GlobalKey newKey = GlobalKey();
     _stickerKeys.add(newKey);
-    _stickerOpacitys.add(1.0);
+
+    /// add sticker opacity
+    double newOpacity = 1.0;
+    _stickerOpacitys.add(newOpacity);
+
+    int newIndex = _stickerOpacitys.length - 1;
 
     /// add bloc sticker widget
-    _controller.add(SizedBox(
+    Widget newChild = SizedBox(
       width: widget.stickerSize,
       height: widget.stickerSize,
       child: BlocProvider(
         create: (BuildContext context) {
+          ///初始化 透明度
           double initOpacity = 1.0;
-          if (currentIndex != -1) {
-            initOpacity = _stickerOpacitys[currentIndex];
+          if (newIndex <= _stickerOpacitys.length - 1) {
+            initOpacity = _stickerOpacitys[newIndex];
           }
           return StickerAddedCubit(StickerAddedState(initOpacity));
         },
         child: BlocBuilder<StickerAddedCubit, StickerAddedState>(
             builder: (cubit, state) {
+          ///slider 调节 透明度
           return StickerAddedWidget(
               stickerPath: path ?? '',
               initOpacity: state.opacity,
               stickerKey: newKey);
         }),
       ),
-    ));
+    );
+    _controller.add(newChild);
   }
 }
