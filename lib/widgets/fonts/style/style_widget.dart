@@ -37,6 +37,7 @@ class _StyleWidgetState extends State<StyleWidget> {
         setState(() {
           _currentItem = item;
         });
+        widget.onSelect.call(item.type);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,

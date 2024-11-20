@@ -4,28 +4,34 @@ import 'package:flutter/material.dart';
 import 'custom_thumb_shape.dart';
 import 'custom_track_shape.dart';
 
-///透明度调节（100）
-class SliderOpacityParameterWidget2 extends StatefulWidget {
+///调节
+class SliderNormalParameterWidget extends StatefulWidget {
   final Function(double value) onChanged;
   final double initValue;
   final double value;
   final int showNumber;
+  final double max;
+  final double min;
+  String name;
 
-  SliderOpacityParameterWidget2(
+  SliderNormalParameterWidget(
       {super.key,
       required this.onChanged,
       this.initValue = 1.0,
-      required this.value,
+        required this.value,
+        required this.max,
+      required this.min,
+        this.name = '',
       this.showNumber = 100});
 
   @override
   State<StatefulWidget> createState() {
-    return _SliderOpacityParameterWidgetState();
+    return _SliderNormalParameterWidgetState();
   }
 }
 
-class _SliderOpacityParameterWidgetState
-    extends State<SliderOpacityParameterWidget2> {
+class _SliderNormalParameterWidgetState
+    extends State<SliderNormalParameterWidget> {
   final _thumbSize = 22.0;
 
   var _value;
@@ -46,9 +52,9 @@ class _SliderOpacityParameterWidgetState
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            '透明',
-            style: TextStyle(
+          Text(
+            widget.name,
+            style: const TextStyle(
                 fontSize: 11,
                 fontWeight: FontWeight.bold,
                 color: Color(0xff19191A)),
@@ -65,7 +71,7 @@ class _SliderOpacityParameterWidgetState
                         text: '',
                         borderColor: const Color(0xff19191A),
                         borderWidth: 3),
-                    // (_value * (showNumber/1.0)).toStringAsFixed(0)
+                    // (_value * (widget.showNumber/1.0)).toStringAsFixed(0)
                     thumbColor: Colors.white,
                     activeTrackColor: const Color(0xff19191A),
                     inactiveTrackColor: const Color(0xff19191A),
@@ -79,8 +85,8 @@ class _SliderOpacityParameterWidgetState
                   child: Slider(
                     divisions: widget.showNumber,
                     value: _value,
-                    max: 1.0,
-                    min: 0.0,
+                    max: widget.max,
+                    min: widget.min,
                     onChanged: (value) {
                       widget.onChanged.call(value);
                       setState(() {

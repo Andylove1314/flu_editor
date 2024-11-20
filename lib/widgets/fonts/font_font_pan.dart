@@ -1,22 +1,20 @@
-import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
-import '../confirm_bar.dart';
 import '../vip_bar.dart';
 import 'font_class_widget.dart';
 import 'font_list.dart';
 
 class FontFontPan extends StatefulWidget {
-
   FontDetail? usingDetail;
 
-  final Function({FontDetail? item, String? ttfPath, String? imgPath, bool? showVipPop}) onChanged;
+  final Function(
+      {FontDetail? item,
+      String? ttfPath,
+      String? imgPath,
+      bool? showVipPop}) onChanged;
 
-  FontFontPan(
-      {super.key,
-      required this.onChanged,
-      this.usingDetail});
+  FontFontPan({super.key, required this.onChanged, this.usingDetail});
 
   @override
   State<StatefulWidget> createState() => _FontFontPanState();
@@ -33,13 +31,13 @@ class _FontFontPanState extends State<FontFontPan>
   @override
   void initState() {
     super.initState();
-    _tabController =
-        TabController(length: EditorUtil.fontList.length, vsync: this, initialIndex: 0)
-          ..addListener(() {
-            setState(() {
-              position = _tabController.index;
-            });
-          });
+    _tabController = TabController(
+        length: EditorUtil.fontList.length, vsync: this, initialIndex: 0)
+      ..addListener(() {
+        setState(() {
+          position = _tabController.index;
+        });
+      });
   }
 
   @override
@@ -62,24 +60,36 @@ class _FontFontPanState extends State<FontFontPan>
           child: FontClassWidget(
             position: position,
             tabController: _tabController,
-            tags: EditorUtil.fontList.map((item)=>item.groupName ?? '').toList(),
+            tags: EditorUtil.fontList
+                .map((item) => item.groupName ?? '')
+                .toList(),
           ),
         ),
         Expanded(
-          child: Container(color: Colors.white, child: TabBarView(
-            controller: _tabController,
-            children: EditorUtil.fontList
-                .map((item) => FontList(
-                usingDetail: widget.usingDetail,
-                fons: item.list ?? [],
-                onChanged: ({FontDetail? item, String? ttfPath, String? imgPath}) {
-                  setState(() {
-                    vipSticker = item?.isVipFont ?? false;
-                  });
-                  widget.onChanged(item: item, ttfPath: ttfPath, imgPath: imgPath,showVipPop: showVipBg);
-                }))
-                .toList(),
-          ),),
+          child: Container(
+            color: Colors.white,
+            child: TabBarView(
+              controller: _tabController,
+              children: EditorUtil.fontList
+                  .map((item) => FontList(
+                      usingDetail: widget.usingDetail,
+                      fons: item.list ?? [],
+                      onChanged: (
+                          {FontDetail? item,
+                          String? ttfPath,
+                          String? imgPath}) {
+                        setState(() {
+                          vipSticker = item?.isVipFont ?? false;
+                        });
+                        widget.onChanged(
+                            item: item,
+                            ttfPath: ttfPath,
+                            imgPath: imgPath,
+                            showVipPop: showVipBg);
+                      }))
+                  .toList(),
+            ),
+          ),
         ),
       ],
     );

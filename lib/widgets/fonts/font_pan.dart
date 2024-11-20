@@ -12,7 +12,8 @@ import 'font_style_pan.dart';
 class FontPan extends StatefulWidget {
   FontDetail? usingDetail;
 
-  final Function({FontDetail? item, String? ttfPath, String? imgPath}) onFontChanged;
+  final Function({FontDetail? item, String? ttfPath, String? imgPath})
+      onFontChanged;
   final Function({Color? color, double? opacity, int? style}) onStyleChanged;
   final Function({double? worldSpace, double? lineSpace, int? algin})
       onAlginChanged;
@@ -62,23 +63,31 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
               if (item.type == 0) {
                 return FontFontPan(
                   onChanged: (
-                      {FontDetail? item, String? ttfPath, String? imgPath, bool? showVipPop}) {
+                      {FontDetail? item,
+                      String? ttfPath,
+                      String? imgPath,
+                      bool? showVipPop}) {
                     setState(() {
                       vipFont = showVipPop ?? false;
                     });
-                    widget.onFontChanged.call(item:item, ttfPath:ttfPath, imgPath: imgPath);
+                    widget.onFontChanged
+                        .call(item: item, ttfPath: ttfPath, imgPath: imgPath);
                   },
                   usingDetail: widget.usingDetail,
                 );
               }
               if (item.type == 1) {
                 return FontStylePan(
-                  onChanged: widget.onStyleChanged,
+                  onColorChanged: (color) {},
+                  onOpacityChanged: (double opacity) {},
+                  onStyleChanged: (int style) {},
                 );
               }
               if (item.type == 2) {
-                return FontAlginPan(
-                  onChanged: widget.onAlginChanged,
+                return FontAlignPan(
+                  onWorldSpaceChanged: (ws) {},
+                  onLineSpaceChanged: (double? lineSpace) {},
+                  onAlignChanged: (int algin) {},
                 );
               }
 
