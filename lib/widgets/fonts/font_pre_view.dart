@@ -1,5 +1,4 @@
 import 'package:flu_editor/blocs/font_added_bloc/font_added_bloc.dart';
-import 'package:flu_editor/blocs/sticker_added_bloc/sticker_added_bloc.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
