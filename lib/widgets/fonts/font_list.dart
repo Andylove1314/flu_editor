@@ -24,26 +24,14 @@ class FontList extends StatefulWidget {
 }
 
 class _FrameListState extends State<FontList> {
-  late ScrollController _scrollController;
   int currentIndex = -1;
 
   @override
   void initState() {
-    _scrollController = ScrollController()
-      ..addListener(() {
-        if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent + 40) {
-        } else if (_scrollController.position.pixels <=
-            _scrollController.position.minScrollExtent - 40) {}
-      });
-
+    if (widget.fons.contains(widget.usingDetail)) {
+      currentIndex = widget.fons.indexOf(widget.usingDetail!);
+    }
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -51,7 +39,6 @@ class _FrameListState extends State<FontList> {
     return SizedBox(
         height: 180,
         child: GridView.builder(
-          controller: _scrollController,
           padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 10),
           physics: const BouncingScrollPhysics(),
           // 设置为横向滚动
