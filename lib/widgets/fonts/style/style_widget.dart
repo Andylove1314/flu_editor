@@ -23,7 +23,7 @@ class _StyleWidgetState extends State<StyleWidget> {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: fontAlignActions.map((item) => _item(context, item)).toList(),
+        children: fontStyleActions.map((item) => _item(context, item)).toList(),
       ),
     );
   }

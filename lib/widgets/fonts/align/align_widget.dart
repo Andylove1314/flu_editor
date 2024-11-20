@@ -1,4 +1,3 @@
-
 import 'package:flu_editor/models/action_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +17,12 @@ class _AlignWidgetState extends State<AlignWidget> {
   ActionData? _currentItem;
 
   @override
+  void initState() {
+    _currentItem = fontAlignActions[0];
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Center(
       child: Row(
@@ -31,9 +36,12 @@ class _AlignWidgetState extends State<AlignWidget> {
   Widget _item(BuildContext context, ActionData item) {
     bool selected = _currentItem == item;
 
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
+        if (_currentItem == item) {
+          return;
+        }
+
         setState(() {
           _currentItem = item;
         });

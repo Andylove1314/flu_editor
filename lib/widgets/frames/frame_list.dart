@@ -23,26 +23,14 @@ class FrameList extends StatefulWidget {
 }
 
 class _FrameListState extends State<FrameList> {
-  late ScrollController _scrollController;
   int currentIndex = -1;
 
   @override
   void initState() {
-    _scrollController = ScrollController()
-      ..addListener(() {
-        if (_scrollController.position.pixels >=
-            _scrollController.position.maxScrollExtent + 40) {
-        } else if (_scrollController.position.pixels <=
-            _scrollController.position.minScrollExtent - 40) {}
-      });
-
+    if (widget.sts.contains(widget.usingDetail)) {
+      currentIndex = widget.sts.indexOf(widget.usingDetail!);
+    }
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
   }
 
   @override
@@ -50,7 +38,6 @@ class _FrameListState extends State<FrameList> {
     return SizedBox(
         height: 170,
         child: GridView.builder(
-          controller: _scrollController,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
           physics: const BouncingScrollPhysics(),
           // 设置为横向滚动
