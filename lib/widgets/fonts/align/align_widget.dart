@@ -1,4 +1,4 @@
-import 'package:flu_editor/flu_editor.dart';
+
 import 'package:flu_editor/models/action_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +37,7 @@ class _AlignWidgetState extends State<AlignWidget> {
         setState(() {
           _currentItem = item;
         });
+        widget.onSelect.call(item.type);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,

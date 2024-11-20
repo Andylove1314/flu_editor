@@ -1,15 +1,20 @@
 import 'package:flu_editor/widgets/fonts/style/style_widget.dart';
 import 'package:flutter/material.dart';
 
-import '../slider_opacity_parameter.dart';
-import '../slider_opacity_parameter_2.dart';
+import '../slider_normal_parameter.dart';
 import 'color/color_widget.dart';
 
 class FontStylePan extends StatefulWidget {
   /// style 0 粗体 1 斜体 2 下划线
-  final Function({Color? color, double? opacity, int style}) onChanged;
+  final Function(Color color) onColorChanged;
+  final Function(double opacity) onOpacityChanged;
+  final Function(int style) onStyleChanged;
 
-  FontStylePan({super.key, required this.onChanged});
+  FontStylePan(
+      {super.key,
+      required this.onColorChanged,
+      required this.onOpacityChanged,
+      required this.onStyleChanged});
 
   @override
   State<StatefulWidget> createState() => _FontStylePanState();
@@ -27,7 +32,6 @@ class _FontStylePanState extends State<FontStylePan>
           ],
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(12), topRight: Radius.circular(12))),
-      height: 200,
       child: Column(
         children: [
           Padding(
@@ -35,20 +39,27 @@ class _FontStylePanState extends State<FontStylePan>
             child: ColorWidget(
               onSelect: (color) {
                 debugPrint('color: $color');
+                widget.onColorChanged.call(color);
               },
             ),
           ),
-          SliderOpacityParameterWidget2(
+          SliderNormalParameterWidget(
+            initValue: 1.0,
             value: 1.0,
+            max: 1.0,
+            min: 0.0,
+            name: '透明',
             onChanged: (double value) {
-              debugPrint('opacity: $value');
+              widget.onOpacityChanged.call(value);
             },
           ),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: StyleWidget(
-              onSelect: (style) {},
+              onSelect: (style) {
+                widget.onStyleChanged.call(style);
+              },
             ),
           ))
         ],
