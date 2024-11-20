@@ -576,7 +576,7 @@ class EditorUtil {
   static Future<String> addFrame(GlobalKey imgkey, String input, String frame,
       double frameAspectRatio) async {
     /// 输入图
-    img.Image inputImage = (await fileToUint8ListAndImage(input))[0];
+    // img.Image inputImage = (await fileToUint8ListAndImage(input))[0];
 
     /// 生成底图
     // 获取RepaintBoundary对应的RenderObject
@@ -645,7 +645,64 @@ class EditorUtil {
     return output.path;
   }
 
-  static Future<String> addText(String input) async {
-    return input; //todo
+
+  static Future<String> addText(
+      String input, LindiController stickerController) async {
+    // 1. 加载 input 原始图片
+    var inputBytes = (await fileToUint8ListAndImage(input))[1];
+    final ui.Codec codec = await ui.instantiateImageCodec(inputBytes);
+    final ui.FrameInfo frame = await codec.getNextFrame();
+    final ui.Image baseImage = frame.image;
+
+    // 2. 获取贴纸图片的 Uint8List 数据
+    Uint8List? stickerImageBytes = await stickerController.saveAsUint8List();
+    if (stickerImageBytes == null) {
+      return '';
+    }
+    final ui.Codec codec2 = await ui.instantiateImageCodec(stickerImageBytes);
+    final ui.FrameInfo frame2 = await codec2.getNextFrame();
+    final ui.Image stickerImage = frame2.image;
+    if (stickerImage == null) {
+      return '';
+    }
+
+    // 3. 创建画布并合成图片
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(recorder);
+
+    final Paint paint = Paint();
+    // 在画布上绘制原图
+    canvas.drawImage(baseImage, Offset.zero, paint);
+
+    // 将 stickerImage 绘制到 baseImage 上
+    canvas.drawImageRect(
+      stickerImage,
+      Rect.fromLTWH(
+          0, 0, stickerImage.width.toDouble(), stickerImage.height.toDouble()),
+      // 原始 sticker 的矩形区域
+      Rect.fromLTWH(
+          0, 0, baseImage.width.toDouble(), baseImage.height.toDouble()),
+      // 目标区域（缩放后的矩形）
+      Paint(),
+    );
+
+    canvas.save();
+
+    // 将画布内容转换为图片
+    final ui.Image composedImage = await recorder
+        .endRecording()
+        .toImage(baseImage.width, baseImage.height);
+
+    // 4. 将合成后的图像转换为 Uint8List
+    final ByteData? byteData =
+    await composedImage.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List composedImageBytes = byteData!.buffer.asUint8List();
+
+    // 5. 保存合成后的图片
+    File output =
+    await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
+    await output.writeAsBytes(composedImageBytes);
+
+    return output.path;
   }
 }

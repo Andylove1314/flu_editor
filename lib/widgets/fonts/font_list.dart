@@ -6,7 +6,8 @@ import 'font_widget.dart';
 class FontList extends StatefulWidget {
   final List<FontDetail> fons;
 
-  final Function({FontDetail? item, String? path}) onChanged;
+  final Function({FontDetail? item, String? ttfPath, String? imgPath})
+      onChanged;
   Function()? onScrollNext;
   Function()? onScrollPre;
 
@@ -63,11 +64,12 @@ class _FrameListState extends State<FontList> {
               children: [
                 FontWidget(
                   fontDetail: item,
-                  onSelect: (st, path) {
+                  onSelect: (st, path, img) {
                     if (st == null || currentIndex == i) {
                       return;
                     }
-                    widget.onChanged.call(item: item, path: path);
+                    widget.onChanged
+                        .call(item: item, ttfPath: path, imgPath: img);
                     setState(() {
                       currentIndex = i;
                     });
@@ -106,8 +108,10 @@ class _FrameListState extends State<FontList> {
             );
           },
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            childAspectRatio: (110/53),
-              crossAxisCount: 3, mainAxisSpacing: 6, crossAxisSpacing: 6),
+              childAspectRatio: (110 / 53),
+              crossAxisCount: 3,
+              mainAxisSpacing: 6,
+              crossAxisSpacing: 6),
         ));
   }
 }

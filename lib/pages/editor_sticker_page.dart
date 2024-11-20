@@ -36,6 +36,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
   @override
   Widget build(BuildContext context) {
     debugPrint('fffffff666666');
+    var stickerSize = (MediaQuery.of(context).size.width - 63) / 4;
     return Scaffold(
       body: Column(
         children: [
@@ -65,7 +66,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                 onInited: (LindiController stickerController) {
                   _stickerController = stickerController;
                 },
-                stickerSize: (MediaQuery.of(context).size.width - 63) / 4,
+                stickerSize: Size(stickerSize, stickerSize),
                 addStickerPath: currentStickerPath,
                 addCount: stickerCount,
               ),

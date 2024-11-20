@@ -1,45 +1,47 @@
+import 'package:flu_editor/utils/constant.dart';
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
 import '../confirm_bar.dart';
-import '../vip_bar.dart';
+import 'font_align_pan.dart';
 import 'font_class_widget.dart';
-import 'font_list.dart';
+import 'font_font_pan.dart';
+import 'font_style_pan.dart';
 
 class FontPan extends StatefulWidget {
-  final List<FontsData> fons;
-
   FontDetail? usingDetail;
 
-  final Function({FontDetail? item, String? path}) onChanged;
+  final Function({FontDetail? item, String? ttfPath, String? imgPath}) onFontChanged;
+  final Function({Color? color, double? opacity, int? style}) onStyleChanged;
+  final Function({double? worldSpace, double? lineSpace, int? algin})
+      onAlginChanged;
 
   final Function() onEffectSave;
 
   FontPan(
       {super.key,
-      required this.fons,
-      required this.onChanged,
+      required this.onFontChanged,
+      required this.onStyleChanged,
+      required this.onAlginChanged,
       required this.onEffectSave,
       this.usingDetail});
 
   @override
-  State<FontPan> createState() => _FramePanState();
+  State<StatefulWidget> createState() => _FontPanState();
 }
 
-class _FramePanState extends State<FontPan>
-    with SingleTickerProviderStateMixin {
+class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  bool vipSticker = false;
-
   int position = 0;
+  bool vipFont = false;
 
   @override
   void initState() {
     super.initState();
     _tabController =
-        TabController(length: widget.fons.length, vsync: this, initialIndex: 0)
+        TabController(length: fontActions.length, vsync: this, initialIndex: 0)
           ..addListener(() {
             setState(() {
               position = _tabController.index;
@@ -49,51 +51,54 @@ class _FramePanState extends State<FontPan>
 
   @override
   Widget build(BuildContext context) {
-    bool showVipBg =
-        vipSticker && !(EditorUtil.vipStatusCallback?.call() ?? false);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        VipBar(
-          showVipbg: showVipBg,
-          subAction: () {
-            EditorUtil.vipActionCallback?.call();
-          },
-        ),
-        Container(
-          color: Colors.white,
-          child: FontClassWidget(
-            position: position,
-            tabController: _tabController,
-            tags: widget.fons,
-          ),
-        ),
-        Container(
-          color: Colors.white,
-          height: 180,
+        SizedBox(
+          height: 230,
           child: TabBarView(
             controller: _tabController,
-            children: widget.fons
-                .map((item) => FontList(
-                    usingDetail: widget.usingDetail,
-                fons: item.list ?? [],
-                    onChanged: ({FontDetail? item, String? path}) {
-                      setState(() {
-                        vipSticker = item?.isVipFont ?? false;
-                      });
-                      widget.onChanged(item: item, path: path);
-                    }))
-                .toList(),
+            children: fontActions.map((item) {
+              if (item.type == 0) {
+                return FontFontPan(
+                  onChanged: (
+                      {FontDetail? item, String? ttfPath, String? imgPath, bool? showVipPop}) {
+                    setState(() {
+                      vipFont = showVipPop ?? false;
+                    });
+                    widget.onFontChanged.call(item:item, ttfPath:ttfPath, imgPath: imgPath);
+                  },
+                  usingDetail: widget.usingDetail,
+                );
+              }
+              if (item.type == 1) {
+                return FontStylePan(
+                  onChanged: widget.onStyleChanged,
+                );
+              }
+              if (item.type == 2) {
+                return FontAlginPan(
+                  onChanged: widget.onAlginChanged,
+                );
+              }
+
+              return const SizedBox();
+            }).toList(),
           ),
         ),
         ConfirmBar(
-          content: const Text('字体'),
+          content: FontClassWidget(
+            position: position,
+            tabController: _tabController,
+            tags: fontActions.map((filter) => filter.name).toList(),
+            centerTab: true,
+            showIndicator: true,
+          ),
           cancel: () {
             Navigator.of(context).pop();
           },
           confirm: () async {
-            if (showVipBg) {
+            if (vipFont) {
               showVipPop(context, content: '您使用了VIP素材，请在开通会员后保存效果？',
                   onSave: () {
                 EditorUtil.vipActionCallback?.call();
