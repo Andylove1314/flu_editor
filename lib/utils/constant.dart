@@ -263,11 +263,11 @@ final _cropRotateActions = [
 
 final fontActions = [
   ActionData(type: 0, name: '字体', icon: ''),
-  ActionData(type: 1, name: '样式', icon: '', subActions: _fontStyleActions),
-  ActionData(type: 2, name: '对齐', icon: '', subActions: _fontAlignActions),
+  ActionData(type: 1, name: '样式', icon: '', subActions: fontStyleActions),
+  ActionData(type: 2, name: '对齐', icon: '', subActions: fontAlignActions),
 ];
 
-final _fontStyleActions = [
+final fontStyleActions = [
   ActionData(
       type: 0,
       name: '粗体',
@@ -285,7 +285,7 @@ final _fontStyleActions = [
       selectedIcon: 'icon_underline_s@3x'.imageFontsPng),
 ];
 
-final _fontAlignActions = [
+final fontAlignActions = [
   ActionData(
       type: 0,
       name: '居左',

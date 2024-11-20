@@ -6,7 +6,7 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_icon.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
 
-import '../slider_aloha_parameter.dart';
+import '../slider_opacity_parameter.dart';
 import 'font_added_widget.dart';
 
 class FontPreView extends StatefulWidget {
@@ -142,7 +142,7 @@ class _FontPreViewState extends State<FontPreView> {
             child: IndexedStack(
               index: currentIndex,
               children: _fontOpacitys
-                  .map((opacity) => SliderAlphaParameterWidget(
+                  .map((opacity) => SliderOpacityParameterWidget(
                         value: opacity,
                         onChanged: (double value) {
                           /// 更新sticker opacity

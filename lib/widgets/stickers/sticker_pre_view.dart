@@ -5,7 +5,7 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_icon.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
 
-import '../slider_aloha_parameter.dart';
+import '../slider_opacity_parameter.dart';
 import 'sticker_added_widget.dart';
 
 class StikerPreView extends StatefulWidget {
@@ -141,7 +141,7 @@ class _StikerViewState extends State<StikerPreView> {
             child: IndexedStack(
               index: currentIndex,
               children: _stickerOpacitys
-                  .map((opacity) => SliderAlphaParameterWidget(
+                  .map((opacity) => SliderOpacityParameterWidget(
                         value: opacity,
                         onChanged: (double value) {
                           /// 更新sticker opacity
