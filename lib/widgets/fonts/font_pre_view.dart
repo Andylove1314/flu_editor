@@ -1,5 +1,6 @@
 import 'package:flu_editor/blocs/font_added_bloc/font_added_bloc.dart';
 import 'package:flu_editor/blocs/sticker_added_bloc/sticker_added_bloc.dart';
+import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lindi_sticker_widget/lindi_controller.dart';
@@ -81,10 +82,10 @@ class _FontPreViewState extends State<FontPreView> {
               _controller.selectedWidget!.delete();
             }),
         LindiStickerIcon(
-            icon: Icons.flip,
-            alignment: Alignment.bottomLeft,
+            icon: Icons.edit,
+            alignment: Alignment.topRight,
             onTap: () {
-              _controller.selectedWidget!.flip();
+              EditorUtil.showToast('弹出键盘，修改文字');
             }),
         LindiStickerIcon(
             icon: Icons.cached,
