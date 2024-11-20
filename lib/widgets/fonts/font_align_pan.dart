@@ -5,9 +5,9 @@ import 'align/align_widget.dart';
 
 class FontAlignPan extends StatefulWidget {
   /// algin 0 居左 1 居中 2 居右
-  final Function(double worldSpace) onWorldSpaceChanged;
-  final Function(double lineSpace) onLineSpaceChanged;
-  final Function(int type) onAlignChanged;
+  final Function(double? worldSpace) onWorldSpaceChanged;
+  final Function(double? lineSpace) onLineSpaceChanged;
+  final Function(TextAlign? align) onAlignChanged;
 
   FontAlignPan(
       {super.key,
@@ -62,9 +62,9 @@ class _FontAlginPanState extends State<FontAlignPan>
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: AlignWidget(
-              onSelect: (type) {
-                debugPrint('alignttype: $type');
-                widget.onAlignChanged.call(type);
+              onAlign: (align) {
+                debugPrint('alignttype: $align');
+                widget.onAlignChanged.call(align);
               },
             ),
           ))

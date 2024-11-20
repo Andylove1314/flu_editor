@@ -6,16 +6,24 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class StyleWidget extends StatefulWidget {
-  const StyleWidget({super.key, required this.onSelect});
+  const StyleWidget(
+      {super.key,
+      required this.onBold,
+      required this.onUnderline,
+      required this.onItalic});
 
-  final Function(int style) onSelect;
+  final Function(bool bold) onBold;
+  final Function(bool underline) onUnderline;
+  final Function(bool italic) onItalic;
 
   @override
   State<StatefulWidget> createState() => _StyleWidgetState();
 }
 
 class _StyleWidgetState extends State<StyleWidget> {
-  ActionData? _currentItem;
+  bool _bold = false;
+  bool _underline = false;
+  bool _italic = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,24 +37,26 @@ class _StyleWidgetState extends State<StyleWidget> {
   }
 
   Widget _item(BuildContext context, ActionData item) {
-    bool selected = _currentItem == item;
-
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: () {
+    return GestureDetector(
+      onTap: () {
         setState(() {
-          _currentItem = item;
+          if (item.type == 0) {
+            _bold = !_bold;
+            widget.onBold(_bold);
+          } else if (item.type == 1) {
+            _italic = !_italic;
+            widget.onItalic(_italic);
+          } else if (item.type == 2) {
+            _underline = !_underline;
+            widget.onUnderline(_underline);
+          }
         });
-        widget.onSelect.call(item.type);
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            (selected ? item.selectedIcon : item.icon) ?? '',
-            fit: BoxFit.fill,
-            width: 33,
-            height: 33,
+          _icon(
+            item,
           ),
           const SizedBox(
             height: 4,
@@ -61,5 +71,34 @@ class _StyleWidgetState extends State<StyleWidget> {
         ],
       ),
     );
+  }
+
+  Widget _icon(ActionData item) {
+    if (item.type == 0) {
+      return Image.asset(
+        (_bold ? item.selectedIcon : item.icon) ?? '',
+        fit: BoxFit.fill,
+        width: 33,
+        height: 33,
+      );
+    }
+    if (item.type == 1) {
+      return Image.asset(
+        (_italic ? item.selectedIcon : item.icon) ?? '',
+        fit: BoxFit.fill,
+        width: 33,
+        height: 33,
+      );
+    }
+    if (item.type == 2) {
+      return Image.asset(
+        (_underline ? item.selectedIcon : item.icon) ?? '',
+        fit: BoxFit.fill,
+        width: 33,
+        height: 33,
+      );
+    }
+
+    return const SizedBox();
   }
 }
