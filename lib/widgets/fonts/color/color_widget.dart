@@ -2,6 +2,8 @@ import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/constant.dart';
+
 class ColorWidget extends StatefulWidget {
 
   const ColorWidget({super.key, required this.onSelect});
@@ -15,12 +17,6 @@ class ColorWidget extends StatefulWidget {
 class _ColorWidgetState extends State<ColorWidget> {
   int _index = 1;
 
-  final List<String> _colorStrs = [
-    '',
-    '0xffFFFFFF',
-    '0xff000000',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -32,14 +28,14 @@ class _ColorWidgetState extends State<ColorWidget> {
         separatorBuilder: (BuildContext context, int index) => const SizedBox(
           width: 15,
         ),
-        itemCount: _colorStrs.length,
+        itemCount: colorStrs.length,
       ),
     );
   }
 
   Widget _item(BuildContext context, int index) {
     bool selected = _index == index;
-    String colorStr = _colorStrs[index];
+    String colorStr = colorStrs[index];
 
     if (colorStr.isEmpty) {
       return SizedBox(

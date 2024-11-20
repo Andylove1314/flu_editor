@@ -5,9 +5,9 @@ import 'align/align_widget.dart';
 
 class FontAlignPan extends StatefulWidget {
   /// algin 0 居左 1 居中 2 居右
-  final Function(double? worldSpace) onWorldSpaceChanged;
-  final Function(double? lineSpace) onLineSpaceChanged;
-  final Function(int algin) onAlignChanged;
+  final Function(double worldSpace) onWorldSpaceChanged;
+  final Function(double lineSpace) onLineSpaceChanged;
+  final Function(int type) onAlignChanged;
 
   FontAlignPan(
       {super.key,

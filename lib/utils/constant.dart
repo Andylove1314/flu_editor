@@ -7,7 +7,8 @@ import '../models/action_data.dart';
 typedef VipStatusCallback = bool Function();
 typedef VipActionCallback = void Function();
 typedef SaveCallback = void Function(String tmpPath);
-typedef LoadingWidgetCallback = Widget Function(bool isLight, double size, double stroke);
+typedef LoadingWidgetCallback = Widget Function(
+    bool isLight, double size, double stroke);
 typedef ToastActionCallback = void Function(String msg);
 typedef SaveEffectCallback = Future<bool> Function(EffectData effect);
 typedef DeleteEffectCallback = Future<bool> Function(dynamic effectId);
@@ -301,4 +302,54 @@ final fontAlignActions = [
       name: '居右',
       icon: 'icon_rightalignment_n@3x'.imageFontsPng,
       selectedIcon: 'icon_rightalignment_s@3x'.imageFontsPng),
+];
+
+final List<String> colorStrs = [
+  '',
+  '0xffffffff',
+  '0xff000000',
+  '0xff646466',
+  '0xffC8C9CC',
+  '0xffFFB2B2',
+  '0xffFFE680',
+  '0xffFFDB4D',
+  '0xffFFCA00',
+  '0xffCCA714',
+  '0xffFFF0B2',
+  '0xffFFE680',
+  '0xffFFDB4D',
+  '0xffFFCA00',
+  '0xffCCA714',
+  '0xffB6FFB2',
+  '0xff9AE883',
+  '0xffACE249',
+  '0xff20D82A',
+  '0xff14CC95',
+  '0xffB2BBFF',
+  '0xff838EE8',
+  '0xff495BE2',
+  '0xff0B26F0',
+  '0xff142ACC',
+  '0xffE7B2FF',
+  '0xffD083E8',
+  '0xffB149E2',
+  '0xffCA00FF',
+  '0xffC514CC',
+  '0xffFFB2DB',
+  '0xffF389C1',
+  '0xffE2499B',
+  '0xffFF0089',
+  '0xffCC1476',
+  '0xff800D0D',
+  '0xff897629',
+  '0xff2E8929',
+  '0xff293489',
+  '0xff792989',
+  '0xff89295C',
+  '0xff330505',
+  '0xff332E05',
+  '0xff083305',
+  '0xff050B33',
+  '0xff2C0533',
+  '0xff33051E'
 ];

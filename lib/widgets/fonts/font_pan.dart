@@ -12,19 +12,32 @@ import 'font_style_pan.dart';
 class FontPan extends StatefulWidget {
   FontDetail? usingDetail;
 
+  /// 字体
   final Function({FontDetail? item, String? ttfPath, String? imgPath})
       onFontChanged;
-  final Function({Color? color, double? opacity, int? style}) onStyleChanged;
-  final Function({double? worldSpace, double? lineSpace, int? algin})
-      onAlginChanged;
 
+  ///样式
+  final Function(Color color) onColorChanged;
+  final Function(double opacity) onOpacityChanged;
+  final Function(int style) onStyleChanged;
+
+  /// 对齐
+  final Function(double? worldSpace) onWorldSpaceChanged;
+  final Function(double? lineSpace) onLineSpaceChanged;
+  final Function(int algin) onAlignChanged;
+
+  /// 保存
   final Function() onEffectSave;
 
   FontPan(
       {super.key,
       required this.onFontChanged,
+      required this.onColorChanged,
+      required this.onOpacityChanged,
       required this.onStyleChanged,
-      required this.onAlginChanged,
+      required this.onWorldSpaceChanged,
+      required this.onLineSpaceChanged,
+      required this.onAlignChanged,
       required this.onEffectSave,
       this.usingDetail});
 
@@ -78,16 +91,16 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
               }
               if (item.type == 1) {
                 return FontStylePan(
-                  onColorChanged: (color) {},
-                  onOpacityChanged: (double opacity) {},
-                  onStyleChanged: (int style) {},
+                  onColorChanged: (color) => widget.onColorChanged,
+                  onOpacityChanged: (double opacity) => widget.onOpacityChanged,
+                  onStyleChanged: (int style) => widget.onStyleChanged,
                 );
               }
               if (item.type == 2) {
                 return FontAlignPan(
-                  onWorldSpaceChanged: (ws) {},
-                  onLineSpaceChanged: (double? lineSpace) {},
-                  onAlignChanged: (int algin) {},
+                  onWorldSpaceChanged: (ws) => widget.onWorldSpaceChanged,
+                  onLineSpaceChanged: (ls) => widget.onLineSpaceChanged,
+                  onAlignChanged: (alignType) => widget.onAlignChanged,
                 );
               }
 
