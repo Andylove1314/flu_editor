@@ -15,8 +15,15 @@ class FontPreView extends StatefulWidget {
 
   Size fontStickerSize;
 
-  String? addFontStickerPath;
-  int addCount;
+  String? font;
+  Color? color;
+  double? opacity;
+  bool? bold;
+  bool? italic;
+  bool? underline;
+  TextAlign? textAlign;
+  double? worldSpace;
+  double? lineSpace;
 
   Function(LindiController stickerController) onInited;
 
@@ -27,8 +34,15 @@ class FontPreView extends StatefulWidget {
       required this.stvHeight,
       required this.fontStickerSize,
       required this.onInited,
-      required this.addFontStickerPath,
-      required this.addCount});
+      this.font = '',
+      this.opacity = 1.0,
+      this.color = Colors.white,
+      this.textAlign = TextAlign.left,
+      this.bold = false,
+      this.italic = false,
+      this.underline = false,
+      this.worldSpace = 1.0,
+      this.lineSpace = 1.0});
 
   @override
   State<StatefulWidget> createState() {
@@ -40,12 +54,11 @@ class _FontPreViewState extends State<FontPreView> {
   ///贴纸控制器
   late LindiController _controller;
 
-  /// 当前贴纸key
-  late GlobalKey _textKey;
+  final GlobalKey _stickerKey = GlobalKey();
 
   /// 当前sticker cubit
-  FontAddedCubit? get textSticker {
-    BuildContext? con = _textKey?.currentContext;
+  FontAddedCubit? get sticker {
+    BuildContext? con = _stickerKey.currentContext;
     if (con == null) {
       return null;
     }
@@ -54,8 +67,16 @@ class _FontPreViewState extends State<FontPreView> {
 
   @override
   void didUpdateWidget(covariant FontPreView oldWidget) {
-    if (widget.addCount != oldWidget.addCount) {
-      _addSticker(widget.addFontStickerPath);
+    if (widget.font != oldWidget.font ||
+        widget.opacity != oldWidget.opacity ||
+        widget.color != oldWidget.color ||
+        widget.textAlign != oldWidget.textAlign ||
+        widget.bold != oldWidget.bold ||
+        widget.italic != oldWidget.italic ||
+        widget.underline != oldWidget.underline ||
+        widget.worldSpace != oldWidget.worldSpace ||
+        widget.lineSpace != oldWidget.lineSpace) {
+      _changeSticker();
     }
 
     super.didUpdateWidget(oldWidget);
@@ -106,35 +127,40 @@ class _FontPreViewState extends State<FontPreView> {
   }
 
   /// add sticker
-  void _addSticker(String? path) {
+  void _changeSticker() {
     /// add bloc sticker widget
     if (_controller.widgets.isEmpty) {
-      _textKey = GlobalKey();
       debugPrint('add sticker');
       Widget newChild = SizedBox(
         width: widget.fontStickerSize.width,
         height: widget.fontStickerSize.height,
         child: Center(
           child: BlocProvider(
-            create: (BuildContext context) {
-              /// 初始化透明度
-              double init = 1.0;
-              return FontAddedCubit(FontAddedState(init));
-            },
+            create: (c) => FontAddedCubit(FontAddedState()),
             child: BlocBuilder<FontAddedCubit, FontAddedState>(
-                builder: (cubit, state) {
-              ///slider 调节 透明度
+                builder: (c, state) {
+                  debugPrint('更新 参数');
               return FontAddedWidget(
-                fontStickerKey: _textKey,
+                stickerKey: _stickerKey,
                 text: '你我当年',
-                font: path ?? '',
-                opacity: state.opacity,
+                font: widget.font ?? '',
+                opacity: widget.opacity,
+                color: widget.color,
+                bold: widget.bold,
+                italic: widget.italic,
+                underline: widget.underline,
+                textAlign: widget.textAlign,
+                worldSpace: widget.worldSpace,
+                lineSpace: widget.lineSpace,
               );
             }),
           ),
         ),
       );
       _controller.add(newChild);
+    } else {
+      debugPrint('外层修改参数');
+      sticker?.updateParam();
     }
   }
 }

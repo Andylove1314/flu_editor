@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class AlignWidget extends StatefulWidget {
-  const AlignWidget({super.key, required this.onSelect});
+  const AlignWidget({super.key, required this.onAlign});
 
-  final Function(int style) onSelect;
+  final Function(TextAlign align) onAlign;
 
   @override
   State<StatefulWidget> createState() => _AlignWidgetState();
@@ -45,7 +45,14 @@ class _AlignWidgetState extends State<AlignWidget> {
         setState(() {
           _currentItem = item;
         });
-        widget.onSelect.call(item.type);
+
+        if (item.type == 0) {
+          widget.onAlign.call(TextAlign.left);
+        } else if (item.type == 1) {
+          widget.onAlign.call(TextAlign.center);
+        } else if (item.type == 2) {
+          widget.onAlign.call(TextAlign.right);
+        }
       },
       child: Column(
         mainAxisSize: MainAxisSize.min,

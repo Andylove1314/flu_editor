@@ -20,17 +20,22 @@ class EditorFontPage extends StatefulWidget {
 class _EditorFontPageState extends State<EditorFontPage> {
   late LindiController _stickerController;
 
-  /// current sticker
+  /// current sticker 参数
   FontDetail? _fontDetail;
-  String? _ttfPath;
-  String? _imgPath;
+  String? _font;
+  Color? _color;
+  double? _opacity;
+  bool? _bold;
+  bool? _italic;
+  bool? _underline;
+  TextAlign? _textAlign;
+  double? _worldSpace;
+  double? _lineSpace;
 
   var _contentW = 0.0;
   var _contentH = 0.0;
 
   final GlobalKey _imageKey = GlobalKey();
-
-  int _stickerCount = 0;
 
   @override
   void initState() {
@@ -74,21 +79,20 @@ class _EditorFontPageState extends State<EditorFontPage> {
                   _stickerController = stickerController;
                 },
                 fontStickerSize: const Size(186, 65),
-                addFontStickerPath: _imgPath,
-                addCount: _stickerCount,
+                font: _font,
+                opacity: _opacity,
+                color: _color,
+                bold: _bold,
+                italic: _italic,
+                underline: _underline,
+                textAlign: _textAlign,
+                worldSpace: _worldSpace,
+                lineSpace: _lineSpace,
               ),
             ],
           )),
           FontPan(
             usingDetail: _fontDetail,
-            onFontChanged: (
-                {FontDetail? item, String? ttfPath, String? imgPath}) {
-              _fontDetail = item;
-              _ttfPath = ttfPath;
-              _imgPath = imgPath;
-              _stickerCount++;
-              setState(() {});
-            },
             onEffectSave: () async {
               if (_fontDetail == null) {
                 return;
@@ -105,12 +109,44 @@ class _EditorFontPageState extends State<EditorFontPage> {
                 Navigator.pop(context);
               });
             },
-            onColorChanged: (Color color) {},
-            onOpacityChanged: (double opacity) {},
-            onStyleChanged: (int style) {},
-            onWorldSpaceChanged: (double? worldSpace) {},
-            onLineSpaceChanged: (double? lineSpace) {},
-            onAlignChanged: (int algin) {},
+            onFontChanged: (
+                {FontDetail? item, String? ttfPath, String? imgPath}) {
+              _fontDetail = item;
+              _font = ttfPath;
+              setState(() {});
+            },
+            onColorChanged: (color) {
+              _color = color;
+              setState(() {});
+            },
+            onOpacityChanged: (opacity) {
+              _opacity = opacity;
+              setState(() {});
+            },
+            onAlignChanged: (align) {
+              _textAlign = align;
+              setState(() {});
+            },
+            onBold: (bold) {
+              _bold = bold;
+              setState(() {});
+            },
+            onItalic: (italic) {
+              _italic = italic;
+              setState(() {});
+            },
+            onUnderline: (underline) {
+              _underline = underline;
+              setState(() {});
+            },
+            onWorldSpaceChanged: (worldSpace) {
+              _worldSpace = worldSpace;
+              setState(() {});
+            },
+            onLineSpaceChanged: (lineSpace) {
+              _lineSpace = lineSpace;
+              setState(() {});
+            },
           )
         ],
       ),

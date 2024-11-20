@@ -9,11 +9,8 @@ class StickerAddedCubit extends Cubit<StickerAddedState> {
     debugPrint('StickerAddedCubit create');
   }
 
-  double? opacity;
-
   void updateOpacity(double value) {
     debugPrint('updateOpacity');
-    opacity = value;
     emit(StickerAddedState(value));
   }
 }

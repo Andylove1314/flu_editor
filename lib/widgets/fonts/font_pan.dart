@@ -1,3 +1,4 @@
+
 import 'package:flu_editor/utils/constant.dart';
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,14 +18,17 @@ class FontPan extends StatefulWidget {
       onFontChanged;
 
   ///样式
-  final Function(Color color) onColorChanged;
-  final Function(double opacity) onOpacityChanged;
-  final Function(int style) onStyleChanged;
+  final Function(Color? color) onColorChanged;
+  final Function(double? opacity) onOpacityChanged;
+
+  final Function(bool? bold) onBold;
+  final Function(bool? italic) onItalic;
+  final Function(bool? underline) onUnderline;
 
   /// 对齐
   final Function(double? worldSpace) onWorldSpaceChanged;
   final Function(double? lineSpace) onLineSpaceChanged;
-  final Function(int algin) onAlignChanged;
+  final Function(TextAlign? align) onAlignChanged;
 
   /// 保存
   final Function() onEffectSave;
@@ -34,7 +38,9 @@ class FontPan extends StatefulWidget {
       required this.onFontChanged,
       required this.onColorChanged,
       required this.onOpacityChanged,
-      required this.onStyleChanged,
+      required this.onBold,
+      required this.onItalic,
+      required this.onUnderline,
       required this.onWorldSpaceChanged,
       required this.onLineSpaceChanged,
       required this.onAlignChanged,
@@ -91,16 +97,34 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
               }
               if (item.type == 1) {
                 return FontStylePan(
-                  onColorChanged: (color) => widget.onColorChanged,
-                  onOpacityChanged: (double opacity) => widget.onOpacityChanged,
-                  onStyleChanged: (int style) => widget.onStyleChanged,
+                  onColorChanged: (color){
+                    widget.onColorChanged(color);
+                  },
+                  onOpacityChanged: (opacity){
+                    widget.onOpacityChanged.call(opacity);
+                  },
+                  onBold: (bold){
+                    widget.onBold.call(bold);
+                  },
+                  onItalic: (italic){
+                    widget.onItalic.call(italic);
+                  },
+                  onUnderline: (underline){
+                    widget.onUnderline.call(underline);
+                  },
                 );
               }
               if (item.type == 2) {
                 return FontAlignPan(
-                  onWorldSpaceChanged: (ws) => widget.onWorldSpaceChanged,
-                  onLineSpaceChanged: (ls) => widget.onLineSpaceChanged,
-                  onAlignChanged: (alignType) => widget.onAlignChanged,
+                  onWorldSpaceChanged: (ws){
+                    widget.onWorldSpaceChanged.call(ws);
+                  },
+                  onLineSpaceChanged: (ls){
+                    widget.onLineSpaceChanged.call(ls);
+                  },
+                  onAlignChanged: (align){
+                    widget.onAlignChanged.call(align);
+                  },
                 );
               }
 

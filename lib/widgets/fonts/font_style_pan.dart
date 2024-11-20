@@ -6,15 +6,20 @@ import 'color/color_widget.dart';
 
 class FontStylePan extends StatefulWidget {
   /// style 0 粗体 1 斜体 2 下划线
-  final Function(Color color) onColorChanged;
-  final Function(double opacity) onOpacityChanged;
-  final Function(int style) onStyleChanged;
+  final Function(Color? color) onColorChanged;
+  final Function(double? opacity) onOpacityChanged;
+
+  final Function(bool? bold) onBold;
+  final Function(bool? italic) onItalic;
+  final Function(bool? underline) onUnderline;
 
   FontStylePan(
       {super.key,
       required this.onColorChanged,
       required this.onOpacityChanged,
-      required this.onStyleChanged});
+      required this.onBold,
+      required this.onItalic,
+      required this.onUnderline});
 
   @override
   State<StatefulWidget> createState() => _FontStylePanState();
@@ -57,8 +62,14 @@ class _FontStylePanState extends State<FontStylePan>
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: StyleWidget(
-              onSelect: (style) {
-                widget.onStyleChanged.call(style);
+              onBold: (bool bold) {
+                widget.onBold.call(bold);
+              },
+              onItalic: (bool italic) {
+                widget.onItalic.call(italic);
+              },
+              onUnderline: (bool underline) {
+                widget.onUnderline.call(underline);
               },
             ),
           ))
