@@ -89,9 +89,6 @@ class _EditorFontPageState extends State<EditorFontPage> {
               _stickerCount++;
               setState(() {});
             },
-            onStyleChanged: ({Color? color, double? opacity, int? style}) {},
-            onAlginChanged: (
-                {double? worldSpace, double? lineSpace, int? algin}) {},
             onEffectSave: () async {
               if (_fontDetail == null) {
                 return;
@@ -108,6 +105,12 @@ class _EditorFontPageState extends State<EditorFontPage> {
                 Navigator.pop(context);
               });
             },
+            onColorChanged: (Color color) {},
+            onOpacityChanged: (double opacity) {},
+            onStyleChanged: (int style) {},
+            onWorldSpaceChanged: (double? worldSpace) {},
+            onLineSpaceChanged: (double? lineSpace) {},
+            onAlignChanged: (int algin) {},
           )
         ],
       ),
