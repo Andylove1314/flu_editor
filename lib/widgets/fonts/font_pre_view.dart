@@ -1,3 +1,4 @@
+import 'package:flu_editor/blocs/font_added_bloc/font_added_bloc.dart';
 import 'package:flu_editor/blocs/sticker_added_bloc/sticker_added_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,62 +7,62 @@ import 'package:lindi_sticker_widget/lindi_sticker_icon.dart';
 import 'package:lindi_sticker_widget/lindi_sticker_widget.dart';
 
 import '../slider_aloha_parameter.dart';
-import 'sticker_added_widget.dart';
+import 'font_added_widget.dart';
 
-class StikerPreView extends StatefulWidget {
+class FontPreView extends StatefulWidget {
   double stvWidth;
   double stvHeight;
   Widget bgChild;
 
-  Size stickerSize;
+  Size fontStickerSize;
 
-  String? addStickerPath;
+  String? addFontStickerPath;
   int addCount;
 
   Function(LindiController stickerController) onInited;
 
-  StikerPreView(
+  FontPreView(
       {super.key,
       required this.bgChild,
       required this.stvWidth,
       required this.stvHeight,
-      required this.stickerSize,
+      required this.fontStickerSize,
       required this.onInited,
-      required this.addStickerPath,
+      required this.addFontStickerPath,
       required this.addCount});
 
   @override
   State<StatefulWidget> createState() {
-    return _StikerViewState();
+    return _FontPreViewState();
   }
 }
 
-class _StikerViewState extends State<StikerPreView> {
+class _FontPreViewState extends State<FontPreView> {
   ///贴纸控制器
   late LindiController _controller;
 
   /// 当前贴纸
   int currentIndex = -1;
-  List<GlobalKey> _stickerKeys = [];
-  List<double> _stickerOpacitys = [];
+  List<GlobalKey> _fontKeys = [];
+  List<double> _fontOpacitys = [];
 
   /// 当前sticker cubit
-  StickerAddedCubit? get sticker {
+  FontAddedCubit? get sticker {
     if (currentIndex == -1) {
       return null;
     }
 
-    BuildContext? con = _stickerKeys[currentIndex].currentContext;
+    BuildContext? con = _fontKeys[currentIndex].currentContext;
     if (con == null) {
       return null;
     }
-    return con.read<StickerAddedCubit>();
+    return con.read<FontAddedCubit>();
   }
 
   @override
-  void didUpdateWidget(covariant StikerPreView oldWidget) {
+  void didUpdateWidget(covariant FontPreView oldWidget) {
     if (widget.addCount != oldWidget.addCount) {
-      _addSticker(widget.addStickerPath);
+      _addSticker(widget.addFontStickerPath);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -101,8 +102,8 @@ class _StikerViewState extends State<StikerPreView> {
 
       if (_controller.deleted) {
         debugPrint(" $currentIndex deleted");
-        _stickerKeys.removeAt(currentIndex);
-        _stickerOpacitys.removeAt(currentIndex);
+        _fontKeys.removeAt(currentIndex);
+        _fontOpacitys.removeAt(currentIndex);
       }
 
       setState(() {
@@ -118,7 +119,7 @@ class _StikerViewState extends State<StikerPreView> {
   Widget build(BuildContext context) {
     debugPrint('StikerView build');
 
-    debugPrint("opacitys: ${_stickerOpacitys}");
+    debugPrint("opacitys: ${_fontOpacitys}");
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -140,7 +141,7 @@ class _StikerViewState extends State<StikerPreView> {
             right: 0,
             child: IndexedStack(
               index: currentIndex,
-              children: _stickerOpacitys
+              children: _fontOpacitys
                   .map((opacity) => SliderAlphaParameterWidget(
                         value: opacity,
                         onChanged: (double value) {
@@ -148,7 +149,7 @@ class _StikerViewState extends State<StikerPreView> {
                           sticker?.updateOpacity(value);
 
                           /// 更新slider opacity
-                          _stickerOpacitys[currentIndex] = value;
+                          _fontOpacitys[currentIndex] = value;
                         },
                       ))
                   .toList(),
@@ -164,38 +165,38 @@ class _StikerViewState extends State<StikerPreView> {
 
     /// add sticker key
     GlobalKey newKey = GlobalKey();
-    _stickerKeys.add(newKey);
+    _fontKeys.add(newKey);
 
     /// add sticker opacity
     double newOpacity = 1.0;
-    _stickerOpacitys.add(newOpacity);
+    _fontOpacitys.add(newOpacity);
 
     /// 新添加的sticker index
-    int newIndex = _stickerOpacitys.length - 1;
+    int newIndex = _fontOpacitys.length - 1;
 
     /// add bloc sticker widget
     Widget newChild = SizedBox(
-      width: widget.stickerSize.width,
-      height: widget.stickerSize.height,
+      width: widget.fontStickerSize.width,
+      height: widget.fontStickerSize.height,
       child: BlocProvider(
         create: (BuildContext context) {
           ///初始化 透明度
           double initOpacity = 1.0;
-          if (newIndex >= 0 && newIndex < _stickerOpacitys.length) {
-            initOpacity = _stickerOpacitys[newIndex];
+          if (newIndex >= 0 && newIndex < _fontOpacitys.length) {
+            initOpacity = _fontOpacitys[newIndex];
           } else {
             newIndex = newIndex - 1;
-            initOpacity = _stickerOpacitys[newIndex];
+            initOpacity = _fontOpacitys[newIndex];
           }
-          return StickerAddedCubit(StickerAddedState(initOpacity));
+          return FontAddedCubit(FontAddedState(initOpacity));
         },
-        child: BlocBuilder<StickerAddedCubit, StickerAddedState>(
+        child: BlocBuilder<FontAddedCubit, FontAddedState>(
             builder: (cubit, state) {
           ///slider 调节 透明度
-          return StickerAddedWidget(
-              stickerPath: path ?? '',
+          return FontAddedWidget(
+              fontStickerPath: path ?? '',
               initOpacity: state.opacity,
-              stickerKey: newKey);
+              fontStickerKey: newKey);
         }),
       ),
     );

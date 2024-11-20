@@ -1,18 +1,19 @@
-import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
 class FontClassWidget extends StatefulWidget {
   TabController tabController;
-  List<FontsData> tags;
+  List<String> tags;
   int position;
   bool centerTab;
+  bool showIndicator;
 
   FontClassWidget(
       {super.key,
       this.tags = const [],
       required this.tabController,
       this.position = 0,
-      this.centerTab = false});
+      this.centerTab = false,
+      this.showIndicator = false});
 
   @override
   State<StatefulWidget> createState() {
@@ -23,7 +24,6 @@ class FontClassWidget extends StatefulWidget {
 class _FrameClassWidgetState extends State<FontClassWidget> {
   @override
   Widget build(BuildContext context) {
-
     return TabBar(
       tabAlignment: widget.centerTab ? TabAlignment.center : TabAlignment.start,
       controller: widget.tabController,
@@ -35,7 +35,7 @@ class _FrameClassWidgetState extends State<FontClassWidget> {
           child: Column(
             children: [
               Text(
-                e.groupName ?? '',
+                e ?? '',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 13,
@@ -43,15 +43,17 @@ class _FrameClassWidgetState extends State<FontClassWidget> {
                         ? const Color(0xff19191A)
                         : const Color(0xff969799)),
               ),
-              // Container(
-              //   height: 2,
-              //   width: 10,
-              //   margin: const EdgeInsets.only(top: 2),
-              //   decoration: BoxDecoration(
-              //       color:
-              //           selected ? const Color(0xff19191A) : Colors.transparent,
-              //       borderRadius: BorderRadius.circular(1.5)),
-              // )
+              if (widget.showIndicator)
+                Container(
+                  height: 2,
+                  width: 10,
+                  margin: const EdgeInsets.only(top: 2),
+                  decoration: BoxDecoration(
+                      color: selected
+                          ? const Color(0xff19191A)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(1.5)),
+                )
             ],
           ),
         );

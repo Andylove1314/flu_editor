@@ -10,7 +10,7 @@ import '../../blocs/frame_image_bloc/frame_bloc.dart';
 class FontWidget extends StatelessWidget {
   FontDetail fontDetail;
 
-  Function(FontDetail? item, String? framePath)? onSelect;
+  Function(FontDetail? item, String? ttfPath, String? imgPath)? onSelect;
 
   FontWidget({super.key, required this.fontDetail, this.onSelect});
 
@@ -50,14 +50,14 @@ class FontWidget extends StatelessWidget {
                 debugPrint('000000');
                 if (state is FontSourceImageCached) {
                   debugPrint('cached: ${state.path}');
-                  onSelect?.call(fontDetail, state.path);
+                  onSelect?.call(fontDetail, state.path, state.fontDetail.image);
                 } else {
                   context
                       .read<FontSourceImageCubit>()
                       .cacheFont(fontDetail)
                       .then((path) {
                     debugPrint('cached: $path');
-                    onSelect?.call(fontDetail, path);
+                    onSelect?.call(fontDetail, path, fontDetail.image);
                   });
                 }
               },

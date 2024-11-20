@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 class VipBar extends StatelessWidget {
   final bool showVipbg;
   final Function() subAction;
+  final double barHeight;
+  final double borderHeight;
 
-  const VipBar({super.key, this.showVipbg = false, required this.subAction});
+  const VipBar({super.key, this.showVipbg = false, required this.subAction, this.barHeight = 64, this.borderHeight = 21});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +17,7 @@ class VipBar extends StatelessWidget {
       children: [
         if (showVipbg)
           Container(
-            height: 64,
+            height: barHeight,
             width: double.infinity,
             decoration: BoxDecoration(
                 image: DecorationImage(
@@ -66,7 +68,7 @@ class VipBar extends StatelessWidget {
         Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 21,
+            height: borderHeight,
             width: double.infinity,
             decoration: BoxDecoration(
                 color: Colors.white,
