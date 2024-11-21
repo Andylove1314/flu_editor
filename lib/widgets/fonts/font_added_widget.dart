@@ -36,7 +36,7 @@ class FontAddedWidget extends StatelessWidget {
         key: stickerKey,
         opacity: opacity ?? 1.0,
         child: Text(
-          text,
+          text.isEmpty ? '点击输入文案' : text,
           style: TextStyle(
               fontSize: 28,
               color: color ?? Colors.white,

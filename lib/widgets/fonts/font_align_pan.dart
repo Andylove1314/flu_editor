@@ -36,10 +36,10 @@ class _FontAlginPanState extends State<FontAlignPan>
           Padding(
             padding: const EdgeInsets.only(top: 33, bottom: 20),
             child: SliderNormalParameterWidget(
-              initValue: 0.15,
-              max: 0.2,
-              min: 0.1,
-              value: 0.15,
+              initValue: 0.0,
+              max: 6.0,
+              min: 0.0,
+              value: 0.0,
               name: '字间距',
               onChanged: (double value) {
                 debugPrint('worldspace: $value');
@@ -48,10 +48,10 @@ class _FontAlginPanState extends State<FontAlignPan>
             ),
           ),
           SliderNormalParameterWidget(
-            initValue: 0.15,
-            max: 0.2,
-            min: 0.1,
-            value: 0.15,
+            initValue: 0.0,
+            max: 6.0,
+            min: 0.0,
+            value: 0.0,
             name: '行间距',
             onChanged: (double value) {
               debugPrint('linespace: $value');
