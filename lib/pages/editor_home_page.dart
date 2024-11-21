@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:flu_editor/utils/editor_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,7 +94,7 @@ class EditorHomePage extends StatelessWidget {
           child: MainPan(
             panHeight: _panHeight,
             onClick: (action) {
-              context.read<EditorHomeCubit>().toEditor(context, action.type);
+              context.read<EditorHomeCubit>().toEditor(context, EditorType.values[action.type]);
             },
           ),
         )

@@ -226,10 +226,17 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                       String effectImagePath =
                           await EditorUtil.exportImage(context, _currentConfig);
 
-                      /// 更新 home after
-                      EditorUtil.homeCubit?.emit(
-                        EditorHomeState(effectImagePath),
-                      );
+                      if (EditorUtil.editorType == null) {
+                        /// 更新 home after
+                        EditorUtil.homeCubit?.emit(
+                          EditorHomeState(effectImagePath),
+                        );
+                      } else {
+                        if(EditorUtil.singleEditorSavetoAlbum){
+                          EditorUtil.saveCallback?.call(effectImagePath);
+                        }
+                        EditorUtil.clearTmpObject(effectImagePath);
+                      }
 
                       Navigator.pop(context);
                       if (saveEffect) {

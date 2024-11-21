@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flu_editor/widgets/fonts/input_pop_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lindi_sticker_widget/lindi_controller.dart';
 
 import '../blocs/edtor_home_cubit.dart';
@@ -107,10 +108,18 @@ class _EditorFontPageState extends State<EditorFontPage> {
               EditorUtil.showLoadingdialog(context);
               EditorUtil.addText(widget.afterPath, _stickerController)
                   .then((after) {
-                /// 更新 home after
-                EditorUtil.homeCubit?.emit(
-                  EditorHomeState(after),
-                );
+                if (EditorUtil.editorType == null) {
+                  /// 更新 home after
+                  EditorUtil.homeCubit?.emit(
+                    EditorHomeState(after),
+                  );
+                } else {
+                  if(EditorUtil.singleEditorSavetoAlbum){
+                    EditorUtil.saveCallback?.call(after);
+                  }
+                  EditorUtil.clearTmpObject(after);
+                }
+
                 Navigator.pop(context);
                 Navigator.pop(context);
               });
