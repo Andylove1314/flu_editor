@@ -5,7 +5,6 @@ import '../slider_normal_parameter.dart';
 import 'color/color_widget.dart';
 
 class FontStylePan extends StatefulWidget {
-  /// style 0 粗体 1 斜体 2 下划线
   final Function(Color? color) onColorChanged;
   final Function(double? opacity) onOpacityChanged;
 
@@ -50,7 +49,6 @@ class _FontStylePanState extends State<FontStylePan>
           ),
           SliderNormalParameterWidget(
             initValue: 1.0,
-            value: 1.0,
             max: 1.0,
             min: 0.0,
             name: '透明',

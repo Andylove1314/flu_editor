@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flu_editor/widgets/fonts/input_pop_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:lindi_sticker_widget/lindi_controller.dart';
 
@@ -80,7 +81,6 @@ class _EditorFontPageState extends State<EditorFontPage> {
                 onInited: (LindiController stickerController) {
                   _stickerController = stickerController;
                 },
-                fontStickerSize: const Size(186, 65),
                 content: _content,
                 font: _font,
                 opacity: _opacity,
@@ -181,6 +181,15 @@ class _EditorFontPageState extends State<EditorFontPage> {
   }
 
   void _showInputPop() {
-    EditorUtil.showToast('msg');
+    showDialog(
+        context: context,
+        builder: (con) => InputPopWidget(
+              input: (s) {
+                setState(() {
+                  _content = s;
+                });
+              },
+              content: _content,
+            ));
   }
 }

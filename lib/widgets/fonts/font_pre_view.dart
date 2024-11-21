@@ -1,4 +1,3 @@
-
 import 'package:flu_editor/blocs/font_added_bloc/font_added_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,8 +11,6 @@ class FontPreView extends StatefulWidget {
   double stvWidth;
   double stvHeight;
   Widget bgChild;
-
-  Size fontStickerSize;
 
   String? font;
   Color? color;
@@ -36,7 +33,6 @@ class FontPreView extends StatefulWidget {
       required this.bgChild,
       required this.stvWidth,
       required this.stvHeight,
-      required this.fontStickerSize,
       required this.onInited,
       required this.content,
       this.font = '',
@@ -104,7 +100,7 @@ class _FontPreViewState extends State<FontPreView> {
     _controller = LindiController(
       borderColor: Colors.white,
       insidePadding: 13,
-      maxScale: 10,
+      maxScale: 100,
       minScale: 0.3,
       icons: [
         LindiStickerIcon(
@@ -174,12 +170,17 @@ class _FontPreViewState extends State<FontPreView> {
               lineSpace: widget.lineSpace,
             ));
           },
-          child: BlocBuilder<FontAddedCubit, FontAddedState>(
-              builder: (c, state) {
-                debugPrint('更新参数');
-                return GestureDetector(onTap: (){
-                  widget.onInputContent?.call();
-                }, child: FontAddedWidget(
+          child:
+              BlocBuilder<FontAddedCubit, FontAddedState>(builder: (c, state) {
+            debugPrint('更新参数');
+            return GestureDetector(
+              onTap: () {
+                widget.onInputContent?.call();
+              },
+              child: Container(
+                constraints:
+                    BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
+                child: FontAddedWidget(
                   stickerKey: _stickerKey,
                   text: state.text,
                   font: state.font ?? '',
@@ -191,8 +192,10 @@ class _FontPreViewState extends State<FontPreView> {
                   textAlign: state.textAlign,
                   worldSpace: state.worldSpace,
                   lineSpace: state.lineSpace,
-                ),);
-              }),
+                ),
+              ),
+            );
+          }),
         ),
       );
       _controller.add(newChild);

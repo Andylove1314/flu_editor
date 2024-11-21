@@ -311,7 +311,6 @@ final List<String> colorStrs = [
   '0xff646466',
   '0xffC8C9CC',
   '0xffFFB2B2',
-  '0xffFFB2B2',
   '0xffFF8080',
   '0xffFF4D4D',
   '0xffFF0000',

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'align/align_widget.dart';
 
 class FontAlignPan extends StatefulWidget {
-  /// algin 0 居左 1 居中 2 居右
   final Function(double? worldSpace) onWorldSpaceChanged;
   final Function(double? lineSpace) onLineSpaceChanged;
   final Function(TextAlign? align) onAlignChanged;
@@ -39,7 +38,6 @@ class _FontAlginPanState extends State<FontAlignPan>
               initValue: 0.0,
               max: 6.0,
               min: 0.0,
-              value: 0.0,
               name: '字间距',
               onChanged: (double value) {
                 debugPrint('worldspace: $value');
@@ -51,7 +49,6 @@ class _FontAlginPanState extends State<FontAlignPan>
             initValue: 0.0,
             max: 6.0,
             min: 0.0,
-            value: 0.0,
             name: '行间距',
             onChanged: (double value) {
               debugPrint('linespace: $value');
