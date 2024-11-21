@@ -107,10 +107,17 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
                     String after =
                         await EditorUtil.exportImage(context, _currentConfig);
 
-                    /// 更新 home after
-                    EditorUtil.homeCubit?.emit(
-                      EditorHomeState(after),
-                    );
+                    if (EditorUtil.editorType == null) {
+                      /// 更新 home after
+                      EditorUtil.homeCubit?.emit(
+                        EditorHomeState(after),
+                      );
+                    } else {
+                      if(EditorUtil.singleEditorSavetoAlbum){
+                        EditorUtil.saveCallback?.call(after);
+                      }
+                      EditorUtil.clearTmpObject(after);
+                    }
 
                     Navigator.pop(context);
                     Navigator.pop(context);

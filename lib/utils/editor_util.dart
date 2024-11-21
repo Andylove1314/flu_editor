@@ -24,6 +24,8 @@ class EditorUtil {
   static CloseEditorCallback? closeEditorCallback;
 
   static EditorHomeCubit? homeCubit;
+  static EditorType? editorType;
+  static bool singleEditorSavetoAlbum = true;
   static List<FilterData> filterList = [];
   static List<StickerData> stickerList = [];
   static List<FontsData> fontList = [];
@@ -107,6 +109,8 @@ class EditorUtil {
 
   static void goFluEditor(BuildContext context,
       {required String orignal,
+      EditorType? type,
+      bool singleEditorSave = true,
       VipStatusCallback? vipStatusCb,
       VipActionCallback? vipActionCb,
       SaveCallback? saveCb,
@@ -119,7 +123,7 @@ class EditorUtil {
       StickersCallback? stickersCb,
       FontsCallback? fontsCb,
       FramesCallback? framesCb,
-      CloseEditorCallback? closeEditorCb}) {
+      CloseEditorCallback? closeEditorCb}) async {
     _registerMultGlsl();
 
     vipStatusCallback = vipStatusCb;
@@ -135,6 +139,57 @@ class EditorUtil {
     fontsCallback = fontsCb;
     framesCallback = framesCb;
     closeEditorCallback = closeEditorCb;
+
+    editorType = type;
+
+    singleEditorSavetoAlbum = singleEditorSave;
+
+    if (EditorType.crop == type) {
+      goCropPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.colors == type) {
+      goColorsPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.filter == type) {
+      if (filterList.isEmpty) {
+        await EditorUtil.fetchFilterList(context);
+      }
+      goFilterPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.blur == type) {
+      /// todo
+      return;
+    }
+
+    if (EditorType.sticker == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchStickerList(context);
+      }
+      goStickerPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.text == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchFontList(context);
+      }
+      goFontPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.frame == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchFrameList(context);
+      }
+      goFramePage(context, orignal);
+      return;
+    }
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
@@ -442,6 +497,8 @@ class EditorUtil {
     stickerList.clear();
     fontList.clear();
     frameList.clear();
+    editorType == null;
+    singleEditorSavetoAlbum = true;
     closeEditorCallback?.call(after);
     Future.delayed(const Duration(milliseconds: 200), () {
       closeEditorCallback = null;
@@ -645,7 +702,6 @@ class EditorUtil {
     return output.path;
   }
 
-
   static Future<String> addText(
       String input, LindiController stickerController) async {
     // 1. 加载 input 原始图片
@@ -695,12 +751,12 @@ class EditorUtil {
 
     // 4. 将合成后的图像转换为 Uint8List
     final ByteData? byteData =
-    await composedImage.toByteData(format: ui.ImageByteFormat.png);
+        await composedImage.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List composedImageBytes = byteData!.buffer.asUint8List();
 
     // 5. 保存合成后的图片
     File output =
-    await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
     await output.writeAsBytes(composedImageBytes);
 
     return output.path;
