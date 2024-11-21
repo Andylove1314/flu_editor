@@ -21,6 +21,8 @@ class _EditorFontPageState extends State<EditorFontPage> {
   late LindiController _stickerController;
 
   /// current sticker 参数
+
+  String _content = '';
   FontDetail? _fontDetail;
   String? _font;
   Color? _color;
@@ -79,6 +81,7 @@ class _EditorFontPageState extends State<EditorFontPage> {
                   _stickerController = stickerController;
                 },
                 fontStickerSize: const Size(186, 65),
+                content: _content,
                 font: _font,
                 opacity: _opacity,
                 color: _color,
@@ -88,13 +91,16 @@ class _EditorFontPageState extends State<EditorFontPage> {
                 textAlign: _textAlign,
                 worldSpace: _worldSpace,
                 lineSpace: _lineSpace,
+                onInputContent: () {
+                  _showInputPop();
+                },
               ),
             ],
           )),
           FontPan(
             usingDetail: _fontDetail,
             onEffectSave: () async {
-              if (_fontDetail == null) {
+              if (_fontDetail == null || _content.isEmpty) {
                 return;
               }
 
@@ -172,5 +178,9 @@ class _EditorFontPageState extends State<EditorFontPage> {
       });
       debugPrint('Image width: $_contentW, height: $_contentW');
     });
+  }
+
+  void _showInputPop() {
+    EditorUtil.showToast('msg');
   }
 }
