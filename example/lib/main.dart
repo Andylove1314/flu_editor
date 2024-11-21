@@ -72,42 +72,39 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: [
               Expanded(
-                  child: GestureDetector(
-                onTap: () {
-                  _pickImage(context);
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.grey,
-                    child: Stack(alignment: Alignment.center, children: [
-                      _currentImage.isEmpty
-                          ? const SizedBox()
-                          : Image.file(File(_currentImage)),
-                      Container(
-                        height: 200,
-                        width: 200,
-                        color: Colors.white.withOpacity(0.4),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_a_photo,
-                              size: 50.0,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              '添加照片',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 24),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ])),
-              )),
+                  child:Container(
+                      width: double.infinity,
+                      color: Colors.grey,
+                      child: Stack(alignment: Alignment.center, children: [
+                        _currentImage.isEmpty
+                            ? const SizedBox()
+                            : Image.file(File(_currentImage)),
+                        GestureDetector(onTap: (){
+                          _pickImage(context);
+                        }, child: Container(
+                          height: 200,
+                          width: 200,
+                          color: Colors.white.withOpacity(0.4),
+                          child: const Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_a_photo,
+                                size: 50.0,
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                '添加照片',
+                                style:
+                                TextStyle(color: Colors.black, fontSize: 24),
+                              ),
+                            ],
+                          ),
+                        ),),
+                      ]))),
               const SizedBox(
                 height: 20,
               ),
