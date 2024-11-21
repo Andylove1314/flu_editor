@@ -8,7 +8,6 @@ import 'custom_track_shape.dart';
 class SliderNormalParameterWidget extends StatefulWidget {
   final Function(double value) onChanged;
   final double initValue;
-  final double value;
   final int showNumber;
   final double max;
   final double min;
@@ -18,7 +17,6 @@ class SliderNormalParameterWidget extends StatefulWidget {
       {super.key,
       required this.onChanged,
       this.initValue = 1.0,
-        required this.value,
         required this.max,
       required this.min,
         this.name = '',
@@ -38,7 +36,7 @@ class _SliderNormalParameterWidgetState
 
   @override
   void initState() {
-    _value = widget.value;
+    _value = widget.initValue;
     super.initState();
   }
 
@@ -68,7 +66,7 @@ class _SliderNormalParameterWidgetState
                     trackShape: CustomTrackShape(thumbSize: _thumbSize),
                     thumbShape: CustomThumbShape(
                         thumbSize: _thumbSize,
-                        text: '',
+                        text: (_value * (widget.showNumber/1.0)).toStringAsFixed(0),
                         borderColor: const Color(0xff19191A),
                         borderWidth: 3),
                     // (_value * (widget.showNumber/1.0)).toStringAsFixed(0)
