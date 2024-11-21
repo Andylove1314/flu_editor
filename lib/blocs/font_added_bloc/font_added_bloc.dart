@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,9 +8,26 @@ class FontAddedCubit extends Cubit<FontAddedState> {
     debugPrint('FontAddedCubit create');
   }
 
-
-  void updateParam() {
-    debugPrint('updateParam');
-    emit(FontAddedState());
+  void updateParam(String text,
+      {String? font,
+      Color? color,
+      double? opacity,
+      bool? bold,
+      bool? italic,
+      bool? underline,
+      TextAlign? textAlign,
+      double? worldSpace,
+      double? lineSpace}) {
+    debugPrint('updateParam $color');
+    emit(FontAddedState(text,
+        font: font,
+        opacity: opacity,
+        color: color,
+        bold: bold,
+        italic: italic,
+        underline: underline,
+        textAlign: textAlign,
+        worldSpace: worldSpace,
+        lineSpace: lineSpace));
   }
 }

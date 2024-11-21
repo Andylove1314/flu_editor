@@ -72,6 +72,9 @@ class _StikerViewState extends State<StikerPreView> {
     debugPrint('init StikerView');
     _controller = LindiController(
       borderColor: Colors.white,
+      insidePadding: 0,
+      maxScale: 10,
+      minScale: 0.3,
       icons: [
         LindiStickerIcon(
             icon: Icons.close,

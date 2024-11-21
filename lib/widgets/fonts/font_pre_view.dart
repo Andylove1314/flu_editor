@@ -56,6 +56,8 @@ class _FontPreViewState extends State<FontPreView> {
 
   final GlobalKey _stickerKey = GlobalKey();
 
+  String _content = '你我当年';
+
   /// 当前sticker cubit
   FontAddedCubit? get sticker {
     BuildContext? con = _stickerKey.currentContext;
@@ -76,7 +78,16 @@ class _FontPreViewState extends State<FontPreView> {
         widget.underline != oldWidget.underline ||
         widget.worldSpace != oldWidget.worldSpace ||
         widget.lineSpace != oldWidget.lineSpace) {
-      _changeSticker();
+      _changeSticker(_content,
+          font: widget.font,
+          opacity: widget.opacity,
+          color: widget.color,
+          bold: widget.bold,
+          italic: widget.italic,
+          underline: widget.underline,
+          textAlign: widget.textAlign,
+          worldSpace: widget.worldSpace,
+          lineSpace: widget.lineSpace);
     }
 
     super.didUpdateWidget(oldWidget);
@@ -87,6 +98,9 @@ class _FontPreViewState extends State<FontPreView> {
     debugPrint('init FontPreView');
     _controller = LindiController(
       borderColor: Colors.white,
+      insidePadding: 0,
+      maxScale: 10,
+      minScale: 0.3,
       icons: [
         LindiStickerIcon(
             icon: Icons.close,
@@ -115,7 +129,6 @@ class _FontPreViewState extends State<FontPreView> {
   @override
   Widget build(BuildContext context) {
     debugPrint('StikerView build');
-
     return SizedBox(
       width: widget.stvWidth,
       height: widget.stvHeight,
@@ -127,7 +140,16 @@ class _FontPreViewState extends State<FontPreView> {
   }
 
   /// add sticker
-  void _changeSticker() {
+  void _changeSticker(String text,
+      {String? font,
+      Color? color,
+      double? opacity,
+      bool? bold,
+      bool? italic,
+      bool? underline,
+      TextAlign? textAlign,
+      double? worldSpace,
+      double? lineSpace}) {
     /// add bloc sticker widget
     if (_controller.widgets.isEmpty) {
       debugPrint('add sticker');
@@ -136,13 +158,9 @@ class _FontPreViewState extends State<FontPreView> {
         height: widget.fontStickerSize.height,
         child: Center(
           child: BlocProvider(
-            create: (c) => FontAddedCubit(FontAddedState()),
-            child: BlocBuilder<FontAddedCubit, FontAddedState>(
-                builder: (c, state) {
-                  debugPrint('更新 参数');
-              return FontAddedWidget(
-                stickerKey: _stickerKey,
-                text: '你我当年',
+            create: (c) {
+              return FontAddedCubit(FontAddedState(
+                _content,
                 font: widget.font ?? '',
                 opacity: widget.opacity,
                 color: widget.color,
@@ -152,6 +170,23 @@ class _FontPreViewState extends State<FontPreView> {
                 textAlign: widget.textAlign,
                 worldSpace: widget.worldSpace,
                 lineSpace: widget.lineSpace,
+              ));
+            },
+            child: BlocBuilder<FontAddedCubit, FontAddedState>(
+                builder: (c, state) {
+              debugPrint('更新参数');
+              return FontAddedWidget(
+                stickerKey: _stickerKey,
+                text: state.text,
+                font: state.font ?? '',
+                opacity: state.opacity,
+                color: state.color,
+                bold: state.bold,
+                italic: state.italic,
+                underline: state.underline,
+                textAlign: state.textAlign,
+                worldSpace: state.worldSpace,
+                lineSpace: state.lineSpace,
               );
             }),
           ),
@@ -159,8 +194,16 @@ class _FontPreViewState extends State<FontPreView> {
       );
       _controller.add(newChild);
     } else {
-      debugPrint('外层修改参数');
-      sticker?.updateParam();
+      sticker?.updateParam(text,
+          font: font,
+          opacity: opacity,
+          color: color,
+          bold: bold,
+          italic: italic,
+          underline: underline,
+          textAlign: textAlign,
+          worldSpace: worldSpace,
+          lineSpace: lineSpace);
     }
   }
 }
