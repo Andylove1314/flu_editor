@@ -47,6 +47,8 @@ class _ColorWidgetState extends State<ColorWidget> {
               setState(() {
                 _index = 1;
               });
+              Color color = Color(int.parse(colorStrs[_index]));
+              widget.onSelect.call(color);
             },
             icon: Image.asset(
               'icon_cancle_color@3x'.imageFontsPng,
