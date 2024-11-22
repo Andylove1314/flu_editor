@@ -3,9 +3,11 @@ import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
 class InputPopWidget extends StatefulWidget {
-  InputPopWidget({super.key, required this.input, required this.content});
+  InputPopWidget(
+      {super.key, required this.input, required this.content, this.font});
 
   final String content;
+  String? font;
   final Function(String content) input;
 
   @override
@@ -27,12 +29,21 @@ class _InputPopWidgetState extends State<InputPopWidget> {
 
   @override
   Widget build(BuildContext context) {
-    TextStyle topStyle = const TextStyle(
-        color: Colors.white, fontWeight: FontWeight.w500, fontSize: 28);
-    TextStyle bottomStyle = const TextStyle(
-        color: Color(0xff19191A), fontWeight: FontWeight.w500, fontSize: 16);
-    TextStyle bottomHintStyle = const TextStyle(
-        color: Color(0xff646466), fontWeight: FontWeight.w500, fontSize: 16);
+    TextStyle topStyle = TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w500,
+        fontSize: 28,
+        fontFamily: widget.font);
+    TextStyle bottomStyle = TextStyle(
+        color: Color(0xff19191A),
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+        fontFamily: widget.font);
+    TextStyle bottomHintStyle = TextStyle(
+        color: Color(0xff646466),
+        fontWeight: FontWeight.w500,
+        fontSize: 16,
+        fontFamily: widget.font);
 
     return Material(
       color: Colors.transparent,
@@ -51,8 +62,8 @@ class _InputPopWidgetState extends State<InputPopWidget> {
             alignment: Alignment.topCenter,
             child: Container(
               margin: const EdgeInsets.only(top: 100),
-              constraints: BoxConstraints(
-                  maxWidth: MediaQuery.of(context).size.width),
+              constraints:
+                  BoxConstraints(maxWidth: MediaQuery.of(context).size.width),
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.white, width: 2)),

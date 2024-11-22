@@ -38,6 +38,7 @@ class FontAddedWidget extends StatelessWidget {
         child: Text(
           text.isEmpty ? '点击输入文案' : text,
           style: TextStyle(
+              fontFamily: font,
               fontSize: 28,
               color: color ?? Colors.white,
               fontWeight: (bold ?? false) ? FontWeight.w700 : null,
