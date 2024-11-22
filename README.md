@@ -1,19 +1,18 @@
-
 # **flu_editor**
 
 ![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 
 `flu_editor` 是一个用于照片和视频的颜色滤镜编辑插件。
 
-| 功能   | 状态   | 备注   |
-| ------ | ------ | ------ |
-| 滤镜   | 已完成 |       |
-| 裁剪   | 已完成 |       |
-| 颜色   | 已完成 |       |
-| 文字   | 开发中 |       |
-| 边框   | 开发中 |       |
-| 贴纸   | 开发中 |       |
-| 模糊   | 开发中 |       |
+| 功能 | 状态  | 备注 |
+|----|-----|----|
+| 裁剪 | 已完成 |    |
+| 颜色 | 已完成 |    |
+| 滤镜 | 已完成 |    |
+| 模糊 | 开发中 |    |
+| 贴纸 | 已完成 |    |
+| 文字 | 已完成 |    |
+| 边框 | 已完成 |    |
 
 ## 入门
 
@@ -241,17 +240,19 @@ class _MyAppState extends State<MyApp> {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
-        loadWidgetCb: (islight, size, stroke) => Container(
-          width: size,
-          height: size,
-          alignment: Alignment.center,
-          child: CircularProgressIndicator(
-            color: islight ? Colors.white : Colors.black,
-            strokeWidth: stroke,
-          ),
-        ),
-        toastActionCb: (msg) => ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text(msg))),
+        loadWidgetCb: (islight, size, stroke) =>
+            Container(
+              width: size,
+              height: size,
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(
+                color: islight ? Colors.white : Colors.black,
+                strokeWidth: stroke,
+              ),
+            ),
+        toastActionCb: (msg) =>
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(msg))),
         effectsCb: (page) async => await _fetchPF(),
         saveEffectCb: (effect) async {
           debugPrint('保存配方：${effect.toJson()}');
@@ -418,7 +419,6 @@ class _MyAppState extends State<MyApp> {
 - vibration: ^2.0.1
 - haptic_feedback: ^0.5.1+1
 - lindi_sticker_widget: ^1.0.1
-
 
 ## 结语
 
