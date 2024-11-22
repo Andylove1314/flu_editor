@@ -11,13 +11,13 @@ class FontList extends StatefulWidget {
   Function()? onScrollNext;
   Function()? onScrollPre;
 
-  FontDetail? usingDetail;
+  FontDetail? fontDetail;
 
   FontList(
       {super.key,
       required this.fons,
       required this.onChanged,
-      this.usingDetail});
+      this.fontDetail});
 
   @override
   State<FontList> createState() => _FrameListState();
@@ -28,10 +28,20 @@ class _FrameListState extends State<FontList> {
 
   @override
   void initState() {
-    if (widget.fons.contains(widget.usingDetail)) {
-      currentIndex = widget.fons.indexOf(widget.usingDetail!);
+    if (widget.fons.contains(widget.fontDetail)) {
+      currentIndex = widget.fons.indexOf(widget.fontDetail!);
     }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant FontList oldWidget) {
+    if (widget.fontDetail == null) {
+      setState(() {
+        currentIndex = -1;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

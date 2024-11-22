@@ -6,7 +6,7 @@ import 'font_class_widget.dart';
 import 'font_list.dart';
 
 class FontFontPan extends StatefulWidget {
-  FontDetail? usingDetail;
+  FontDetail? fontDetail;
 
   final Function(
       {FontDetail? item,
@@ -14,7 +14,7 @@ class FontFontPan extends StatefulWidget {
       String? imgPath,
       bool? showVipPop}) onChanged;
 
-  FontFontPan({super.key, required this.onChanged, this.usingDetail});
+  FontFontPan({super.key, required this.onChanged, this.fontDetail});
 
   @override
   State<StatefulWidget> createState() => _FontFontPanState();
@@ -72,7 +72,7 @@ class _FontFontPanState extends State<FontFontPan>
               controller: _tabController,
               children: EditorUtil.fontList
                   .map((item) => FontList(
-                      usingDetail: widget.usingDetail,
+                  fontDetail: widget.fontDetail,
                       fons: item.list ?? [],
                       onChanged: (
                           {FontDetail? item,

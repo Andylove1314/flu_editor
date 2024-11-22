@@ -94,11 +94,33 @@ class _EditorFontPageState extends State<EditorFontPage> {
                 onInputContent: () {
                   _showInputPop();
                 },
+                onClose: () {
+                  _content = '';
+                  _fontDetail = null;
+                  _font = null;
+                  _color = null;
+                  _opacity = null;
+                  _bold = null;
+                  _italic = null;
+                  _underline = null;
+                  _textAlign = null;
+                  _worldSpace = null;
+                  _lineSpace = null;
+                  setState(() {});
+                },
               ),
             ],
           )),
           FontPan(
-            usingDetail: _fontDetail,
+            fontDetail: _fontDetail,
+            color: _color,
+            opacity: _opacity,
+            bold: _bold,
+            italic: _italic,
+            underline: _underline,
+            textAlign: _textAlign,
+            worldSpace: _worldSpace,
+            lineSpace: _lineSpace,
             onEffectSave: () async {
               if (_fontDetail == null || _content.isEmpty) {
                 return;

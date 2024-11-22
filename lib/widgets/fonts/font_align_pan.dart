@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'align/align_widget.dart';
 
 class FontAlignPan extends StatefulWidget {
+  /// 初始化参数
+  TextAlign? textAlign;
+  double? worldSpace;
+  double? lineSpace;
+
   final Function(double? worldSpace) onWorldSpaceChanged;
   final Function(double? lineSpace) onLineSpaceChanged;
   final Function(TextAlign? align) onAlignChanged;
@@ -12,7 +17,10 @@ class FontAlignPan extends StatefulWidget {
       {super.key,
       required this.onWorldSpaceChanged,
       required this.onLineSpaceChanged,
-      required this.onAlignChanged});
+      required this.onAlignChanged,
+      this.textAlign,
+      this.worldSpace,
+      this.lineSpace});
 
   @override
   State<StatefulWidget> createState() => _FontAlginPanState();
@@ -20,6 +28,7 @@ class FontAlignPan extends StatefulWidget {
 
 class _FontAlginPanState extends State<FontAlignPan>
     with SingleTickerProviderStateMixin {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -35,7 +44,7 @@ class _FontAlginPanState extends State<FontAlignPan>
           Padding(
             padding: const EdgeInsets.only(top: 33, bottom: 20),
             child: SliderNormalParameterWidget(
-              initValue: 0.0,
+              initValue: widget.worldSpace ?? 0.0,
               max: 6.0,
               min: 0.0,
               name: '字间距',
@@ -46,7 +55,7 @@ class _FontAlginPanState extends State<FontAlignPan>
             ),
           ),
           SliderNormalParameterWidget(
-            initValue: 0.0,
+            initValue: widget.lineSpace ?? 0.0,
             max: 6.0,
             min: 0.0,
             name: '行间距',
@@ -59,6 +68,7 @@ class _FontAlginPanState extends State<FontAlignPan>
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: AlignWidget(
+              textAlign: widget.textAlign,
               onAlign: (align) {
                 debugPrint('alignttype: $align');
                 widget.onAlignChanged.call(align);

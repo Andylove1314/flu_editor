@@ -17,9 +17,9 @@ class SliderNormalParameterWidget extends StatefulWidget {
       {super.key,
       required this.onChanged,
       this.initValue = 1.0,
-        required this.max,
+      required this.max,
       required this.min,
-        this.name = '',
+      this.name = '',
       this.showNumber = 100});
 
   @override
@@ -38,6 +38,14 @@ class _SliderNormalParameterWidgetState
   void initState() {
     _value = widget.initValue;
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant SliderNormalParameterWidget oldWidget) {
+    setState(() {
+      _value = widget.initValue;
+    });
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

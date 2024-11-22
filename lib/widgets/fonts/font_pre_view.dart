@@ -26,6 +26,8 @@ class FontPreView extends StatefulWidget {
 
   Function(LindiController stickerController) onInited;
 
+  Function() onClose;
+
   Function()? onInputContent;
 
   FontPreView(
@@ -34,6 +36,7 @@ class FontPreView extends StatefulWidget {
       required this.stvWidth,
       required this.stvHeight,
       required this.onInited,
+      required this.onClose,
       required this.content,
       this.font = '',
       this.opacity = 1.0,
@@ -121,7 +124,11 @@ class _FontPreViewState extends State<FontPreView> {
             type: IconType.resize),
       ],
     );
-    _controller.onPositionChange((index) {});
+    _controller.onPositionChange((index) {
+      if (_controller.deleted) {
+        widget.onClose.call();
+      }
+    });
 
     widget.onInited.call(_controller);
     super.initState();
@@ -152,7 +159,7 @@ class _FontPreViewState extends State<FontPreView> {
       double? worldSpace,
       double? lineSpace}) {
     /// add bloc sticker widget
-    if (_controller.widgets.isEmpty) {
+    if (_controller.widgets.isEmpty && font != null) {
       debugPrint('add sticker');
       Widget newChild = Center(
         child: BlocProvider(

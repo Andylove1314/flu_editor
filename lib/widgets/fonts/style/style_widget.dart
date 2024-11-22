@@ -6,11 +6,19 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class StyleWidget extends StatefulWidget {
-  const StyleWidget(
+  /// 初始化参数
+  bool? bold;
+  bool? italic;
+  bool? underline;
+
+  StyleWidget(
       {super.key,
       required this.onBold,
       required this.onUnderline,
-      required this.onItalic});
+      required this.onItalic,
+      this.bold,
+      this.italic,
+      this.underline});
 
   final Function(bool bold) onBold;
   final Function(bool underline) onUnderline;
@@ -22,8 +30,36 @@ class StyleWidget extends StatefulWidget {
 
 class _StyleWidgetState extends State<StyleWidget> {
   bool _bold = false;
-  bool _underline = false;
   bool _italic = false;
+  bool _underline = false;
+
+  @override
+  void initState() {
+    _bold = widget.bold ?? false;
+    _italic = widget.italic ?? false;
+    _underline = widget.underline ?? false;
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant StyleWidget oldWidget) {
+    if (widget.bold == null) {
+      setState(() {
+        _bold = false;
+      });
+    }
+    if (widget.italic == null) {
+      setState(() {
+        _italic = false;
+      });
+    }
+    if (widget.underline == null) {
+      setState(() {
+        _underline = false;
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
