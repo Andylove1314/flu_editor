@@ -7,6 +7,7 @@ import 'package:photo_view/photo_view.dart';
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
 import '../widgets/frames/frame_bg_container_widget.dart';
+import 'package:image/image.dart' as img;
 
 class EditorFramePage extends StatefulWidget {
   final String afterPath;
@@ -25,16 +26,9 @@ class _EditorFramePageState extends State<EditorFramePage> {
   PhotoViewController? _photoViewController;
 
   final GlobalKey _imageKey = GlobalKey();
-  final GlobalKey _inputKey = GlobalKey();
-
-  late Size _inputSize;
 
   late double frameAspectRatio;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  img.Image? _input;
 
   @override
   void dispose() {
@@ -94,17 +88,11 @@ class _EditorFramePageState extends State<EditorFramePage> {
   /// 相框预览
   Widget _getPre() {
     Widget input = Image.file(
-      key: _inputKey,
       File(widget.afterPath),
-      frameBuilder: (c, child, i, b) {
-        _fetchInputSize();
-        return child;
-      },
     );
     if (_frameDetail == null) {
       return input;
     }
-
     return LayoutBuilder(builder: (context, constraints) {
       var bgWidth = constraints.maxWidth;
       var bgHeight = constraints.maxHeight;
@@ -140,7 +128,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
         displayWidth = bgHeight * frameAspectRatio;
       }
 
-      debugPrint('frame Widget宽高: $displayWidth - $displayHeight');
+      debugPrint('图片Widget宽高: $displayWidth - $displayHeight');
 
       // 计算缩放比例
       double scaleX = displayWidth / imagePixelWidth;
@@ -152,7 +140,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
       double imageRight = frameRightPixel * scaleX;
       double imageBottom = frameBottomPixel * scaleY;
       debugPrint(
-          'frame Widget镂边距: $imageLeft - $imageTop - $imageRight - $imageBottom');
+          '图片Widget镂边距: $imageLeft - $imageTop - $imageRight - $imageBottom');
 
       double bgLeft = imageLeft + (bgWidth - displayWidth) / 2;
       double bgTop = imageTop + (bgHeight - displayHeight) / 2;
@@ -164,7 +152,23 @@ class _EditorFramePageState extends State<EditorFramePage> {
       var lkHeight = bgHeight - bgTop - bgBottom;
       debugPrint('镂空大小 $lkWidth x $lkHeight}');
 
-      _initInputPosition((displayWidth - imageLeft - imageLeft) / displayWidth);
+      _fetchInputSize(displayWidth, displayHeight).then((size) {
+        debugPrint('input大小 ${size.width} x ${size.height}');
+
+        // 计算X、Y方向的缩放比例
+        double scaleX = lkWidth / size.width;
+        double scaleY = lkHeight / size.height;
+
+        double newScale = scaleX > scaleY ? scaleX : scaleY;
+        var left = (displayWidth - lkWidth) / 2;
+        double x = imageLeft - left;
+        var top = (displayHeight - lkHeight) / 2;
+        double y = imageTop - top;
+
+        debugPrint('缩放大小：$newScale');
+        debugPrint('偏移：x=$x, y=$y');
+        _initInputPosition(newScale, Offset(x, y));
+      });
 
       return Stack(
         alignment: Alignment.center,
@@ -221,27 +225,42 @@ class _EditorFramePageState extends State<EditorFramePage> {
     });
   }
 
-  void _initInputPosition(double scale) {
+  /// 初始化输入图位置
+  void _initInputPosition(double scale, Offset offset) {
     debugPrint('refresh position');
-    Duration dur = const Duration(milliseconds: 0);
     if (_photoViewController == null) {
-      _photoViewController = PhotoViewController();
-      dur = const Duration(milliseconds: 80);
+      _photoViewController = PhotoViewController(initialScale: scale);
+      _photoViewController?.position = offset;
+      setState(() {});
     }
-    Future.delayed(dur, () {
-      _photoViewController?.reset();
-      _photoViewController?.scale = scale;
-      _photoViewController?.position = Offset.zero;
-    });
+    _photoViewController?.reset();
+    _photoViewController?.scale = scale;
+    _photoViewController?.position = offset;
   }
 
-  void _fetchInputSize() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final RenderBox renderBox =
-          _inputKey.currentContext?.findRenderObject() as RenderBox;
-      final Size size = renderBox.size;
-      debugPrint('input大小 ${size.width} x ${size.height}');
-      _inputSize = size;
-    });
+  /// 获取输入图宽高
+  Future<Size> _fetchInputSize(
+      double photoViewWidth, double photoViewHeight) async {
+    if (_input == null) {
+      List list = await EditorUtil.fileToUint8ListAndImage(widget.afterPath);
+      _input = list[0];
+    }
+
+    double inputWidth, inputHeight;
+
+    var inputScale = _input!.width / _input!.height;
+    var photoViewScale = photoViewWidth / photoViewHeight;
+
+    if (inputScale > photoViewScale) {
+      // 图片宽高比大，按宽度适应容器
+      inputWidth = photoViewWidth;
+      inputHeight = inputWidth / inputScale;
+    } else {
+      // 图片高宽比大，按高度适应容器
+      inputHeight = photoViewHeight;
+      inputWidth = photoViewHeight * inputScale;
+    }
+
+    return Size(inputWidth, inputHeight);
   }
 }
