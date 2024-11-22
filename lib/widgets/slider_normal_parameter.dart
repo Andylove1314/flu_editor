@@ -66,7 +66,7 @@ class _SliderNormalParameterWidgetState
                     trackShape: CustomTrackShape(thumbSize: _thumbSize),
                     thumbShape: CustomThumbShape(
                         thumbSize: _thumbSize,
-                        text: (_value * (widget.showNumber/1.0)).toStringAsFixed(0),
+                        text: '',
                         borderColor: const Color(0xff19191A),
                         borderWidth: 3),
                     // (_value * (widget.showNumber/1.0)).toStringAsFixed(0)
