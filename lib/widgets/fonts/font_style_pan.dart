@@ -5,6 +5,13 @@ import '../slider_normal_parameter.dart';
 import 'color/color_widget.dart';
 
 class FontStylePan extends StatefulWidget {
+  /// 初始化参数
+  Color? color;
+  double? opacity;
+  bool? bold;
+  bool? italic;
+  bool? underline;
+
   final Function(Color? color) onColorChanged;
   final Function(double? opacity) onOpacityChanged;
 
@@ -12,13 +19,19 @@ class FontStylePan extends StatefulWidget {
   final Function(bool? italic) onItalic;
   final Function(bool? underline) onUnderline;
 
-  FontStylePan(
-      {super.key,
-      required this.onColorChanged,
-      required this.onOpacityChanged,
-      required this.onBold,
-      required this.onItalic,
-      required this.onUnderline});
+  FontStylePan({
+    super.key,
+    required this.onColorChanged,
+    required this.onOpacityChanged,
+    required this.onBold,
+    required this.onItalic,
+    required this.onUnderline,
+    this.color,
+    this.opacity,
+    this.bold,
+    this.italic,
+    this.underline,
+  });
 
   @override
   State<StatefulWidget> createState() => _FontStylePanState();
@@ -41,6 +54,7 @@ class _FontStylePanState extends State<FontStylePan>
           Padding(
             padding: const EdgeInsets.only(top: 33, bottom: 23),
             child: ColorWidget(
+              color: widget.color,
               onSelect: (color) {
                 debugPrint('color: $color');
                 widget.onColorChanged.call(color);
@@ -48,7 +62,7 @@ class _FontStylePanState extends State<FontStylePan>
             ),
           ),
           SliderNormalParameterWidget(
-            initValue: 1.0,
+            initValue: widget.opacity ?? 1.0,
             max: 1.0,
             min: 0.0,
             name: '透明',
@@ -60,6 +74,9 @@ class _FontStylePanState extends State<FontStylePan>
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 35),
             child: StyleWidget(
+              bold: widget.bold,
+              italic: widget.italic,
+              underline: widget.underline,
               onBold: (bool bold) {
                 widget.onBold.call(bold);
               },

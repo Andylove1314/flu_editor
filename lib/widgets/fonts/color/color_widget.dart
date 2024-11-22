@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class ColorWidget extends StatefulWidget {
+  Color? color;
 
-  const ColorWidget({super.key, required this.onSelect});
+  ColorWidget({super.key, required this.onSelect, this.color});
 
   final Function(Color color) onSelect;
 

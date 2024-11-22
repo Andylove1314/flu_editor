@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class AlignWidget extends StatefulWidget {
-  const AlignWidget({super.key, required this.onAlign});
+  TextAlign? textAlign;
+
+  AlignWidget({super.key, required this.onAlign, this.textAlign});
 
   final Function(TextAlign align) onAlign;
 
@@ -18,8 +20,26 @@ class _AlignWidgetState extends State<AlignWidget> {
 
   @override
   void initState() {
-    _currentItem = fontAlignActions[0];
+    if (widget.textAlign == TextAlign.left) {
+      _currentItem = fontAlignActions[0];
+    } else if (widget.textAlign == TextAlign.center) {
+      _currentItem = fontAlignActions[1];
+    } else if (widget.textAlign == TextAlign.right) {
+      _currentItem = fontAlignActions[2];
+    } else {
+      _currentItem = fontAlignActions[0];
+    }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant AlignWidget oldWidget) {
+    if(widget.textAlign == null){
+      setState(() {
+        _currentItem = fontAlignActions[0];
+      });
+    }
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

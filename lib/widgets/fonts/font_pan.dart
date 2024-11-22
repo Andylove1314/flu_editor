@@ -1,4 +1,3 @@
-
 import 'package:flu_editor/utils/constant.dart';
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,16 @@ import 'font_font_pan.dart';
 import 'font_style_pan.dart';
 
 class FontPan extends StatefulWidget {
-  FontDetail? usingDetail;
+  /// 初始化参数
+  FontDetail? fontDetail;
+  Color? color;
+  double? opacity;
+  bool? bold;
+  bool? italic;
+  bool? underline;
+  TextAlign? textAlign;
+  double? worldSpace;
+  double? lineSpace;
 
   /// 字体
   final Function({FontDetail? item, String? ttfPath, String? imgPath})
@@ -45,7 +53,15 @@ class FontPan extends StatefulWidget {
       required this.onLineSpaceChanged,
       required this.onAlignChanged,
       required this.onEffectSave,
-      this.usingDetail});
+      this.fontDetail,
+      this.color,
+      this.opacity,
+      this.bold,
+      this.italic,
+      this.underline,
+      this.textAlign,
+      this.worldSpace,
+      this.lineSpace});
 
   @override
   State<StatefulWidget> createState() => _FontPanState();
@@ -92,39 +108,47 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
                     widget.onFontChanged
                         .call(item: item, ttfPath: ttfPath, imgPath: imgPath);
                   },
-                  usingDetail: widget.usingDetail,
+                  fontDetail: widget.fontDetail,
                 );
               }
               if (item.type == 1) {
                 return FontStylePan(
-                  onColorChanged: (color){
+                  onColorChanged: (color) {
                     widget.onColorChanged(color);
                   },
-                  onOpacityChanged: (opacity){
+                  onOpacityChanged: (opacity) {
                     widget.onOpacityChanged.call(opacity);
                   },
-                  onBold: (bold){
+                  onBold: (bold) {
                     widget.onBold.call(bold);
                   },
-                  onItalic: (italic){
+                  onItalic: (italic) {
                     widget.onItalic.call(italic);
                   },
-                  onUnderline: (underline){
+                  onUnderline: (underline) {
                     widget.onUnderline.call(underline);
                   },
+                  color: widget.color,
+                  opacity: widget.opacity,
+                  bold: widget.bold,
+                  italic: widget.italic,
+                  underline: widget.underline,
                 );
               }
               if (item.type == 2) {
                 return FontAlignPan(
-                  onWorldSpaceChanged: (ws){
+                  onWorldSpaceChanged: (ws) {
                     widget.onWorldSpaceChanged.call(ws);
                   },
-                  onLineSpaceChanged: (ls){
+                  onLineSpaceChanged: (ls) {
                     widget.onLineSpaceChanged.call(ls);
                   },
-                  onAlignChanged: (align){
+                  onAlignChanged: (align) {
                     widget.onAlignChanged.call(align);
                   },
+                  textAlign: widget.textAlign,
+                  worldSpace: widget.worldSpace,
+                  lineSpace: widget.lineSpace,
                 );
               }
 
