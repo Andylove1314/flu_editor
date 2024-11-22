@@ -25,6 +25,9 @@ class _EditorFramePageState extends State<EditorFramePage> {
   PhotoViewController? _photoViewController;
 
   final GlobalKey _imageKey = GlobalKey();
+  final GlobalKey _inputKey = GlobalKey();
+
+  late Size _inputSize;
 
   late double frameAspectRatio;
 
@@ -69,7 +72,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
                         EditorHomeState(after),
                       );
                     } else {
-                      if(EditorUtil.singleEditorSavetoAlbum){
+                      if (EditorUtil.singleEditorSavetoAlbum) {
                         EditorUtil.saveCallback?.call(after);
                       }
                       EditorUtil.clearTmpObject(after);
@@ -91,7 +94,12 @@ class _EditorFramePageState extends State<EditorFramePage> {
   /// 相框预览
   Widget _getPre() {
     Widget input = Image.file(
+      key: _inputKey,
       File(widget.afterPath),
+      frameBuilder: (c, child, i, b) {
+        _fetchInputSize();
+        return child;
+      },
     );
     if (_frameDetail == null) {
       return input;
@@ -132,7 +140,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
         displayWidth = bgHeight * frameAspectRatio;
       }
 
-      debugPrint('图片Widget宽高: $displayWidth - $displayHeight');
+      debugPrint('frame Widget宽高: $displayWidth - $displayHeight');
 
       // 计算缩放比例
       double scaleX = displayWidth / imagePixelWidth;
@@ -144,7 +152,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
       double imageRight = frameRightPixel * scaleX;
       double imageBottom = frameBottomPixel * scaleY;
       debugPrint(
-          '图片Widget镂边距: $imageLeft - $imageTop - $imageRight - $imageBottom');
+          'frame Widget镂边距: $imageLeft - $imageTop - $imageRight - $imageBottom');
 
       double bgLeft = imageLeft + (bgWidth - displayWidth) / 2;
       double bgTop = imageTop + (bgHeight - displayHeight) / 2;
@@ -152,9 +160,11 @@ class _EditorFramePageState extends State<EditorFramePage> {
       double bgBottom = imageBottom + (bgHeight - displayHeight) / 2;
       debugPrint('容器Widget镂边距: $bgLeft - $bgTop - $bgRight - $bgBottom');
 
+      var lkWidth = bgWidth - bgLeft - bgRight;
+      var lkHeight = bgHeight - bgTop - bgBottom;
+      debugPrint('镂空大小 $lkWidth x $lkHeight}');
+
       _initInputPosition((displayWidth - imageLeft - imageLeft) / displayWidth);
-      // _initInputPosition(
-      //     (displayHeight - imageTop - imageBottom) / displayHeight);
 
       return Stack(
         alignment: Alignment.center,
@@ -169,6 +179,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
                   key: _imageKey,
                   child: PhotoView.customChild(
                     enablePanAlways: true,
+                    initialScale: PhotoViewComputedScale.contained,
                     controller: _photoViewController,
                     enableRotation: true,
                     backgroundDecoration:
@@ -221,6 +232,16 @@ class _EditorFramePageState extends State<EditorFramePage> {
       _photoViewController?.reset();
       _photoViewController?.scale = scale;
       _photoViewController?.position = Offset.zero;
+    });
+  }
+
+  void _fetchInputSize() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final RenderBox renderBox =
+          _inputKey.currentContext?.findRenderObject() as RenderBox;
+      final Size size = renderBox.size;
+      debugPrint('input大小 ${size.width} x ${size.height}');
+      _inputSize = size;
     });
   }
 }
