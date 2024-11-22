@@ -10,7 +10,7 @@ class FontAddedCubit extends Cubit<FontAddedState> {
 
   void updateParam(String text,
       {String? font,
-      Color? color,
+      String? color,
       double? opacity,
       bool? bold,
       bool? italic,

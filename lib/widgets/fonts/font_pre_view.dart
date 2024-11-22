@@ -13,7 +13,7 @@ class FontPreView extends StatefulWidget {
   Widget bgChild;
 
   String? font;
-  Color? color;
+  String? color;
   double? opacity;
   bool? bold;
   bool? italic;
@@ -40,7 +40,7 @@ class FontPreView extends StatefulWidget {
       required this.content,
       this.font = '',
       this.opacity = 1.0,
-      this.color = Colors.white,
+      this.color,
       this.textAlign = TextAlign.left,
       this.bold = false,
       this.italic = false,
@@ -150,7 +150,7 @@ class _FontPreViewState extends State<FontPreView> {
   /// add sticker
   void _changeSticker(String text,
       {String? font,
-      Color? color,
+      String? color,
       double? opacity,
       bool? bold,
       bool? italic,

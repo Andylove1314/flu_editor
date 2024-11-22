@@ -26,7 +26,7 @@ class _EditorFontPageState extends State<EditorFontPage> {
   String _content = '';
   FontDetail? _fontDetail;
   String? _font;
-  Color? _color;
+  String? _color;
   double? _opacity;
   bool? _bold;
   bool? _italic;

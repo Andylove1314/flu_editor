@@ -1,10 +1,11 @@
+import 'package:flu_editor/utils/constant.dart';
 import 'package:flutter/material.dart';
 
 /// 文字编辑
 class FontAddedWidget extends StatelessWidget {
   final String text;
   String? font;
-  Color? color;
+  String? color;
   double? opacity;
   bool? bold;
   bool? italic;
@@ -21,7 +22,7 @@ class FontAddedWidget extends StatelessWidget {
       required this.text,
       this.font = '',
       this.opacity = 1.0,
-      this.color = Colors.white,
+      this.color,
       this.bold = false,
       this.italic = false,
       this.underline = false,
@@ -40,10 +41,10 @@ class FontAddedWidget extends StatelessWidget {
           style: TextStyle(
               fontFamily: font,
               fontSize: 28,
-              color: color ?? Colors.white,
+              color: Color(int.parse(color ?? colorStrs[1])),
               fontWeight: (bold ?? false) ? FontWeight.w700 : null,
               fontStyle: (italic ?? false) ? FontStyle.italic : null,
-              decorationColor: color ?? Colors.white,
+              decorationColor: Color(int.parse(color ?? colorStrs[1])),
               decoration:
                   (underline ?? false) ? TextDecoration.underline : null,
               letterSpacing: worldSpace,

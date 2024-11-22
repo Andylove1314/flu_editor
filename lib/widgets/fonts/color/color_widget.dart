@@ -5,18 +5,34 @@ import 'package:flutter/material.dart';
 import '../../../utils/constant.dart';
 
 class ColorWidget extends StatefulWidget {
-  Color? color;
+  String? colorHex;
 
-  ColorWidget({super.key, required this.onSelect, this.color});
+  ColorWidget({super.key, required this.onSelect, this.colorHex});
 
-  final Function(Color color) onSelect;
+  final Function(String colorStr) onSelect;
 
   @override
   State<ColorWidget> createState() => _ColorWidgetState();
 }
 
 class _ColorWidgetState extends State<ColorWidget> {
-  int _index = 1;
+  String _color = colorStrs[1];
+
+  @override
+  void initState() {
+    _color = widget.colorHex ?? _color;
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant ColorWidget oldWidget) {
+    if (widget.colorHex == null) {
+      setState(() {
+        _color = colorStrs[1];
+      });
+    }
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +51,7 @@ class _ColorWidgetState extends State<ColorWidget> {
   }
 
   Widget _item(BuildContext context, int index) {
-    bool selected = _index == index;
+    bool selected = _color == colorStrs[index];
     String colorStr = colorStrs[index];
 
     if (colorStr.isEmpty) {
@@ -46,10 +62,9 @@ class _ColorWidgetState extends State<ColorWidget> {
             padding: EdgeInsets.zero,
             onPressed: () {
               setState(() {
-                _index = 1;
+                _color = colorStrs[1];
               });
-              Color color = Color(int.parse(colorStrs[_index]));
-              widget.onSelect.call(color);
+              widget.onSelect.call(_color);
             },
             icon: Image.asset(
               'icon_cancle_color@3x'.imageFontsPng,
@@ -58,14 +73,12 @@ class _ColorWidgetState extends State<ColorWidget> {
       );
     }
 
-    Color color = Color(int.parse(colorStr));
-
     return GestureDetector(
       onTap: () {
         setState(() {
-          _index = index;
+          _color = colorStr;
         });
-        widget.onSelect.call(color);
+        widget.onSelect.call(colorStr);
       },
       child: Stack(
         alignment: Alignment.center,
@@ -77,7 +90,7 @@ class _ColorWidgetState extends State<ColorWidget> {
                 border: index == 1
                     ? Border.all(color: const Color(0xffE1E2E6), width: 2)
                     : null,
-                color: color,
+                color: Color(int.parse(colorStr)),
                 borderRadius: BorderRadius.circular(25)),
           ),
           if (selected)

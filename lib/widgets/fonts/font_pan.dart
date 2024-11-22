@@ -12,7 +12,7 @@ import 'font_style_pan.dart';
 class FontPan extends StatefulWidget {
   /// 初始化参数
   FontDetail? fontDetail;
-  Color? color;
+  String? color;
   double? opacity;
   bool? bold;
   bool? italic;
@@ -26,7 +26,7 @@ class FontPan extends StatefulWidget {
       onFontChanged;
 
   ///样式
-  final Function(Color? color) onColorChanged;
+  final Function(String? color) onColorChanged;
   final Function(double? opacity) onOpacityChanged;
 
   final Function(bool? bold) onBold;

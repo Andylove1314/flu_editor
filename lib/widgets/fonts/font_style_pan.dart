@@ -6,13 +6,13 @@ import 'color/color_widget.dart';
 
 class FontStylePan extends StatefulWidget {
   /// 初始化参数
-  Color? color;
+  String? color;
   double? opacity;
   bool? bold;
   bool? italic;
   bool? underline;
 
-  final Function(Color? color) onColorChanged;
+  final Function(String? color) onColorChanged;
   final Function(double? opacity) onOpacityChanged;
 
   final Function(bool? bold) onBold;
@@ -54,7 +54,7 @@ class _FontStylePanState extends State<FontStylePan>
           Padding(
             padding: const EdgeInsets.only(top: 33, bottom: 23),
             child: ColorWidget(
-              color: widget.color,
+              colorHex: widget.color,
               onSelect: (color) {
                 debugPrint('color: $color');
                 widget.onColorChanged.call(color);

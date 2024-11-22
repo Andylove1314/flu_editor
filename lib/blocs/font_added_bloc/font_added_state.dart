@@ -13,7 +13,7 @@ part of 'font_added_bloc.dart';
 class FontAddedState {
   final String text;
   String? font;
-  Color? color;
+  String? color;
   double? opacity;
   bool? bold;
   bool? italic;
