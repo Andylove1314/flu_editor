@@ -16,6 +16,7 @@ class InputPopWidget extends StatefulWidget {
 
 class _InputPopWidgetState extends State<InputPopWidget> {
   final TextEditingController _topController = TextEditingController();
+  final FocusNode _focusNode = FocusNode(); // FocusNode 用于控制焦点
 
   @override
   void initState() {
@@ -23,7 +24,8 @@ class _InputPopWidgetState extends State<InputPopWidget> {
     // 初始化顶部的 TextField 内容
     _topController.text = widget.content;
     WidgetsBinding.instance.addPostFrameCallback((s) {
-      setState(() {});
+      // 自动聚焦，弹出键盘
+      _focusNode.requestFocus();
     });
   }
 
@@ -34,16 +36,13 @@ class _InputPopWidgetState extends State<InputPopWidget> {
         fontWeight: FontWeight.w500,
         fontSize: 28,
         fontFamily: widget.font);
-    TextStyle bottomStyle = TextStyle(
-        color: Color(0xff19191A),
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
-        fontFamily: widget.font);
-    TextStyle bottomHintStyle = TextStyle(
-        color: Color(0xff646466),
-        fontWeight: FontWeight.w500,
-        fontSize: 16,
-        fontFamily: widget.font);
+    TextStyle bottomStyle = const TextStyle(
+        color: Color(0xff19191A), fontWeight: FontWeight.w500, fontSize: 16);
+    TextStyle bottomHintStyle = const TextStyle(
+        color: Color(0xff646466), fontWeight: FontWeight.w500, fontSize: 16);
+
+    // 获取键盘高度
+    double keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
 
     return Material(
       color: Colors.transparent,
@@ -58,6 +57,7 @@ class _InputPopWidgetState extends State<InputPopWidget> {
             ),
           ),
 
+          // 顶部显示文字区域
           Align(
             alignment: Alignment.topCenter,
             child: Container(
@@ -72,41 +72,49 @@ class _InputPopWidgetState extends State<InputPopWidget> {
                   style: topStyle),
             ),
           ),
+
+          // 输入框区域
           Align(
             alignment: Alignment.bottomCenter,
-            child: Container(
-              color: Colors.white,
-              padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TextField(
-                      controller: _topController,
-                      maxLines: null,
-                      style: bottomStyle,
-                      onChanged: (t) {
-                        setState(() {});
-                      },
-                      decoration: InputDecoration(
-                          border: const OutlineInputBorder(),
-                          hintText: '输入文案',
-                          hintStyle: bottomHintStyle,
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 5, horizontal: 10)),
-                      textInputAction: TextInputAction.done,
+            child: Padding(
+              padding: EdgeInsets.only(bottom: keyboardHeight),
+              // 调整输入框的位置避免被键盘遮挡
+              child: Container(
+                color: Colors.white,
+                padding: const EdgeInsets.only(left: 10, top: 10, bottom: 10),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        focusNode: _focusNode,
+                        // 关联 FocusNode
+                        controller: _topController,
+                        maxLines: null,
+                        style: bottomStyle,
+                        onChanged: (t) {
+                          setState(() {});
+                        },
+                        decoration: InputDecoration(
+                            border: const OutlineInputBorder(),
+                            hintText: '输入文案',
+                            hintStyle: bottomHintStyle,
+                            contentPadding: const EdgeInsets.symmetric(
+                                vertical: 5, horizontal: 10)),
+                        textInputAction: TextInputAction.done,
+                      ),
                     ),
-                  ),
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                        widget.input.call(_topController.text);
-                      },
-                      icon: Image.asset(
-                        'icon_queren_edit'.imagePng,
-                        width: 21,
-                      )),
-                ],
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                          widget.input.call(_topController.text);
+                        },
+                        icon: Image.asset(
+                          'icon_queren_edit'.imagePng,
+                          width: 21,
+                        )),
+                  ],
+                ),
               ),
             ),
           ),
