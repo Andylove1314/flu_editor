@@ -88,7 +88,7 @@ class _EditorFramePageState extends State<EditorFramePage> {
   /// 相框预览
   Widget _getPre() {
     Widget input = Image.file(
-      File(widget.afterPath),
+      File(widget.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain
     );
     if (_frameDetail == null) {
       return input;

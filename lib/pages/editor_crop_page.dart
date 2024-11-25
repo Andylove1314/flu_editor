@@ -98,6 +98,7 @@ class _EditorCropPageState extends State<EditorCropPage> {
     return Theme(
         data: themeData,
         child: ExtendedImage.memory(
+          width: MediaQuery.of(context).size.width,
           cutImageByte,
           cacheRawData: true,
           fit: BoxFit.contain,

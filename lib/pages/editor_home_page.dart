@@ -78,10 +78,10 @@ class EditorHomePage extends StatelessWidget {
     return Stack(
       children: [
         FadeBeforeAfter(
-          before: Image.file(File(orignal)),
+          before: Image.file(File(orignal), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
           after: BlocBuilder<EditorHomeCubit, EditorHomeState>(
             builder: (BuildContext context, EditorHomeState state) {
-              return Image.file(File(state.afterPath));
+              return Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain);
             },
           ),
           diffBg: const Color(0xffFAFBFF),
