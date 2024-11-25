@@ -1,3 +1,7 @@
+
+export 'package:flu_editor/flu_editor.dart';
+export 'package:flu_editor/models/effect_data.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
