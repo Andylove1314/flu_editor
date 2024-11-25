@@ -31,6 +31,7 @@ class EditorUtil {
   static List<FontsData> fontList = [];
   static List<FrameData> frameList = [];
 
+  /// 页面动画
   static Widget _transAnim(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     return FadeTransition(
