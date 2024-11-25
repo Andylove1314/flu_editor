@@ -57,6 +57,7 @@ class FontSourceImageCubit extends Cubit<FontSourceImageState> {
     debugPrint('local ttf = $path');
     if (path.isNotEmpty) {
       debugPrint('$path alreay cached');
+      _loadFont(path);
       emit(
         FontSourceImageCached(
           fontDetail,
