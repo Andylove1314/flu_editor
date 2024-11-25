@@ -1,5 +1,4 @@
 import 'package:flu_editor/flu_editor.dart';
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/action_data.dart';
@@ -21,7 +20,7 @@ typedef CloseEditorCallback = void Function(String lastImage);
 
 final mainActions = [
   ActionData(type: 0, name: '裁剪', icon: 'icon_caijian_edit@3x'.imagePng),
-  ActionData(type: 1, name: '颜色', icon: 'icon_color_edit@3x'.imagePng),
+  ActionData(type: 1, name: '调色', icon: 'icon_color_edit@3x'.imagePng),
   ActionData(type: 2, name: '滤镜', icon: 'icon_lut_edit@3x'.imagePng),
   // ActionData(type: 3, name: '模糊', icon: 'icon_blur_edit@3x'.imagePng),
   ActionData(type: 4, name: '贴纸', icon: 'icon_tiezhi_edit@3x'.imagePng),
