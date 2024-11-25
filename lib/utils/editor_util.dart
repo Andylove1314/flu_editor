@@ -598,6 +598,8 @@ class EditorUtil {
     // 在画布上绘制原图
     canvas.drawImage(baseImage, Offset.zero, paint);
 
+    debugPrint('base =${baseImage.width.toDouble()} X ${baseImage.height.toDouble()}');
+    debugPrint('sticker =${stickerImage.width.toDouble()} X ${stickerImage.height.toDouble()}');
     // 将 stickerImage 绘制到 baseImage 上
     canvas.drawImageRect(
       stickerImage,
@@ -731,6 +733,8 @@ class EditorUtil {
     canvas.drawImage(baseImage, Offset.zero, paint);
 
     // 将 stickerImage 绘制到 baseImage 上
+    debugPrint('base =${baseImage.width.toDouble()} X ${baseImage.height.toDouble()}');
+    debugPrint('sticker =${stickerImage.width.toDouble()} X ${stickerImage.height.toDouble()}');
     canvas.drawImageRect(
       stickerImage,
       Rect.fromLTWH(
