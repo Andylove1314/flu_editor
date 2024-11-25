@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flu_editor_example/route_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
