@@ -29,6 +29,7 @@ class EditorHomeCubit extends Cubit<EditorHomeState> {
       }
       EditorUtil.goFilterPage(context, this.state.afterPath);
     } else if (type == EditorType.blur) {
+      EditorUtil.showToast('功能开发中...');
       // ... todo
     } else if (type == EditorType.sticker) {
       if (EditorUtil.stickerList.isEmpty) {

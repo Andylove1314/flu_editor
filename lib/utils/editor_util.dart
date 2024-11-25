@@ -39,6 +39,7 @@ class EditorUtil {
     );
   }
 
+  /// 滤镜 action
   static void goFilterPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -51,6 +52,7 @@ class EditorUtil {
     ));
   }
 
+  /// 调色 action
   static void goColorsPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -63,6 +65,7 @@ class EditorUtil {
     ));
   }
 
+  /// 裁剪 action
   static void goCropPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -75,6 +78,7 @@ class EditorUtil {
     ));
   }
 
+  /// 贴纸 action
   static void goStickerPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) =>
@@ -85,6 +89,7 @@ class EditorUtil {
     ));
   }
 
+  /// 字体 action
   static void goFontPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => EditorFontPage(
@@ -96,6 +101,7 @@ class EditorUtil {
     ));
   }
 
+  /// 相框 action
   static void goFramePage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => EditorFramePage(
@@ -107,6 +113,7 @@ class EditorUtil {
     ));
   }
 
+  /// 编辑页面
   static void goFluEditor(BuildContext context,
       {required String orignal,
       EditorType? type,
@@ -163,6 +170,7 @@ class EditorUtil {
     }
 
     if (EditorType.blur == type) {
+      showToast('功能开发中...');
       /// todo
       return;
     }
@@ -615,39 +623,43 @@ class EditorUtil {
 
     final double stickerScaleX = canvasWidth / stickerImage.width;
     final double stickerScaleY = canvasHeight / stickerImage.height;
-    final double stickerScale = stickerScaleX < stickerScaleY ? stickerScaleX : stickerScaleY;
+    final double stickerScale =
+        stickerScaleX < stickerScaleY ? stickerScaleX : stickerScaleY;
 
     // 绘制原始图片
     canvas.drawImageRect(
       baseImage,
-      Rect.fromLTWH(0, 0, baseImage.width.toDouble(), baseImage.height.toDouble()),
-      Rect.fromLTWH(0, 0, baseImage.width * baseScale, baseImage.height * baseScale),
+      Rect.fromLTWH(
+          0, 0, baseImage.width.toDouble(), baseImage.height.toDouble()),
+      Rect.fromLTWH(
+          0, 0, baseImage.width * baseScale, baseImage.height * baseScale),
       paint,
     );
 
     // 绘制贴纸图片
     canvas.drawImageRect(
       stickerImage,
-      Rect.fromLTWH(0, 0, stickerImage.width.toDouble(), stickerImage.height.toDouble()),
-      Rect.fromLTWH(0, 0, stickerImage.width * stickerScale, stickerImage.height * stickerScale),
+      Rect.fromLTWH(
+          0, 0, stickerImage.width.toDouble(), stickerImage.height.toDouble()),
+      Rect.fromLTWH(0, 0, stickerImage.width * stickerScale,
+          stickerImage.height * stickerScale),
       paint,
     );
 
     canvas.save();
 
     // 将画布内容转换为图片
-    final ui.Image composedImage = await recorder
-        .endRecording()
-        .toImage(canvasWidth, canvasHeight);
+    final ui.Image composedImage =
+        await recorder.endRecording().toImage(canvasWidth, canvasHeight);
 
     // 4. 将合成后的图像转换为 Uint8List
     final ByteData? byteData =
-    await composedImage.toByteData(format: ui.ImageByteFormat.png);
+        await composedImage.toByteData(format: ui.ImageByteFormat.png);
     final Uint8List composedImageBytes = byteData!.buffer.asUint8List();
 
     // 5. 保存合成后的图片
     File output =
-    await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
+        await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
     await output.writeAsBytes(composedImageBytes);
 
     return output.path;
@@ -656,7 +668,6 @@ class EditorUtil {
   /// 相框
   static Future<String> addFrame(GlobalKey imgkey, String input, String frame,
       double frameAspectRatio) async {
-
     /// 生成底图
     RenderRepaintBoundary boundary =
         imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
@@ -722,5 +733,4 @@ class EditorUtil {
 
     return output.path;
   }
-
 }

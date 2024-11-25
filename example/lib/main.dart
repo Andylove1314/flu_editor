@@ -72,38 +72,41 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: [
               Expanded(
-                  child:Container(
+                  child: Container(
                       width: double.infinity,
                       color: Colors.grey,
                       child: Stack(alignment: Alignment.center, children: [
                         _currentImage.isEmpty
                             ? const SizedBox()
                             : Image.file(File(_currentImage)),
-                        GestureDetector(onTap: (){
-                          _pickImage(context);
-                        }, child: Container(
-                          height: 200,
-                          width: 200,
-                          color: Colors.white.withOpacity(0.4),
-                          child: const Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_a_photo,
-                                size: 50.0,
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                '添加照片',
-                                style:
-                                TextStyle(color: Colors.black, fontSize: 24),
-                              ),
-                            ],
+                        GestureDetector(
+                          onTap: () {
+                            _pickImage(context);
+                          },
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            color: Colors.white.withOpacity(0.4),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_a_photo,
+                                  size: 50.0,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  '添加照片',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 24),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),),
+                        ),
                       ]))),
               const SizedBox(
                 height: 20,
@@ -137,7 +140,7 @@ class _MyAppState extends State<MyApp> {
     ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    if(image == null){
+    if (image == null) {
       return;
     }
 
@@ -253,21 +256,21 @@ class _MyAppState extends State<MyApp> {
     StickDetail detail1 = StickDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/e71b319ebce14952a87a40a03f8e7404.png';
     detail1.name = 'sticker1';
-    detail1.vip = 1;
+    detail1.vip = 0;
 
     StickDetail detail2 = StickDetail();
     detail2.id = 1;
     detail2.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/1f0ceb1952a44a4ebd0a8c419a105545.png';
     detail2.name = 'sticker2';
     detail2.vip = 0;
 
     StickerData group1 = StickerData();
     group1.groupName = '分类1';
     group1.groupImage =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/318fa7a144af47f29adbdc73cb7e78b5.png';
 
     group1.list = [detail1, detail2];
 
@@ -277,17 +280,25 @@ class _MyAppState extends State<MyApp> {
   Future<List<FontsData>> _fetchFonts() async {
     FontDetail detail1 = FontDetail();
     detail1.id = 1;
-    detail1.file =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/9e7605d28b114f60adc4b63b66f91bfa.jpg';
+        'https://nwdnui.bigwinepot.com/ui/index/icon/ca9f5c3e742d49c2bafa28c8808a2280.jpg';
+    detail1.file =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/7be3f3395e5c49b3aec36071c9bacc03.ttf';
     detail1.name = 'font1';
-    detail1.vip = 1;
+    detail1.vip = 0;
+
+    FontDetail detail2 = FontDetail();
+    detail2.id = 2;
+    detail2.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/8a2058f31d384c0d952f21661b8f4a3e.jpg';
+    detail2.file =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/f5d6dbf7914d45eababc0cd395b973ed.ttf';
+    detail2.name = 'font2';
+    detail2.vip = 0;
 
     FontsData group1 = FontsData();
-    group1.groupName = '分类1';
+    group1.groupName = '简体';
 
-    FontDetail detail2 = detail1;
     group1.list = [detail1, detail2];
 
     return [group1];
@@ -299,8 +310,7 @@ class _MyAppState extends State<MyApp> {
     detail1.image =
         'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
     detail1.name = 'frame1';
-    detail1.vip = 1;
-
+    detail1.vip = 0;
     FrameSize size = FrameSize();
     size.frameWidth = 560;
     size.frameHeight = 1000;
@@ -310,10 +320,24 @@ class _MyAppState extends State<MyApp> {
     size.frameBottom = 114.0;
     detail1.params = size;
 
-    FrameData group1 = FrameData();
-    group1.groupName = '分类1';
+    FrameDetail detail2 = FrameDetail();
+    detail2.id = 2;
+    detail2.image =
+        'https://nwdnui.bigwinepot.com/ui/index/icon/e0ee85fe76e34fd093729428757e0401.png';
+    detail2.name = 'frame2';
+    detail2.vip = 0;
+    FrameSize size2 = FrameSize();
+    size2.frameWidth = 672;
+    size2.frameHeight = 1000;
+    size2.frameLeft = 136.0;
+    size2.frameTop = 154.0;
+    size2.frameRight = 136.0;
+    size2.frameBottom = 156.0;
+    detail2.params = size2;
 
-    FrameDetail detail2 = detail1;
+    FrameData group1 = FrameData();
+    group1.groupName = '简单';
+
     group1.list = [detail1, detail2];
 
     return [group1];
