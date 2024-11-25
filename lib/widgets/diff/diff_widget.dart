@@ -33,23 +33,8 @@ class FadeBeforeAfter extends StatefulWidget {
   }
 }
 
-class _FadeBeforeAfterState extends State<FadeBeforeAfter>
-    with TickerProviderStateMixin {
-  late AnimationController fixedLook;
-
-  @override
-  void initState() {
-    fixedLook = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 200));
-    fixedLook.forward(from: 0.0);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    fixedLook.dispose();
-    super.dispose();
-  }
+class _FadeBeforeAfterState extends State<FadeBeforeAfter> {
+  int position = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +46,8 @@ class _FadeBeforeAfterState extends State<FadeBeforeAfter>
             PhotoView.customChild(
                 backgroundDecoration: BoxDecoration(color: widget.diffBg),
                 minScale: 1.0,
-                child: Stack(
-                  fit: StackFit.loose,
+                child: IndexedStack(
+                  index: position,
                   alignment: Alignment.center,
                   children: [
                     Container(
@@ -71,17 +56,11 @@ class _FadeBeforeAfterState extends State<FadeBeforeAfter>
                     ),
                     Container(
                       margin: widget.contentMargin,
-                      child: FadeTransition(
-                        opacity: CurvedAnimation(
-                            parent: fixedLook, curve: Curves.linear),
-                        child: Container(
-                          color: widget.diffBg,
-                          alignment: Alignment.center,
-                          child: widget.after,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
-                      ),
+                      color: widget.diffBg,
+                      alignment: Alignment.center,
+                      child: widget.after,
+                      width: double.infinity,
+                      height: double.infinity,
                     )
                   ],
                 )),
@@ -93,19 +72,24 @@ class _FadeBeforeAfterState extends State<FadeBeforeAfter>
               right: widget.diffActionRight,
               bottom: widget.diffActionBottom,
               child: Container(
+                width: 46,
+                height: 46,
+                alignment: Alignment.center,
                 margin: widget.actionMargin,
-                child: GestureDetector(
+                child: Listener(
+                  onPointerDown: (event) {
+                    debugPrint('onPointerDown');
+                    setState(() {
+                      position = 0;
+                    });
+                  },
+                  onPointerUp: (event) {
+                    debugPrint('onPointerUp');
+                    setState(() {
+                      position = 1;
+                    });
+                  },
                   child: diffAction(),
-                  onTapDown: (down) {
-                    setState(() {
-                      fixedLook.reverse(from: 1.0);
-                    });
-                  },
-                  onTapUp: (up) {
-                    setState(() {
-                      fixedLook.forward(from: 0.0);
-                    });
-                  },
                 ),
               ),
             )

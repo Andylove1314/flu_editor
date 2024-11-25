@@ -136,6 +136,11 @@ class _MyAppState extends State<MyApp> {
   Future<void> _pickImage(BuildContext context) async {
     ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if(image == null){
+      return;
+    }
+
     _currentImage = image?.path ?? '';
     setState(() {});
   }
