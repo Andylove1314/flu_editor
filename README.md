@@ -27,60 +27,38 @@ API 参考。
 
 ### EditorUtil 工具类
 
-- **页面切换动画**：提供页面切换时的淡入淡出动画，切换持续时间为 200 毫秒。
-- **效果临时目录**：定义保存临时编辑效果的目录路径 `/tmpEffectDir`。
-- **业务回调**：支持多种业务回调函数，包括 VIP 状态、保存、加载、提示、效果保存与删除等。
+### 页面导航说明
 
-### 页面导航功能
+- `goFluEditor`：跳转到编辑器页面。
+- **参数说明**：
+    - `context`：当前上下文，通常使用 `BuildContext` 来启动编辑器。
+    - `orignal`：原始图片路径，用于传入需要编辑的图片。
+    - `type`：编辑类型 （null 代表进首页）。
+    - `singleEditorSave`：单独进到某个功能页面，关闭是否保存图片到相册。
+    - `vipStatusCb`：一个回调函数，返回用户是否为 VIP 用户。
+    - `vipActionCb`：一个回调函数，当用户非 VIP 时，触发跳转到订阅页面。
+    - `saveCb`：一个回调函数，用于保存编辑后的图片，参数为保存路径。
+    - `loadWidgetCb`：加载提示回调，用于显示加载动画，传入 `islight`（是否为浅色模式）、`size`
+      （进度条大小）、`stroke`（进度条宽度）。
+    - `toastActionCb`：一个回调函数，显示自定义提示信息（如 "保存成功"）。
+    - `effectsCb`：回调函数，用于获取并处理滤镜配方。
+    - `saveEffectCb`：回调函数，保存自定义滤镜配方。
+    - `deleteEffectCb`：回调函数，删除已保存的滤镜配方。
+    - `filtersCb`：回调函数，用于获取滤镜列表。
+    - `stickersCb`：回调函数，用于获取贴纸列表。
+    - `fontsCb`：回调函数，用于获取字体列表。
+    - `framesCb`：回调函数，用于获取边框列表。
+    - `closeEditorCb`：回调函数，编辑器关闭时触发，返回编辑后的图片路径。
 
-- `goFilterPage`：跳转到滤镜编辑页面。
-- `goColorsPage`：跳转到颜色调整页面。
-- `goCropPage`：跳转到裁剪页面。
-- `pushHome`：跳转到编辑器主页，支持传入原始图片路径、滤镜列表并执行回调函数。
+- `内部页面路由`：
+- **编辑器首页进入的具体功能区（宿主app不要直接调用，要通过goFluEditor(type)进入）。**：
 
-### 滤镜初始化
-
-- `_initFilters`：初始化滤镜配置，包括插入空滤镜（无滤镜选项），并将滤镜列表保存到内存中。
-
-### 颜色组合滤镜
-
-- `_registerMultGlsl`：注册滤镜和颜色调整 GLSL 着色器，包括无滤镜效果、噪声滤镜和颜色组合调整滤镜。
-
-### 图像导出
-
-- `exportImage`：导出应用了滤镜的图片，返回保存的图片路径。
-
-### 文件处理功能
-
-- `fileToUint8ListAndImage`：将文件转换为 Uint8List 和 Image 对象，支持后台处理以提高性能。
-
-### 图片裁剪
-
-- `cropImage`：裁剪图片，支持旋转和翻转等裁剪参数，裁剪后保存并更新编辑页面。
-
-### 临时文件管理
-
-- `_createTmp`：在临时目录中创建文件，用于保存编辑后的图片或效果。
-
-### 加载对话框和提示信息
-
-- `showLoadingdialog`：显示加载对话框。
-- `loadingWidget`：定义加载进度指示器。
-- `showToast`：显示提示信息。
-
-### 保存与删除滤镜效果
-
-- `saveColorEffectParam`：保存颜色效果的参数配置。
-- `fetchSavedParamList`：获取已保存的效果列表。
-- `deleteEffect`：删除已保存的效果。
-
-### 临时对象清理
-
-- `clearTmpObject`：清理所有回调函数和临时数据。
-
-### 图像加载
-
-- `loadSourceImage`：从文件路径加载图片。
+    - `goCropPage`：跳转到裁剪页面。
+    - `goColorsPage`：跳转到颜色调整页面。
+    - `goFilterPage`：跳转到滤镜编辑页面。
+    - `goStickerPage`：跳转到贴纸编辑页面。
+    - `goFontPage`：跳转到字体编辑页面。
+    - `goFramePage`：跳转到相框编辑页面。
 
 ## 使用示例
 
@@ -149,18 +127,18 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: [
               Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      _pickImage(context);
-                    },
-                    child: Container(
-                        width: double.infinity,
-                        color: Colors.grey,
-                        child: Stack(alignment: Alignment.center, children: [
-                          _currentImage.isEmpty
-                              ? const SizedBox()
-                              : Image.file(File(_currentImage)),
-                          Container(
+                  child: Container(
+                      width: double.infinity,
+                      color: Colors.grey,
+                      child: Stack(alignment: Alignment.center, children: [
+                        _currentImage.isEmpty
+                            ? const SizedBox()
+                            : Image.file(File(_currentImage)),
+                        GestureDetector(
+                          onTap: () {
+                            _pickImage(context);
+                          },
+                          child: Container(
                             height: 200,
                             width: 200,
                             color: Colors.white.withOpacity(0.4),
@@ -177,14 +155,14 @@ class _MyAppState extends State<MyApp> {
                                 ),
                                 Text(
                                   '添加照片',
-                                  style:
-                                  TextStyle(color: Colors.black, fontSize: 24),
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 24),
                                 ),
                               ],
                             ),
                           ),
-                        ])),
-                  )),
+                        ),
+                      ]))),
               const SizedBox(
                 height: 20,
               ),
@@ -216,6 +194,11 @@ class _MyAppState extends State<MyApp> {
   Future<void> _pickImage(BuildContext context) async {
     ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image == null) {
+      return;
+    }
+
     _currentImage = image?.path ?? '';
     setState(() {});
   }
@@ -330,21 +313,21 @@ class _MyAppState extends State<MyApp> {
     StickDetail detail1 = StickDetail();
     detail1.id = 1;
     detail1.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    'https://nwdnui.bigwinepot.com/ui/index/icon/e71b319ebce14952a87a40a03f8e7404.png';
     detail1.name = 'sticker1';
-    detail1.vip = 1;
+    detail1.vip = 0;
 
     StickDetail detail2 = StickDetail();
     detail2.id = 1;
     detail2.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    'https://nwdnui.bigwinepot.com/ui/index/icon/1f0ceb1952a44a4ebd0a8c419a105545.png';
     detail2.name = 'sticker2';
     detail2.vip = 0;
 
     StickerData group1 = StickerData();
     group1.groupName = '分类1';
     group1.groupImage =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/193f3120993c4e0f892f11fa8287ef81.png';
+    'https://nwdnui.bigwinepot.com/ui/index/icon/318fa7a144af47f29adbdc73cb7e78b5.png';
 
     group1.list = [detail1, detail2];
 
@@ -354,17 +337,25 @@ class _MyAppState extends State<MyApp> {
   Future<List<FontsData>> _fetchFonts() async {
     FontDetail detail1 = FontDetail();
     detail1.id = 1;
-    detail1.file =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/ffc1bedb34234264b24792384f1add3f.ttf';
     detail1.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/9e7605d28b114f60adc4b63b66f91bfa.jpg';
+    'https://nwdnui.bigwinepot.com/ui/index/icon/ca9f5c3e742d49c2bafa28c8808a2280.jpg';
+    detail1.file =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/7be3f3395e5c49b3aec36071c9bacc03.ttf';
     detail1.name = 'font1';
-    detail1.vip = 1;
+    detail1.vip = 0;
+
+    FontDetail detail2 = FontDetail();
+    detail2.id = 2;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/8a2058f31d384c0d952f21661b8f4a3e.jpg';
+    detail2.file =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/f5d6dbf7914d45eababc0cd395b973ed.ttf';
+    detail2.name = 'font2';
+    detail2.vip = 0;
 
     FontsData group1 = FontsData();
-    group1.groupName = '分类1';
+    group1.groupName = '简体';
 
-    FontDetail detail2 = detail1;
     group1.list = [detail1, detail2];
 
     return [group1];
@@ -376,8 +367,7 @@ class _MyAppState extends State<MyApp> {
     detail1.image =
     'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
     detail1.name = 'frame1';
-    detail1.vip = 1;
-
+    detail1.vip = 0;
     FrameSize size = FrameSize();
     size.frameWidth = 560;
     size.frameHeight = 1000;
@@ -387,15 +377,30 @@ class _MyAppState extends State<MyApp> {
     size.frameBottom = 114.0;
     detail1.params = size;
 
-    FrameData group1 = FrameData();
-    group1.groupName = '分类1';
+    FrameDetail detail2 = FrameDetail();
+    detail2.id = 2;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/e0ee85fe76e34fd093729428757e0401.png';
+    detail2.name = 'frame2';
+    detail2.vip = 0;
+    FrameSize size2 = FrameSize();
+    size2.frameWidth = 672;
+    size2.frameHeight = 1000;
+    size2.frameLeft = 136.0;
+    size2.frameTop = 154.0;
+    size2.frameRight = 136.0;
+    size2.frameBottom = 156.0;
+    detail2.params = size2;
 
-    FrameDetail detail2 = detail1;
+    FrameData group1 = FrameData();
+    group1.groupName = '简单';
+
     group1.list = [detail1, detail2];
 
     return [group1];
   }
 }
+
 ```
 
 ## 感谢

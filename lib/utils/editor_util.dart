@@ -172,6 +172,7 @@ class EditorUtil {
 
     if (EditorType.blur == type) {
       showToast('功能开发中...');
+
       /// todo
       return;
     }
@@ -294,6 +295,7 @@ class EditorUtil {
     // );
   }
 
+  /// 导出滤镜｜调色 图片
   static Future<String> exportImage(
       BuildContext context, ShaderConfiguration configuration) async {
     final texture = context.read<SourceImageCubit>().state.textureSource;
@@ -347,6 +349,7 @@ class EditorUtil {
     return image;
   }
 
+  /// 裁剪图片
   static Future<String> cropImage(
       ImageEditorController croperController) async {
     var state = croperController.state;
@@ -442,12 +445,14 @@ class EditorUtil {
     return output;
   }
 
+  /// show loading
   static void showLoadingdialog(BuildContext context, {bool isLight = true}) {
     showDialog(
         context: context,
         builder: (con) => loadingWidget(context, isLight: isLight));
   }
 
+  /// loading widget
   static Widget loadingWidget(BuildContext context,
       {bool isLight = true, double size = 30.0, double stroke = 2.0}) {
     return Center(
@@ -461,10 +466,12 @@ class EditorUtil {
     );
   }
 
+  /// toast
   static void showToast(String msg) {
     toastActionCallback?.call(msg);
   }
 
+  /// 保存配方
   static Future<bool?> saveColorEffectParam(
       List<ConfigurationParameter> params, String path, String name) async {
     // 创建一个 Map 用于存储参数
@@ -477,16 +484,19 @@ class EditorUtil {
         EffectData(name: name, image: path, params: jsonEncode(paramMap)));
   }
 
+  /// 获取配方列表
   static Future<List<EffectData>> fetchSavedParamList(int page) async {
     var effects = await effectsCallback?.call(page) ?? [];
 
     return effects;
   }
 
+  ///删除配方
   static Future<bool?> deleteEffect(id) async {
     return await deleteEffectCallback?.call(id);
   }
 
+  /// clean tmp
   static void clearTmpObject(String after) {
     vipStatusCallback = null;
     vipActionCallback = null;
@@ -514,6 +524,7 @@ class EditorUtil {
     });
   }
 
+  /// 导入图片到Uint8List
   static Future<Uint8List> loadSourceImage(String afterPath) async {
     final fbyte = await compute(_loadFileBytes, afterPath);
     return fbyte;
@@ -525,6 +536,7 @@ class EditorUtil {
     return await file.readAsBytes();
   }
 
+  /// 获取滤镜列表
   static Future<List<FilterData>> fetchFilterList(BuildContext context) async {
     showLoadingdialog(context);
     var filters = await filtersCallback?.call() ?? [];
@@ -552,6 +564,7 @@ class EditorUtil {
     return filterList;
   }
 
+  /// 获取贴纸列表
   static Future<List<StickerData>> fetchStickerList(
       BuildContext context) async {
     showLoadingdialog(context);
@@ -563,6 +576,7 @@ class EditorUtil {
     return stickerList;
   }
 
+  /// 获取字体列表
   static Future<List<FontsData>> fetchFontList(BuildContext context) async {
     showLoadingdialog(context);
     var fonts = await fontsCallback?.call() ?? [];
@@ -571,6 +585,7 @@ class EditorUtil {
     return fontList;
   }
 
+  /// 获取相框列表
   static Future<List<FrameData>> fetchFrameList(BuildContext context) async {
     showLoadingdialog(context);
     var frames = await framesCallback?.call() ?? [];
