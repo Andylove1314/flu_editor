@@ -57,7 +57,7 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
             child: BlocBuilder<SourceImageCubit, SourceImageReady>(
               builder: (context, state) {
                 return FadeBeforeAfter(
-                  before: Image.file(File(state.afterPath)),
+                  before: Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
                   after: (state.textureSource != null)
                       ? ImageShaderPreview(
                           texture: state.textureSource!,

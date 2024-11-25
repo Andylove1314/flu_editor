@@ -46,6 +46,8 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
             children: [
               Image.file(
                 key: _imageKey,
+                width: MediaQuery.of(context).size.width,
+                fit: BoxFit.contain,
                 File(widget.afterPath),
                 frameBuilder: (context, child, loadingProgress, loaded) {
                   if (loaded) {
@@ -94,7 +96,7 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                     EditorHomeState(after),
                   );
                 } else {
-                  if(EditorUtil.singleEditorSavetoAlbum){
+                  if (EditorUtil.singleEditorSavetoAlbum) {
                     EditorUtil.saveCallback?.call(after);
                   }
                   EditorUtil.clearTmpObject(after);
