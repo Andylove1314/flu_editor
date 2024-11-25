@@ -128,7 +128,7 @@ class _EditorFontPageState extends State<EditorFontPage> {
               }
 
               EditorUtil.showLoadingdialog(context);
-              EditorUtil.addText(widget.afterPath, _stickerController)
+              EditorUtil.addSticker(widget.afterPath, _stickerController)
                   .then((after) {
                 if (EditorUtil.editorType == null) {
                   /// 更新 home after
