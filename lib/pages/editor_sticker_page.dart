@@ -46,7 +46,6 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
             children: [
               Image.file(
                 key: _imageKey,
-                width: MediaQuery.of(context).size.width,
                 fit: BoxFit.contain,
                 File(widget.afterPath),
                 frameBuilder: (context, child, loadingProgress, loaded) {
