@@ -1,6 +1,5 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/flu_editor.dart';
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flutter/material.dart';
 
 class ParamsListWidget extends StatefulWidget {

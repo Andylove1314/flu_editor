@@ -1,4 +1,4 @@
-import 'dart:convert';
+part of '../../flu_editor.dart';
 
 class EffectData {
   String name;

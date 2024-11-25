@@ -1,6 +1,5 @@
 
-export 'package:flu_editor/flu_editor.dart';
-export 'package:flu_editor/models/effect_data.dart';
+library flu_editor;
 
 import 'dart:async';
 import 'dart:convert';
@@ -30,7 +29,6 @@ import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/blocs/cut_bloc_cubit/cut_cubit.dart';
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flu_editor/utils/constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart';
@@ -79,6 +77,7 @@ part 'models/filter_config_data.dart';
 part 'models/sticker_data.dart';
 part 'models/font_data.dart';
 part 'models/frame_data.dart';
+part 'models/effect_data.dart';
 
 part 'base/configuration.dart';
 part 'base/parameters.dart';
