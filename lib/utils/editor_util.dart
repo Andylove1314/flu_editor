@@ -22,6 +22,7 @@ class EditorUtil {
   static FontsCallback? fontsCallback;
   static FramesCallback? framesCallback;
   static CloseEditorCallback? closeEditorCallback;
+  static HomeSavedCallback? homeSavedCallback;
 
   static EditorHomeCubit? homeCubit;
   static EditorType? editorType;
@@ -131,7 +132,8 @@ class EditorUtil {
       StickersCallback? stickersCb,
       FontsCallback? fontsCb,
       FramesCallback? framesCb,
-      CloseEditorCallback? closeEditorCb}) async {
+      CloseEditorCallback? closeEditorCb,
+      HomeSavedCallback? homeSavedCb}) async {
     _registerMultGlsl();
 
     vipStatusCallback = vipStatusCb;
@@ -147,6 +149,7 @@ class EditorUtil {
     fontsCallback = fontsCb;
     framesCallback = framesCb;
     closeEditorCallback = closeEditorCb;
+    homeSavedCallback = homeSavedCb;
 
     editorType = type;
 
@@ -515,6 +518,7 @@ class EditorUtil {
     filtersCallback = null;
     stickersCallback = null;
     fontsCallback = null;
+    homeSavedCallback = null;
 
     homeCubit = null;
     filterList.clear();

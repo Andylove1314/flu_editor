@@ -158,11 +158,11 @@ class _MyAppState extends State<MyApp> {
           debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return const RoutePage();
+              return RoutePage(title: '订阅页面',);
             },
           ));
         },
-        saveCb: (path) {
+        saveCb: (path) async{
           GallerySaver.saveImage(path, albumName: 'Flu-Editor');
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text('保存成功: $path')));
@@ -191,7 +191,14 @@ class _MyAppState extends State<MyApp> {
         stickersCb: () => _fetchStickers(),
         fontsCb: () => _fetchFonts(),
         framesCb: () => _fetchFrames(),
-        closeEditorCb: (after) => debugPrint('last image = $after'));
+        closeEditorCb: (after) => debugPrint('last image = $after'),
+        homeSavedCb: (after){
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return RoutePage(savedPath: after, title: '保存成功',);
+            },
+          ));
+        });
   }
 
   Future<List<EffectData>> _fetchPF() async {

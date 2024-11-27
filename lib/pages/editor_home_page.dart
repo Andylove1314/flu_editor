@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flu_editor/utils/editor_type.dart';
@@ -25,16 +24,18 @@ class EditorHomePage extends StatelessWidget {
         if (orignal != context.read<EditorHomeCubit>().state.afterPath &&
             !context.read<EditorHomeCubit>().saved) {
           showSaveImagePop(context, onSave: () {
-            context.read<EditorHomeCubit>().saveImage();
-            EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
-            Navigator.pop(context);
+            context.read<EditorHomeCubit>().saveImage().then((path) {
+              EditorUtil.homeSavedCallback?.call(path);
+            });
           }, onCancel: () {
-            EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
+            EditorUtil.clearTmpObject(
+                context.read<EditorHomeCubit>().state.afterPath);
             Navigator.pop(context);
           });
           return Future.value(false);
         }
-        EditorUtil.clearTmpObject(context.read<EditorHomeCubit>().state.afterPath);
+        EditorUtil.clearTmpObject(
+            context.read<EditorHomeCubit>().state.afterPath);
         return Future.value(true);
       },
       child: Scaffold(
@@ -53,9 +54,10 @@ class EditorHomePage extends StatelessWidget {
   AppBar _bar(BuildContext context) {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.black),
-      title: Text(
+      title: const Text(
         '图片编辑',
-        style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
+        style: TextStyle(
+            color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       ),
       backgroundColor: Colors.white,
       shadowColor: const Color(0xff19191A).withOpacity(0.1),
@@ -66,7 +68,12 @@ class EditorHomePage extends StatelessWidget {
             return saveAction(
                 action:
                     orignal != context.read<EditorHomeCubit>().state.afterPath
-                        ? () => context.read<EditorHomeCubit>().saveImage()
+                        ? () => context
+                                .read<EditorHomeCubit>()
+                                .saveImage()
+                                .then((path) {
+                              EditorUtil.homeSavedCallback?.call(path);
+                            })
                         : null);
           },
         )
@@ -78,10 +85,13 @@ class EditorHomePage extends StatelessWidget {
     return Stack(
       children: [
         FadeBeforeAfter(
-          before: Image.file(File(orignal), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
+          before: Image.file(File(orignal),
+              width: MediaQuery.of(context).size.width, fit: BoxFit.contain),
           after: BlocBuilder<EditorHomeCubit, EditorHomeState>(
             builder: (BuildContext context, EditorHomeState state) {
-              return Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain);
+              return Image.file(File(state.afterPath),
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.contain);
             },
           ),
           diffBg: const Color(0xffFAFBFF),
@@ -94,7 +104,9 @@ class EditorHomePage extends StatelessWidget {
           child: MainPan(
             panHeight: _panHeight,
             onClick: (action) {
-              context.read<EditorHomeCubit>().toEditor(context, EditorType.values[action.type]);
+              context
+                  .read<EditorHomeCubit>()
+                  .toEditor(context, EditorType.values[action.type]);
             },
           ),
         )
