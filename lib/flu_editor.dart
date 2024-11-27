@@ -21,7 +21,6 @@ import 'package:flutter/cupertino.dart' hide Image;
 import 'package:flutter/widgets.dart' hide Image;
 import 'dart:math';
 import 'package:crypto/crypto.dart';
-import 'dart:convert';
 
 import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
