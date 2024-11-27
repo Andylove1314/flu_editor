@@ -60,6 +60,45 @@ API 参考。
     - `goFontPage`：跳转到字体编辑页面。
     - `goFramePage`：跳转到相框编辑页面。
 
+## Screenshots
+
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114447.jpg">
+        <img src="screenshots/Screenshot_20241127-114447.jpg" alt="Screenshot 1" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
+        <img src="screenshots/Screenshot_20241127-114447.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114536.jpg">
+        <img src="screenshots/Screenshot_20241127-114536.jpg" alt="Screenshot 3" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114559.jpg">
+        <img src="screenshots/Screenshot_20241127-114559.jpg" alt="Screenshot 4" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114641.jpg">
+        <img src="screenshots/Screenshot_20241127-114641.jpg" alt="Screenshot 5" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114710.jpg">
+        <img src="screenshots/Screenshot_20241127-114710.jpg" alt="Screenshot 6" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
+</table>
+
 ## 使用示例
 
 以下是如何使用 `flu_editor` 进行图像编辑的示例：
