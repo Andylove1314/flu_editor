@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:crypto/crypto.dart'; // 用于计算文件的哈希值
-import 'dart:convert';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,9 +30,8 @@ class FontSourceImageCubit extends Cubit<FontSourceImageState> {
     emit(
       FontSourceImageCaching(fontDetail),
     );
-    String cacheKey = _generateMd5(fontDetail.file ?? '');
     FileInfo ttf = await _imageCacheManager.downloadFile(fontDetail.file ?? '',
-        key: cacheKey);
+        key: EditorUtil.generateMd5(fontDetail.file ?? ''));
     File ttfFile = ttf.file;
     debugPrint('ttf download= ${ttfFile.path}');
 
@@ -51,17 +48,16 @@ class FontSourceImageCubit extends Cubit<FontSourceImageState> {
 
   Future<void> _checkCache(FontDetail fontDetail) async {
     debugPrint('online ttf = ${fontDetail.file}');
-    String cacheKey = _generateMd5(fontDetail.file ?? '');
-    FileInfo? fileInfo = await _imageCacheManager.getFileFromCache(cacheKey);
-    String path = fileInfo?.file.path ?? '';
-    debugPrint('local ttf = $path');
-    if (path.isNotEmpty) {
-      debugPrint('$path alreay cached');
-      _loadFont(path);
+    FileInfo? fileInfo = await _imageCacheManager
+        .getFileFromCache(EditorUtil.generateMd5(fontDetail.file ?? ''));
+    debugPrint('local ttf = $fileInfo');
+    if (fileInfo != null) {
+      debugPrint('${fileInfo.file.path} already cached');
+      _loadFont(fileInfo.file.path);
       emit(
         FontSourceImageCached(
           fontDetail,
-          path,
+          fileInfo.file.path,
         ),
       );
     }
@@ -78,10 +74,5 @@ class FontSourceImageCubit extends Cubit<FontSourceImageState> {
   Future<ByteData> _getFileByteData(String path) async {
     final bytes = await File(path).readAsBytes();
     return ByteData.view(Uint8List.fromList(bytes).buffer);
-  }
-
-  // 生成文件的 MD5 哈希值
-  String _generateMd5(String input) {
-    return md5.convert(utf8.encode(input)).toString();
   }
 }

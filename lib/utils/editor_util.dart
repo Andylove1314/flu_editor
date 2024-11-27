@@ -754,4 +754,9 @@ class EditorUtil {
 
     return output.path;
   }
+
+  /// input md5
+  static String generateMd5(String input) {
+    return md5.convert(utf8.encode(input)).toString();
+  }
 }

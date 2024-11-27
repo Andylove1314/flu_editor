@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,34 +24,32 @@ class FrameSourceImageCubit extends Cubit<FrameSourceImageState> {
       });
 
   /// 缓存frame
-  Future<String> cacheFrame(FrameDetail stickDetail) async {
+  Future<String> cacheFrame(FrameDetail frameDetail) async {
     emit(
-      FrameSourceImageCaching(stickDetail),
+      FrameSourceImageCaching(frameDetail),
     );
 
-    File file = await _imageCacheManager.getSingleFile(stickDetail.image ?? '');
-    Uint8List fbyte = (await EditorUtil.fileToUint8ListAndImage(file.path))[1];
-    File cached = await _imageCacheManager.putFile(
-        '${stickDetail.image}_${stickDetail.id}', fbyte,
-        maxAge: const Duration(days: 100));
+    FileInfo imgInfo =
+        await _imageCacheManager.downloadFile(frameDetail.image ?? '');
+    File img = imgInfo.file;
 
     emit(
       FrameSourceImageCached(
-        stickDetail,
-        cached.path,
+        frameDetail,
+        img.path,
       ),
     );
-    return cached.path;
+    return img.path;
   }
 
   Future<void> _checkCache(FrameDetail frameDetail) async {
-    File file = await _imageCacheManager
-        .getSingleFile('${frameDetail.image}_${frameDetail.id}');
-    if (file.path.isNotEmpty) {
+    FileInfo? fileInfo =
+        await _imageCacheManager.getFileFromCache('${frameDetail.image}');
+    if (fileInfo != null) {
       emit(
         FrameSourceImageCached(
           frameDetail,
-          file.path,
+          fileInfo.file.path,
         ),
       );
     }
