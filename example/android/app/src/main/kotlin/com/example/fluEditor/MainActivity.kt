@@ -1,4 +1,4 @@
-package com.example.flu_editor_example
+package com.example.fluEditor
 
 import io.flutter.embedding.android.FlutterActivity
 

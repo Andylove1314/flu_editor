@@ -449,12 +449,14 @@ class EditorUtil {
   static void showLoadingdialog(BuildContext context, {bool isLight = true}) {
     showDialog(
         context: context,
+        barrierDismissible: false,
+
         builder: (con) => loadingWidget(context, isLight: isLight));
   }
 
   /// loading widget
   static Widget loadingWidget(BuildContext context,
-      {bool isLight = true, double size = 30.0, double stroke = 2.0}) {
+      {bool isLight = true, double size = 20.0, double stroke = 2.0}) {
     return Center(
       child: loadingWidgetCallback?.call(isLight, size, stroke) ??
           SizedBox(

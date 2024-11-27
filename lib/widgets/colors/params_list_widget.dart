@@ -1,6 +1,7 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
+
+import '../net_image.dart';
 
 class ParamsListWidget extends StatefulWidget {
   final double bottom;
@@ -139,9 +140,9 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        ExtendedImage.network(
-          item.image,
-          fit: BoxFit.cover,
+        NetImage(
+          url: item.image,
+          isLight: true,
         ),
         Positioned(
             left: 0,

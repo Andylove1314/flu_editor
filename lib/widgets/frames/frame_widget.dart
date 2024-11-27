@@ -1,10 +1,9 @@
-import 'package:extended_image/extended_image.dart';
-import 'package:flu_editor/blocs/sticker_image_bloc/sticker_bloc.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/frame_image_bloc/frame_bloc.dart';
+import '../net_image.dart';
 
 class FrameWidget extends StatelessWidget {
   FrameDetail frameDetail;
@@ -19,8 +18,8 @@ class FrameWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        ExtendedImage.network(
-          frameDetail.image ?? '',
+        NetImage(
+          url: frameDetail.image ?? '',
           fit: BoxFit.contain,
         ),
         BlocProvider(

@@ -1,10 +1,10 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/filter_image_bloc/filter_bloc.dart';
 import '../../models/lut_data.dart';
+import '../net_image.dart';
 
 class FilterWidget extends StatelessWidget {
   FilterDetail filterDetail;
@@ -22,9 +22,9 @@ class FilterWidget extends StatelessWidget {
         Widget child = EditorUtil.loadingWidget(context, isLight: false);
 
         if (state is FilterSourceImageReady && state.filterData != null) {
-          child = ExtendedImage.network(
-            filterDetail.image ?? '',
-            fit: BoxFit.cover,
+          child = NetImage(
+            url: filterDetail.image ?? '',
+            isLight: false,
           );
         }
 

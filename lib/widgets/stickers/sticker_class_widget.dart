@@ -1,6 +1,7 @@
-import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
+
+import '../net_image.dart';
 
 class StickerClassWidget extends StatefulWidget {
   TabController tabController;
@@ -36,10 +37,10 @@ class _StickerClassWidgetState extends State<StickerClassWidget> {
           child: Column(
             children: [
               Stack(children: [
-                ExtendedImage.network(
-                  e.groupImage ?? '',
-                  width: 33,
+                NetImage(
+                  url: e.groupImage ?? '',
                   fit: BoxFit.contain,
+                  width: 33,
                 ),
                 if (e.isVipGroup)
                   Positioned(
