@@ -483,6 +483,7 @@ class _MyAppState extends State<MyApp> {
 - vibration: ^2.0.1
 - haptic_feedback: ^0.5.1+1
 - lindi_sticker_widget: ^1.0.1
+- crypto: ^3.0.6
 
 ## 结语
 
