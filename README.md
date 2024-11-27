@@ -76,12 +76,17 @@ API 参考。
       </a>
     </td>
     <td>
-      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-165709.jpg">
         <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
       </a>
     </td>
   </tr>
   <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
+        <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114536.jpg">
         <img src="screenshots/Screenshot_20241127-114536.jpg" alt="Screenshot 3" width="250" style="margin: 10px;"/>
@@ -92,14 +97,14 @@ API 参考。
         <img src="screenshots/Screenshot_20241127-164212.jpg" alt="Screenshot 4" width="250" style="margin: 10px;"/>
       </a>
     </td>
+
+  </tr>
+  <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114559.jpg">
         <img src="screenshots/Screenshot_20241127-114559.jpg" alt="Screenshot 5" width="250" style="margin: 10px;"/>
       </a>
     </td>
-   
-  </tr>
-  <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114641.jpg">
         <img src="screenshots/Screenshot_20241127-114641.jpg" alt="Screenshot 6" width="250" style="margin: 10px;"/>
