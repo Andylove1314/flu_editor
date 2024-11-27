@@ -1,11 +1,10 @@
-import 'package:extended_image/extended_image.dart';
-import 'package:flu_editor/blocs/sticker_image_bloc/sticker_bloc.dart';
+
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../blocs/font_image_bloc/font_bloc.dart';
-import '../../blocs/frame_image_bloc/frame_bloc.dart';
+import '../net_image.dart';
 
 class FontWidget extends StatelessWidget {
   FontDetail fontDetail;
@@ -20,8 +19,8 @@ class FontWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        ExtendedImage.network(
-          fontDetail.image ?? '',
+        NetImage(
+          url: fontDetail.image ?? '',
           fit: BoxFit.fill,
         ),
         BlocProvider(
@@ -50,7 +49,8 @@ class FontWidget extends StatelessWidget {
                 debugPrint('000000');
                 if (state is FontSourceImageCached) {
                   debugPrint('cached: ${state.path}');
-                  onSelect?.call(fontDetail, state.path, state.fontDetail.image);
+                  onSelect?.call(
+                      fontDetail, state.path, state.fontDetail.image);
                 } else {
                   context
                       .read<FontSourceImageCubit>()
