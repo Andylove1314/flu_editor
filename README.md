@@ -63,6 +63,14 @@ API 参考。
 ## Screenshots
 
 <table>
+
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screen_Recording_20241127_115015%2012.10.21.gif">
+        <img src="screenshots/Screen_Recording_20241127_115015%2012.10.21.gif" alt="Screenshot 1" width="250" style="display: block; margin: 10px auto;"/>
+      </a>
+    </td>
+  </tr>
   <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114447.jpg">
