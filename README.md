@@ -63,48 +63,60 @@ API 参考。
 ## Screenshots
 
 <table>
-
   <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screen_Recording_20241127_115015%2012.10.21.gif">
-        <img src="screenshots/Screen_Recording_20241127_115015%2012.10.21.gif" alt="Screenshot 1" width="250" style="display: block; margin: 10px auto;"/>
+        <img src="screenshots/Screen_Recording_20241127_115015%2012.10.21.gif" alt="Screenshot 0" width="250" style="display: block; margin: 10px auto;"/>
       </a>
     </td>
-  </tr>
-  <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114447.jpg">
         <img src="screenshots/Screenshot_20241127-114447.jpg" alt="Screenshot 1" width="250" style="margin: 10px;"/>
       </a>
     </td>
     <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-165709.jpg">
+        <img src="screenshots/Screenshot_20241127-165709.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
-        <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 3" width="250" style="margin: 10px;"/>
       </a>
     </td>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114536.jpg">
-        <img src="screenshots/Screenshot_20241127-114536.jpg" alt="Screenshot 3" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114536.jpg" alt="Screenshot 4" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-164212.jpg">
+        <img src="screenshots/Screenshot_20241127-164212.jpg" alt="Screenshot 5" width="250" style="margin: 10px;"/>
       </a>
     </td>
   </tr>
+
   <tr>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114559.jpg">
-        <img src="screenshots/Screenshot_20241127-114559.jpg" alt="Screenshot 4" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114559.jpg" alt="Screenshot 6" width="250" style="margin: 10px;"/>
       </a>
     </td>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114641.jpg">
-        <img src="screenshots/Screenshot_20241127-114641.jpg" alt="Screenshot 5" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114641.jpg" alt="Screenshot 7" width="250" style="margin: 10px;"/>
       </a>
     </td>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114710.jpg">
-        <img src="screenshots/Screenshot_20241127-114710.jpg" alt="Screenshot 6" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114710.jpg" alt="Screenshot 8" width="250" style="margin: 10px;"/>
       </a>
     </td>
   </tr>
+
 </table>
 
 ## 使用示例
@@ -471,6 +483,7 @@ class _MyAppState extends State<MyApp> {
 - vibration: ^2.0.1
 - haptic_feedback: ^0.5.1+1
 - lindi_sticker_widget: ^1.0.1
+- crypto: ^3.0.6
 
 ## 结语
 
