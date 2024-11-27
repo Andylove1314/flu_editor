@@ -24,6 +24,7 @@ class NetImage extends StatelessWidget {
       fit: fit,
       width: width,
       height: height,
+      cacheKey: EditorUtil.generateMd5(url),
       loadStateChanged: (ExtendedImageState state) {
         switch (state.extendedImageLoadState) {
           case LoadState.loading:
@@ -46,4 +47,5 @@ class NetImage extends StatelessWidget {
       },
     );
   }
+
 }

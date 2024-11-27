@@ -1,4 +1,3 @@
-
 library flu_editor;
 
 import 'dart:async';
@@ -21,6 +20,8 @@ import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/cupertino.dart' hide Image;
 import 'package:flutter/widgets.dart' hide Image;
 import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 
 import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
@@ -74,17 +75,27 @@ part 'configuration/colors/saturation_configuration2.dart';
 part 'configuration/filters/lookup_configuration2.dart';
 
 part 'models/filter_config_data.dart';
+
 part 'models/sticker_data.dart';
+
 part 'models/font_data.dart';
+
 part 'models/frame_data.dart';
+
 part 'models/effect_data.dart';
 
 part 'base/configuration.dart';
+
 part 'base/parameters.dart';
+
 part 'base/image_shader_painter.dart';
+
 part 'base/image_shader_preview.dart';
+
 part 'base/pipeline_image_shader_preview.dart';
+
 part 'base/none.dart';
+
 part 'base/texture_source.dart';
 
 Map<Type, Future<FragmentProgram> Function()> _fragmentPrograms = {};
@@ -96,15 +107,15 @@ class FluEditor {
 }
 
 void register<T extends ShaderConfiguration>(
-    Future<FragmentProgram> Function() fragmentProgramProvider, {
-      bool override = false,
-    }) {
+  Future<FragmentProgram> Function() fragmentProgramProvider, {
+  bool override = false,
+}) {
   if (override) {
     _fragmentPrograms[T] = fragmentProgramProvider;
   } else {
     _fragmentPrograms.putIfAbsent(
       T,
-          () => fragmentProgramProvider,
+      () => fragmentProgramProvider,
     );
   }
 }
