@@ -71,7 +71,7 @@ API 参考。
     </td>
     <td>
       <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
-        <img src="screenshots/Screenshot_20241127-114447.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+        <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
       </a>
     </td>
     <td>
