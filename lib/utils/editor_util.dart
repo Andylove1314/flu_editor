@@ -450,8 +450,11 @@ class EditorUtil {
     showDialog(
         context: context,
         barrierDismissible: false,
-
-        builder: (con) => loadingWidget(context, isLight: isLight));
+        builder: (con) => WillPopScope(
+            child: loadingWidget(context, isLight: isLight),
+            onWillPop: () {
+              return Future.value(false);
+            }));
   }
 
   /// loading widget
