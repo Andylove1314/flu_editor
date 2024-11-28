@@ -164,8 +164,6 @@ class _MyAppState extends State<MyApp> {
         },
         saveCb: (path) async{
           GallerySaver.saveImage(path, albumName: 'Flu-Editor');
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
         loadWidgetCb: (islight, size, stroke) => Container(
               width: size,
@@ -191,8 +189,7 @@ class _MyAppState extends State<MyApp> {
         stickersCb: () => _fetchStickers(),
         fontsCb: () => _fetchFonts(),
         framesCb: () => _fetchFrames(),
-        closeEditorCb: (after) => debugPrint('last image = $after'),
-        homeSavedCb: (after){
+        homeSavedCb: (context, after){
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
               return RoutePage(savedPath: after, title: '保存成功',);

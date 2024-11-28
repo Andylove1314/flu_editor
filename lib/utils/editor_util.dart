@@ -21,7 +21,6 @@ class EditorUtil {
   static StickersCallback? stickersCallback;
   static FontsCallback? fontsCallback;
   static FramesCallback? framesCallback;
-  static CloseEditorCallback? closeEditorCallback;
   static HomeSavedCallback? homeSavedCallback;
 
   static EditorHomeCubit? homeCubit;
@@ -132,7 +131,6 @@ class EditorUtil {
       StickersCallback? stickersCb,
       FontsCallback? fontsCb,
       FramesCallback? framesCb,
-      CloseEditorCallback? closeEditorCb,
       HomeSavedCallback? homeSavedCb}) async {
     _registerMultGlsl();
 
@@ -148,7 +146,6 @@ class EditorUtil {
     stickersCallback = stickersCb;
     fontsCallback = fontsCb;
     framesCallback = framesCb;
-    closeEditorCallback = closeEditorCb;
     homeSavedCallback = homeSavedCb;
 
     editorType = type;
@@ -527,10 +524,6 @@ class EditorUtil {
     frameList.clear();
     editorType == null;
     singleEditorSavetoAlbum = true;
-    closeEditorCallback?.call(after);
-    Future.delayed(const Duration(milliseconds: 200), () {
-      closeEditorCallback = null;
-    });
   }
 
   /// 导入图片到Uint8List

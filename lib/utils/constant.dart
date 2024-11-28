@@ -16,8 +16,7 @@ typedef FiltersCallback = Future<List<FilterData>> Function();
 typedef StickersCallback = Future<List<StickerData>> Function();
 typedef FontsCallback = Future<List<FontsData>> Function();
 typedef FramesCallback = Future<List<FrameData>> Function();
-typedef CloseEditorCallback = void Function(String lastImage);
-typedef HomeSavedCallback = void Function(String lastImage);
+typedef HomeSavedCallback = void Function(BuildContext context, String lastImage);
 
 final mainActions = [
   ActionData(type: 0, name: '裁剪', icon: 'icon_caijian_edit@3x'.imagePng),

@@ -25,7 +25,7 @@ class EditorHomePage extends StatelessWidget {
             !context.read<EditorHomeCubit>().saved) {
           showSaveImagePop(context, onSave: () {
             context.read<EditorHomeCubit>().saveImage().then((path) {
-              EditorUtil.homeSavedCallback?.call(path);
+              EditorUtil.homeSavedCallback?.call(context, path);
             });
           }, onCancel: () {
             EditorUtil.clearTmpObject(
@@ -72,7 +72,7 @@ class EditorHomePage extends StatelessWidget {
                                 .read<EditorHomeCubit>()
                                 .saveImage()
                                 .then((path) {
-                              EditorUtil.homeSavedCallback?.call(path);
+                              EditorUtil.homeSavedCallback?.call(context, path);
                             })
                         : null);
           },
