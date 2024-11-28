@@ -12,42 +12,42 @@ import 'intl/messages_all.dart';
 // ignore_for_file: join_return_with_assignment, prefer_final_in_for_each
 // ignore_for_file: avoid_redundant_argument_values, avoid_escaping_inner_quotes
 
-class S {
-  S();
+class EditorLang {
+  EditorLang();
 
-  static S? _current;
+  static EditorLang? _current;
 
-  static S get current {
+  static EditorLang get current {
     assert(_current != null,
-        'No instance of S was loaded. Try to initialize the S delegate before accessing S.current.');
+        'No instance of EditorLang was loaded. Try to initialize the EditorLang delegate before accessing EditorLang.current.');
     return _current!;
   }
 
   static const AppLocalizationDelegate delegate = AppLocalizationDelegate();
 
-  static Future<S> load(Locale locale) {
+  static Future<EditorLang> load(Locale locale) {
     final name = (locale.countryCode?.isEmpty ?? false)
         ? locale.languageCode
         : locale.toString();
     final localeName = Intl.canonicalizedLocale(name);
     return initializeMessages(localeName).then((_) {
       Intl.defaultLocale = localeName;
-      final instance = S();
-      S._current = instance;
+      final instance = EditorLang();
+      EditorLang._current = instance;
 
       return instance;
     });
   }
 
-  static S of(BuildContext context) {
-    final instance = S.maybeOf(context);
+  static EditorLang of(BuildContext context) {
+    final instance = EditorLang.maybeOf(context);
     assert(instance != null,
-        'No instance of S present in the widget tree. Did you add S.delegate in localizationsDelegates?');
+        'No instance of EditorLang present in the widget tree. Did you add EditorLang.delegate in localizationsDelegates?');
     return instance!;
   }
 
-  static S? maybeOf(BuildContext context) {
-    return Localizations.of<S>(context, S);
+  static EditorLang? maybeOf(BuildContext context) {
+    return Localizations.of<EditorLang>(context, EditorLang);
   }
 
   /// `图片编辑`
@@ -63,7 +63,7 @@ class S {
   /// `程度`
   String get editor_intensity {
     return Intl.message(
-      '程度',
+      EditorLang.current.editor_intensity,
       name: 'editor_intensity',
       desc: '',
       args: [],
@@ -591,7 +591,7 @@ class S {
   }
 }
 
-class AppLocalizationDelegate extends LocalizationsDelegate<S> {
+class AppLocalizationDelegate extends LocalizationsDelegate<EditorLang> {
   const AppLocalizationDelegate();
 
   List<Locale> get supportedLocales {
@@ -604,7 +604,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
   @override
   bool isSupported(Locale locale) => _isSupported(locale);
   @override
-  Future<S> load(Locale locale) => S.load(locale);
+  Future<EditorLang> load(Locale locale) => EditorLang.load(locale);
   @override
   bool shouldReload(AppLocalizationDelegate old) => false;
 

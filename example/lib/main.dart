@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:gallery_saver_plus/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
@@ -61,6 +62,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        EditorLang.delegate
+      ],
+      supportedLocales: [...EditorLang.delegate.supportedLocales],
       home: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
