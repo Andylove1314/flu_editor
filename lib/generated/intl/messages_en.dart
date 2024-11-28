@@ -45,6 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_xyd": MessageLookupByLibrary.simpleMessage("Vividness"),
         "editor_color_yy": MessageLookupByLibrary.simpleMessage("Shadows"),
         "editor_color_yying": MessageLookupByLibrary.simpleMessage("Vignette"),
+        "editor_color_yying_dx": MessageLookupByLibrary.simpleMessage("大小"),
+        "editor_color_yying_sx": MessageLookupByLibrary.simpleMessage("上下"),
+        "editor_color_yying_wy": MessageLookupByLibrary.simpleMessage("外延"),
+        "editor_color_yying_zy": MessageLookupByLibrary.simpleMessage("左右"),
         "editor_color_zd": MessageLookupByLibrary.simpleMessage("Noise"),
         "editor_crop": MessageLookupByLibrary.simpleMessage("Crop"),
         "editor_crop_freedom": MessageLookupByLibrary.simpleMessage("Free"),
@@ -77,6 +81,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_text_style": MessageLookupByLibrary.simpleMessage("style"),
         "editor_text_style_alpha":
             MessageLookupByLibrary.simpleMessage("transparent"),
+        "editor_text_style_alpha_2":
+            MessageLookupByLibrary.simpleMessage("透明度"),
         "editor_text_style_ct": MessageLookupByLibrary.simpleMessage("bold"),
         "editor_text_style_xhx":
             MessageLookupByLibrary.simpleMessage("underline"),
@@ -87,6 +93,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_vip_limited_1": MessageLookupByLibrary.simpleMessage(
             "activate VIP to use exclusive material functions"),
         "editor_vip_limited_2": MessageLookupByLibrary.simpleMessage(
-            "You have used VIP filters. Please save the filter effects after activating VIP?")
+            "You have used VIP filters. Please save the filter effects after activating VIP?"),
+        "editor_vip_limited_3":
+            MessageLookupByLibrary.simpleMessage("您使用了VIP素材，请在开通会员后保存效果？")
       };
 }

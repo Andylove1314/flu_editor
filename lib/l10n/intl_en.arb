@@ -52,5 +52,13 @@
   "editor_vip_limited_2": "You have used VIP filters. Please save the filter effects after activating VIP?",
   "editor_exit_tip": "Do you want to save the edited effects before exiting?",
   "editor_exit_no": "Do not save",
-  "editor_exit_save": "Save"
+  "editor_exit_save": "Save",
+
+
+  "editor_vip_limited_3": "您使用了VIP素材，请在开通会员后保存效果？",
+  "editor_text_style_alpha_2": "透明度",
+  "editor_color_yying_zy": "左右",
+  "editor_color_yying_sx": "上下",
+  "editor_color_yying_dx": "大小",
+  "editor_color_yying_wy": "外延"
 }

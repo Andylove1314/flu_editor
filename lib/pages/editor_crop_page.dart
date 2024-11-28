@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:image/image.dart' as img;
 
@@ -136,8 +137,8 @@ class _EditorCropPageState extends State<EditorCropPage> {
                 _currentCropIndex = 1;
                 _imageEditorController.reset();
               },
-              child: const Text(
-                '复位',
+              child: Text(
+                EditorLang.of(context).editor_restore,
                 style: TextStyle(
                     color: Color(0xff1E1925),
                     fontSize: 12,

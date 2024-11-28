@@ -43,6 +43,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_xyd": MessageLookupByLibrary.simpleMessage("鲜艳度"),
         "editor_color_yy": MessageLookupByLibrary.simpleMessage("阴影"),
         "editor_color_yying": MessageLookupByLibrary.simpleMessage("晕影"),
+        "editor_color_yying_dx": MessageLookupByLibrary.simpleMessage("大小"),
+        "editor_color_yying_sx": MessageLookupByLibrary.simpleMessage("上下"),
+        "editor_color_yying_wy": MessageLookupByLibrary.simpleMessage("外延"),
+        "editor_color_yying_zy": MessageLookupByLibrary.simpleMessage("左右"),
         "editor_color_zd": MessageLookupByLibrary.simpleMessage("噪点"),
         "editor_crop": MessageLookupByLibrary.simpleMessage("裁剪"),
         "editor_crop_freedom": MessageLookupByLibrary.simpleMessage("自由"),
@@ -72,6 +76,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_text_font": MessageLookupByLibrary.simpleMessage("字体"),
         "editor_text_style": MessageLookupByLibrary.simpleMessage("样式"),
         "editor_text_style_alpha": MessageLookupByLibrary.simpleMessage("透明"),
+        "editor_text_style_alpha_2":
+            MessageLookupByLibrary.simpleMessage("透明度"),
         "editor_text_style_ct": MessageLookupByLibrary.simpleMessage("粗体"),
         "editor_text_style_xhx": MessageLookupByLibrary.simpleMessage("下划线"),
         "editor_text_style_xt": MessageLookupByLibrary.simpleMessage("斜体"),
@@ -80,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_vip_limited_1":
             MessageLookupByLibrary.simpleMessage("会员已到期，开通即可使用专享素材功能"),
         "editor_vip_limited_2":
-            MessageLookupByLibrary.simpleMessage("您使用了VIP滤镜，请在开通会员后保存滤镜效果？")
+            MessageLookupByLibrary.simpleMessage("您使用了VIP滤镜，请在开通会员后保存滤镜效果？"),
+        "editor_vip_limited_3":
+            MessageLookupByLibrary.simpleMessage("您使用了VIP素材，请在开通会员后保存效果？")
       };
 }

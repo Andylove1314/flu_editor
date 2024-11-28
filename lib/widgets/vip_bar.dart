@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flu_editor/flu_editor.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class VipBar extends StatelessWidget {
@@ -30,12 +31,12 @@ class VipBar extends StatelessWidget {
                 Expanded(
                     child: Container(
                   margin: const EdgeInsets.only(top: 12),
-                  child: const AutoSizeText(
-                    '会员已到期，开通即可使用专享素材功能',
+                  child: AutoSizeText(
+                    EditorLang.of(context).editor_vip_limited_1,
                     maxFontSize: 13,
                     minFontSize: 10,
                     maxLines: 1,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 13),
@@ -54,9 +55,9 @@ class VipBar extends StatelessWidget {
                       onPressed: () {
                         subAction.call();
                       },
-                      child: const Text(
-                        '购买会员',
-                        style: TextStyle(
+                      child:  Text(
+                        EditorLang.of(context).editor_vip_action,
+                        style: const TextStyle(
                             color: Color(0xffFF799E),
                             fontSize: 13,
                             fontWeight: FontWeight.bold),

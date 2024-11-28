@@ -1,6 +1,8 @@
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class BackTipPopWidget extends StatelessWidget {
   Function() onSave;
   Function() onCancel;
@@ -32,12 +34,12 @@ class BackTipPopWidget extends StatelessWidget {
                     )),
               ),
             ),
-            const Padding(
+             Padding(
               padding:
-                  EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 30),
+                  const EdgeInsets.only(left: 30, right: 30, top: 10, bottom: 30),
               child: Text(
-                '是否保存编辑的效果后退出？',
-                style: TextStyle(
+                EditorLang.of(context).editor_exit_tip,
+                style: const TextStyle(
                     color: Color(0xff19191A),
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
@@ -64,9 +66,9 @@ class BackTipPopWidget extends StatelessWidget {
                         Navigator.pop(context);
                         onCancel.call();
                       },
-                      child: const Text(
-                        '不保存',
-                        style: TextStyle(
+                      child:  Text(
+                        EditorLang.of(context).editor_exit_no,
+                        style: const TextStyle(
                             color: Color(0xff19191A),
                             fontWeight: FontWeight.w600,
                             fontSize: 18),
@@ -85,9 +87,9 @@ class BackTipPopWidget extends StatelessWidget {
                           padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 9, horizontal: 30))),
-                      child: const Text(
-                        '保存',
-                        style: TextStyle(
+                      child:  Text(
+                        EditorLang.of(context).editor_exit_save,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 18),

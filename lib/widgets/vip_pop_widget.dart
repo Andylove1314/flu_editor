@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class VipTipPopWidget extends StatelessWidget {
   Function() onSave;
   Function() onCancel;
@@ -71,9 +73,9 @@ class VipTipPopWidget extends StatelessWidget {
                         Navigator.pop(context);
                         onCancel.call();
                       },
-                      child: const Text(
-                        '放弃效果',
-                        style: TextStyle(
+                      child: Text(
+                        EditorLang.of(context).editor_vip_cancel,
+                        style: const TextStyle(
                             color: Color(0xff19191A),
                             fontWeight: FontWeight.w600,
                             fontSize: 18),
@@ -92,9 +94,9 @@ class VipTipPopWidget extends StatelessWidget {
                           padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 9, horizontal: 30))),
-                      child: const Text(
-                        '购买会员',
-                        style: TextStyle(
+                      child:  Text(
+                        EditorLang.of(context).editor_vip_action,
+                        style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 18),

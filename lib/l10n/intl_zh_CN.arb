@@ -52,5 +52,12 @@
   "editor_vip_limited_2": "您使用了VIP滤镜，请在开通会员后保存滤镜效果？",
   "editor_exit_tip": "是否保存编辑的效果后退出？",
   "editor_exit_no": "不保存",
-  "editor_exit_save": "保存"
+  "editor_exit_save": "保存",
+
+  "editor_vip_limited_3": "您使用了VIP素材，请在开通会员后保存效果？",
+  "editor_text_style_alpha_2": "透明度",
+  "editor_color_yying_zy": "左右",
+  "editor_color_yying_sx": "上下",
+  "editor_color_yying_dx": "大小",
+  "editor_color_yying_wy": "外延"
 }

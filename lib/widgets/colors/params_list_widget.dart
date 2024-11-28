@@ -1,4 +1,5 @@
 import 'package:flu_editor/flu_editor.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../net_image.dart';
@@ -124,10 +125,10 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
           ),
         ),
       )
-          : const Center(
+          :  Center(
         child: Text(
-          '暂无配方',
-          style: TextStyle(
+          EditorLang.of(context).editor_color_pf_no,
+          style: const TextStyle(
               color: Colors.white,
               fontSize: 14,
               fontWeight: FontWeight.w600),
@@ -165,7 +166,7 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
                 onTap: () async {
                   bool? deleted = await EditorUtil.deleteEffect(item.id);
                   EditorUtil.toastActionCallback
-                      ?.call(deleted == true ? '删除配方成功' : '删除配方失败');
+                      ?.call(deleted == true ? EditorLang.of(context).editor_color_delete_pf_successfully : EditorLang.of(context).editor_color_delete_pf_faild);
                   if (deleted == true) {
                     setState(() {
                       _index = -1;

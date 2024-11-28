@@ -1,6 +1,7 @@
 import 'package:flu_editor/widgets/fonts/style/style_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import '../slider_normal_parameter.dart';
 import 'color/color_widget.dart';
 
@@ -65,7 +66,7 @@ class _FontStylePanState extends State<FontStylePan>
             initValue: widget.opacity ?? 1.0,
             max: 1.0,
             min: 0.0,
-            name: '透明',
+            name: EditorLang.of(context).editor_text_style_alpha,
             onChanged: (double value) {
               widget.onOpacityChanged.call(value);
             },
