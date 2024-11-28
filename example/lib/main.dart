@@ -98,7 +98,7 @@ class _MyAppState extends State<MyApp> {
                                   height: 20,
                                 ),
                                 Text(
-                                  '添加照片',
+                                  'Add photo',
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 24),
                                 ),
@@ -117,12 +117,12 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         if (_currentImage.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('请选择图片！')));
+                              const SnackBar(content: Text('Add photo pleasen!')));
                           return;
                         }
                         _goEditor(context);
                       },
-                      child: const Text('编辑照片')),
+                      child: const Text('Go Editor')),
                 ),
               ),
               const SizedBox(
@@ -158,7 +158,7 @@ class _MyAppState extends State<MyApp> {
           debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return RoutePage(title: '订阅页面',);
+              return RoutePage(title: 'Sub page',);
             },
           ));
         },
@@ -178,11 +178,11 @@ class _MyAppState extends State<MyApp> {
             .showSnackBar(SnackBar(content: Text(msg))),
         effectsCb: (page) async => await _fetchPF(),
         saveEffectCb: (effect) async {
-          debugPrint('保存配方：${effect.toJson()}');
+          debugPrint('Save pf：${effect.toJson()}');
           return await true;
         },
         deleteEffectCb: (id) async {
-          debugPrint('删除配方：$id');
+          debugPrint('Delete：$id');
           return await true;
         },
         filtersCb: () => _fetchLJ(),
@@ -192,7 +192,7 @@ class _MyAppState extends State<MyApp> {
         homeSavedCb: (context, after){
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return RoutePage(savedPath: after, title: '保存成功',);
+              return RoutePage(savedPath: after, title: 'Saved page',);
             },
           ));
         });
@@ -234,7 +234,7 @@ class _MyAppState extends State<MyApp> {
     detail1.image =
         'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
     detail1.filterImage = 'luts/01-x.png';
-    detail1.name = '滤镜1';
+    detail1.name = 'class1';
     detail1.noise = 0.2;
     detail1.vip = 1;
     detail1.lutFrom = 0;
@@ -244,11 +244,11 @@ class _MyAppState extends State<MyApp> {
     detail2.image =
         'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
     detail2.filterImage = 'luts/03-x.png';
-    detail2.name = '滤镜2';
+    detail2.name = 'class2';
     detail2.lutFrom = 0;
 
     FilterData group1 = FilterData();
-    group1.groupName = '分类1';
+    group1.groupName = 'class1';
 
     group1.list = [detail1, detail2];
 
@@ -271,7 +271,7 @@ class _MyAppState extends State<MyApp> {
     detail2.vip = 0;
 
     StickerData group1 = StickerData();
-    group1.groupName = '分类1';
+    group1.groupName = 'class1';
     group1.groupImage =
         'https://nwdnui.bigwinepot.com/ui/index/icon/318fa7a144af47f29adbdc73cb7e78b5.png';
 
@@ -300,7 +300,7 @@ class _MyAppState extends State<MyApp> {
     detail2.vip = 0;
 
     FontsData group1 = FontsData();
-    group1.groupName = '简体';
+    group1.groupName = 'Sample';
 
     group1.list = [detail1, detail2];
 
@@ -339,7 +339,7 @@ class _MyAppState extends State<MyApp> {
     detail2.params = size2;
 
     FrameData group1 = FrameData();
-    group1.groupName = '简单';
+    group1.groupName = 'Sample';
 
     group1.list = [detail1, detail2];
 

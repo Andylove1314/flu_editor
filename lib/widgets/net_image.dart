@@ -34,7 +34,7 @@ class NetImage extends StatelessWidget {
             // 图片加载完成，显示图片
             return ExtendedRawImage(
               image: state.extendedImageInfo?.image,
-              fit: BoxFit.cover,
+              fit: fit,
             );
           case LoadState.failed:
             // 图片加载失败，显示一个占位图或错误提示

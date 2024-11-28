@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
+import '../generated/l10n.dart';
 import '../widgets/custom_widget.dart';
 import '../widgets/diff/diff_widget.dart';
 import '../widgets/main_pan.dart';
@@ -54,9 +55,10 @@ class EditorHomePage extends StatelessWidget {
   AppBar _bar(BuildContext context) {
     return AppBar(
       iconTheme: const IconThemeData(color: Colors.black),
-      title: const Text(
+      title: Text(
         '图片编辑',
-        style: TextStyle(
+        // 'S.of(context).editor_name',
+        style: const TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       ),
       backgroundColor: Colors.white,
