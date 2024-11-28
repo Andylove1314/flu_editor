@@ -39,6 +39,8 @@ import 'blocs/source_image_bloc/source_image_bloc.dart';
 import 'flu_editor_platform_interface.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'generated/l10n.dart';
+
 part 'package:flu_editor/utils/editor_util.dart';
 
 part 'package:flu_editor/utils/extension_util.dart';

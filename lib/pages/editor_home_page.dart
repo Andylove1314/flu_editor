@@ -57,7 +57,7 @@ class EditorHomePage extends StatelessWidget {
       iconTheme: const IconThemeData(color: Colors.black),
       title: Text(
         '图片编辑',
-        // 'S.of(context).editor_name',
+        // S.of(context).editor_name,
         style: const TextStyle(
             color: Colors.black, fontSize: 20, fontWeight: FontWeight.w600),
       ),

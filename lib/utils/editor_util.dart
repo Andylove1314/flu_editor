@@ -5,7 +5,7 @@ class EditorUtil {
   static Duration get _transDur => const Duration(milliseconds: 200);
 
   ///效果临时目录
-  static final _tmpEffectDir = '/tmpEffectDir';
+  static const _tmpEffectDir = '/tmpEffectDir';
 
   /// 业务回调
   static VipStatusCallback? vipStatusCallback;
