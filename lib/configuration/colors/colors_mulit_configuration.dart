@@ -74,7 +74,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
     required double vigEndMax,
   })  : _brightness = ShaderRangeNumberParameter(
           'Brightness',
-          '亮度',
+          '程度',
           brightness,
           0,
           min: brightnessMin,
@@ -82,7 +82,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _saturation = ShaderRangeNumberParameter(
           'Saturation',
-          '饱和度',
+          '程度',
           saturation,
           1,
           min: saturationMin,
@@ -90,7 +90,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _contrast = ShaderRangeNumberParameter(
           'Contrast',
-          '对比度',
+          '程度',
           contrast,
           2,
           min: contrastMin,
@@ -98,7 +98,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _sharpen = ShaderRangeNumberParameter(
           'Sharpen',
-          '锐化',
+          '程度',
           sharpen,
           3,
           min: sharpenMin,
@@ -106,7 +106,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _shadow = ShaderRangeNumberParameter(
           'Shadow',
-          '阴影',
+          '程度',
           shadow,
           4,
           min: shadowMin,
@@ -114,7 +114,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _temperature = ShaderRangeNumberParameter(
           'Temperature',
-          '色温',
+          '程度',
           temperature,
           5,
           min: temperatureMin,
@@ -122,7 +122,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _noise = ShaderRangeNumberParameter(
           'Noise',
-          '噪点',
+          '程度',
           noise,
           6,
           min: noiseMin,
@@ -130,7 +130,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _exposure = ShaderRangeNumberParameter(
           'Exposure',
-          '曝光',
+          '程度',
           exposure,
           7,
           min: exposureMin,
@@ -138,7 +138,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _vibrance = ShaderRangeNumberParameter(
           'Vibrance',
-          '鲜艳度',
+          '程度',
           vibrance,
           8,
           min: vibranceMin,
@@ -146,7 +146,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _highlight = ShaderRangeNumberParameter(
           'Highlight',
-          '高光',
+          '程度',
           highlight,
           9,
           min: highlightMin,

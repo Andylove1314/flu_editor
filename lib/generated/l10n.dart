@@ -320,6 +320,36 @@ class S {
     );
   }
 
+  /// `红色`
+  String get editor_color_bph_red {
+    return Intl.message(
+      '红色',
+      name: 'editor_color_bph_red',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `绿色`
+  String get editor_color_bph_green {
+    return Intl.message(
+      '绿色',
+      name: 'editor_color_bph_green',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `蓝色`
+  String get editor_color_bph_blue {
+    return Intl.message(
+      '蓝色',
+      name: 'editor_color_bph_blue',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `曝光`
   String get editor_color_bg {
     return Intl.message(
@@ -335,16 +365,6 @@ class S {
     return Intl.message(
       '滤镜',
       name: 'editor_filter',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `阴影`
-  String get editor_ {
-    return Intl.message(
-      '阴影',
-      name: 'editor_',
       desc: '',
       args: [],
     );

@@ -22,11 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "editor_": MessageLookupByLibrary.simpleMessage("阴影"),
         "editor_color": MessageLookupByLibrary.simpleMessage("调色"),
         "editor_color_bg": MessageLookupByLibrary.simpleMessage("曝光"),
         "editor_color_bhd": MessageLookupByLibrary.simpleMessage("饱和度"),
         "editor_color_bph": MessageLookupByLibrary.simpleMessage("白平衡"),
+        "editor_color_bph_blue": MessageLookupByLibrary.simpleMessage("蓝色"),
+        "editor_color_bph_green": MessageLookupByLibrary.simpleMessage("绿色"),
+        "editor_color_bph_red": MessageLookupByLibrary.simpleMessage("红色"),
         "editor_color_dbd": MessageLookupByLibrary.simpleMessage("对比度"),
         "editor_color_delete_pf_faild":
             MessageLookupByLibrary.simpleMessage("删除配方失败"),

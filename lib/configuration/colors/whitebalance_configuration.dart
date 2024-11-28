@@ -18,7 +18,7 @@ class WhiteBalanceShaderConfiguration2 extends ShaderConfiguration {
     required double blueMax,
   })  : _redBalance = ShaderRangeNumberParameter(
           'Red',
-          '红',
+          '红色',
           red,
           0,
           min: redMin,
@@ -26,7 +26,7 @@ class WhiteBalanceShaderConfiguration2 extends ShaderConfiguration {
         ),
         _greenBalance = ShaderRangeNumberParameter(
           'Green',
-          '绿',
+          '绿色',
           green,
           1,
           min: greenMin,
@@ -34,7 +34,7 @@ class WhiteBalanceShaderConfiguration2 extends ShaderConfiguration {
         ),
         _blueBalance = ShaderRangeNumberParameter(
           'Blue',
-          '蓝',
+          '蓝色',
           blue,
           2,
           min: blueMin,
