@@ -22,7 +22,7 @@ class VignetteShaderConfiguration2 extends ShaderConfiguration {
     required double endmax,
   })  : _centerX = ShaderRangeNumberParameter(
           'CenterX',
-          '左右',
+          EditorLang.current.editor_color_yying_zy,
           centerX, // 中心点X的默认值
           0,
           min: xmin,
@@ -30,7 +30,7 @@ class VignetteShaderConfiguration2 extends ShaderConfiguration {
         ),
         _centerY = ShaderRangeNumberParameter(
           'CenterY',
-          '上下',
+          EditorLang.current.editor_color_yying_sx,
           centerY, // 中心点Y的默认值
           1,
           min: ymin,
@@ -38,7 +38,7 @@ class VignetteShaderConfiguration2 extends ShaderConfiguration {
         ),
         _start = ShaderRangeNumberParameter(
           'Start',
-          '大小',
+          EditorLang.current.editor_color_yying_dx,
           start, // 默认开始值
           2,
           min: startmin,
@@ -46,7 +46,7 @@ class VignetteShaderConfiguration2 extends ShaderConfiguration {
         ),
         _end = ShaderRangeNumberParameter(
           'End',
-          '外延',
+          EditorLang.current.editor_color_yying_wy,
           end, // 默认结束值
           3,
           min: endmin,

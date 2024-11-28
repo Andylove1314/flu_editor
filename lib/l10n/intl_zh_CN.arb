@@ -59,5 +59,7 @@
   "editor_color_yying_zy": "左右",
   "editor_color_yying_sx": "上下",
   "editor_color_yying_dx": "大小",
-  "editor_color_yying_wy": "外延"
+  "editor_color_yying_wy": "外延",
+  "editor_blur": "模糊",
+  "editor_color_sd": "色调"
 }

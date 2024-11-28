@@ -10,7 +10,7 @@ class ContrastShaderConfiguration2 extends ShaderConfiguration {
         required double contrastMax})
       : _contrast = ShaderRangeNumberParameter(
           'Contrast',
-          '程度',
+          EditorLang.current.editor_intensity,
           contrast, // 默认对比度
           0, // GLSL中对比度的location
           min: contrastMin, // 最低对比度

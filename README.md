@@ -60,6 +60,19 @@ API 参考。
     - `goFontPage`：跳转到字体编辑页面。
     - `goFramePage`：跳转到相框编辑页面。
 
+### 多语言配置
+- **MaterialApp 内添加如下delegate以及supportedLocales**：
+
+```dart
+
+MaterialApp(
+localizationsDelegates: [
+EditorLang.delegate
+],
+supportedLocales: [...EditorLang.delegate.supportedLocales],)
+
+```
+
 ## Screenshots
 
 <table>

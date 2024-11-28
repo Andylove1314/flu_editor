@@ -3,6 +3,7 @@ import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
+import '../../generated/l10n.dart';
 import '../confirm_bar.dart';
 import 'font_align_pan.dart';
 import 'font_class_widget.dart';
@@ -169,7 +170,7 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
           },
           confirm: () async {
             if (vipFont) {
-              showVipPop(context, content: '您使用了VIP素材，请在开通会员后保存效果？',
+              showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3,
                   onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});

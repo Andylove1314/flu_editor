@@ -1,6 +1,6 @@
 {
   "editor_name": "Image Editing",
-  "editor_intensity": "Degree",
+  "editor_intensity": "Intensity",
   "editor_crop": "Crop",
   "editor_crop_orignal": "Original",
   "editor_crop_freedom": "Free",
@@ -54,11 +54,12 @@
   "editor_exit_no": "Do not save",
   "editor_exit_save": "Save",
 
-
-  "editor_vip_limited_3": "您使用了VIP素材，请在开通会员后保存效果？",
-  "editor_text_style_alpha_2": "透明度",
-  "editor_color_yying_zy": "左右",
-  "editor_color_yying_sx": "上下",
-  "editor_color_yying_dx": "大小",
-  "editor_color_yying_wy": "外延"
+  "editor_vip_limited_3": "You have used VIP materials. Please save the effects after activating membership?",
+  "editor_text_style_alpha_2": "Transparency",
+  "editor_color_yying_zy": "Left and right",
+  "editor_color_yying_sx": "Up and down",
+  "editor_color_yying_dx": "Size",
+  "editor_color_yying_wy": "Extension",
+  "editor_blur": "Blur",
+  "editor_color_sd": "Hue"
 }

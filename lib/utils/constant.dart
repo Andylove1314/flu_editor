@@ -1,4 +1,5 @@
 import 'package:flu_editor/flu_editor.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../models/action_data.dart';
@@ -19,13 +20,13 @@ typedef FramesCallback = Future<List<FrameData>> Function();
 typedef HomeSavedCallback = void Function(BuildContext context, String lastImage);
 
 final mainActions = [
-  ActionData(type: 0, name: '裁剪', icon: 'icon_caijian_edit@3x'.imagePng),
-  ActionData(type: 1, name: '调色', icon: 'icon_color_edit@3x'.imagePng),
-  ActionData(type: 2, name: '滤镜', icon: 'icon_lut_edit@3x'.imagePng),
-  // ActionData(type: 3, name: '模糊', icon: 'icon_blur_edit@3x'.imagePng),
-  ActionData(type: 4, name: '贴纸', icon: 'icon_tiezhi_edit@3x'.imagePng),
-  ActionData(type: 5, name: '文字', icon: 'icon_word_edit@3x'.imagePng),
-  ActionData(type: 6, name: '边框', icon: 'icon_biankuang_edit@3x'.imagePng)
+  ActionData(type: 0, name: EditorLang.current.editor_crop, icon: 'icon_caijian_edit@3x'.imagePng),
+  ActionData(type: 1, name: EditorLang.current.editor_color, icon: 'icon_color_edit@3x'.imagePng),
+  ActionData(type: 2, name: EditorLang.current.editor_filter, icon: 'icon_lut_edit@3x'.imagePng),
+  // ActionData(type: 3, name: EditorLang.current.editor_blur, icon: 'icon_blur_edit@3x'.imagePng),
+  ActionData(type: 4, name: EditorLang.current.editor_sticker, icon: 'icon_tiezhi_edit@3x'.imagePng),
+  ActionData(type: 5, name: EditorLang.current.editor_text, icon: 'icon_word_edit@3x'.imagePng),
+  ActionData(type: 6, name: EditorLang.current.editor_frame, icon: 'icon_biankuang_edit@3x'.imagePng)
 ];
 
 final Map<String, double> filterParamInitValues = {
@@ -46,84 +47,84 @@ final Map<String, double> filterParamMaxValues = {
 final colorActions = [
   ActionData(
       type: 0,
-      name: '配方',
+      name: EditorLang.current.editor_color_pf,
       icon: 'icon_pf_n'.imageColorsPng,
       selectedIcon: 'icon_pf_s'.imageColorsPng),
   ActionData(
       type: 1,
-      name: '亮度',
+      name: EditorLang.current.editor_color_ld,
       icon: 'icon_ld_n'.imageColorsPng,
       selectedIcon: 'icon_ld_s'.imageColorsPng,
       params: ['Brightness']),
   ActionData(
       type: 2,
-      name: '饱和度',
+      name: EditorLang.current.editor_color_bhd,
       icon: 'icon_bhd_n'.imageColorsPng,
       selectedIcon: 'icon_bhd_s'.imageColorsPng,
       params: ['Saturation']),
   ActionData(
       type: 3,
-      name: '对比度',
+      name: EditorLang.current.editor_color_dbd,
       icon: 'icon_dbd_n'.imageColorsPng,
       selectedIcon: 'icon_dbd_s'.imageColorsPng,
       params: ['Contrast']),
   ActionData(
       type: 4,
-      name: '高光',
+      name: EditorLang.current.editor_color_gg,
       icon: 'icon_gg_n'.imageColorsPng,
       selectedIcon: 'icon_gg_s'.imageColorsPng,
       params: ['Highlight']),
   ActionData(
       type: 5,
-      name: '阴影',
+      name: EditorLang.current.editor_color_yy,
       icon: 'icon_yy_n'.imageColorsPng,
       selectedIcon: 'icon_yy_s'.imageColorsPng,
       params: ['Shadow']),
   // ActionData(
   //     type: 6,
-  //     name: '色调',
+  //     name: EditorLang.current.editor_color_sd,
   //     icon: 'icon_sd_n'.imageColorsPng,
   //     selectedIcon: 'icon_sd_s'.imageColorsPng,
   //     params: ['Hue']),
   ActionData(
       type: 6,
-      name: '色温',
+      name: EditorLang.current.editor_color_sw,
       icon: 'icon_sw_n'.imageColorsPng,
       selectedIcon: 'icon_sw_s'.imageColorsPng,
       params: ['Temperature']),
   ActionData(
       type: 7,
-      name: '晕影',
+      name: EditorLang.current.editor_color_yying,
       icon: 'icon_yuny_n'.imageColorsPng,
       selectedIcon: 'icon_yuny_s'.imageColorsPng,
       params: ['Start']), //'CenterX', 'CenterY', ｜ 'End'
   ActionData(
       type: 8,
-      name: '锐化',
+      name: EditorLang.current.editor_color_rh,
       icon: 'icon_rh_n'.imageColorsPng,
       selectedIcon: 'icon_rh_s'.imageColorsPng,
       params: ['Sharpen']),
   ActionData(
       type: 9,
-      name: '噪点',
+      name: EditorLang.current.editor_color_zd,
       icon: 'icon_zd_n'.imageColorsPng,
       selectedIcon: 'icon_zd_s'.imageColorsPng,
       params: ['Noise']),
   ActionData(
       type: 10,
-      name: '鲜艳度',
+      name: EditorLang.current.editor_color_xyd,
       icon: 'icon_xyd_n'.imageColorsPng,
       selectedIcon: 'icon_xyd_s'.imageColorsPng,
       params: ['Vibrance']),
   ActionData(
       type: 11,
-      name: '白平衡',
+      name: EditorLang.current.editor_color_bph,
       icon: 'icon_bph_n'.imageColorsPng,
       selectedIcon: 'icon_bph_s'.imageColorsPng,
       params: ['Red', 'Green', 'Blue']),
   ActionData(
       type: 12,
-      name: '曝光',
+      name: EditorLang.current.editor_color_bg,
       icon: 'icon_bgd_n'.imageColorsPng,
       selectedIcon: 'icon_bgd_s'.imageColorsPng,
       params: ['Exposure'])
@@ -198,20 +199,20 @@ final Map<String, double> colorParamMaxValues = {
 };
 
 final cutActions = [
-  ActionData(type: 0, name: '裁剪', icon: '', subActions: _cropCropActions),
-  ActionData(type: 1, name: '旋转', icon: '', subActions: _cropRotateActions),
+  ActionData(type: 0, name: EditorLang.current.editor_crop, icon: '', subActions: _cropCropActions),
+  ActionData(type: 1, name: EditorLang.current.editor_rotate, icon: '', subActions: _cropRotateActions),
 ];
 
 final _cropCropActions = [
   ActionData(
       type: 0,
-      name: '原图',
+      name: EditorLang.current.editor_crop_orignal,
       icon: 'icon_yuantu_n'.imageCropPng,
       selectedIcon: 'icon_yuantu_s'.imageCropPng,
       cropRatio: -1.0),
   ActionData(
       type: 1,
-      name: '自由',
+      name: EditorLang.current.editor_crop_freedom,
       icon: 'icon_dengbi_n'.imageCropPng,
       selectedIcon: 'icon_dengbi_s'.imageCropPng),
   ActionData(
@@ -247,40 +248,40 @@ final _cropCropActions = [
 ];
 
 final _cropRotateActions = [
-  ActionData(type: 10, name: '水平翻转', icon: 'icon_zyfz_n'.imageCropPng),
-  ActionData(type: 11, name: '垂直翻转', icon: 'icon_sxfz_n'.imageCropPng),
+  ActionData(type: 10, name: EditorLang.current.editor_rotate_lr, icon: 'icon_zyfz_n'.imageCropPng),
+  ActionData(type: 11, name: EditorLang.current.editor_rotate_tb, icon: 'icon_sxfz_n'.imageCropPng),
   ActionData(
       type: 12,
-      name: '左转90°',
+      name: EditorLang.current.editor_rotate_l90,
       icon: 'icon_zxz_n'.imageCropPng,
       rotateAngle: -90.0),
   ActionData(
       type: 13,
-      name: '右转90°',
+      name: EditorLang.current.editor_rotate_r90,
       icon: 'icon_yxz_n'.imageCropPng,
       rotateAngle: 90.0),
 ];
 
 final fontActions = [
-  ActionData(type: 0, name: '字体', icon: ''),
-  ActionData(type: 1, name: '样式', icon: '', subActions: fontStyleActions),
-  ActionData(type: 2, name: '对齐', icon: '', subActions: fontAlignActions),
+  ActionData(type: 0, name: EditorLang.current.editor_text_font, icon: ''),
+  ActionData(type: 1, name: EditorLang.current.editor_text_style, icon: '', subActions: fontStyleActions),
+  ActionData(type: 2, name: EditorLang.current.editor_text_align, icon: '', subActions: fontAlignActions),
 ];
 
 final fontStyleActions = [
   ActionData(
       type: 0,
-      name: '粗体',
+      name: EditorLang.current.editor_text_style_ct,
       icon: 'icon_coarse_n@3x'.imageFontsPng,
       selectedIcon: 'icon_coarse_s@3x'.imageFontsPng),
   ActionData(
       type: 1,
-      name: '斜体',
+      name: EditorLang.current.editor_text_style_xt,
       icon: 'icon_inclined_n@3x'.imageFontsPng,
       selectedIcon: 'icon_inclined_s@3x'.imageFontsPng),
   ActionData(
       type: 2,
-      name: '下划线',
+      name: EditorLang.current.editor_text_style_xhx,
       icon: 'icon_underline_n@3x'.imageFontsPng,
       selectedIcon: 'icon_underline_s@3x'.imageFontsPng),
 ];
@@ -288,17 +289,17 @@ final fontStyleActions = [
 final fontAlignActions = [
   ActionData(
       type: 0,
-      name: '居左',
+      name: EditorLang.current.editor_text_align_left,
       icon: 'icon_leftalignment_n@3x'.imageFontsPng,
       selectedIcon: 'icon_leftalignment_s@3x'.imageFontsPng),
   ActionData(
       type: 1,
-      name: '居中',
+      name: EditorLang.current.editor_text_align_center,
       icon: 'icon_midst_n@3x'.imageFontsPng,
       selectedIcon: 'icon_midst_s@3x'.imageFontsPng),
   ActionData(
       type: 2,
-      name: '居右',
+      name: EditorLang.current.editor_text_align_right,
       icon: 'icon_rightalignment_n@3x'.imageFontsPng,
       selectedIcon: 'icon_rightalignment_s@3x'.imageFontsPng),
 ];

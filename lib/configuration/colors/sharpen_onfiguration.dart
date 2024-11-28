@@ -8,7 +8,7 @@ class SharpenShaderConfiguration extends ShaderConfiguration {
       {required double sharpen, required double sharpenMin, required double sharpenMax})
       : _sharpenIntensity = ShaderRangeNumberParameter(
           'Sharpen',
-          '程度',
+          EditorLang.current.editor_intensity,
           sharpen,
           0,
           min: sharpenMin,

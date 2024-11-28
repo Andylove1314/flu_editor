@@ -10,7 +10,7 @@ class HighlightShaderConfiguration extends ShaderConfiguration {
         required double highlightMax})
       : _highlightStrength = ShaderRangeNumberParameter(
           'Highlight',
-          '程度',
+          EditorLang.current.editor_intensity,
           highlight,
           0,
           min: highlightMin, // 不调整高光

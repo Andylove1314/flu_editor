@@ -1,6 +1,7 @@
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
 import 'custom_thumb_shape.dart';
 import 'custom_track_shape.dart';
 
@@ -46,9 +47,9 @@ class _SliderOpacityParameterWidgetState
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            '透明度',
-            style: TextStyle(
+           Text(
+             EditorLang.current.editor_text_style_alpha_2,
+            style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,

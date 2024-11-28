@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "editor_blur": MessageLookupByLibrary.simpleMessage("Blur"),
         "editor_color":
             MessageLookupByLibrary.simpleMessage("Color Adjustment"),
         "editor_color_bg": MessageLookupByLibrary.simpleMessage("Exposure"),
@@ -41,14 +42,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_pf_no":
             MessageLookupByLibrary.simpleMessage("No Formula"),
         "editor_color_rh": MessageLookupByLibrary.simpleMessage("Sharpen"),
+        "editor_color_sd": MessageLookupByLibrary.simpleMessage("Hue"),
         "editor_color_sw": MessageLookupByLibrary.simpleMessage("Temperature"),
         "editor_color_xyd": MessageLookupByLibrary.simpleMessage("Vividness"),
         "editor_color_yy": MessageLookupByLibrary.simpleMessage("Shadows"),
         "editor_color_yying": MessageLookupByLibrary.simpleMessage("Vignette"),
-        "editor_color_yying_dx": MessageLookupByLibrary.simpleMessage("大小"),
-        "editor_color_yying_sx": MessageLookupByLibrary.simpleMessage("上下"),
-        "editor_color_yying_wy": MessageLookupByLibrary.simpleMessage("外延"),
-        "editor_color_yying_zy": MessageLookupByLibrary.simpleMessage("左右"),
+        "editor_color_yying_dx": MessageLookupByLibrary.simpleMessage("Size"),
+        "editor_color_yying_sx":
+            MessageLookupByLibrary.simpleMessage("Up and down"),
+        "editor_color_yying_wy":
+            MessageLookupByLibrary.simpleMessage("Extension"),
+        "editor_color_yying_zy":
+            MessageLookupByLibrary.simpleMessage("Left and right"),
         "editor_color_zd": MessageLookupByLibrary.simpleMessage("Noise"),
         "editor_crop": MessageLookupByLibrary.simpleMessage("Crop"),
         "editor_crop_freedom": MessageLookupByLibrary.simpleMessage("Free"),
@@ -59,7 +64,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Do you want to save the edited effects before exiting?"),
         "editor_filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "editor_frame": MessageLookupByLibrary.simpleMessage("border"),
-        "editor_intensity": MessageLookupByLibrary.simpleMessage("Degree"),
+        "editor_intensity": MessageLookupByLibrary.simpleMessage("Intensity"),
         "editor_name": MessageLookupByLibrary.simpleMessage("Image Editing"),
         "editor_restore": MessageLookupByLibrary.simpleMessage("Reset"),
         "editor_rotate": MessageLookupByLibrary.simpleMessage("Rotate"),
@@ -82,7 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_text_style_alpha":
             MessageLookupByLibrary.simpleMessage("transparent"),
         "editor_text_style_alpha_2":
-            MessageLookupByLibrary.simpleMessage("透明度"),
+            MessageLookupByLibrary.simpleMessage("Transparency"),
         "editor_text_style_ct": MessageLookupByLibrary.simpleMessage("bold"),
         "editor_text_style_xhx":
             MessageLookupByLibrary.simpleMessage("underline"),
@@ -94,7 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "activate VIP to use exclusive material functions"),
         "editor_vip_limited_2": MessageLookupByLibrary.simpleMessage(
             "You have used VIP filters. Please save the filter effects after activating VIP?"),
-        "editor_vip_limited_3":
-            MessageLookupByLibrary.simpleMessage("您使用了VIP素材，请在开通会员后保存效果？")
+        "editor_vip_limited_3": MessageLookupByLibrary.simpleMessage(
+            "You have used VIP materials. Please save the effects after activating membership?")
       };
 }

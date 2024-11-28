@@ -10,7 +10,7 @@ class TemperatureShaderConfiguration extends ShaderConfiguration {
         required double temperatureMax})
       : _temperature = ShaderRangeNumberParameter(
           'Temperature',
-          '程度',
+          EditorLang.current.editor_intensity,
           temperature,
           0,
           min: temperatureMin, // 色温降低（蓝色增强）

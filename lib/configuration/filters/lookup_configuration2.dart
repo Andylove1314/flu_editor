@@ -7,18 +7,17 @@ class SquareLookupTableShaderConfiguration2 extends ShaderConfiguration {
 
   DataParameter get lutParamter => _cubeData;
 
-  SquareLookupTableShaderConfiguration2(
-      {required double lookup,
-      required double lookupMin,
-      required double lookupMax})
+  SquareLookupTableShaderConfiguration2({required double lookup,
+    required double lookupMin,
+    required double lookupMax})
       : _intensity = ShaderRangeNumberParameter(
-          'Intensity',
-          '程度', // 参数显示名称
-          lookup,
-          0,
-          min: lookupMin,
-          max: lookupMax,
-        ),
+    'Intensity',
+    EditorLang.current.editor_intensity, // 参数显示名称
+    lookup,
+    0,
+    min: lookupMin,
+    max: lookupMax,
+  ),
         _cubeData = ShaderTextureParameter('inputTextureCubeData', 'LUT'),
         super([lookup]);
 
@@ -67,25 +66,24 @@ class SquareLookupTableNoiseShaderConfiguration extends ShaderConfiguration {
 
   NumberParameter get lutIntensity => _intensity;
 
-  SquareLookupTableNoiseShaderConfiguration(
-      {required double lookup,
-      required double lookupMin,
-      required double lookupMax,
-      required double noise,
-      required double noiseMin,
-      required double noiseMax})
+  SquareLookupTableNoiseShaderConfiguration({required double lookup,
+    required double lookupMin,
+    required double lookupMax,
+    required double noise,
+    required double noiseMin,
+    required double noiseMax})
       : _intensity = ShaderRangeNumberParameter(
-          'Intensity', // 对应 GLSL 中的滤镜强度
-          '程度', // 参数显示名称
-          lookup, // 初始值
-          0, // 参数索引
-          min: lookupMin,
-          max: lookupMax,
-        ),
+    'Intensity', // 对应 GLSL 中的滤镜强度
+    EditorLang.current.editor_intensity,// 参数显示名称
+    lookup, // 初始值
+    0, // 参数索引
+    min: lookupMin,
+    max: lookupMax,
+  ),
         _cubeData = ShaderTextureParameter('inputTextureCubeDataL', 'LUT'),
         _noiseStrength = ShaderRangeNumberParameter(
           'Noise', // 对应 GLSL 中的噪点强度
-          '噪点',
+          EditorLang.current.editor_color_zd,
           noise,
           1,
           min: noiseMin,
@@ -136,18 +134,17 @@ class HALDLookupTableShaderConfiguration2 extends ShaderConfiguration {
   final RangeNumberParameter _intensity;
   final DataParameter _cubeData;
 
-  HALDLookupTableShaderConfiguration2(
-      {required double lookup,
-      required double lookupMin,
-      required double lookupMax})
+  HALDLookupTableShaderConfiguration2({required double lookup,
+    required double lookupMin,
+    required double lookupMax})
       : _intensity = ShaderRangeNumberParameter(
-          'Intensity', // 对应 GLSL 中的滤镜强度
-          '程度', // 参数显示名称
-          lookup,
-          0,
-          min: lookupMin,
-          max: lookupMax,
-        ),
+    'Intensity', // 对应 GLSL 中的滤镜强度
+    EditorLang.current.editor_intensity,// 参数显示名称
+    lookup,
+    0,
+    min: lookupMin,
+    max: lookupMax,
+  ),
         _cubeData = ShaderTextureParameter('inputTextureCubeData', 'HALD LUT'),
         super([lookup]);
 

@@ -8,7 +8,7 @@ class ShadowShaderConfiguration extends ShaderConfiguration {
       {required double shadow, required double shadowMin, required double shadowMax})
       : _shadowStrength = ShaderRangeNumberParameter(
           'Shadow', // 对应 GLSL 中的变量名
-          '程度', // 参数显示名称
+          EditorLang.current.editor_intensity, // 参数显示名称
           shadow, // 初始值
           0, // 索引位置（在参数列表中的位置）
           min: shadowMin, // 最小值

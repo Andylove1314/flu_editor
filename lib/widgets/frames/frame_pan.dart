@@ -3,6 +3,7 @@ import 'package:flu_editor/widgets/frames/frame_list.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
+import '../../generated/l10n.dart';
 import '../confirm_bar.dart';
 import '../vip_bar.dart';
 import 'frame_class_widget.dart';
@@ -90,7 +91,7 @@ class _FramePanState extends State<FramePan>
           },
           confirm: () async {
             if (showVipBg) {
-              showVipPop(context, content: '您使用了VIP素材，请在开通会员后保存效果？',
+              showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3,
                   onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});

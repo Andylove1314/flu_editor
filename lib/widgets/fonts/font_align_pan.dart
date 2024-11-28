@@ -1,6 +1,7 @@
 import 'package:flu_editor/widgets/slider_normal_parameter.dart';
 import 'package:flutter/material.dart';
 
+import '../../generated/l10n.dart';
 import 'align/align_widget.dart';
 
 class FontAlignPan extends StatefulWidget {
@@ -47,7 +48,7 @@ class _FontAlginPanState extends State<FontAlignPan>
               initValue: widget.worldSpace ?? 0.0,
               max: 6.0,
               min: 0.0,
-              name: '字间距',
+              name: EditorLang.of(context).editor_text_align_ws,
               onChanged: (double value) {
                 debugPrint('worldspace: $value');
                 widget.onWorldSpaceChanged.call(value);
@@ -58,7 +59,7 @@ class _FontAlginPanState extends State<FontAlignPan>
             initValue: widget.lineSpace ?? 0.0,
             max: 6.0,
             min: 0.0,
-            name: '行间距',
+            name: EditorLang.of(context).editor_text_align_ls,
             onChanged: (double value) {
               debugPrint('linespace: $value');
               widget.onLineSpaceChanged.call(value);

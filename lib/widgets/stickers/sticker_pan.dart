@@ -1,3 +1,4 @@
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flu_editor/widgets/stickers/sticker_class_widget.dart';
 import 'package:flu_editor/widgets/stickers/stickers_list.dart';
@@ -88,10 +89,10 @@ class _StickerPanState extends State<StickerPan>
           ),
         ),
         ConfirmBar(
-          content: const Center(
+          content:  Center(
             child: Text(
-              '贴纸',
-              style: TextStyle(
+              EditorLang.of(context).editor_sticker,
+              style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 13,
                   color: Color(0xff646466)),
@@ -102,7 +103,7 @@ class _StickerPanState extends State<StickerPan>
           },
           confirm: () async {
             if (showVipBg) {
-              showVipPop(context, content: '您使用了VIP素材，请在开通会员后保存效果？',onSave: () {
+              showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3, onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});
               return;

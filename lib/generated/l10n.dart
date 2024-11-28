@@ -60,10 +60,10 @@ class EditorLang {
     );
   }
 
-  /// `Degree`
+  /// `Intensity`
   String get editor_intensity {
     return Intl.message(
-      'Degree',
+      'Intensity',
       name: 'editor_intensity',
       desc: '',
       args: [],
@@ -590,61 +590,81 @@ class EditorLang {
     );
   }
 
-  /// `您使用了VIP素材，请在开通会员后保存效果？`
+  /// `You have used VIP materials. Please save the effects after activating membership?`
   String get editor_vip_limited_3 {
     return Intl.message(
-      '您使用了VIP素材，请在开通会员后保存效果？',
+      'You have used VIP materials. Please save the effects after activating membership?',
       name: 'editor_vip_limited_3',
       desc: '',
       args: [],
     );
   }
 
-  /// `透明度`
+  /// `Transparency`
   String get editor_text_style_alpha_2 {
     return Intl.message(
-      '透明度',
+      'Transparency',
       name: 'editor_text_style_alpha_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `左右`
+  /// `Left and right`
   String get editor_color_yying_zy {
     return Intl.message(
-      '左右',
+      'Left and right',
       name: 'editor_color_yying_zy',
       desc: '',
       args: [],
     );
   }
 
-  /// `上下`
+  /// `Up and down`
   String get editor_color_yying_sx {
     return Intl.message(
-      '上下',
+      'Up and down',
       name: 'editor_color_yying_sx',
       desc: '',
       args: [],
     );
   }
 
-  /// `大小`
+  /// `Size`
   String get editor_color_yying_dx {
     return Intl.message(
-      '大小',
+      'Size',
       name: 'editor_color_yying_dx',
       desc: '',
       args: [],
     );
   }
 
-  /// `外延`
+  /// `Extension`
   String get editor_color_yying_wy {
     return Intl.message(
-      '外延',
+      'Extension',
       name: 'editor_color_yying_wy',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Blur`
+  String get editor_blur {
+    return Intl.message(
+      'Blur',
+      name: 'editor_blur',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hue`
+  String get editor_color_sd {
+    return Intl.message(
+      'Hue',
+      name: 'editor_color_sd',
       desc: '',
       args: [],
     );
