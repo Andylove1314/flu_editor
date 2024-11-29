@@ -143,7 +143,7 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
         item.path != null
             ? Image.file(File(item.path ?? ''), fit: BoxFit.cover)
             : NetImage(
-                url: item.url ?? '',
+                url: item.image ?? '',
                 isLight: true,
               ),
         Positioned(
