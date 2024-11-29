@@ -67,5 +67,7 @@
   "editor_color_effect_save_no": "不保存配方",
   "editor_color_effect_save_action": "保存配方",
   "editor_color_effect_name": "配方名称",
-  "editor_color_effect_save_action_tip": "请输入配方名称"
+  "editor_color_effect_save_action_tip": "请输入配方名称",
+  "editor_color_save_pf_successfully": "保存配方成功",
+  "editor_color_save_pf_faild": "保存配方失败"
 }
