@@ -53,10 +53,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_pf_no":
             MessageLookupByLibrary.simpleMessage("No Formula"),
         "editor_color_rh": MessageLookupByLibrary.simpleMessage("Sharpen"),
-        "editor_color_save_pf_faild":
-            MessageLookupByLibrary.simpleMessage("Failed to save effect"),
-        "editor_color_save_pf_successfully":
-            MessageLookupByLibrary.simpleMessage("Save effect successfully"),
         "editor_color_sd": MessageLookupByLibrary.simpleMessage("Hue"),
         "editor_color_sw": MessageLookupByLibrary.simpleMessage("Temperature"),
         "editor_color_xyd": MessageLookupByLibrary.simpleMessage("Vividness"),

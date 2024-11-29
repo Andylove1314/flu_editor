@@ -244,7 +244,7 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                         bool? successed = await EditorUtil.saveColorEffectParam(
                             _currentConfig.parameters, effectImagePath, name);
                         EditorUtil.toastActionCallback
-                            ?.call(successed == true ? EditorLang.of(context).editor_color_save_pf_successfully : EditorLang.of(context).editor_color_save_pf_faild);
+                            ?.call(successed == true ? EditorLang.of(context).editor_color_delete_pf_successfully : EditorLang.of(context).editor_color_delete_pf_faild);
                       }
                       Navigator.pop(context);
                     }, onCancel: () {

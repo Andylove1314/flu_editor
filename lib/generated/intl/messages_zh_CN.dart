@@ -50,10 +50,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_pf": MessageLookupByLibrary.simpleMessage("配方"),
         "editor_color_pf_no": MessageLookupByLibrary.simpleMessage("暂无配方"),
         "editor_color_rh": MessageLookupByLibrary.simpleMessage("锐化"),
-        "editor_color_save_pf_faild":
-            MessageLookupByLibrary.simpleMessage("保存配方失败"),
-        "editor_color_save_pf_successfully":
-            MessageLookupByLibrary.simpleMessage("保存配方成功"),
         "editor_color_sd": MessageLookupByLibrary.simpleMessage("色调"),
         "editor_color_sw": MessageLookupByLibrary.simpleMessage("色温"),
         "editor_color_xyd": MessageLookupByLibrary.simpleMessage("鲜艳度"),

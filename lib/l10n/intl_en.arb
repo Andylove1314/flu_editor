@@ -67,7 +67,5 @@
   "editor_color_effect_save_no": "Don't save effect",
   "editor_color_effect_save_action": "Save effect",
   "editor_color_effect_name": "Name",
-  "editor_color_effect_save_action_tip": "Please enter the effect name",
-  "editor_color_save_pf_successfully": "Save effect successfully",
-  "editor_color_save_pf_faild": "Failed to save effect"
+  "editor_color_effect_save_action_tip": "Please enter the effect name"
 }

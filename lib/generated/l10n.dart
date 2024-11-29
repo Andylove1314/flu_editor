@@ -719,26 +719,6 @@ class EditorLang {
       args: [],
     );
   }
-
-  /// `Save effect successfully`
-  String get editor_color_save_pf_successfully {
-    return Intl.message(
-      'Save effect successfully',
-      name: 'editor_color_save_pf_successfully',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Failed to save effect`
-  String get editor_color_save_pf_faild {
-    return Intl.message(
-      'Failed to save effect',
-      name: 'editor_color_save_pf_faild',
-      desc: '',
-      args: [],
-    );
-  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<EditorLang> {
