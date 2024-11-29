@@ -1,70 +1,76 @@
 # **flu_editor**
 
-## Language: 中文 | [English](https://github.com/Andylove1314/flu_editors/blob/1.0.3/README_en.md)
+## Language: English | [中文](https://github.com/Andylove1314/flu_editors/blob/1.0.3/README.md)
 
 ![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 
-`flu_editor` 是一个用于照片和视频的颜色滤镜编辑插件。
+`flu_editor` is a color filter editing plugin for photos and videos.
 
-| 功能 | 状态  | 备注 |
-|----|-----|----|
-| 裁剪 | 已完成 |    |
-| 颜色 | 已完成 |    |
-| 滤镜 | 已完成 |    |
-| 模糊 | 开发中 |    |
-| 贴纸 | 已完成 |    |
-| 文字 | 已完成 |    |
-| 边框 | 已完成 |    |
+| Feature | Status      | Remarks |
+|---------|-------------|---------|
+| Crop    | Completed   |         |
+| Color   | Completed   |         |
+| Filter  | Completed   |         |
+| Blur    | In Progress |         |
+| Sticker | Completed   |         |
+| Text    | Completed   |         |
+| Frame   | Completed   |         |
 
-## 入门
+## Getting Started
 
-这是 Flutter 插件包的模板项目，其中包含 Android 和 iOS 的平台特定代码。
+This is a template project for a Flutter plugin, which includes platform-specific code for both
+Android and iOS.
 
-有关 Flutter 开发的详细信息，请参阅 [在线文档](https://docs.flutter.dev)，该文档提供了开发教程、示例、移动开发指南和完整的
-API 参考。
+For more detailed information on Flutter development, refer to
+the [official documentation](https://docs.flutter.dev)，which includes development tutorials,
+examples, mobile development guidelines, and the full API reference.
 
-## 功能概述
+## Features Overview
 
-`flu_editor` 提供了多种图像编辑功能，以下是工具类的功能概述：
+`flu_editor` provides a variety of image editing features. Below is an overview of the utility
+classes:
 
-### EditorUtil 工具类
+### EditorUtil Utility Class
 
-### 页面导航说明
+### Navigation Instructions
 
-- `goFluEditor`：跳转到编辑器页面。
-- **参数说明**：
-    - `context`：当前上下文，通常使用 `BuildContext` 来启动编辑器。
-    - `orignal`：原始图片路径，用于传入需要编辑的图片。
-    - `type`：编辑类型 （null 代表进首页）。
-    - `singleEditorSave`：单独进到某个功能页面，关闭是否保存图片到相册。
-    - `vipStatusCb`：一个回调函数，返回用户是否为 VIP 用户。
-    - `vipActionCb`：一个回调函数，当用户非 VIP 时，触发跳转到订阅页面。
-    - `saveCb`：一个回调函数，用于保存编辑后的图片，参数为保存路径。
-    - `loadWidgetCb`：加载提示回调，用于显示加载动画，传入 `islight`（是否为浅色模式）、`size`
-      （进度条大小）、`stroke`（进度条宽度）。
-    - `toastActionCb`：一个回调函数，显示自定义提示信息（如 "保存成功"）。
-    - `effectsCb`：回调函数，用于获取并处理滤镜配方。
-    - `saveEffectCb`：回调函数，保存自定义滤镜配方。
-    - `deleteEffectCb`：回调函数，删除已保存的滤镜配方。
-    - `filtersCb`：回调函数，用于获取滤镜列表。
-    - `stickersCb`：回调函数，用于获取贴纸列表。
-    - `fontsCb`：回调函数，用于获取字体列表。
-    - `framesCb`：回调函数，用于获取边框列表。
-    - `homeSavedCb`：回调函数，编辑器主页保存图片。
+- `goFluEditor`：Navigate to the editor page.
+- **Parameter Descriptions**：
+    - `context`：The current context, typically using BuildContext to start the editor.
+    - `orignal`：The original image path to be edited.
+    - `type`：The edit type (null means enter the home page).
+    - `singleEditorSave`：Go to a specific editing page. Whether the image is saved to the album when
+      closed.
+    - `vipStatusCb`：A callback function to return whether the user is a VIP.
+    - `vipActionCb`：A callback function to navigate to the subscription page when the user is not a
+      VIP.
+    - `saveCb`：A callback function to save the edited image, with the save path as a parameter.
+    - `loadWidgetCb`：A callback to show a loading animation, with islight (whether it's light mode),
+      size (progress bar size), and stroke (progress bar width).
+    - `toastActionCb`：A callback to display a custom toast message (e.g., "Save successful").
+    - `effectsCb`：A callback to retrieve and process filter recipes.
+    - `saveEffectCb`：A callback to save a custom filter recipe.
+    - `deleteEffectCb`：A callback to delete a saved filter recipe.
+    - `filtersCb`：A callback to retrieve the filter list.
+    - `stickersCb`：A callback to retrieve the sticker list.
+    - `fontsCb`：A callback to retrieve the font list.
+    - `framesCb`：A callback to retrieve the frame list.
+    - `homeSavedCb`：A callback to save images on the editor home page.
 
-- `内部页面路由`：
-- **编辑器首页进入的具体功能区（宿主app不要直接调用，要通过goFluEditor(type)进入）。**：
+- `Internal Page Routes`：
+- **The specific function areas to enter from the editor homepage (do not call directly from the
+  app, navigate through goFluEditor(type)).**：
 
-    - `goCropPage`：跳转到裁剪页面。
-    - `goColorsPage`：跳转到颜色调整页面。
-    - `goFilterPage`：跳转到滤镜编辑页面。
-    - `goStickerPage`：跳转到贴纸编辑页面。
-    - `goFontPage`：跳转到字体编辑页面。
-    - `goFramePage`：跳转到相框编辑页面。
+    - `goCropPage`：Navigate to the crop page.
+    - `goColorsPage`：Navigate to the crop page.
+    - `goFilterPage`：Navigate to the filter edit page.
+    - `goStickerPage`：Navigate to the sticker edit page.
+    - `goFontPage`：Navigate to the font edit page.
+    - `goFramePage`：Navigate to the frame edit page.
 
-### 多语言配置
+### Multi-Language Configuration
 
-- **MaterialApp 内添加如下delegate以及supportedLocales**：
+- **Add the following delegates and supported locales in MaterialApp**：
 
 ```dart
 
@@ -143,9 +149,9 @@ supportedLocales
 
 </table>
 
-## 使用示例
+## Usage Example
 
-以下是如何使用 `flu_editor` 进行图像编辑的示例：
+Below is an example of how to use flu_editor for image editing:
 
 ```dart
 
@@ -494,11 +500,11 @@ class _MyAppState extends State<MyApp> {
 
 ```
 
-## 感谢
+## Acknowledgements
 
-- **我们感谢 Flutter 团队提供了出色的开发框架和工具。**：
-- **感谢所有开源贡献者使这个插件得以实现。**：
-- **特别感谢社区提供的宝贵反馈和支持。**：
+- **We would like to thank the Flutter team for their excellent development framework and tools.**：
+- **Thanks to all the open-source contributors who have made this plugin possible.**：
+- **Special thanks to the community for providing valuable feedback and support.**：
 
 - plugin_platform_interface: ^2.0.2
 - flutter_gpu_filters_interface: ^0.0.18
@@ -521,11 +527,12 @@ class _MyAppState extends State<MyApp> {
 - lindi_sticker_widget: ^1.0.1
 - crypto: ^3.0.6
 
-## 许可证
+## License
 
-MIT 许可证。详情请参见[LICENSE](https://github.com/Andylove1314/flu_editors/blob/1.0.3/LICENSE)。
+MIT License. See [LICENSE](https://github.com/Andylove1314/flu_editors/blob/1.0.3/LICENSE) for details.
 
-## 结语
+## Conclusion
 
-通过使用 `flu_editor`，开发者可以轻松实现图像和视频编辑功能，提供了强大的滤镜、裁剪、颜色调整和效果保存等功能。
+By using `flu_editor`, developers can easily implement image and video editing features, offering
+powerful capabilities such as filters, cropping, color adjustments, and effect saving.
 
