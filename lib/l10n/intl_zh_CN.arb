@@ -61,5 +61,11 @@
   "editor_color_yying_dx": "大小",
   "editor_color_yying_wy": "外延",
   "editor_blur": "模糊",
-  "editor_color_sd": "色调"
+  "editor_color_sd": "色调",
+
+  "editor_color_effect_save_tip": "应用调色效果前是否要保存配方下次一键调用",
+  "editor_color_effect_save_no": "不保存配方",
+  "editor_color_effect_save_action": "保存配方",
+  "editor_color_effect_name": "配方名称",
+  "editor_color_effect_save_action_tip": "请输入配方名称"
 }

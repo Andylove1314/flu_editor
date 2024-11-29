@@ -520,20 +520,20 @@ class EditorLang {
     );
   }
 
-  /// `buy VIP`
+  /// `Buy VIP`
   String get editor_vip_action {
     return Intl.message(
-      'buy VIP',
+      'Buy VIP',
       name: 'editor_vip_action',
       desc: '',
       args: [],
     );
   }
 
-  /// `give up the effect`
+  /// `Give up the effect`
   String get editor_vip_cancel {
     return Intl.message(
-      'give up the effect',
+      'Give up the effect',
       name: 'editor_vip_cancel',
       desc: '',
       args: [],
@@ -665,6 +665,56 @@ class EditorLang {
     return Intl.message(
       'Hue',
       name: 'editor_color_sd',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save the effect for one-click use next time before applying the color effect?`
+  String get editor_color_effect_save_tip {
+    return Intl.message(
+      'Save the effect for one-click use next time before applying the color effect?',
+      name: 'editor_color_effect_save_tip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Don't save effect`
+  String get editor_color_effect_save_no {
+    return Intl.message(
+      'Don\'t save effect',
+      name: 'editor_color_effect_save_no',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save effect`
+  String get editor_color_effect_save_action {
+    return Intl.message(
+      'Save effect',
+      name: 'editor_color_effect_save_action',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name`
+  String get editor_color_effect_name {
+    return Intl.message(
+      'Name',
+      name: 'editor_color_effect_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please enter the effect name`
+  String get editor_color_effect_save_action_tip {
+    return Intl.message(
+      'Please enter the effect name',
+      name: 'editor_color_effect_save_action_tip',
       desc: '',
       args: [],
     );

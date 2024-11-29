@@ -92,6 +92,7 @@ class _InputPopWidgetState extends State<InputPopWidget> {
                         controller: _topController,
                         maxLines: null,
                         style: bottomStyle,
+                        cursorColor: const Color(0xff19191A),
                         onChanged: (t) {
                           setState(() {});
                         },

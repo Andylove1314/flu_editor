@@ -295,19 +295,10 @@ class _MyAppState extends State<MyApp> {
     detail1.name = 'font1';
     detail1.vip = 0;
 
-    FontDetail detail2 = FontDetail();
-    detail2.id = 2;
-    detail2.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/8a2058f31d384c0d952f21661b8f4a3e.jpg';
-    detail2.file =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/f5d6dbf7914d45eababc0cd395b973ed.ttf';
-    detail2.name = 'font2';
-    detail2.vip = 0;
-
     FontsData group1 = FontsData();
     group1.groupName = 'Sample';
 
-    group1.list = [detail1, detail2];
+    group1.list = [detail1];
 
     return [group1];
   }

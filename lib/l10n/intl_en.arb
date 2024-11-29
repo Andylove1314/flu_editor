@@ -46,8 +46,8 @@
   "editor_text_align_center": "center",
   "editor_text_align_right": "right",
   "editor_frame": "border",
-  "editor_vip_action": "buy VIP",
-  "editor_vip_cancel": "give up the effect",
+  "editor_vip_action": "Buy VIP",
+  "editor_vip_cancel": "Give up the effect",
   "editor_vip_limited_1": "activate VIP to use exclusive material functions",
   "editor_vip_limited_2": "You have used VIP filters. Please save the filter effects after activating VIP?",
   "editor_exit_tip": "Do you want to save the edited effects before exiting?",
@@ -61,5 +61,11 @@
   "editor_color_yying_dx": "Size",
   "editor_color_yying_wy": "Extension",
   "editor_blur": "Blur",
-  "editor_color_sd": "Hue"
+  "editor_color_sd": "Hue",
+
+  "editor_color_effect_save_tip": "Save the effect for one-click use next time before applying the color effect?",
+  "editor_color_effect_save_no": "Don't save effect",
+  "editor_color_effect_save_action": "Save effect",
+  "editor_color_effect_name": "Name",
+  "editor_color_effect_save_action_tip": "Please enter the effect name"
 }

@@ -9,6 +9,7 @@ import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart
 import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
+import '../generated/l10n.dart';
 import '../models/action_data.dart';
 import '../utils/constant.dart';
 import '../widgets/colors/colors_pan.dart';
@@ -243,7 +244,7 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                         bool? successed = await EditorUtil.saveColorEffectParam(
                             _currentConfig.parameters, effectImagePath, name);
                         EditorUtil.toastActionCallback
-                            ?.call(successed == true ? '保存配方成功' : '保存配方失败');
+                            ?.call(successed == true ? EditorLang.of(context).editor_color_delete_pf_successfully : EditorLang.of(context).editor_color_delete_pf_faild);
                       }
                       Navigator.pop(context);
                     }, onCancel: () {

@@ -35,6 +35,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("删除配方失败"),
         "editor_color_delete_pf_successfully":
             MessageLookupByLibrary.simpleMessage("删除配方成功"),
+        "editor_color_effect_name":
+            MessageLookupByLibrary.simpleMessage("配方名称"),
+        "editor_color_effect_save_action":
+            MessageLookupByLibrary.simpleMessage("保存配方"),
+        "editor_color_effect_save_action_tip":
+            MessageLookupByLibrary.simpleMessage("请输入配方名称"),
+        "editor_color_effect_save_no":
+            MessageLookupByLibrary.simpleMessage("不保存配方"),
+        "editor_color_effect_save_tip":
+            MessageLookupByLibrary.simpleMessage("应用调色效果前是否要保存配方下次一键调用"),
         "editor_color_gg": MessageLookupByLibrary.simpleMessage("高光"),
         "editor_color_ld": MessageLookupByLibrary.simpleMessage("亮度"),
         "editor_color_pf": MessageLookupByLibrary.simpleMessage("配方"),

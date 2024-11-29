@@ -36,6 +36,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Delete Failed"),
         "editor_color_delete_pf_successfully":
             MessageLookupByLibrary.simpleMessage("Delete Successfully"),
+        "editor_color_effect_name":
+            MessageLookupByLibrary.simpleMessage("Name"),
+        "editor_color_effect_save_action":
+            MessageLookupByLibrary.simpleMessage("Save effect"),
+        "editor_color_effect_save_action_tip":
+            MessageLookupByLibrary.simpleMessage(
+                "Please enter the effect name"),
+        "editor_color_effect_save_no":
+            MessageLookupByLibrary.simpleMessage("Don\'t save effect"),
+        "editor_color_effect_save_tip": MessageLookupByLibrary.simpleMessage(
+            "Save the effect for one-click use next time before applying the color effect?"),
         "editor_color_gg": MessageLookupByLibrary.simpleMessage("Highlights"),
         "editor_color_ld": MessageLookupByLibrary.simpleMessage("Brightness"),
         "editor_color_pf": MessageLookupByLibrary.simpleMessage("Formula"),
@@ -92,9 +103,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_text_style_xhx":
             MessageLookupByLibrary.simpleMessage("underline"),
         "editor_text_style_xt": MessageLookupByLibrary.simpleMessage("italic"),
-        "editor_vip_action": MessageLookupByLibrary.simpleMessage("buy VIP"),
+        "editor_vip_action": MessageLookupByLibrary.simpleMessage("Buy VIP"),
         "editor_vip_cancel":
-            MessageLookupByLibrary.simpleMessage("give up the effect"),
+            MessageLookupByLibrary.simpleMessage("Give up the effect"),
         "editor_vip_limited_1": MessageLookupByLibrary.simpleMessage(
             "activate VIP to use exclusive material functions"),
         "editor_vip_limited_2": MessageLookupByLibrary.simpleMessage(
