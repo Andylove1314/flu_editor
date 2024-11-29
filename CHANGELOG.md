@@ -1,3 +1,10 @@
+## [1.0.4]
+
+- **多语言支持**：目前支持英文和简体中文。/ **Multi-language support**: Currently supports English and
+  Simplified Chinese.
+- **API优化**：优化了API性能并简化了功能。/ **API optimization**: Improved API performance and
+  streamlined functionality.
+
 ## [1.0.3]
 
 - **多语言支持**：目前支持英文和简体中文。/ **Multi-language support**: Currently supports English and

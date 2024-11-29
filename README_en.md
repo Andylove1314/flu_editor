@@ -525,7 +525,7 @@ class _MyAppState extends State<MyApp> {
 
 ## License
 
-MIT License. See [LICENSE](https://github.com/Andylove1314/flu_editors/blob/1.0.3/LICENSE) for details.
+MIT License. See [LICENSE](https://github.com/Andylove1314/flu_editors/blob/LICENSE) for details.
 
 ## Conclusion
 

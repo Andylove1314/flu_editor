@@ -519,7 +519,7 @@ class _MyAppState extends State<MyApp> {
 
 ## 许可证
 
-MIT 许可证。详情请参见[LICENSE](https://github.com/Andylove1314/flu_editors/blob/1.0.3/LICENSE)。
+MIT 许可证。详情请参见[LICENSE](https://github.com/Andylove1314/flu_editors/blob/LICENSE)。
 
 ## 结语
 

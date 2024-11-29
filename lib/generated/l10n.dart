@@ -530,10 +530,10 @@ class EditorLang {
     );
   }
 
-  /// `Give up the effect`
+  /// `Give up`
   String get editor_vip_cancel {
     return Intl.message(
-      'Give up the effect',
+      'Give up',
       name: 'editor_vip_cancel',
       desc: '',
       args: [],
@@ -570,10 +570,10 @@ class EditorLang {
     );
   }
 
-  /// `Do not save`
+  /// `Cancel`
   String get editor_exit_no {
     return Intl.message(
-      'Do not save',
+      'Cancel',
       name: 'editor_exit_no',
       desc: '',
       args: [],
@@ -680,20 +680,20 @@ class EditorLang {
     );
   }
 
-  /// `Don't save effect`
+  /// `Cancel`
   String get editor_color_effect_save_no {
     return Intl.message(
-      'Don\'t save effect',
+      'Cancel',
       name: 'editor_color_effect_save_no',
       desc: '',
       args: [],
     );
   }
 
-  /// `Save effect`
+  /// `Save`
   String get editor_color_effect_save_action {
     return Intl.message(
-      'Save effect',
+      'Save',
       name: 'editor_color_effect_save_action',
       desc: '',
       args: [],

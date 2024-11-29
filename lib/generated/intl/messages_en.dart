@@ -39,12 +39,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_color_effect_name":
             MessageLookupByLibrary.simpleMessage("Name"),
         "editor_color_effect_save_action":
-            MessageLookupByLibrary.simpleMessage("Save effect"),
+            MessageLookupByLibrary.simpleMessage("Save"),
         "editor_color_effect_save_action_tip":
             MessageLookupByLibrary.simpleMessage(
                 "Please enter the effect name"),
         "editor_color_effect_save_no":
-            MessageLookupByLibrary.simpleMessage("Don\'t save effect"),
+            MessageLookupByLibrary.simpleMessage("Cancel"),
         "editor_color_effect_save_tip": MessageLookupByLibrary.simpleMessage(
             "Save the effect for one-click use next time before applying the color effect?"),
         "editor_color_gg": MessageLookupByLibrary.simpleMessage("Highlights"),
@@ -73,7 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "editor_crop": MessageLookupByLibrary.simpleMessage("Crop"),
         "editor_crop_freedom": MessageLookupByLibrary.simpleMessage("Free"),
         "editor_crop_orignal": MessageLookupByLibrary.simpleMessage("Original"),
-        "editor_exit_no": MessageLookupByLibrary.simpleMessage("Do not save"),
+        "editor_exit_no": MessageLookupByLibrary.simpleMessage("Cancel"),
         "editor_exit_save": MessageLookupByLibrary.simpleMessage("Save"),
         "editor_exit_tip": MessageLookupByLibrary.simpleMessage(
             "Do you want to save the edited effects before exiting?"),
@@ -108,8 +108,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("underline"),
         "editor_text_style_xt": MessageLookupByLibrary.simpleMessage("italic"),
         "editor_vip_action": MessageLookupByLibrary.simpleMessage("Buy VIP"),
-        "editor_vip_cancel":
-            MessageLookupByLibrary.simpleMessage("Give up the effect"),
+        "editor_vip_cancel": MessageLookupByLibrary.simpleMessage("Give up"),
         "editor_vip_limited_1": MessageLookupByLibrary.simpleMessage(
             "activate VIP to use exclusive material functions"),
         "editor_vip_limited_2": MessageLookupByLibrary.simpleMessage(

@@ -15,7 +15,7 @@ class EffectData {
 // 从 JSON 创建 EffectData 实例
   EffectData.fromJson(Map json)
       : name = json['name'] as String,
-        image = json['image'] as String,
+        image = json['image'],
         params = json['params'] as String,
         path = json['path'],
         id = json['id']; // id 可以是任意类型
