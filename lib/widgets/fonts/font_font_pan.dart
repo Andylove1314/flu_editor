@@ -24,7 +24,7 @@ class _FontFontPanState extends State<FontFontPan>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  bool vipSticker = false;
+  bool vipFont = false;
 
   int position = 0;
 
@@ -43,7 +43,7 @@ class _FontFontPanState extends State<FontFontPan>
   @override
   Widget build(BuildContext context) {
     bool showVipBg =
-        vipSticker && !(EditorUtil.vipStatusCallback?.call() ?? false);
+        vipFont && !(EditorUtil.vipStatusCallback?.call() ?? false);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -72,20 +72,22 @@ class _FontFontPanState extends State<FontFontPan>
               controller: _tabController,
               children: EditorUtil.fontList
                   .map((item) => FontList(
-                  fontDetail: widget.fontDetail,
+                      fontDetail: widget.fontDetail,
                       fons: item.list ?? [],
                       onChanged: (
                           {FontDetail? item,
                           String? ttfPath,
                           String? imgPath}) {
                         setState(() {
-                          vipSticker = item?.isVipFont ?? false;
+                          vipFont = item?.isVipFont ?? false;
                         });
+                        showVipBg = vipFont &&
+                            !(EditorUtil.vipStatusCallback?.call() ?? false);
                         widget.onChanged(
                             item: item,
                             ttfPath: ttfPath,
                             imgPath: imgPath,
-                            showVipPop: showVipBg);
+                            showVipPop: vipFont && showVipBg);
                       }))
                   .toList(),
             ),

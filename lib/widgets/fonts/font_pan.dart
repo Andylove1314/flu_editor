@@ -72,7 +72,7 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   int position = 0;
-  bool vipFont = false;
+  bool showViptip = false;
 
   @override
   void initState() {
@@ -104,7 +104,8 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
                       String? imgPath,
                       bool? showVipPop}) {
                     setState(() {
-                      vipFont = showVipPop ?? false;
+                      debugPrint('000000088888 $showVipPop');
+                      showViptip = showVipPop ?? false;
                     });
                     widget.onFontChanged
                         .call(item: item, ttfPath: ttfPath, imgPath: imgPath);
@@ -169,7 +170,7 @@ class _FontPanState extends State<FontPan> with SingleTickerProviderStateMixin {
             Navigator.of(context).pop();
           },
           confirm: () async {
-            if (vipFont) {
+            if (showViptip) {
               showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3,
                   onSave: () {
                 EditorUtil.vipActionCallback?.call();
