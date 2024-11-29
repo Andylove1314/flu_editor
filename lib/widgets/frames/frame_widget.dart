@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,10 +20,7 @@ class FrameWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        NetImage(
-          url: frameDetail.image ?? '',
-          fit: BoxFit.contain,
-        ),
+        _fetchSrc(),
         BlocProvider(
           create: (context) => FrameSourceImageCubit(frameDetail),
           child: BlocBuilder<FrameSourceImageCubit, FrameSourceImageState>(
@@ -69,6 +68,24 @@ class FrameWidget extends StatelessWidget {
           }),
         )
       ],
+    );
+  }
+
+  Widget _fetchSrc() {
+    if (frameDetail.imgFrom == 0) {
+      return Image.asset(
+        frameDetail.image ?? '',
+        fit: BoxFit.contain,
+      );
+    } else if (frameDetail.imgFrom == 1) {
+      return Image.file(
+        File(frameDetail.image ?? ''),
+        fit: BoxFit.contain,
+      );
+    }
+    return NetImage(
+      url: frameDetail.image ?? '',
+      fit: BoxFit.contain,
     );
   }
 }

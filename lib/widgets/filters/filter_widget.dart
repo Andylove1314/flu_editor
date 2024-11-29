@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +24,7 @@ class FilterWidget extends StatelessWidget {
         Widget child = EditorUtil.loadingWidget(context, isLight: false);
 
         if (state is FilterSourceImageReady && state.filterData != null) {
-          child = NetImage(
-            url: filterDetail.image ?? '',
-            isLight: false,
-          );
+          child = _fetchSrc();
         }
 
         return SizedBox(
@@ -44,5 +43,23 @@ class FilterWidget extends StatelessWidget {
       }),
     );
     return filterPre;
+  }
+
+  Widget _fetchSrc() {
+    if (filterDetail.imgFrom == 0) {
+      return Image.asset(
+        filterDetail.image ?? '',
+        fit: BoxFit.cover,
+      );
+    } else if (filterDetail.imgFrom == 1) {
+      return Image.file(
+        File(filterDetail.image ?? ''),
+        fit: BoxFit.cover,
+      );
+    }
+    return NetImage(
+      url: filterDetail.image ?? '',
+      isLight: false,
+    );
   }
 }

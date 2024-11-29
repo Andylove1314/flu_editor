@@ -126,7 +126,8 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         if (_currentImage.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Add photo pleasen!')));
+                              const SnackBar(
+                                  content: Text('Add photo pleasen!')));
                           return;
                         }
                         _goEditor(context);
@@ -167,11 +168,13 @@ class _MyAppState extends State<MyApp> {
           debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return RoutePage(title: 'Sub page',);
+              return RoutePage(
+                title: 'Sub page',
+              );
             },
           ));
         },
-        saveCb: (path) async{
+        saveCb: (path) async {
           GallerySaver.saveImage(path, albumName: 'Flu-Editor');
         },
         loadWidgetCb: (islight, size, stroke) => Container(
@@ -198,10 +201,13 @@ class _MyAppState extends State<MyApp> {
         stickersCb: () => _fetchStickers(),
         fontsCb: () => _fetchFonts(),
         framesCb: () => _fetchFrames(),
-        homeSavedCb: (context, after){
+        homeSavedCb: (context, after) {
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return RoutePage(savedPath: after, title: 'Saved page',);
+              return RoutePage(
+                savedPath: after,
+                title: 'Saved page',
+              );
             },
           ));
         });
@@ -211,8 +217,9 @@ class _MyAppState extends State<MyApp> {
     return await [
       EffectData.fromJson({
         'name': 'test',
-        'image':
-            'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/effect.jpg',
+        // 'image':
+        //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/effect.jpg',
+        'asset': 'assets/effect.jpg',
         'id': 0,
         'params': jsonEncode({
           "Brightness": 0.14719999999999997,
@@ -240,21 +247,25 @@ class _MyAppState extends State<MyApp> {
   Future<List<FilterData>> _fetchLJ() async {
     FilterDetail detail1 = FilterDetail();
     detail1.id = 1;
-    detail1.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    detail1.image = 'assets/filter_bg.jpg';
     detail1.filterImage = 'luts/01-x.png';
     detail1.name = 'class1';
     detail1.noise = 0.2;
     detail1.vip = 1;
     detail1.lutFrom = 0;
+    detail1.imgFrom = 0;
 
     FilterDetail detail2 = FilterDetail();
     detail2.id = 2;
-    detail2.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    // detail2.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    detail2.image = 'assets/filter_bg.jpg';
     detail2.filterImage = 'luts/03-x.png';
     detail2.name = 'class2';
     detail2.lutFrom = 0;
+    detail2.imgFrom = 0;
 
     FilterData group1 = FilterData();
     group1.groupName = 'class1';
@@ -267,22 +278,28 @@ class _MyAppState extends State<MyApp> {
   Future<List<StickerData>> _fetchStickers() async {
     StickDetail detail1 = StickDetail();
     detail1.id = 1;
-    detail1.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    detail1.image = 'assets/sticker_1.png';
     detail1.name = 'sticker1';
     detail1.vip = 0;
+    detail1.imgFrom = 0;
 
     StickDetail detail2 = StickDetail();
     detail2.id = 1;
-    detail2.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_2.png';
+    // detail2.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_2.png';
+    detail2.image = 'assets/sticker_2.png';
     detail2.name = 'sticker2';
     detail2.vip = 0;
+    detail2.imgFrom = 0;
 
     StickerData group1 = StickerData();
     group1.groupName = 'class1';
-    group1.groupImage =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    // group1.groupImage =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    group1.groupImage = 'assets/sticker_1.png';
+    group1.imgFrom = 0;
 
     group1.list = [detail1, detail2];
 
@@ -292,12 +309,16 @@ class _MyAppState extends State<MyApp> {
   Future<List<FontsData>> _fetchFonts() async {
     FontDetail detail1 = FontDetail();
     detail1.id = 1;
-    detail1.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/font_1.jpg';
-    detail1.file =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/ttf_1.ttf';
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/font_1.jpg';
+    detail1.image = 'assets/font_1.jpg';
+    // detail1.file =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/ttf_1.ttf';
+    detail1.file = 'assets/ttf_1.ttf';
     detail1.name = 'font1';
     detail1.vip = 0;
+    detail1.imgFrom = 0;
+    detail1.ttfFrom = 0;
 
     FontsData group1 = FontsData();
     group1.groupName = 'Sample';
@@ -310,8 +331,9 @@ class _MyAppState extends State<MyApp> {
   Future<List<FrameData>> _fetchFrames() async {
     FrameDetail detail1 = FrameDetail();
     detail1.id = 1;
-    detail1.image =
-        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_1.png';
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_1.png';
+    detail1.image = 'assets/frame_1.png';
     detail1.name = 'frame1';
     detail1.vip = 0;
     FrameSize size = FrameSize();
@@ -322,11 +344,13 @@ class _MyAppState extends State<MyApp> {
     size.frameRight = 88.0;
     size.frameBottom = 114.0;
     detail1.params = size;
+    detail1.imgFrom = 0;
 
     FrameDetail detail2 = FrameDetail();
     detail2.id = 2;
     detail2.image =
         'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_2.png';
+    detail2.image = 'assets/frame_2.png';
     detail2.name = 'frame2';
     detail2.vip = 0;
     FrameSize size2 = FrameSize();
@@ -337,6 +361,7 @@ class _MyAppState extends State<MyApp> {
     size2.frameRight = 136.0;
     size2.frameBottom = 156.0;
     detail2.params = size2;
+    detail2.imgFrom = 0;
 
     FrameData group1 = FrameData();
     group1.groupName = 'Sample';

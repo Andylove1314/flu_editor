@@ -1,3 +1,4 @@
+import 'dart:io';
 
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +20,7 @@ class FontWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        NetImage(
-          url: fontDetail.image ?? '',
-          fit: BoxFit.fill,
-        ),
+        _fetchSrc(),
         BlocProvider(
           create: (context) => FontSourceImageCubit(fontDetail),
           child: BlocBuilder<FontSourceImageCubit, FontSourceImageState>(
@@ -71,6 +69,24 @@ class FontWidget extends StatelessWidget {
           }),
         )
       ],
+    );
+  }
+
+  Widget _fetchSrc() {
+    if (fontDetail.imgFrom == 0) {
+      return Image.asset(
+        fontDetail.image ?? '',
+        fit: BoxFit.fill,
+      );
+    } else if (fontDetail.imgFrom == 1) {
+      return Image.file(
+        File(fontDetail.image ?? ''),
+        fit: BoxFit.fill,
+      );
+    }
+    return NetImage(
+      url: fontDetail.image ?? '',
+      fit: BoxFit.fill,
     );
   }
 }

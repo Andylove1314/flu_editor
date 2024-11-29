@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flu_editor/blocs/sticker_image_bloc/sticker_bloc.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
@@ -18,10 +20,7 @@ class StickerWidget extends StatelessWidget {
       alignment: Alignment.center,
       fit: StackFit.expand,
       children: [
-        NetImage(
-          url: stickerDetail.image ?? '',
-          fit: BoxFit.contain,
-        ),
+        _fetchSrc(),
         BlocProvider(
           create: (context) => StickerSourceImageCubit(stickerDetail),
           child: BlocBuilder<StickerSourceImageCubit, StickerSourceImageState>(
@@ -69,6 +68,24 @@ class StickerWidget extends StatelessWidget {
           }),
         )
       ],
+    );
+  }
+
+  Widget _fetchSrc() {
+    if (stickerDetail.imgFrom == 0) {
+      return Image.asset(
+        stickerDetail.image ?? '',
+        fit: BoxFit.contain,
+      );
+    } else if (stickerDetail.imgFrom == 1) {
+      return Image.file(
+        File(stickerDetail.image ?? ''),
+        fit: BoxFit.contain,
+      );
+    }
+    return NetImage(
+      url: stickerDetail.image ?? '',
+      fit: BoxFit.contain,
     );
   }
 }

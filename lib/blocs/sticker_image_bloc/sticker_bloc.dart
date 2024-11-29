@@ -23,15 +23,22 @@ class StickerSourceImageCubit extends Cubit<StickerSourceImageState> {
         if (state is StickerSourceImageInitial) {}
       });
 
-  /// 缓存sticker
+  /// 缓存sticker, 离线资源不缓存
   Future<String> cacheSticker(StickDetail stickDetail) async {
     emit(
       StickerSourceImageCaching(stickDetail),
     );
 
-    FileInfo imgInfo =
-        await _imageCacheManager.downloadFile(stickDetail.image ?? '');
-    File img = imgInfo.file;
+    File img;
+    if (stickDetail.imgFrom == 0) {
+      img = await EditorUtil.saveAssetToFile(stickDetail.image ?? '');
+    } else if (stickDetail.imgFrom == 0) {
+      img = File(stickDetail.image ?? '');
+    } else {
+      FileInfo imgInfo =
+          await _imageCacheManager.downloadFile(stickDetail.image ?? '');
+      img = imgInfo.file;
+    }
 
     emit(
       StickerSourceImageCached(

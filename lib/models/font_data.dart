@@ -43,6 +43,8 @@ class FontDetail {
   String? file;
   String? image;
   int? groupId;
+  var imgFrom = 2;// 0 asset, 1 file, 2 url
+  var ttfFrom = 2;// 0 asset, 1 file, 2 url
 
   bool get isVipFont => vip == 1;
 

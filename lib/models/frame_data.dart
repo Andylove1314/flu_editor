@@ -44,6 +44,7 @@ class FrameDetail {
   int? groupId;
   var color;
   FrameSize? params;
+  var imgFrom = 2;// 0 asset, 1 file, 2 url
 
   bool get isVipFrame => vip == 1;
 

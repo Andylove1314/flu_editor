@@ -7,6 +7,8 @@ class StickerData {
   int? status;
   List<StickDetail>? list;
   int? vip;
+  var imgFrom = 2;// 0 asset, 1 file, 2 url
+
 
 
   bool get isVipGroup => vip == 1;
@@ -52,6 +54,7 @@ class StickDetail {
   String? image;
   int? groupId;
   var color;
+  var imgFrom = 2;// 0 asset, 1 file, 2 url
 
   bool get isVipSticker => vip == 1;
 

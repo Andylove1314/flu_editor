@@ -25,14 +25,24 @@ class FontSourceImageCubit extends Cubit<FontSourceImageState> {
         if (state is FontSourceImageInitial) {}
       });
 
-  /// 缓存font
+  /// 缓存font, 离线资源不缓存
   Future<String> cacheFont(FontDetail fontDetail) async {
     emit(
       FontSourceImageCaching(fontDetail),
     );
-    FileInfo ttf = await _imageCacheManager.downloadFile(fontDetail.file ?? '',
-        key: EditorUtil.generateMd5(fontDetail.file ?? ''));
-    File ttfFile = ttf.file;
+
+    File ttfFile;
+    if (fontDetail.ttfFrom == 0) {
+      ttfFile = await EditorUtil.saveAssetToFile(fontDetail.file ?? '');
+    } else if (fontDetail.ttfFrom == 1) {
+      ttfFile = File(fontDetail.file ?? '');
+    } else {
+      FileInfo ttfinfo = await _imageCacheManager.downloadFile(
+          fontDetail.file ?? '',
+          key: EditorUtil.generateMd5(fontDetail.file ?? ''));
+      ttfFile = ttfinfo.file;
+    }
+
     debugPrint('ttf download= ${ttfFile.path}');
 
     await _loadFont(ttfFile.path);

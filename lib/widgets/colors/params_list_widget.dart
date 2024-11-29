@@ -140,12 +140,7 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        item.path != null
-            ? Image.file(File(item.path ?? ''), fit: BoxFit.cover)
-            : NetImage(
-                url: item.image ?? '',
-                isLight: true,
-              ),
+        _fetchSrc(item),
         Positioned(
             left: 0,
             right: 0,
@@ -189,6 +184,21 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
                   border: Border.all(color: const Color(0xffFF799E), width: 2)),
             ))
       ],
+    );
+  }
+
+  Widget _fetchSrc(EffectData item) {
+    if (item.asset != null) {
+      return Image.asset(
+        item.image ?? '',
+        fit: BoxFit.cover,
+      );
+    } else if (item.path != null) {
+      return Image.file(File(item.path ?? ''), fit: BoxFit.cover);
+    }
+    return NetImage(
+      url: item.image ?? '',
+      isLight: true,
     );
   }
 

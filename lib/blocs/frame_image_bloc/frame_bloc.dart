@@ -23,15 +23,22 @@ class FrameSourceImageCubit extends Cubit<FrameSourceImageState> {
         if (state is FrameSourceImageInitial) {}
       });
 
-  /// 缓存frame
+  /// 缓存frame, 离线资源不缓存
   Future<String> cacheFrame(FrameDetail frameDetail) async {
     emit(
       FrameSourceImageCaching(frameDetail),
     );
 
-    FileInfo imgInfo =
-        await _imageCacheManager.downloadFile(frameDetail.image ?? '');
-    File img = imgInfo.file;
+    File img;
+    if (frameDetail.imgFrom == 0) {
+      img = await EditorUtil.saveAssetToFile(frameDetail.image ?? '');
+    } else if (frameDetail.imgFrom == 0) {
+      img = File(frameDetail.image ?? '');
+    } else {
+      FileInfo imgInfo =
+          await _imageCacheManager.downloadFile(frameDetail.image ?? '');
+      img = imgInfo.file;
+    }
 
     emit(
       FrameSourceImageCached(

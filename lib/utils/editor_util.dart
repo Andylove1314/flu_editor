@@ -556,6 +556,7 @@ class EditorUtil {
                 filterImage: 'neutral_color_luts'.lutPng,
                 image: lists[0].image,
                 name: '无滤镜',
+                imgFrom: lists[0].imgFrom,
                 lutFrom: 0));
       }
 
@@ -755,5 +756,25 @@ class EditorUtil {
   /// input md5
   static String generateMd5(String input) {
     return md5.convert(utf8.encode(input)).toString();
+  }
+
+  /// asset to file
+  static Future<File> saveAssetToFile(String assetPath) async {
+    // 获取设备的文档目录（可以根据需要选择其他目录）
+    Directory directory = await getApplicationDocumentsDirectory();
+
+    // 定义目标文件路径
+    String targetPath = '${directory.path}/${path.basename(assetPath)}';
+
+    // 使用 rootBundle 加载 asset 文件
+    ByteData data = await rootBundle.load(assetPath);
+
+    // 将字节数据写入到文件
+    File file = File(targetPath);
+    await file.writeAsBytes(data.buffer.asUint8List());
+
+    debugPrint('Asset saved to $targetPath');
+
+    return file;
   }
 }

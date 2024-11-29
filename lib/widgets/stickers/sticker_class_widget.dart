@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +27,6 @@ class StickerClassWidget extends StatefulWidget {
 class _StickerClassWidgetState extends State<StickerClassWidget> {
   @override
   Widget build(BuildContext context) {
-
     return TabBar(
       tabAlignment: widget.centerTab ? TabAlignment.center : TabAlignment.start,
       controller: widget.tabController,
@@ -36,26 +37,24 @@ class _StickerClassWidgetState extends State<StickerClassWidget> {
               const EdgeInsets.only(left: 13, right: 13, top: 10, bottom: 2),
           child: Column(
             children: [
-              Stack(children: [
-                NetImage(
-                  url: e.groupImage ?? '',
-                  fit: BoxFit.contain,
-                  width: 33,
-                ),
-                if (e.isVipGroup)
-                  Positioned(
-                    right: 0,
-                    top: 0,
-                    child: ClipRRect(
-                      borderRadius:
-                      const BorderRadius.only(topRight: Radius.circular(4)),
-                      child: Image.asset(
-                        'icon_vip_lvjing'.imagePng,
-                        width: 21,
+              Stack(
+                children: [
+                  _fetchSrc(e),
+                  if (e.isVipGroup)
+                    Positioned(
+                      right: 0,
+                      top: 0,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(4)),
+                        child: Image.asset(
+                          'icon_vip_lvjing'.imagePng,
+                          width: 21,
+                        ),
                       ),
-                    ),
-                  )
-              ],),
+                    )
+                ],
+              ),
               Container(
                 height: 2,
                 width: 10,
@@ -76,6 +75,27 @@ class _StickerClassWidgetState extends State<StickerClassWidget> {
       },
       dividerColor: Colors.transparent,
       indicatorColor: Colors.black,
+    );
+  }
+
+  Widget _fetchSrc(StickerData data) {
+    if (data.imgFrom == 0) {
+      return Image.asset(
+        data.groupImage ?? '',
+        fit: BoxFit.contain,
+        width: 33,
+      );
+    } else if (data.imgFrom == 1) {
+      return Image.file(
+        File(data.groupImage ?? ''),
+        fit: BoxFit.contain,
+        width: 33,
+      );
+    }
+    return NetImage(
+      url: data.groupImage ?? '',
+      fit: BoxFit.contain,
+      width: 33,
     );
   }
 }
