@@ -1,6 +1,6 @@
 # **flu_editor**
 
-## Language: 中文 | [English](https://github.com/Andylove1314/flu_editors/blob/1.0.3/README_en.md)
+## Language: 中文 | [English](https://github.com/Andylove1314/flu_editors/blob/1.0.4/README_en.md)
 
 ![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 

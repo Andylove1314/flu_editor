@@ -212,7 +212,7 @@ class _MyAppState extends State<MyApp> {
       EffectData.fromJson({
         'name': 'test',
         'image':
-            'https://nwdnui.oss-cn-beijing.aliyuncs.com/user/effectSave/da2752d15d0e48359bbc42c7ec845d3d/1730962077026793.jpg',
+            'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/effect.jpg',
         'id': 0,
         'params': jsonEncode({
           "Brightness": 0.14719999999999997,
@@ -241,7 +241,7 @@ class _MyAppState extends State<MyApp> {
     FilterDetail detail1 = FilterDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
     detail1.filterImage = 'luts/01-x.png';
     detail1.name = 'class1';
     detail1.noise = 0.2;
@@ -251,7 +251,7 @@ class _MyAppState extends State<MyApp> {
     FilterDetail detail2 = FilterDetail();
     detail2.id = 2;
     detail2.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
     detail2.filterImage = 'luts/03-x.png';
     detail2.name = 'class2';
     detail2.lutFrom = 0;
@@ -268,21 +268,21 @@ class _MyAppState extends State<MyApp> {
     StickDetail detail1 = StickDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/e71b319ebce14952a87a40a03f8e7404.png';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
     detail1.name = 'sticker1';
     detail1.vip = 0;
 
     StickDetail detail2 = StickDetail();
     detail2.id = 1;
     detail2.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/1f0ceb1952a44a4ebd0a8c419a105545.png';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_2.png';
     detail2.name = 'sticker2';
     detail2.vip = 0;
 
     StickerData group1 = StickerData();
     group1.groupName = 'class1';
     group1.groupImage =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/318fa7a144af47f29adbdc73cb7e78b5.png';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
 
     group1.list = [detail1, detail2];
 
@@ -293,9 +293,9 @@ class _MyAppState extends State<MyApp> {
     FontDetail detail1 = FontDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/ca9f5c3e742d49c2bafa28c8808a2280.jpg';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/font_1.jpg';
     detail1.file =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/7be3f3395e5c49b3aec36071c9bacc03.ttf';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/ttf_1.ttf';
     detail1.name = 'font1';
     detail1.vip = 0;
 
@@ -311,7 +311,7 @@ class _MyAppState extends State<MyApp> {
     FrameDetail detail1 = FrameDetail();
     detail1.id = 1;
     detail1.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_1.png';
     detail1.name = 'frame1';
     detail1.vip = 0;
     FrameSize size = FrameSize();
@@ -326,7 +326,7 @@ class _MyAppState extends State<MyApp> {
     FrameDetail detail2 = FrameDetail();
     detail2.id = 2;
     detail2.image =
-        'https://nwdnui.bigwinepot.com/ui/index/icon/e0ee85fe76e34fd093729428757e0401.png';
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_2.png';
     detail2.name = 'frame2';
     detail2.vip = 0;
     FrameSize size2 = FrameSize();
