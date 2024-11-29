@@ -75,17 +75,13 @@ classes:
 ```dart
 
 MaterialApp(
-localizationsDelegates: [
+localizationsDelegates: const [
+GlobalMaterialLocalizations.delegate,
+GlobalWidgetsLocalizations.delegate,
+GlobalCupertinoLocalizations.delegate,
 EditorLang.delegate
 ],
-supportedLocales: [...
-EditorLang
-.
-delegate
-.
-supportedLocales
-]
-,
+supportedLocales: [...EditorLang.delegate.supportedLocales],
 )
 
 ```

@@ -10,6 +10,7 @@ import 'package:flu_editor/generated/l10n.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:gallery_saver_plus/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,7 +63,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: [
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
         EditorLang.delegate
       ],
       supportedLocales: [...EditorLang.delegate.supportedLocales],

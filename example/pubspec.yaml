@@ -18,6 +18,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
   image_picker: ^1.1.1
   gallery_saver_plus: ^3.1.1
