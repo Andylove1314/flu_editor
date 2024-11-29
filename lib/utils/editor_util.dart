@@ -486,7 +486,7 @@ class EditorUtil {
     }
 
     return await saveEffectCallback?.call(
-        EffectData(name: name, image: path, params: jsonEncode(paramMap)));
+        EffectData(name: name, path: path, params: jsonEncode(paramMap)));
   }
 
   /// 获取配方列表

@@ -207,7 +207,7 @@ class _MyAppState extends State<MyApp> {
     return await [
       EffectData.fromJson({
         'name': 'test',
-        'image':
+        'url':
             'https://nwdnui.oss-cn-beijing.aliyuncs.com/user/effectSave/da2752d15d0e48359bbc42c7ec845d3d/1730962077026793.jpg',
         'id': 0,
         'params': jsonEncode({
