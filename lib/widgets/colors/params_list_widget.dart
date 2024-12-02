@@ -1,7 +1,10 @@
-import 'package:extended_image/extended_image.dart';
+import 'dart:io';
+
 import 'package:flu_editor/flu_editor.dart';
-import 'package:flu_editor/models/effect_data.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flutter/material.dart';
+
+import '../net_image.dart';
 
 class ParamsListWidget extends StatefulWidget {
   final double bottom;
@@ -9,7 +12,10 @@ class ParamsListWidget extends StatefulWidget {
   final Function() recover;
 
   const ParamsListWidget(
-      {super.key, required this.bottom, required this.applyPf, required this.recover});
+      {super.key,
+      required this.bottom,
+      required this.applyPf,
+      required this.recover});
 
   @override
   State<StatefulWidget> createState() {
@@ -32,7 +38,7 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
     // 添加滚动监听器
     _scrollController.addListener(() {
       if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent &&
+              _scrollController.position.maxScrollExtent &&
           !_isLoadingMore) {
         // 滚动到底部时加载更多
         _loadMoreEffects();
@@ -60,14 +66,8 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double maxHeight = MediaQuery
-        .of(context)
-        .size
-        .height -
-        MediaQuery
-            .of(context)
-            .padding
-            .top -
+    double maxHeight = MediaQuery.of(context).size.height -
+        MediaQuery.of(context).padding.top -
         widget.bottom;
 
     return Container(
@@ -80,59 +80,59 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
       ),
       child: _effects.isNotEmpty
           ? NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification scrollInfo) {
-          if (scrollInfo.metrics.pixels ==
-              scrollInfo.metrics.maxScrollExtent &&
-              !_isLoadingMore) {
-            _loadMoreEffects();
-          }
-          return true;
-        },
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          controller: _scrollController,
-          scrollDirection: Axis.vertical,
-          child: Wrap(
-            direction: Axis.vertical,
-            children: _effects
-                .map((item) =>
-                Container(
-                  margin: const EdgeInsets.only(bottom: 8),
-                  width: 77,
-                  height: 77,
-                  child: GestureDetector(
-                    onTap: () {
-                      if (_effects.indexOf(item) != _index) {
-                        widget.applyPf.call(item);
-                        setState(() {
-                          _index = _effects.indexOf(item);
-                        });
-                      } else {
-                        setState(() {
-                          _index = -1;
-                        });
-                        widget.recover.call();
-                      }
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: _item(item, _effects.indexOf(item) == _index),
-                    ),
-                  ),
-                ))
-                .toList(),
-          ),
-        ),
-      )
-          : const Center(
-        child: Text(
-          '暂无配方',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600),
-        ),
-      ),
+              onNotification: (ScrollNotification scrollInfo) {
+                if (scrollInfo.metrics.pixels ==
+                        scrollInfo.metrics.maxScrollExtent &&
+                    !_isLoadingMore) {
+                  _loadMoreEffects();
+                }
+                return true;
+              },
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                controller: _scrollController,
+                scrollDirection: Axis.vertical,
+                child: Wrap(
+                  direction: Axis.vertical,
+                  children: _effects
+                      .map((item) => Container(
+                            margin: const EdgeInsets.only(bottom: 8),
+                            width: 77,
+                            height: 77,
+                            child: GestureDetector(
+                              onTap: () {
+                                if (_effects.indexOf(item) != _index) {
+                                  widget.applyPf.call(item);
+                                  setState(() {
+                                    _index = _effects.indexOf(item);
+                                  });
+                                } else {
+                                  setState(() {
+                                    _index = -1;
+                                  });
+                                  widget.recover.call();
+                                }
+                              },
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: _item(
+                                    item, _effects.indexOf(item) == _index),
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                ),
+              ),
+            )
+          : Center(
+              child: Text(
+                EditorLang.of(context).editor_color_pf_no,
+                style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600),
+              ),
+            ),
     );
   }
 
@@ -140,10 +140,7 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
     return Stack(
       fit: StackFit.expand,
       children: [
-        ExtendedImage.network(
-          item.image,
-          fit: BoxFit.cover,
-        ),
+        _fetchSrc(item),
         Positioned(
             left: 0,
             right: 0,
@@ -164,8 +161,10 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
             child: GestureDetector(
                 onTap: () async {
                   bool? deleted = await EditorUtil.deleteEffect(item.id);
-                  EditorUtil.toastActionCallback
-                      ?.call(deleted == true ? '删除配方成功' : '删除配方失败');
+                  EditorUtil.toastActionCallback?.call(deleted == true
+                      ? EditorLang.of(context)
+                          .editor_color_delete_pf_successfully
+                      : EditorLang.of(context).editor_color_delete_pf_faild);
                   if (deleted == true) {
                     setState(() {
                       _index = -1;
@@ -185,6 +184,21 @@ class _ParamsListWidgetState extends State<ParamsListWidget> {
                   border: Border.all(color: const Color(0xffFF799E), width: 2)),
             ))
       ],
+    );
+  }
+
+  Widget _fetchSrc(EffectData item) {
+    if (item.asset != null) {
+      return Image.asset(
+        item.image ?? '',
+        fit: BoxFit.cover,
+      );
+    } else if (item.path != null) {
+      return Image.file(File(item.path ?? ''), fit: BoxFit.cover);
+    }
+    return NetImage(
+      url: item.image ?? '',
+      isLight: true,
     );
   }
 

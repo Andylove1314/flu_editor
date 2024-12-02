@@ -1,15 +1,16 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flu_editor_example/route_page.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:flu_editor/flu_editor.dart';
 import 'package:gallery_saver_plus/gallery_saver.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,6 +63,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        EditorLang.delegate
+      ],
+      supportedLocales: [...EditorLang.delegate.supportedLocales],
       home: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
@@ -72,42 +80,42 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: [
               Expanded(
-                  child: GestureDetector(
-                onTap: () {
-                  _pickImage(context);
-                },
-                child: Container(
-                    width: double.infinity,
-                    color: Colors.grey,
-                    child: Stack(alignment: Alignment.center, children: [
-                      _currentImage.isEmpty
-                          ? const SizedBox()
-                          : Image.file(File(_currentImage)),
-                      Container(
-                        height: 200,
-                        width: 200,
-                        color: Colors.white.withOpacity(0.4),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_a_photo,
-                              size: 50.0,
+                  child: Container(
+                      width: double.infinity,
+                      color: Colors.grey,
+                      child: Stack(alignment: Alignment.center, children: [
+                        _currentImage.isEmpty
+                            ? const SizedBox()
+                            : Image.file(File(_currentImage)),
+                        GestureDetector(
+                          onTap: () {
+                            _pickImage(context);
+                          },
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            color: Colors.white.withOpacity(0.4),
+                            child: const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.add_a_photo,
+                                  size: 50.0,
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'Add photo',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 24),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              '添加照片',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 24),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ])),
-              )),
+                      ]))),
               const SizedBox(
                 height: 20,
               ),
@@ -118,12 +126,13 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         if (_currentImage.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('请选择图片！')));
+                              const SnackBar(
+                                  content: Text('Add photo pleasen!')));
                           return;
                         }
                         _goEditor(context);
                       },
-                      child: const Text('编辑照片')),
+                      child: const Text('Go Editor')),
                 ),
               ),
               const SizedBox(
@@ -139,49 +148,18 @@ class _MyAppState extends State<MyApp> {
   Future<void> _pickImage(BuildContext context) async {
     ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image == null) {
+      return;
+    }
+
     _currentImage = image?.path ?? '';
     setState(() {});
   }
 
   Future<void> _goEditor(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Material(
-            color: Colors.transparent,
-            child: Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.black,
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '加载滤镜中',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-    List<FilterData> groups = await _fetchLJ();
-
-    Navigator.pop(context);
-
-    EditorUtil.pushHome(context,
+    EditorUtil.goFluEditor(context,
         orignal: _currentImage,
-        fs: groups,
         vipStatusCb: () {
           debugPrint('get vip status: $isVipUser');
           return isVipUser;
@@ -190,34 +168,48 @@ class _MyAppState extends State<MyApp> {
           debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return const RoutePage();
+              return RoutePage(
+                title: 'Sub page',
+              );
             },
           ));
         },
-        saveCb: (path) {
+        saveCb: (path) async {
           GallerySaver.saveImage(path, albumName: 'Flu-Editor');
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
-        loadWidgetCb: (islight) => Container(
-              width: 50,
-              height: 50,
-              padding: const EdgeInsets.all(10),
+        loadWidgetCb: (islight, size, stroke) => Container(
+              width: size,
+              height: size,
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 color: islight ? Colors.white : Colors.black,
+                strokeWidth: stroke,
               ),
             ),
         toastActionCb: (msg) => ScaffoldMessenger.of(context)
             .showSnackBar(SnackBar(content: Text(msg))),
         effectsCb: (page) async => await _fetchPF(),
         saveEffectCb: (effect) async {
-          debugPrint('保存配方：${effect.toJson()}');
+          debugPrint('Save pf：${effect.toJson()}');
           return await true;
         },
         deleteEffectCb: (id) async {
-          debugPrint('删除配方：$id');
+          debugPrint('Delete：$id');
           return await true;
+        },
+        filtersCb: () => _fetchLJ(),
+        stickersCb: () => _fetchStickers(),
+        fontsCb: () => _fetchFonts(),
+        framesCb: () => _fetchFrames(),
+        homeSavedCb: (context, after) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return RoutePage(
+                savedPath: after,
+                title: 'Saved page',
+              );
+            },
+          ));
         });
   }
 
@@ -225,8 +217,9 @@ class _MyAppState extends State<MyApp> {
     return await [
       EffectData.fromJson({
         'name': 'test',
-        'image':
-            'https://nwdnui.oss-cn-beijing.aliyuncs.com/user/effectSave/da2752d15d0e48359bbc42c7ec845d3d/1730962077026793.jpg',
+        // 'image':
+        //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/effect.jpg',
+        'asset': 'assets/effect.jpg',
         'id': 0,
         'params': jsonEncode({
           "Brightness": 0.14719999999999997,
@@ -252,29 +245,126 @@ class _MyAppState extends State<MyApp> {
   }
 
   Future<List<FilterData>> _fetchLJ() async {
-
     FilterDetail detail1 = FilterDetail();
     detail1.id = 1;
-    detail1.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail1.filterImage =
-    'luts/01-x.png';
-    detail1.name = '滤镜1';
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    detail1.image = 'assets/filter_bg.jpg';
+    detail1.filterImage = 'luts/01-x.png';
+    detail1.name = 'class1';
     detail1.noise = 0.2;
     detail1.vip = 1;
     detail1.lutFrom = 0;
+    detail1.imgFrom = 0;
 
     FilterDetail detail2 = FilterDetail();
     detail2.id = 2;
-    detail2.image =
-    'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail2.filterImage =
-    'luts/03-x.png';
-    detail2.name = '滤镜2';
+    // detail2.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/filter_bg.jpg';
+    detail2.image = 'assets/filter_bg.jpg';
+    detail2.filterImage = 'luts/03-x.png';
+    detail2.name = 'class2';
     detail2.lutFrom = 0;
+    detail2.imgFrom = 0;
 
     FilterData group1 = FilterData();
-    group1.groupName = '分类1';
+    group1.groupName = 'class1';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<StickerData>> _fetchStickers() async {
+    StickDetail detail1 = StickDetail();
+    detail1.id = 1;
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    detail1.image = 'assets/sticker_1.png';
+    detail1.name = 'sticker1';
+    detail1.vip = 0;
+    detail1.imgFrom = 0;
+
+    StickDetail detail2 = StickDetail();
+    detail2.id = 1;
+    // detail2.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_2.png';
+    detail2.image = 'assets/sticker_2.png';
+    detail2.name = 'sticker2';
+    detail2.vip = 0;
+    detail2.imgFrom = 0;
+
+    StickerData group1 = StickerData();
+    group1.groupName = 'class1';
+    // group1.groupImage =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/sticker_1.png';
+    group1.groupImage = 'assets/sticker_1.png';
+    group1.imgFrom = 0;
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FontsData>> _fetchFonts() async {
+    FontDetail detail1 = FontDetail();
+    detail1.id = 1;
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/font_1.jpg';
+    detail1.image = 'assets/font_1.jpg';
+    // detail1.file =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/ttf_1.ttf';
+    detail1.file = 'assets/ttf_1.ttf';
+    detail1.name = 'font1';
+    detail1.vip = 0;
+    detail1.imgFrom = 0;
+    detail1.ttfFrom = 0;
+
+    FontsData group1 = FontsData();
+    group1.groupName = 'Sample';
+
+    group1.list = [detail1];
+
+    return [group1];
+  }
+
+  Future<List<FrameData>> _fetchFrames() async {
+    FrameDetail detail1 = FrameDetail();
+    detail1.id = 1;
+    // detail1.image =
+    //     'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_1.png';
+    detail1.image = 'assets/frame_1.png';
+    detail1.name = 'frame1';
+    detail1.vip = 0;
+    FrameSize size = FrameSize();
+    size.frameWidth = 560;
+    size.frameHeight = 1000;
+    size.frameLeft = 94.0;
+    size.frameTop = 142.0;
+    size.frameRight = 88.0;
+    size.frameBottom = 114.0;
+    detail1.params = size;
+    detail1.imgFrom = 0;
+
+    FrameDetail detail2 = FrameDetail();
+    detail2.id = 2;
+    detail2.image =
+        'https://github.com/Andylove1314/flu_editors/blob/1.0.4/example/assets/frame_2.png';
+    detail2.image = 'assets/frame_2.png';
+    detail2.name = 'frame2';
+    detail2.vip = 0;
+    FrameSize size2 = FrameSize();
+    size2.frameWidth = 672;
+    size2.frameHeight = 1000;
+    size2.frameLeft = 136.0;
+    size2.frameTop = 154.0;
+    size2.frameRight = 136.0;
+    size2.frameBottom = 156.0;
+    detail2.params = size2;
+    detail2.imgFrom = 0;
+
+    FrameData group1 = FrameData();
+    group1.groupName = 'Sample';
 
     group1.list = [detail1, detail2];
 

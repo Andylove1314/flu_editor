@@ -10,7 +10,7 @@ class ExposureShaderConfiguration2 extends ShaderConfiguration {
         required double exposureMax})
       : _exposure = ShaderRangeNumberParameter(
           'Exposure',
-          '程度',
+          EditorLang.current.editor_intensity,
           exposure,
           0,
           min: exposureMin,

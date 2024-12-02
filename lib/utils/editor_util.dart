@@ -5,7 +5,7 @@ class EditorUtil {
   static Duration get _transDur => const Duration(milliseconds: 200);
 
   ///效果临时目录
-  static final _tmpEffectDir = '/tmpEffectDir';
+  static const _tmpEffectDir = '/tmpEffectDir';
 
   /// 业务回调
   static VipStatusCallback? vipStatusCallback;
@@ -17,9 +17,21 @@ class EditorUtil {
   static DeleteEffectCallback? deleteEffectCallback;
   static EffectsCallback? effectsCallback;
 
-  static EditorHomeCubit? _homeCubit;
-  static List<FilterData> lutSquareImagesUrls = [];
+  static FiltersCallback? filtersCallback;
+  static StickersCallback? stickersCallback;
+  static FontsCallback? fontsCallback;
+  static FramesCallback? framesCallback;
+  static HomeSavedCallback? homeSavedCallback;
 
+  static EditorHomeCubit? homeCubit;
+  static EditorType? editorType;
+  static bool singleEditorSavetoAlbum = true;
+  static List<FilterData> filterList = [];
+  static List<StickerData> stickerList = [];
+  static List<FontsData> fontList = [];
+  static List<FrameData> frameList = [];
+
+  /// 页面动画
   static Widget _transAnim(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
     return FadeTransition(
@@ -28,6 +40,7 @@ class EditorUtil {
     );
   }
 
+  /// 滤镜 action
   static void goFilterPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -40,6 +53,7 @@ class EditorUtil {
     ));
   }
 
+  /// 调色 action
   static void goColorsPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -52,6 +66,7 @@ class EditorUtil {
     ));
   }
 
+  /// 裁剪 action
   static void goCropPage(BuildContext context, String afterPath) {
     Navigator.of(context).push(PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => BlocProvider(
@@ -64,9 +79,46 @@ class EditorUtil {
     ));
   }
 
-  static void pushHome(BuildContext context,
+  /// 贴纸 action
+  static void goStickerPage(BuildContext context, String afterPath) {
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          EditorStickerPage(afterPath: afterPath),
+      transitionDuration: _transDur,
+      // You can adjust the duration
+      transitionsBuilder: _transAnim,
+    ));
+  }
+
+  /// 字体 action
+  static void goFontPage(BuildContext context, String afterPath) {
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => EditorFontPage(
+        afterPath: afterPath,
+      ),
+      transitionDuration: _transDur,
+      // You can adjust the duration
+      transitionsBuilder: _transAnim,
+    ));
+  }
+
+  /// 相框 action
+  static void goFramePage(BuildContext context, String afterPath) {
+    Navigator.of(context).push(PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => EditorFramePage(
+        afterPath: afterPath,
+      ),
+      transitionDuration: _transDur,
+      // You can adjust the duration
+      transitionsBuilder: _transAnim,
+    ));
+  }
+
+  /// 编辑页面
+  static void goFluEditor(BuildContext context,
       {required String orignal,
-      List<FilterData>? fs,
+      EditorType? type,
+      bool singleEditorSave = true,
       VipStatusCallback? vipStatusCb,
       VipActionCallback? vipActionCb,
       SaveCallback? saveCb,
@@ -74,9 +126,13 @@ class EditorUtil {
       ToastActionCallback? toastActionCb,
       SaveEffectCallback? saveEffectCb,
       DeleteEffectCallback? deleteEffectCb,
-      EffectsCallback? effectsCb}) {
+      EffectsCallback? effectsCb,
+      FiltersCallback? filtersCb,
+      StickersCallback? stickersCb,
+      FontsCallback? fontsCb,
+      FramesCallback? framesCb,
+      HomeSavedCallback? homeSavedCb}) async {
     _registerMultGlsl();
-    _initFilters(fs ?? []);
 
     vipStatusCallback = vipStatusCb;
     vipActionCallback = vipActionCb;
@@ -86,14 +142,72 @@ class EditorUtil {
     saveEffectCallback = saveEffectCb;
     deleteEffectCallback = deleteEffectCb;
     effectsCallback = effectsCb;
+    filtersCallback = filtersCb;
+    stickersCallback = stickersCb;
+    fontsCallback = fontsCb;
+    framesCallback = framesCb;
+    homeSavedCallback = homeSavedCb;
+
+    editorType = type;
+
+    singleEditorSavetoAlbum = singleEditorSave;
+
+    if (EditorType.crop == type) {
+      goCropPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.colors == type) {
+      goColorsPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.filter == type) {
+      if (filterList.isEmpty) {
+        await EditorUtil.fetchFilterList(context);
+      }
+      goFilterPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.blur == type) {
+      showToast('功能开发中...');
+
+      /// todo
+      return;
+    }
+
+    if (EditorType.sticker == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchStickerList(context);
+      }
+      goStickerPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.text == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchFontList(context);
+      }
+      goFontPage(context, orignal);
+      return;
+    }
+
+    if (EditorType.frame == type) {
+      if (fontList.isEmpty) {
+        await EditorUtil.fetchFrameList(context);
+      }
+      goFramePage(context, orignal);
+      return;
+    }
 
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) {
         return MultiBlocProvider(
           providers: [
             BlocProvider<EditorHomeCubit>(create: (context) {
-              _homeCubit = EditorHomeCubit(orignal);
-              return _homeCubit!;
+              homeCubit = EditorHomeCubit(orignal);
+              return homeCubit!;
             }),
             // ...
           ],
@@ -101,29 +215,6 @@ class EditorUtil {
         );
       },
     ));
-  }
-
-  /// 初始化滤镜
-  static void _initFilters(List<FilterData> filters) {
-    ///配置滤镜
-    lutSquareImagesUrls = [];
-    for (FilterData f in filters) {
-      /// 插入空滤镜
-      List<FilterDetail> lists = f.list ?? [];
-      if (filters.indexOf(f) == 0 && lists.isNotEmpty) {
-        lists.insert(
-            0,
-            FilterDetail(
-                id: -1,
-                filterImage: 'neutral_color_luts'.lutPng,
-                image: lists[0].image,
-                name: '无滤镜',
-                lutFrom: 0));
-      }
-
-      f.list = lists;
-      lutSquareImagesUrls.add(f);
-    }
   }
 
   /// 颜色组合滤镜 着色器语言
@@ -204,6 +295,7 @@ class EditorUtil {
     // );
   }
 
+  /// 导出滤镜｜调色 图片
   static Future<String> exportImage(
       BuildContext context, ShaderConfiguration configuration) async {
     final texture = context.read<SourceImageCubit>().state.textureSource;
@@ -235,11 +327,6 @@ class EditorUtil {
     String exportPath = output.path;
     debugPrint('Exported: $exportPath');
 
-    /// 更新 home after
-    _homeCubit?.emit(
-      EditorHomeState(exportPath),
-    );
-
     return exportPath;
   }
 
@@ -262,11 +349,13 @@ class EditorUtil {
     return image;
   }
 
-  static Future<void> cropImage(ImageEditorController croperController) async {
+  /// 裁剪图片
+  static Future<String> cropImage(
+      ImageEditorController croperController) async {
     var state = croperController.state;
 
     if (state == null || state.getCropRect() == null) {
-      return;
+      return '';
     }
 
     // 仅处理剪裁参数，不涉及 UI 操作
@@ -287,10 +376,7 @@ class EditorUtil {
     String exportPath = output.path;
     debugPrint('Exported: $exportPath');
 
-    /// 更新 home after
-    _homeCubit?.emit(
-      EditorHomeState(exportPath),
-    );
+    return exportPath;
   }
 
   // 图片剪裁所需参数的封装
@@ -359,20 +445,38 @@ class EditorUtil {
     return output;
   }
 
+  /// show loading
   static void showLoadingdialog(BuildContext context, {bool isLight = true}) {
-    showDialog(context: context, builder: (con) => loadingWidget(context, isLight:isLight));
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (con) => WillPopScope(
+            child: loadingWidget(context, isLight: isLight),
+            onWillPop: () {
+              return Future.value(false);
+            }));
   }
 
-  static Widget loadingWidget(BuildContext context, {bool isLight = true}) {
+  /// loading widget
+  static Widget loadingWidget(BuildContext context,
+      {bool isLight = true, double size = 20.0, double stroke = 2.0}) {
     return Center(
-      child: loadingWidgetCallback?.call(isLight) ?? const CircularProgressIndicator(),
+      child: loadingWidgetCallback?.call(isLight, size, stroke) ??
+          SizedBox(
+              width: size,
+              height: size,
+              child: CircularProgressIndicator(
+                strokeWidth: stroke,
+              )),
     );
   }
 
+  /// toast
   static void showToast(String msg) {
     toastActionCallback?.call(msg);
   }
 
+  /// 保存配方
   static Future<bool?> saveColorEffectParam(
       List<ConfigurationParameter> params, String path, String name) async {
     // 创建一个 Map 用于存储参数
@@ -382,20 +486,23 @@ class EditorUtil {
     }
 
     return await saveEffectCallback?.call(
-        EffectData(name: name, image: path, params: jsonEncode(paramMap)));
+        EffectData(name: name, path: path, params: jsonEncode(paramMap)));
   }
 
+  /// 获取配方列表
   static Future<List<EffectData>> fetchSavedParamList(int page) async {
     var effects = await effectsCallback?.call(page) ?? [];
 
     return effects;
   }
 
+  ///删除配方
   static Future<bool?> deleteEffect(id) async {
     return await deleteEffectCallback?.call(id);
   }
 
-  static void clearTmpObject() {
+  /// clean tmp
+  static void clearTmpObject(String after) {
     vipStatusCallback = null;
     vipActionCallback = null;
     saveCallback = null;
@@ -405,10 +512,21 @@ class EditorUtil {
     deleteEffectCallback = null;
     effectsCallback = null;
 
-    _homeCubit = null;
-    lutSquareImagesUrls.clear();
+    filtersCallback = null;
+    stickersCallback = null;
+    fontsCallback = null;
+    homeSavedCallback = null;
+
+    homeCubit = null;
+    filterList.clear();
+    stickerList.clear();
+    fontList.clear();
+    frameList.clear();
+    editorType == null;
+    singleEditorSavetoAlbum = true;
   }
 
+  /// 导入图片到Uint8List
   static Future<Uint8List> loadSourceImage(String afterPath) async {
     final fbyte = await compute(_loadFileBytes, afterPath);
     return fbyte;
@@ -418,5 +536,245 @@ class EditorUtil {
   static Future<Uint8List> _loadFileBytes(String filePath) async {
     final file = File(filePath);
     return await file.readAsBytes();
+  }
+
+  /// 获取滤镜列表
+  static Future<List<FilterData>> fetchFilterList(BuildContext context) async {
+    showLoadingdialog(context);
+    var filters = await filtersCallback?.call() ?? [];
+
+    ///配置滤镜
+    filterList = [];
+    for (FilterData f in filters) {
+      /// 插入空滤镜
+      List<FilterDetail> lists = f.list ?? [];
+      if (filters.indexOf(f) == 0 && lists.isNotEmpty) {
+        lists.insert(
+            0,
+            FilterDetail(
+                id: -1,
+                filterImage: 'neutral_color_luts'.lutPng,
+                image: lists[0].image,
+                name: '无滤镜',
+                imgFrom: lists[0].imgFrom,
+                lutFrom: 0));
+      }
+
+      f.list = lists;
+      filterList.add(f);
+    }
+    Navigator.pop(context);
+    return filterList;
+  }
+
+  /// 获取贴纸列表
+  static Future<List<StickerData>> fetchStickerList(
+      BuildContext context) async {
+    showLoadingdialog(context);
+    var stickers = await stickersCallback?.call() ?? [];
+
+    stickerList = stickers;
+    Navigator.pop(context);
+
+    return stickerList;
+  }
+
+  /// 获取字体列表
+  static Future<List<FontsData>> fetchFontList(BuildContext context) async {
+    showLoadingdialog(context);
+    var fonts = await fontsCallback?.call() ?? [];
+    fontList = fonts;
+    Navigator.pop(context);
+    return fontList;
+  }
+
+  /// 获取相框列表
+  static Future<List<FrameData>> fetchFrameList(BuildContext context) async {
+    showLoadingdialog(context);
+    var frames = await framesCallback?.call() ?? [];
+    frameList = frames;
+    Navigator.pop(context);
+    return frameList;
+  }
+
+  /// 贴纸，贴字
+  static Future<String> addSticker(
+      String input, LindiController stickerController) async {
+    // 1. 加载 input 原始图片
+    var inputBytes = (await fileToUint8ListAndImage(input))[1];
+    final ui.Codec codec = await ui.instantiateImageCodec(inputBytes);
+    final ui.FrameInfo frame = await codec.getNextFrame();
+    final ui.Image baseImage = frame.image;
+
+    // 2. 获取贴纸图片的 Uint8List 数据
+    Uint8List? stickerImageBytes = await stickerController.saveAsUint8List();
+    if (stickerImageBytes == null) {
+      return '';
+    }
+    final ui.Codec codec2 = await ui.instantiateImageCodec(stickerImageBytes);
+    final ui.FrameInfo frame2 = await codec2.getNextFrame();
+    final ui.Image stickerImage = frame2.image;
+
+    if (stickerImage == null) {
+      return '';
+    }
+
+    // 3. 确定画布大小，使用最大尺寸
+    final int canvasWidth = baseImage.width > stickerImage.width
+        ? baseImage.width
+        : stickerImage.width;
+    final int canvasHeight = baseImage.height > stickerImage.height
+        ? baseImage.height
+        : stickerImage.height;
+
+    debugPrint('cavasSize = $canvasWidth x $canvasHeight');
+
+    // 4. 创建画布并合成图片
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas = Canvas(recorder);
+
+    final Paint paint = Paint();
+
+    // 将原始图片按比例缩放以适应较大的画布
+    final double baseScaleX = canvasWidth / baseImage.width;
+    final double baseScaleY = canvasHeight / baseImage.height;
+    final double baseScale = baseScaleX < baseScaleY ? baseScaleX : baseScaleY;
+
+    final double stickerScaleX = canvasWidth / stickerImage.width;
+    final double stickerScaleY = canvasHeight / stickerImage.height;
+    final double stickerScale =
+        stickerScaleX < stickerScaleY ? stickerScaleX : stickerScaleY;
+
+    // 绘制原始图片
+    canvas.drawImageRect(
+      baseImage,
+      Rect.fromLTWH(
+          0, 0, baseImage.width.toDouble(), baseImage.height.toDouble()),
+      Rect.fromLTWH(
+          0, 0, baseImage.width * baseScale, baseImage.height * baseScale),
+      paint,
+    );
+
+    // 绘制贴纸图片
+    canvas.drawImageRect(
+      stickerImage,
+      Rect.fromLTWH(
+          0, 0, stickerImage.width.toDouble(), stickerImage.height.toDouble()),
+      Rect.fromLTWH(0, 0, stickerImage.width * stickerScale,
+          stickerImage.height * stickerScale),
+      paint,
+    );
+
+    canvas.save();
+
+    // 将画布内容转换为图片
+    final ui.Image composedImage =
+        await recorder.endRecording().toImage(canvasWidth, canvasHeight);
+
+    // 4. 将合成后的图像转换为 Uint8List
+    final ByteData? byteData =
+        await composedImage.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List composedImageBytes = byteData!.buffer.asUint8List();
+
+    // 5. 保存合成后的图片
+    File output =
+        await _createTmp('${DateTime.now().millisecondsSinceEpoch}.jpg');
+    await output.writeAsBytes(composedImageBytes);
+
+    return output.path;
+  }
+
+  /// 相框
+  static Future<String> addFrame(GlobalKey imgkey, String input, String frame,
+      double frameAspectRatio) async {
+    /// 生成底图
+    RenderRepaintBoundary boundary =
+        imgkey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    // 渲染为图片
+    ui.Image baseImage = await boundary.toImage(pixelRatio: 3.0);
+
+    /// 获取相框图
+    var inputBytes = (await fileToUint8ListAndImage(frame))[1];
+    final ui.Codec codec = await ui.instantiateImageCodec(inputBytes);
+    final ui.FrameInfo frameInfo = await codec.getNextFrame();
+    final ui.Image frameImage = frameInfo.image;
+
+    /// 获取输入图片的宽高
+    final int inputWidth = baseImage.width;
+    final int inputHeight = baseImage.height;
+
+    /// 计算画布大小
+    double canvasWidth, canvasHeight;
+    if (inputWidth / inputHeight > frameAspectRatio) {
+      canvasWidth = inputWidth.toDouble();
+      canvasHeight = inputWidth / frameAspectRatio;
+    } else {
+      canvasHeight = inputHeight.toDouble();
+      canvasWidth = inputHeight * frameAspectRatio;
+    }
+
+    /// 创建画布并绘制图片
+    final ui.PictureRecorder recorder = ui.PictureRecorder();
+    final Canvas canvas =
+        Canvas(recorder, Rect.fromLTWH(0, 0, canvasWidth, canvasHeight));
+    final Paint paint = Paint();
+
+    // 计算居中位置
+    double inputOffsetX = (canvasWidth - inputWidth) / 2;
+    double inputOffsetY = (canvasHeight - inputHeight) / 2;
+
+    // 绘制输入图片
+    canvas.drawImage(baseImage, Offset(inputOffsetX, inputOffsetY), paint);
+
+    // 绘制相框图片
+    double frameWidth = frameImage.width.toDouble();
+    double frameHeight = frameImage.height.toDouble();
+
+    // 将相框适应到画布大小
+    final Rect frameRect = Rect.fromLTWH(0, 0, canvasWidth, canvasHeight);
+    final Rect srcRect = Rect.fromLTWH(0, 0, frameWidth, frameHeight);
+
+    canvas.drawImageRect(frameImage, srcRect, frameRect, paint);
+    canvas.restore();
+
+    /// 将合成的图片保存为PNG格式
+    final ui.Image finalImage = await recorder
+        .endRecording()
+        .toImage(canvasWidth.toInt(), canvasHeight.toInt());
+    final ByteData? byteData =
+        await finalImage.toByteData(format: ui.ImageByteFormat.png);
+    final Uint8List pngBytes = byteData!.buffer.asUint8List();
+
+    /// 保存图片
+    File output =
+        await _createTmp('${DateTime.now().millisecondsSinceEpoch}.png');
+    await output.writeAsBytes(pngBytes);
+
+    return output.path;
+  }
+
+  /// input md5
+  static String generateMd5(String input) {
+    return md5.convert(utf8.encode(input)).toString();
+  }
+
+  /// asset to file
+  static Future<File> saveAssetToFile(String assetPath) async {
+    // 获取设备的文档目录（可以根据需要选择其他目录）
+    Directory directory = await getApplicationDocumentsDirectory();
+
+    // 定义目标文件路径
+    String targetPath = '${directory.path}/${path.basename(assetPath)}';
+
+    // 使用 rootBundle 加载 asset 文件
+    ByteData data = await rootBundle.load(assetPath);
+
+    // 将字节数据写入到文件
+    File file = File(targetPath);
+    await file.writeAsBytes(data.buffer.asUint8List());
+
+    debugPrint('Asset saved to $targetPath');
+
+    return file;
   }
 }

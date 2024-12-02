@@ -10,7 +10,7 @@ class BrightnessShaderConfiguration2 extends ShaderConfiguration {
         required double brightnessMax})
       : _brightness = ShaderRangeNumberParameter(
           'Brightness',
-          '程度',
+          EditorLang.current.editor_intensity,
           brightness,
           0,
           min: brightnessMin,

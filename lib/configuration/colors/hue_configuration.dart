@@ -8,7 +8,7 @@ class HueShaderConfiguration2 extends ShaderConfiguration {
       {required double hue, required double hueMin, required double hueMax})
       : _hue = ShaderRangeNumberParameter(
           'Hue',
-          '程度',
+          EditorLang.current.editor_intensity,
           hue,
           0,
           min: hueMin,

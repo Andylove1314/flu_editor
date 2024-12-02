@@ -45,6 +45,7 @@ class FilterDetail {
   int? groupId;
   num noise;
   var lutFrom = 2;// 0 asset, 1 file, 2 url
+  var imgFrom = 2;// 0 asset, 1 file, 2 url
 
   bool get isVipFilter => vip == 1;
 
@@ -59,7 +60,8 @@ class FilterDetail {
       this.image,
       this.groupId,
       this.noise = 0.0,
-      this.lutFrom = 2});
+      this.lutFrom = 2,
+      this.imgFrom = 2});
 
   /// fromJson 方法
   FilterDetail.fromJson(Map<String, dynamic> json)

@@ -10,7 +10,7 @@ class SaturationShaderConfiguration2 extends ShaderConfiguration {
         required double saturationMax})
       : _saturation = ShaderRangeNumberParameter(
           'Saturation',
-          '程度',
+          EditorLang.current.editor_intensity,
           saturation,
           0,
           min: saturationMin,

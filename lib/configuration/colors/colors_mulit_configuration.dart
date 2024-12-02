@@ -74,7 +74,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
     required double vigEndMax,
   })  : _brightness = ShaderRangeNumberParameter(
           'Brightness',
-          '亮度',
+          EditorLang.current.editor_intensity,
           brightness,
           0,
           min: brightnessMin,
@@ -82,7 +82,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _saturation = ShaderRangeNumberParameter(
           'Saturation',
-          '饱和度',
+          EditorLang.current.editor_intensity,
           saturation,
           1,
           min: saturationMin,
@@ -90,7 +90,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _contrast = ShaderRangeNumberParameter(
           'Contrast',
-          '对比度',
+          EditorLang.current.editor_intensity,
           contrast,
           2,
           min: contrastMin,
@@ -98,7 +98,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _sharpen = ShaderRangeNumberParameter(
           'Sharpen',
-          '锐化',
+          EditorLang.current.editor_intensity,
           sharpen,
           3,
           min: sharpenMin,
@@ -106,7 +106,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _shadow = ShaderRangeNumberParameter(
           'Shadow',
-          '阴影',
+          EditorLang.current.editor_intensity,
           shadow,
           4,
           min: shadowMin,
@@ -114,7 +114,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _temperature = ShaderRangeNumberParameter(
           'Temperature',
-          '色温',
+          EditorLang.current.editor_intensity,
           temperature,
           5,
           min: temperatureMin,
@@ -122,7 +122,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _noise = ShaderRangeNumberParameter(
           'Noise',
-          '噪点',
+          EditorLang.current.editor_intensity,
           noise,
           6,
           min: noiseMin,
@@ -130,7 +130,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _exposure = ShaderRangeNumberParameter(
           'Exposure',
-          '曝光',
+          EditorLang.current.editor_intensity,
           exposure,
           7,
           min: exposureMin,
@@ -138,7 +138,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _vibrance = ShaderRangeNumberParameter(
           'Vibrance',
-          '鲜艳度',
+          EditorLang.current.editor_intensity,
           vibrance,
           8,
           min: vibranceMin,
@@ -146,7 +146,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _highlight = ShaderRangeNumberParameter(
           'Highlight',
-          '高光',
+          EditorLang.current.editor_intensity,
           highlight,
           9,
           min: highlightMin,
@@ -154,7 +154,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _redBalance = ShaderRangeNumberParameter(
           'Red',
-          '红色',
+          EditorLang.current.editor_color_bph_red,
           wbRed,
           10,
           min: wbRedMin,
@@ -162,7 +162,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _greenBalance = ShaderRangeNumberParameter(
           'Green',
-          '绿色',
+          EditorLang.current.editor_color_bph_green,
           wbGreen,
           11,
           min: wbGreenMin,
@@ -170,7 +170,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _blueBalance = ShaderRangeNumberParameter(
           'Blue',
-          '蓝色',
+          EditorLang.current.editor_color_bph_blue,
           wbBlue,
           12,
           min: wbBlueMin,
@@ -178,7 +178,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _centerX = ShaderRangeNumberParameter(
           'CenterX',
-          '左右',
+          EditorLang.current.editor_color_yying_zy,
           vigX,
           13,
           min: vigXMin,
@@ -186,7 +186,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _centerY = ShaderRangeNumberParameter(
           'CenterY',
-          '上下',
+          EditorLang.current.editor_color_yying_sx,
           vigY,
           14,
           min: vigYMin,
@@ -194,7 +194,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _start = ShaderRangeNumberParameter(
           'Start',
-          '大小',
+          EditorLang.current.editor_color_yying_dx,
           vigStart,
           15,
           min: vigStartMin,
@@ -202,7 +202,7 @@ class ColorsMulitConfiguration extends ShaderConfiguration {
         ),
         _end = ShaderRangeNumberParameter(
           'End',
-          '外延',
+          EditorLang.current.editor_color_yying_wy,
           vigEnd,
           16,
           min: vigEndMin,

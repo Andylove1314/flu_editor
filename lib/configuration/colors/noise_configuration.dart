@@ -8,7 +8,7 @@ class NoiseShaderConfiguration extends ShaderConfiguration {
       {required double noise, required double noiseMin, required double noiseMax})
       : _noiseStrength = ShaderRangeNumberParameter(
           'Noise', // 对应 GLSL 中的变量名
-          '程度', // 参数显示名称
+          EditorLang.current.editor_intensity, // 参数显示名称
           noise, // 初始值
           0, // 参数索引
           min: noiseMin, // 最小值

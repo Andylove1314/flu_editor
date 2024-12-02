@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flu_editor/generated/l10n.dart';
 import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:image/image.dart' as img;
 
@@ -9,6 +10,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibration/vibration.dart';
 
 import '../blocs/cut_bloc_cubit/cut_cubit.dart';
+import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
 import '../utils/constant.dart';
 import '../widgets/crop/crop_pan.dart';
@@ -97,6 +99,7 @@ class _EditorCropPageState extends State<EditorCropPage> {
     return Theme(
         data: themeData,
         child: ExtendedImage.memory(
+          width: MediaQuery.of(context).size.width,
           cutImageByte,
           cacheRawData: true,
           fit: BoxFit.contain,
@@ -134,8 +137,8 @@ class _EditorCropPageState extends State<EditorCropPage> {
                 _currentCropIndex = 1;
                 _imageEditorController.reset();
               },
-              child: const Text(
-                '复位',
+              child: Text(
+                EditorLang.of(context).editor_restore,
                 style: TextStyle(
                     color: Color(0xff1E1925),
                     fontSize: 12,
@@ -211,7 +214,20 @@ class _EditorCropPageState extends State<EditorCropPage> {
           },
           onConfirm: () async {
             EditorUtil.showLoadingdialog(context);
-            await EditorUtil.cropImage(_imageEditorController);
+            String after = await EditorUtil.cropImage(_imageEditorController);
+
+            if (EditorUtil.editorType == null) {
+              /// 更新 home after
+              EditorUtil.homeCubit?.emit(
+                EditorHomeState(after),
+              );
+            } else {
+              if(EditorUtil.singleEditorSavetoAlbum){
+                EditorUtil.saveCallback?.call(after);
+              }
+              EditorUtil.clearTmpObject(after);
+            }
+
             Navigator.pop(context);
             Navigator.pop(context);
           },

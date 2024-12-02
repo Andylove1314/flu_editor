@@ -1,10 +1,11 @@
 import 'package:flu_editor/widgets/custom_widget.dart';
 import 'package:flu_editor/widgets/filters/filters_list.dart';
-import 'package:flu_editor/widgets/filters/vip_bar.dart';
 import 'package:flutter/material.dart';
 
 import '../../flu_editor.dart';
+import '../../generated/l10n.dart';
 import '../confirm_bar.dart';
+import '../vip_bar.dart';
 import 'filter_class_widget.dart';
 
 class FiltersPan extends StatefulWidget {
@@ -110,7 +111,7 @@ class _FiltersPanState extends State<FiltersPan>
           },
           confirm: () async {
             if (showVipBg) {
-              showVipPop(context, onSave: () {
+              showVipPop(context, content: EditorLang.of(context).editor_vip_limited_2,onSave: () {
                 EditorUtil.vipActionCallback?.call();
               }, onCancel: () {});
               return;

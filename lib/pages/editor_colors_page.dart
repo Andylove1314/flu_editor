@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart';
 
+import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
+import '../generated/l10n.dart';
 import '../models/action_data.dart';
 import '../utils/constant.dart';
 import '../widgets/colors/colors_pan.dart';
@@ -177,7 +179,7 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
             child: BlocBuilder<SourceImageCubit, SourceImageReady>(
               builder: (context, state) {
                 return FadeBeforeAfter(
-                  before: Image.file(File(state.afterPath)),
+                  before: Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
                   after: (state.textureSource != null)
                       ? ImageShaderPreview(
                           texture: state.textureSource!,
@@ -224,12 +226,25 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                       await Future.delayed(const Duration(milliseconds: 500));
                       String effectImagePath =
                           await EditorUtil.exportImage(context, _currentConfig);
+
+                      if (EditorUtil.editorType == null) {
+                        /// 更新 home after
+                        EditorUtil.homeCubit?.emit(
+                          EditorHomeState(effectImagePath),
+                        );
+                      } else {
+                        if(EditorUtil.singleEditorSavetoAlbum){
+                          EditorUtil.saveCallback?.call(effectImagePath);
+                        }
+                        EditorUtil.clearTmpObject(effectImagePath);
+                      }
+
                       Navigator.pop(context);
                       if (saveEffect) {
                         bool? successed = await EditorUtil.saveColorEffectParam(
                             _currentConfig.parameters, effectImagePath, name);
                         EditorUtil.toastActionCallback
-                            ?.call(successed == true ? '保存配方成功' : '保存配方失败');
+                            ?.call(successed == true ? EditorLang.of(context).editor_color_save_pf_successfully : EditorLang.of(context).editor_color_save_pf_faild);
                       }
                       Navigator.pop(context);
                     }, onCancel: () {

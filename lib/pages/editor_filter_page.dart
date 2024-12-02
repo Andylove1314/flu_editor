@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../blocs/edtor_home_cubit.dart';
 import '../blocs/source_image_bloc/source_image_bloc.dart';
 import '../flu_editor.dart';
 import '../utils/constant.dart';
@@ -56,7 +57,7 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
             child: BlocBuilder<SourceImageCubit, SourceImageReady>(
               builder: (context, state) {
                 return FadeBeforeAfter(
-                  before: Image.file(File(state.afterPath)),
+                  before: Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
                   after: (state.textureSource != null)
                       ? ImageShaderPreview(
                           texture: state.textureSource!,
@@ -89,7 +90,7 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
                       paramMap: filterParamInitValues,
                       paramNames: ['Intensity']),
                 FiltersPan(
-                  fds: EditorUtil.lutSquareImagesUrls,
+                  fds: EditorUtil.filterList,
                   sourceFiltersConfig: _currentConfig,
                   usingDetail: _filterDetail,
                   onChanged: ({FilterDetail? item}) {
@@ -98,13 +99,26 @@ class _EditorFilterPageState extends State<EditorFilterPage> {
                     setState(() {});
                   },
                   onEffectSave: () async {
-
-                    if(_filterDetail == null){
+                    if (_filterDetail == null) {
                       return;
                     }
 
                     EditorUtil.showLoadingdialog(context);
-                    await EditorUtil.exportImage(context, _currentConfig);
+                    String after =
+                        await EditorUtil.exportImage(context, _currentConfig);
+
+                    if (EditorUtil.editorType == null) {
+                      /// 更新 home after
+                      EditorUtil.homeCubit?.emit(
+                        EditorHomeState(after),
+                      );
+                    } else {
+                      if(EditorUtil.singleEditorSavetoAlbum){
+                        EditorUtil.saveCallback?.call(after);
+                      }
+                      EditorUtil.clearTmpObject(after);
+                    }
+
                     Navigator.pop(context);
                     Navigator.pop(context);
                   },

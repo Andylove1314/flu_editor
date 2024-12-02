@@ -1,19 +1,21 @@
-
 # **flu_editor**
 
+## Language: 中文 | [English](https://github.com/Andylove1314/flu_editors/blob/1.0.4/README_en.md)
+
+>>>>>>> 1.0.4
 ![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 
 `flu_editor` 是一个用于照片和视频的颜色滤镜编辑插件。
 
-| 功能   | 状态   | 备注   |
-| ------ | ------ | ------ |
-| 滤镜   | 已完成 |       |
-| 裁剪   | 已完成 |       |
-| 颜色   | 已完成 |       |
-| 文字   | 开发中 |       |
-| 边框   | 开发中 |       |
-| 贴纸   | 开发中 |       |
-| 模糊   | 开发中 |       |
+| 功能 | 状态  | 备注 |
+|----|-----|----|
+| 裁剪 | 已完成 |    |
+| 颜色 | 已完成 |    |
+| 滤镜 | 已完成 |    |
+| 模糊 | 开发中 |    |
+| 贴纸 | 已完成 |    |
+| 文字 | 已完成 |    |
+| 边框 | 已完成 |    |
 
 ## 入门
 
@@ -28,66 +30,122 @@ API 参考。
 
 ### EditorUtil 工具类
 
-- **页面切换动画**：提供页面切换时的淡入淡出动画，切换持续时间为 200 毫秒。
-- **效果临时目录**：定义保存临时编辑效果的目录路径 `/tmpEffectDir`。
-- **业务回调**：支持多种业务回调函数，包括 VIP 状态、保存、加载、提示、效果保存与删除等。
+### 页面导航说明
 
-### 页面导航功能
+- `goFluEditor`：跳转到编辑器页面。
+- **参数说明**：
+    - `context`：当前上下文，通常使用 `BuildContext` 来启动编辑器。
+    - `orignal`：原始图片路径，用于传入需要编辑的图片。
+    - `type`：编辑类型 （null 代表进首页）。
+    - `singleEditorSave`：单独进到某个功能页面，关闭是否保存图片到相册。
+    - `vipStatusCb`：一个回调函数，返回用户是否为 VIP 用户。
+    - `vipActionCb`：一个回调函数，当用户非 VIP 时，触发跳转到订阅页面。
+    - `saveCb`：一个回调函数，用于保存编辑后的图片，参数为保存路径。
+    - `loadWidgetCb`：加载提示回调，用于显示加载动画，传入 `islight`（是否为浅色模式）、`size`
+      （进度条大小）、`stroke`（进度条宽度）。
+    - `toastActionCb`：一个回调函数，显示自定义提示信息（如 "保存成功"）。
+    - `effectsCb`：回调函数，用于获取并处理滤镜配方。
+    - `saveEffectCb`：回调函数，保存自定义滤镜配方。
+    - `deleteEffectCb`：回调函数，删除已保存的滤镜配方。
+    - `filtersCb`：回调函数，用于获取滤镜列表。
+    - `stickersCb`：回调函数，用于获取贴纸列表。
+    - `fontsCb`：回调函数，用于获取字体列表。
+    - `framesCb`：回调函数，用于获取边框列表。
+    - `homeSavedCb`：回调函数，编辑器主页保存图片。
 
-- `goFilterPage`：跳转到滤镜编辑页面。
-- `goColorsPage`：跳转到颜色调整页面。
-- `goCropPage`：跳转到裁剪页面。
-- `pushHome`：跳转到编辑器主页，支持传入原始图片路径、滤镜列表并执行回调函数。
+- `内部页面路由`：
+- **编辑器首页进入的具体功能区（宿主app不要直接调用，要通过goFluEditor(type)进入）。**：
 
-### 滤镜初始化
+    - `goCropPage`：跳转到裁剪页面。
+    - `goColorsPage`：跳转到颜色调整页面。
+    - `goFilterPage`：跳转到滤镜编辑页面。
+    - `goStickerPage`：跳转到贴纸编辑页面。
+    - `goFontPage`：跳转到字体编辑页面。
+    - `goFramePage`：跳转到相框编辑页面。
 
-- `_initFilters`：初始化滤镜配置，包括插入空滤镜（无滤镜选项），并将滤镜列表保存到内存中。
+### 多语言配置
 
-### 颜色组合滤镜
+- **MaterialApp 内添加如下delegate以及supportedLocales**：
 
-- `_registerMultGlsl`：注册滤镜和颜色调整 GLSL 着色器，包括无滤镜效果、噪声滤镜和颜色组合调整滤镜。
+```dart
 
-### 图像导出
+MaterialApp(
+localizationsDelegates: const [
+GlobalMaterialLocalizations.delegate,
+GlobalWidgetsLocalizations.delegate,
+GlobalCupertinoLocalizations.delegate,
+EditorLang.delegate
+],
+supportedLocales: [...EditorLang.delegate.supportedLocales],
+)
 
-- `exportImage`：导出应用了滤镜的图片，返回保存的图片路径。
+```
 
-### 文件处理功能
+## Screenshots
 
-- `fileToUint8ListAndImage`：将文件转换为 Uint8List 和 Image 对象，支持后台处理以提高性能。
+<table>
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screen_Recording_20241127_115015%2012.10.21.gif">
+        <img src="screenshots/Screen_Recording_20241127_115015%2012.10.21.gif" alt="Screenshot 0" width="250" style="display: block; margin: 10px auto;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114447.jpg">
+        <img src="screenshots/Screenshot_20241127-114447.jpg" alt="Screenshot 1" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-165709.jpg">
+        <img src="screenshots/Screenshot_20241127-165709.jpg" alt="Screenshot 2" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
 
-### 图片裁剪
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114514.jpg">
+        <img src="screenshots/Screenshot_20241127-114514.jpg" alt="Screenshot 3" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114536.jpg">
+        <img src="screenshots/Screenshot_20241127-114536.jpg" alt="Screenshot 4" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-164212.jpg">
+        <img src="screenshots/Screenshot_20241127-164212.jpg" alt="Screenshot 5" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
 
-- `cropImage`：裁剪图片，支持旋转和翻转等裁剪参数，裁剪后保存并更新编辑页面。
+  <tr>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114559.jpg">
+        <img src="screenshots/Screenshot_20241127-114559.jpg" alt="Screenshot 6" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114641.jpg">
+        <img src="screenshots/Screenshot_20241127-114641.jpg" alt="Screenshot 7" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+    <td>
+      <a href="https://github.com/Andylove1314/flu_editors/blob/1.0.1-release/screenshots/Screenshot_20241127-114710.jpg">
+        <img src="screenshots/Screenshot_20241127-114710.jpg" alt="Screenshot 8" width="250" style="margin: 10px;"/>
+      </a>
+    </td>
+  </tr>
 
-### 临时文件管理
-
-- `_createTmp`：在临时目录中创建文件，用于保存编辑后的图片或效果。
-
-### 加载对话框和提示信息
-
-- `showLoadingdialog`：显示加载对话框。
-- `loadingWidget`：定义加载进度指示器。
-- `showToast`：显示提示信息。
-
-### 保存与删除滤镜效果
-
-- `saveColorEffectParam`：保存颜色效果的参数配置。
-- `fetchSavedParamList`：获取已保存的效果列表。
-- `deleteEffect`：删除已保存的效果。
-
-### 临时对象清理
-
-- `clearTmpObject`：清理所有回调函数和临时数据。
-
-### 图像加载
-
-- `loadSourceImage`：从文件路径加载图片。
+</table>
 
 ## 使用示例
 
 以下是如何使用 `flu_editor` 进行图像编辑的示例：
 
 ```dart
+
 void main() {
   runApp(const MyApp());
 }
@@ -102,7 +160,10 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String _platformVersion = 'Unknown';
   final _fluEditorPlugin = FluEditor();
+
+  /// 当前输入图
   String _currentImage = '';
+
   bool isVipUser = false;
 
   @override
@@ -111,14 +172,21 @@ class _MyAppState extends State<MyApp> {
     initPlatformState();
   }
 
+  // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> initPlatformState() async {
     String platformVersion;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    // We also handle the message potentially returning null.
     try {
-      platformVersion = await _fluEditorPlugin.getPlatformVersion() ?? 'Unknown platform version';
+      platformVersion = await _fluEditorPlugin.getPlatformVersion() ??
+          'Unknown platform version';
     } on PlatformException {
       platformVersion = 'Failed to get platform version.';
     }
 
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
     if (!mounted) return;
 
     setState(() {
@@ -129,6 +197,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        EditorLang.delegate
+      ],
+      supportedLocales: [...EditorLang.delegate.supportedLocales],
       home: Builder(builder: (context) {
         return Scaffold(
           appBar: AppBar(
@@ -139,18 +211,18 @@ class _MyAppState extends State<MyApp> {
           body: Column(
             children: [
               Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      _pickImage(context);
-                    },
-                    child: Container(
-                        width: double.infinity,
-                        color: Colors.grey,
-                        child: Stack(alignment: Alignment.center, children: [
-                          _currentImage.isEmpty
-                              ? const SizedBox()
-                              : Image.file(File(_currentImage)),
-                          Container(
+                  child: Container(
+                      width: double.infinity,
+                      color: Colors.grey,
+                      child: Stack(alignment: Alignment.center, children: [
+                        _currentImage.isEmpty
+                            ? const SizedBox()
+                            : Image.file(File(_currentImage)),
+                        GestureDetector(
+                          onTap: () {
+                            _pickImage(context);
+                          },
+                          child: Container(
                             height: 200,
                             width: 200,
                             color: Colors.white.withOpacity(0.4),
@@ -166,15 +238,15 @@ class _MyAppState extends State<MyApp> {
                                   height: 20,
                                 ),
                                 Text(
-                                  '添加照片',
-                                  style:
-                                  TextStyle(color: Colors.black, fontSize: 24),
+                                  'Add photo',
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 24),
                                 ),
                               ],
                             ),
                           ),
-                        ])),
-                  )),
+                        ),
+                      ]))),
               const SizedBox(
                 height: 20,
               ),
@@ -185,12 +257,12 @@ class _MyAppState extends State<MyApp> {
                       onPressed: () async {
                         if (_currentImage.isEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('请选择图片！')));
+                              const SnackBar(content: Text('Add photo pleasen!')));
                           return;
                         }
                         _goEditor(context);
                       },
-                      child: const Text('编辑照片')),
+                      child: const Text('Go Editor')),
                 ),
               ),
               const SizedBox(
@@ -206,72 +278,41 @@ class _MyAppState extends State<MyApp> {
   Future<void> _pickImage(BuildContext context) async {
     ImagePicker picker = ImagePicker();
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image == null) {
+      return;
+    }
+
     _currentImage = image?.path ?? '';
     setState(() {});
   }
 
   Future<void> _goEditor(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (_) {
-          return Material(
-            color: Colors.transparent,
-            child: Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                color: Colors.black,
-                padding: const EdgeInsets.all(10),
-                alignment: Alignment.center,
-                child: const Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircularProgressIndicator(
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      '加载滤镜中',
-                      style: TextStyle(color: Colors.white),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          );
-        });
-    List<FilterData> groups = await _fetchLJ();
-
-    Navigator.pop(context);
-
-    EditorUtil.pushHome(context,
+    EditorUtil.goFluEditor(context,
         orignal: _currentImage,
-        fs: groups,
         vipStatusCb: () {
+          debugPrint('get vip status: $isVipUser');
           return isVipUser;
         },
         vipActionCb: () {
+          debugPrint('go Sub');
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) {
-              return const RoutePage();
+              return RoutePage(title: 'Sub page',);
             },
           ));
         },
-        saveCb: (path) {
+        saveCb: (path) async {
           GallerySaver.saveImage(path, albumName: 'Flu-Editor');
-          ScaffoldMessenger.of(context)
-              .showSnackBar(SnackBar(content: Text('保存成功: $path')));
         },
-        loadWidgetCb: (islight) =>
+        loadWidgetCb: (islight, size, stroke) =>
             Container(
-              width: 50,
-              height: 50,
-              padding: const EdgeInsets.all(10),
+              width: size,
+              height: size,
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 color: islight ? Colors.white : Colors.black,
+                strokeWidth: stroke,
               ),
             ),
         toastActionCb: (msg) =>
@@ -279,10 +320,23 @@ class _MyAppState extends State<MyApp> {
                 .showSnackBar(SnackBar(content: Text(msg))),
         effectsCb: (page) async => await _fetchPF(),
         saveEffectCb: (effect) async {
+          debugPrint('Save pf：${effect.toJson()}');
           return await true;
         },
         deleteEffectCb: (id) async {
+          debugPrint('Delete：$id');
           return await true;
+        },
+        filtersCb: () => _fetchLJ(),
+        stickersCb: () => _fetchStickers(),
+        fontsCb: () => _fetchFonts(),
+        framesCb: () => _fetchFrames(),
+        homeSavedCb: (context, after) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) {
+              return RoutePage(savedPath: after, title: 'Saved page',);
+            },
+          ));
         });
   }
 
@@ -290,7 +344,7 @@ class _MyAppState extends State<MyApp> {
     return await [
       EffectData.fromJson({
         'name': 'test',
-        'image':
+        'url':
         'https://nwdnui.oss-cn-beijing.aliyuncs.com/user/effectSave/da2752d15d0e48359bbc42c7ec845d3d/1730962077026793.jpg',
         'id': 0,
         'params': jsonEncode({
@@ -321,9 +375,8 @@ class _MyAppState extends State<MyApp> {
     detail1.id = 1;
     detail1.image =
     'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail1.filterImage =
-    'luts/01-x.png';
-    detail1.name = '滤镜1';
+    detail1.filterImage = 'luts/01-x.png';
+    detail1.name = 'class1';
     detail1.noise = 0.2;
     detail1.vip = 1;
     detail1.lutFrom = 0;
@@ -332,44 +385,144 @@ class _MyAppState extends State<MyApp> {
     detail2.id = 2;
     detail2.image =
     'https://nwdnui.bigwinepot.com/ui/index/icon/90ad4f7bbd3243c285d4f8aaff5123be.jpg';
-    detail2.filterImage =
-    'luts/03-x.png';
-    detail2.name = '滤镜2';
+    detail2.filterImage = 'luts/03-x.png';
+    detail2.name = 'class2';
     detail2.lutFrom = 0;
 
     FilterData group1 = FilterData();
-    group1.groupName = '分类1';
+    group1.groupName = 'class1';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<StickerData>> _fetchStickers() async {
+    StickDetail detail1 = StickDetail();
+    detail1.id = 1;
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/e71b319ebce14952a87a40a03f8e7404.png';
+    detail1.name = 'sticker1';
+    detail1.vip = 0;
+
+    StickDetail detail2 = StickDetail();
+    detail2.id = 1;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/1f0ceb1952a44a4ebd0a8c419a105545.png';
+    detail2.name = 'sticker2';
+    detail2.vip = 0;
+
+    StickerData group1 = StickerData();
+    group1.groupName = 'class1';
+    group1.groupImage =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/318fa7a144af47f29adbdc73cb7e78b5.png';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FontsData>> _fetchFonts() async {
+    FontDetail detail1 = FontDetail();
+    detail1.id = 1;
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/ca9f5c3e742d49c2bafa28c8808a2280.jpg';
+    detail1.file =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/7be3f3395e5c49b3aec36071c9bacc03.ttf';
+    detail1.name = 'font1';
+    detail1.vip = 0;
+
+    FontDetail detail2 = FontDetail();
+    detail2.id = 2;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/8a2058f31d384c0d952f21661b8f4a3e.jpg';
+    detail2.file =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/f5d6dbf7914d45eababc0cd395b973ed.ttf';
+    detail2.name = 'font2';
+    detail2.vip = 0;
+
+    FontsData group1 = FontsData();
+    group1.groupName = 'Sample';
+
+    group1.list = [detail1, detail2];
+
+    return [group1];
+  }
+
+  Future<List<FrameData>> _fetchFrames() async {
+    FrameDetail detail1 = FrameDetail();
+    detail1.id = 1;
+    detail1.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/6c923546f7ff46d9bf613808b9bce72d.png';
+    detail1.name = 'frame1';
+    detail1.vip = 0;
+    FrameSize size = FrameSize();
+    size.frameWidth = 560;
+    size.frameHeight = 1000;
+    size.frameLeft = 94.0;
+    size.frameTop = 142.0;
+    size.frameRight = 88.0;
+    size.frameBottom = 114.0;
+    detail1.params = size;
+
+    FrameDetail detail2 = FrameDetail();
+    detail2.id = 2;
+    detail2.image =
+    'https://nwdnui.bigwinepot.com/ui/index/icon/e0ee85fe76e34fd093729428757e0401.png';
+    detail2.name = 'frame2';
+    detail2.vip = 0;
+    FrameSize size2 = FrameSize();
+    size2.frameWidth = 672;
+    size2.frameHeight = 1000;
+    size2.frameLeft = 136.0;
+    size2.frameTop = 154.0;
+    size2.frameRight = 136.0;
+    size2.frameBottom = 156.0;
+    detail2.params = size2;
+
+    FrameData group1 = FrameData();
+    group1.groupName = 'Sample';
 
     group1.list = [detail1, detail2];
 
     return [group1];
   }
 }
+
 ```
 
 ## 感谢
 
-plugin_platform_interface: ^2.0.2
-flutter_gpu_filters_interface: ^0.0.18
-exif: ^3.3.0
-collection: ^1.16.0
+- **我们感谢 Flutter 团队提供了出色的开发框架和工具。**：
+- **感谢所有开源贡献者使这个插件得以实现。**：
+- **特别感谢社区提供的宝贵反馈和支持。**：
 
-flutter_bloc: ^8.1.6
-equatable: ^2.0.5
-rxdart: ^0.27.7
+- plugin_platform_interface: ^2.0.2
+- flutter_gpu_filters_interface: ^0.0.18
+- exif: ^3.3.0
+- collection: ^1.16.0
 
-flutter_cache_manager: ^3.4.1
-photo_view: ^0.15.0
+- flutter_bloc: ^8.1.6
+- equatable: ^2.0.5
+- rxdart: ^0.27.7
 
-auto_size_text: ^3.0.0
-image: ^4.3.0
-extended_image: ^9.0.4
-image_cropper: ^8.0.2
-vibration: ^2.0.1
-haptic_feedback: ^0.5.1+1
+- flutter_cache_manager: ^3.4.1
+- photo_view: ^0.15.0
 
+- auto_size_text: ^3.0.0
+- image: ^4.3.0
+- extended_image: ^9.0.4
+- image_cropper: ^8.0.2
+- vibration: ^2.0.1
+- haptic_feedback: ^0.5.1+1
+- lindi_sticker_widget: ^1.0.1
+- crypto: ^3.0.6
+
+## 许可证
+
+MIT 许可证。详情请参见[LICENSE](https://github.com/Andylove1314/flu_editors/blob/main/LICENSE)。
 
 ## 结语
 
-通过使用 flu_editor，开发者可以轻松实现图像和视频编辑功能，提供了强大的滤镜、裁剪、颜色调整和效果保存等功能。
+通过使用 `flu_editor`，开发者可以轻松实现图像和视频编辑功能，提供了强大的滤镜、裁剪、颜色调整和效果保存等功能。
 

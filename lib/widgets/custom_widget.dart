@@ -54,13 +54,14 @@ void showSaveImagePop(BuildContext context,
 }
 
 void showVipPop(BuildContext context,
-    {required Function() onSave, required Function() onCancel}) {
+    {required Function() onSave, required Function() onCancel, required String content}) {
   showDialog(
       context: context,
       builder: (c) {
         return Material(
           color: Colors.transparent,
           child: VipTipPopWidget(
+            content: content,
             onSave: onSave,
             onCancel: onCancel,
           ),

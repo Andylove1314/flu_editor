@@ -1,6 +1,6 @@
 name: flu_editor
 description: "local editor"
-version: 1.0.0
+version: 1.0.4
 homepage: https://github.com/Andylove1314/flu_editors.git
 
 environment:
@@ -28,6 +28,15 @@ dependencies:
   image_cropper: ^8.0.2
   vibration: ^2.0.1
   haptic_feedback: ^0.5.1+1
+
+  path_provider: ^2.1.4
+
+  lindi_sticker_widget: ^1.0.1
+
+  crypto: ^3.0.6
+
+  intl_utils: ^2.8.7
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +91,9 @@ flutter:
     - images/colors/
     - images/crop/
     - images/filters/
+#    - images/stickers/
+    - images/fonts/
+#    - images/frames/
     - luts/
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
@@ -113,3 +125,9 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/to/font-from-package
+flutter_intl:
+  enabled: true
+  main_locale: en
+  class_name: EditorLang
+  output_dir: lib/generated
+

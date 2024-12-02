@@ -1,6 +1,8 @@
 import 'package:flu_editor/flu_editor.dart';
 import 'package:flutter/material.dart';
 
+import '../generated/l10n.dart';
+
 class SaveTipPopWidget extends StatelessWidget {
   Function(bool saveEffect, String name) onSave;
   Function() onCancel;
@@ -44,11 +46,11 @@ class SaveTipPopWidget extends StatelessWidget {
                     )),
               ),
             ),
-            const Padding(
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                '应用调色效果前是否要保存配方下次一键调用？',
-                style: TextStyle(
+                EditorLang.of(context).editor_color_effect_save_tip,
+                style: const TextStyle(
                     color: Color(0xff19191A),
                     fontSize: 18,
                     fontWeight: FontWeight.w600),
@@ -76,9 +78,9 @@ class SaveTipPopWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        '配方名称：',
-                        style: TextStyle(
+                       Text(
+                        '${EditorLang.of(context).editor_color_effect_name}: ',
+                        style:const TextStyle(
                             color: Color(0xff656566),
                             fontSize: 14,
                             fontWeight: FontWeight.w600),
@@ -101,9 +103,9 @@ class SaveTipPopWidget extends StatelessWidget {
                               color: Color(0xff19191A),
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
-                          decoration: const InputDecoration(
-                              hintText: '配方名称',
-                              hintStyle: TextStyle(
+                          decoration:  InputDecoration(
+                              hintText: EditorLang.of(context).editor_color_effect_name,
+                              hintStyle: const TextStyle(
                                   color: Color(0xffAEAEAE),
                                   fontSize: 14,
                                   fontWeight: FontWeight.bold),
@@ -137,9 +139,9 @@ class SaveTipPopWidget extends StatelessWidget {
                         Navigator.pop(context);
                         onSave.call(false, _mobileController.text);
                       },
-                      child: const Text(
-                        '不保存配方',
-                        style: TextStyle(
+                      child: Text(
+                          EditorLang.of(context).editor_color_effect_save_no,
+                        style: const TextStyle(
                             color: Color(0xff19191A),
                             fontWeight: FontWeight.w600,
                             fontSize: 18),
@@ -150,7 +152,7 @@ class SaveTipPopWidget extends StatelessWidget {
                   FilledButton(
                       onPressed: () async {
                         if (_mobileController.text.isEmpty) {
-                          EditorUtil.toastActionCallback?.call('请输入配方名称');
+                          EditorUtil.toastActionCallback?.call(EditorLang.of(context).editor_color_effect_save_action_tip);
                           return;
                         }
 
@@ -163,9 +165,9 @@ class SaveTipPopWidget extends StatelessWidget {
                           padding: WidgetStateProperty.all(
                               const EdgeInsets.symmetric(
                                   vertical: 9, horizontal: 30))),
-                      child: const Text(
-                        '保存配方',
-                        style: TextStyle(
+                      child:  Text(
+                        EditorLang.of(context).editor_color_effect_save_action,
+                        style:const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
                             fontSize: 18),

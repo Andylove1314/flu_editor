@@ -1,17 +1,27 @@
+library flu_editor;
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'dart:ui';
+import 'dart:ui' as ui;
 
 import 'package:flu_editor/pages/editor_colors_page.dart';
 import 'package:flu_editor/pages/editor_crop_page.dart';
 import 'package:flu_editor/pages/editor_filter_page.dart';
+import 'package:flu_editor/pages/editor_font_page.dart';
+import 'package:flu_editor/pages/editor_frame_page.dart';
 import 'package:flu_editor/pages/editor_home_page.dart';
+import 'package:flu_editor/pages/editor_sticker_page.dart';
+import 'package:flu_editor/utils/editor_type.dart';
+import 'package:flutter/rendering.dart';
 import 'package:image/image.dart' as img;
 import 'package:flutter/material.dart' hide Image;
 import 'package:flutter/cupertino.dart' hide Image;
 import 'package:flutter/widgets.dart' hide Image;
 import 'dart:math';
+import 'package:crypto/crypto.dart';
+import 'package:path/path.dart' as path;
 
 import 'package:exif/exif.dart';
 import 'package:flutter/foundation.dart';
@@ -20,15 +30,17 @@ import 'package:flutter/services.dart';
 import 'package:collection/collection.dart';
 import 'package:extended_image/extended_image.dart';
 import 'package:flu_editor/blocs/cut_bloc_cubit/cut_cubit.dart';
-import 'package:flu_editor/models/effect_data.dart';
 import 'package:flu_editor/utils/constant.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gpu_filters_interface/flutter_gpu_filters_interface.dart';
+import 'package:lindi_sticker_widget/lindi_controller.dart';
 
 import 'blocs/edtor_home_cubit.dart';
 import 'blocs/source_image_bloc/source_image_bloc.dart';
 import 'flu_editor_platform_interface.dart';
 import 'package:path_provider/path_provider.dart';
+
+import 'package:flu_editor/generated/l10n.dart';
 
 part 'package:flu_editor/utils/editor_util.dart';
 
@@ -66,12 +78,26 @@ part 'configuration/filters/lookup_configuration2.dart';
 
 part 'models/filter_config_data.dart';
 
+part 'models/sticker_data.dart';
+
+part 'models/font_data.dart';
+
+part 'models/frame_data.dart';
+
+part 'models/effect_data.dart';
+
 part 'base/configuration.dart';
+
 part 'base/parameters.dart';
+
 part 'base/image_shader_painter.dart';
+
 part 'base/image_shader_preview.dart';
+
 part 'base/pipeline_image_shader_preview.dart';
+
 part 'base/none.dart';
+
 part 'base/texture_source.dart';
 
 Map<Type, Future<FragmentProgram> Function()> _fragmentPrograms = {};
@@ -83,15 +109,15 @@ class FluEditor {
 }
 
 void register<T extends ShaderConfiguration>(
-    Future<FragmentProgram> Function() fragmentProgramProvider, {
-      bool override = false,
-    }) {
+  Future<FragmentProgram> Function() fragmentProgramProvider, {
+  bool override = false,
+}) {
   if (override) {
     _fragmentPrograms[T] = fragmentProgramProvider;
   } else {
     _fragmentPrograms.putIfAbsent(
       T,
-          () => fragmentProgramProvider,
+      () => fragmentProgramProvider,
     );
   }
 }

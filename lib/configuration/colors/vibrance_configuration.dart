@@ -10,7 +10,7 @@ class VibranceShaderConfiguration2 extends ShaderConfiguration {
         required double vibranceMax})
       : _vibrance = ShaderRangeNumberParameter(
           'Vibrance',
-          '程度',
+          EditorLang.current.editor_intensity,
           vibrance, // Default value
           0, // Shader location
           min: vibranceMin, // Minimum vibrance value
