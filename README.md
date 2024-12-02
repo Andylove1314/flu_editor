@@ -2,7 +2,6 @@
 
 ## Language: 中文 | [English](https://github.com/Andylove1314/flu_editors/blob/1.0.4/README_en.md)
 
->>>>>>> 1.0.4
 ![Banner](https://github.com/Andylove1314/flu_editors/blob/1.0.0/editor_banner.png)
 
 `flu_editor` 是一个用于照片和视频的颜色滤镜编辑插件。
