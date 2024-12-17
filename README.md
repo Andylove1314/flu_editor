@@ -51,6 +51,9 @@ API 参考。
     - `fontsCb`：回调函数，用于获取字体列表。
     - `framesCb`：回调函数，用于获取边框列表。
     - `homeSavedCb`：回调函数，编辑器主页保存图片。
+    - `bannerAdWidgetCb`：banner ad callback.
+    - `nativeAdWidgetCb`：native ad callback.
+    - `adShowWidgetCb`：ad show callback.
 
 - `内部页面路由`：
 - **编辑器首页进入的具体功能区（宿主app不要直接调用，要通过goFluEditor(type)进入）。**：

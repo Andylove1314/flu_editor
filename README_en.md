@@ -56,6 +56,9 @@ classes:
     - `fontsCb`：A callback to retrieve the font list.
     - `framesCb`：A callback to retrieve the frame list.
     - `homeSavedCb`：A callback to save images on the editor home page.
+    - `bannerAdWidgetCb`：banner ad callback.
+    - `nativeAdWidgetCb`：native ad callback.
+    - `adShowWidgetCb`：ad show callback.
 
 - `Internal Page Routes`：
 - **The specific function areas to enter from the editor homepage (do not call directly from the

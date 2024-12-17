@@ -18,6 +18,10 @@ typedef StickersCallback = Future<List<StickerData>> Function();
 typedef FontsCallback = Future<List<FontsData>> Function();
 typedef FramesCallback = Future<List<FrameData>> Function();
 typedef HomeSavedCallback = void Function(BuildContext context, String lastImage);
+typedef BannerAdWidgetCallback = Widget Function();
+typedef NativeAdWidgetCallback = Widget Function();
+/// type 0 激励，1 插页，2 插页激励
+typedef AdShowCallback =  Future<bool?> Function(int type);
 
 final mainActions = [
   ActionData(type: 0, name: EditorLang.current.editor_crop, icon: 'icon_caijian_edit@3x'.imagePng),

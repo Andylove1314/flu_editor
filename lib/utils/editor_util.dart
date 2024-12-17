@@ -23,6 +23,10 @@ class EditorUtil {
   static FramesCallback? framesCallback;
   static HomeSavedCallback? homeSavedCallback;
 
+  static BannerAdWidgetCallback? bannerAdWidgetCallback;
+  static NativeAdWidgetCallback? nativeAdWidgetCallback;
+  static AdShowCallback? adShowCallback;
+
   static EditorHomeCubit? homeCubit;
   static EditorType? editorType;
   static bool singleEditorSavetoAlbum = true;
@@ -131,7 +135,10 @@ class EditorUtil {
       StickersCallback? stickersCb,
       FontsCallback? fontsCb,
       FramesCallback? framesCb,
-      HomeSavedCallback? homeSavedCb}) async {
+      HomeSavedCallback? homeSavedCb,
+      BannerAdWidgetCallback? bannerAdWidgetCb,
+      NativeAdWidgetCallback? nativeAdWidgetCb,
+      AdShowCallback? adShowWidgetCb}) async {
     _registerMultGlsl();
 
     vipStatusCallback = vipStatusCb;
@@ -147,6 +154,9 @@ class EditorUtil {
     fontsCallback = fontsCb;
     framesCallback = framesCb;
     homeSavedCallback = homeSavedCb;
+    bannerAdWidgetCallback = bannerAdWidgetCb;
+    nativeAdWidgetCallback = nativeAdWidgetCb;
+    adShowCallback = adShowWidgetCb;
 
     editorType = type;
 
@@ -517,6 +527,10 @@ class EditorUtil {
     fontsCallback = null;
     homeSavedCallback = null;
 
+    bannerAdWidgetCallback = null;
+    nativeAdWidgetCallback = null;
+    adShowCallback = null;
+
     homeCubit = null;
     filterList.clear();
     stickerList.clear();
@@ -776,5 +790,21 @@ class EditorUtil {
     debugPrint('Asset saved to $targetPath');
 
     return file;
+  }
+
+  /// banner ad widget
+  static Widget bannerAdWidget(BuildContext context) {
+    return bannerAdWidgetCallback?.call() ?? const SizedBox();
+  }
+
+  /// native ad widget
+  static Widget nativeAdWidget(BuildContext context) {
+    return nativeAdWidgetCallback?.call() ?? const SizedBox();
+  }
+
+  /// showAd
+  /// type 0 激励，1 插页，2 插页激励
+  static Future<bool?> showAd({int type = 0}) async {
+    return adShowCallback?.call(type);
   }
 }
