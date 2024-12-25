@@ -12,8 +12,8 @@ class EditorHomeCubit extends Cubit<EditorHomeState> {
 
   EditorHomeCubit(String orignalPath) : super(EditorHomeState(orignalPath));
 
-  Future<String> saveImage() async{
-    EditorUtil.saveCallback?.call(state.afterPath);
+  Future<String> getSaveImagePath() async{
+    // await EditorUtil.saveCallback?.call(state.afterPath);
     saved = true;
     return state.afterPath;
   }

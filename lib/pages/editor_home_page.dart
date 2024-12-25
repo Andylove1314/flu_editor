@@ -25,7 +25,7 @@ class EditorHomePage extends StatelessWidget {
         if (orignal != context.read<EditorHomeCubit>().state.afterPath &&
             !context.read<EditorHomeCubit>().saved) {
           showSaveImagePop(context, onSave: () {
-            context.read<EditorHomeCubit>().saveImage().then((path) {
+            context.read<EditorHomeCubit>().getSaveImagePath().then((path) {
               EditorUtil.homeSavedCallback?.call(context, path);
             });
           }, onCancel: () {
@@ -67,15 +67,13 @@ class EditorHomePage extends StatelessWidget {
         BlocBuilder<EditorHomeCubit, EditorHomeState>(
           builder: (BuildContext context, EditorHomeState state) {
             return saveAction(
-                action:
-                    orignal != context.read<EditorHomeCubit>().state.afterPath
-                        ? () => context
-                                .read<EditorHomeCubit>()
-                                .saveImage()
-                                .then((path) {
-                              EditorUtil.homeSavedCallback?.call(context, path);
-                            })
-                        : null);
+                action: orignal != context.read<EditorHomeCubit>().state.afterPath
+                    ? () async {
+                        // 保存图片
+                        final path = await context.read<EditorHomeCubit>().getSaveImagePath();
+                        EditorUtil.homeSavedCallback?.call(context, path);
+                      }
+                    : null);
           },
         )
       ],
