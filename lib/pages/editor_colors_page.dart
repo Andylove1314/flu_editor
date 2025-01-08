@@ -225,12 +225,6 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                     }
                   },
                   onEffectSave: () async {
-                    bool? logined = (await EditorUtil.isLogined()) ?? false;
-
-                    if (!logined) {
-                      return;
-                    }
-
                     showSaveEffectPop(context, _currentConfig,
                         context.read<SourceImageCubit>().state.textureSource!,
                         onSave: (saveEffect, name) async {
@@ -254,6 +248,12 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
 
                       Navigator.pop(context);
                       if (saveEffect) {
+                        bool? logined = (await EditorUtil.isLogined()) ?? false;
+
+                        if (!logined) {
+                          return;
+                        }
+
                         bool? successed = await EditorUtil.saveColorEffectParam(
                             _currentConfig.parameters, effectImagePath, name);
                         EditorUtil.toastActionCallback?.call(successed == true
