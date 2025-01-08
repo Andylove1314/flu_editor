@@ -102,12 +102,12 @@ class _StickerPanState extends State<StickerPan>
             Navigator.of(context).pop();
           },
           confirm: () async {
-            if (showVipBg) {
-              showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3, onSave: () {
-                EditorUtil.vipActionCallback?.call();
-              }, onCancel: () {});
-              return;
-            }
+            // if (showVipBg) {
+            //   showVipPop(context, content: EditorLang.of(context).editor_vip_limited_3, onSave: () {
+            //     EditorUtil.vipActionCallback?.call();
+            //   }, onCancel: () {});
+            //   return;
+            // }
             widget.onEffectSave.call();
           },
         )

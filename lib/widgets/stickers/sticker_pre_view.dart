@@ -19,6 +19,8 @@ class StikerPreView extends StatefulWidget {
   int addCount;
 
   Function(LindiController stickerController) onInited;
+  Function(int index)? onRemove;
+  Function(int index)? onCheck;
 
   StikerPreView(
       {super.key,
@@ -28,7 +30,9 @@ class StikerPreView extends StatefulWidget {
       required this.stickerSize,
       required this.onInited,
       required this.addStickerPath,
-      required this.addCount});
+      required this.addCount,
+      this.onRemove,
+      this.onCheck});
 
   @override
   State<StatefulWidget> createState() {
@@ -106,13 +110,15 @@ class _StikerViewState extends State<StikerPreView> {
         debugPrint(" $currentIndex deleted");
         _stickerKeys.removeAt(currentIndex);
         _stickerOpacitys.removeAt(currentIndex);
+        widget.onRemove?.call(currentIndex);
+      } else {
+        widget.onCheck?.call(currentIndex);
       }
 
       setState(() {
         currentIndex = index;
       });
     });
-
     widget.onInited.call(_controller);
     super.initState();
   }

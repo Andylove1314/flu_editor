@@ -6,6 +6,8 @@ import 'package:lindi_sticker_widget/lindi_controller.dart';
 
 import '../blocs/edtor_home_cubit.dart';
 import '../flu_editor.dart';
+import '../generated/l10n.dart';
+import '../widgets/custom_widget.dart';
 import '../widgets/stickers/sticker_pre_view.dart';
 
 class EditorStickerPage extends StatefulWidget {
@@ -27,6 +29,8 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
 
   String? currentStickerPath;
   int stickerCount = 0;
+
+  final List<StickDetail?> _stickers = [];
 
   @override
   void dispose() {
@@ -70,6 +74,13 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
                 stickerSize: Size(stickerSize, stickerSize),
                 addStickerPath: currentStickerPath,
                 addCount: stickerCount,
+                onRemove: (index) {
+                  debugPrint('remove= $index');
+                  _stickers.removeAt(index);
+                },
+                onCheck: (index) {
+
+                },
               ),
             ],
           )),
@@ -79,10 +90,24 @@ class _EditorStickerPageState extends State<EditorStickerPage> {
               setState(() {
                 currentStickerPath = path;
                 stickerCount++;
+                _stickers.add(item);
               });
             },
             onEffectSave: () async {
               if (_stickerController.widgets.isEmpty) {
+                return;
+              }
+
+              ///最后检查
+              bool isContainVipSticker =
+                  _stickers.any((item) => item?.isVipSticker ?? false);
+              if (isContainVipSticker &&
+                  !(EditorUtil.vipStatusCallback?.call() ?? false)) {
+                showVipPop(context,
+                    content: EditorLang.of(context).editor_vip_limited_3,
+                    onSave: () {
+                  EditorUtil.vipActionCallback?.call();
+                }, onCancel: () {});
                 return;
               }
 
