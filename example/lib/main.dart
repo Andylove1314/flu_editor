@@ -210,6 +210,9 @@ class _MyAppState extends State<MyApp> {
               );
             },
           ));
+        },
+        loginCheckCb: () {
+          return Future.value(false);
         });
   }
 

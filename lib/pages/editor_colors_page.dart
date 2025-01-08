@@ -179,7 +179,9 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
             child: BlocBuilder<SourceImageCubit, SourceImageReady>(
               builder: (context, state) {
                 return FadeBeforeAfter(
-                  before: Image.file(File(state.afterPath), width: MediaQuery.of(context).size.width,fit: BoxFit.contain),
+                  before: Image.file(File(state.afterPath),
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.contain),
                   after: (state.textureSource != null)
                       ? ImageShaderPreview(
                           texture: state.textureSource!,
@@ -209,15 +211,26 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                 ColorsPan(
                   tags: _genConfig(),
                   sourceFiltersConfig: _currentConfig,
-                  onClick: (action) {
+                  onClick: (action) async {
                     setState(() {
                       _currentAction = action;
                     });
                     if (action.params == null) {
+                      bool? logined = (await EditorUtil.isLogined()) ?? false;
+
+                      if (!logined) {
+                        return;
+                      }
                       _showEffects();
                     }
                   },
                   onEffectSave: () async {
+                    bool? logined = (await EditorUtil.isLogined()) ?? false;
+
+                    if (!logined) {
+                      return;
+                    }
+
                     showSaveEffectPop(context, _currentConfig,
                         context.read<SourceImageCubit>().state.textureSource!,
                         onSave: (saveEffect, name) async {
@@ -233,7 +246,7 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                           EditorHomeState(effectImagePath),
                         );
                       } else {
-                        if(EditorUtil.singleEditorSavetoAlbum){
+                        if (EditorUtil.singleEditorSavetoAlbum) {
                           EditorUtil.saveCallback?.call(effectImagePath);
                         }
                         EditorUtil.clearTmpObject(effectImagePath);
@@ -243,8 +256,11 @@ class _EditorColorsPageState extends State<EditorColorsPage> {
                       if (saveEffect) {
                         bool? successed = await EditorUtil.saveColorEffectParam(
                             _currentConfig.parameters, effectImagePath, name);
-                        EditorUtil.toastActionCallback
-                            ?.call(successed == true ? EditorLang.of(context).editor_color_save_pf_successfully : EditorLang.of(context).editor_color_save_pf_faild);
+                        EditorUtil.toastActionCallback?.call(successed == true
+                            ? EditorLang.of(context)
+                                .editor_color_save_pf_successfully
+                            : EditorLang.of(context)
+                                .editor_color_save_pf_faild);
                       }
                       Navigator.pop(context);
                     }, onCancel: () {

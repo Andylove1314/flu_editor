@@ -26,6 +26,7 @@ class EditorUtil {
   static BannerAdWidgetCallback? bannerAdWidgetCallback;
   static NativeAdWidgetCallback? nativeAdWidgetCallback;
   static AdShowCallback? adShowCallback;
+  static LoginCheckCallback? loginCheckCallback;
 
   static EditorHomeCubit? homeCubit;
   static EditorType? editorType;
@@ -138,7 +139,8 @@ class EditorUtil {
       HomeSavedCallback? homeSavedCb,
       BannerAdWidgetCallback? bannerAdWidgetCb,
       NativeAdWidgetCallback? nativeAdWidgetCb,
-      AdShowCallback? adShowWidgetCb}) async {
+      AdShowCallback? adShowWidgetCb,
+      LoginCheckCallback? loginCheckCb}) async {
     _registerMultGlsl();
 
     vipStatusCallback = vipStatusCb;
@@ -157,6 +159,7 @@ class EditorUtil {
     bannerAdWidgetCallback = bannerAdWidgetCb;
     nativeAdWidgetCallback = nativeAdWidgetCb;
     adShowCallback = adShowWidgetCb;
+    loginCheckCallback = loginCheckCb;
 
     editorType = type;
 
@@ -530,6 +533,7 @@ class EditorUtil {
     bannerAdWidgetCallback = null;
     nativeAdWidgetCallback = null;
     adShowCallback = null;
+    loginCheckCallback = null;
 
     homeCubit = null;
     filterList.clear();
@@ -806,5 +810,10 @@ class EditorUtil {
   /// type 0 激励，1 插页，2 插页激励
   static Future<bool?> showAd({int type = 0}) async {
     return adShowCallback?.call(type);
+  }
+
+  /// is login
+  static Future<bool?> isLogined() async {
+    return loginCheckCallback?.call();
   }
 }

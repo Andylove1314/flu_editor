@@ -54,6 +54,7 @@ API 参考。
     - `bannerAdWidgetCb`：banner ad callback.
     - `nativeAdWidgetCb`：native ad callback.
     - `adShowWidgetCb`：ad show callback.
+    - `loginCheckCb`：logined check callback.
 
 - `内部页面路由`：
 - **编辑器首页进入的具体功能区（宿主app不要直接调用，要通过goFluEditor(type)进入）。**：

@@ -59,6 +59,7 @@ classes:
     - `bannerAdWidgetCb`：banner ad callback.
     - `nativeAdWidgetCb`：native ad callback.
     - `adShowWidgetCb`：ad show callback.
+    - `loginCheckCb`：logined check callback.
 
 - `Internal Page Routes`：
 - **The specific function areas to enter from the editor homepage (do not call directly from the
