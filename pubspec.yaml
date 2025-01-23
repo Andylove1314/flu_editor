@@ -127,7 +127,7 @@ flutter:
   # https://flutter.dev/to/font-from-package
 flutter_intl:
   enabled: true
-  main_locale: zh_CN
+  main_locale: en
   class_name: EditorLang
   output_dir: lib/generated
 

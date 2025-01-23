@@ -50,690 +50,690 @@ class EditorLang {
     return Localizations.of<EditorLang>(context, EditorLang);
   }
 
-  /// `图片编辑`
+  /// `Image Editing`
   String get editor_name {
     return Intl.message(
-      '图片编辑',
+      'Image Editing',
       name: 'editor_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `程度`
+  /// `Intensity`
   String get editor_intensity {
     return Intl.message(
-      '程度',
+      'Intensity',
       name: 'editor_intensity',
       desc: '',
       args: [],
     );
   }
 
-  /// `裁剪`
+  /// `Crop`
   String get editor_crop {
     return Intl.message(
-      '裁剪',
+      'Crop',
       name: 'editor_crop',
       desc: '',
       args: [],
     );
   }
 
-  /// `原图`
+  /// `Original`
   String get editor_crop_orignal {
     return Intl.message(
-      '原图',
+      'Original',
       name: 'editor_crop_orignal',
       desc: '',
       args: [],
     );
   }
 
-  /// `自由`
+  /// `Free`
   String get editor_crop_freedom {
     return Intl.message(
-      '自由',
+      'Free',
       name: 'editor_crop_freedom',
       desc: '',
       args: [],
     );
   }
 
-  /// `旋转`
+  /// `Rotate`
   String get editor_rotate {
     return Intl.message(
-      '旋转',
+      'Rotate',
       name: 'editor_rotate',
       desc: '',
       args: [],
     );
   }
 
-  /// `水平翻转`
+  /// `Horizontal`
   String get editor_rotate_lr {
     return Intl.message(
-      '水平翻转',
+      'Horizontal',
       name: 'editor_rotate_lr',
       desc: '',
       args: [],
     );
   }
 
-  /// `垂直翻转`
+  /// `Vertical`
   String get editor_rotate_tb {
     return Intl.message(
-      '垂直翻转',
+      'Vertical',
       name: 'editor_rotate_tb',
       desc: '',
       args: [],
     );
   }
 
-  /// `左转90°`
+  /// `Turn 90°`
   String get editor_rotate_l90 {
     return Intl.message(
-      '左转90°',
+      'Turn 90°',
       name: 'editor_rotate_l90',
       desc: '',
       args: [],
     );
   }
 
-  /// `右转90°`
+  /// `Turn 90°`
   String get editor_rotate_r90 {
     return Intl.message(
-      '右转90°',
+      'Turn 90°',
       name: 'editor_rotate_r90',
       desc: '',
       args: [],
     );
   }
 
-  /// `复位`
+  /// `Reset`
   String get editor_restore {
     return Intl.message(
-      '复位',
+      'Reset',
       name: 'editor_restore',
       desc: '',
       args: [],
     );
   }
 
-  /// `调色`
+  /// `Color`
   String get editor_color {
     return Intl.message(
-      '调色',
+      'Color',
       name: 'editor_color',
       desc: '',
       args: [],
     );
   }
 
-  /// `删除配方成功`
+  /// `Delete Successfully`
   String get editor_color_delete_pf_successfully {
     return Intl.message(
-      '删除配方成功',
+      'Delete Successfully',
       name: 'editor_color_delete_pf_successfully',
       desc: '',
       args: [],
     );
   }
 
-  /// `删除配方失败`
+  /// `Delete Failed`
   String get editor_color_delete_pf_faild {
     return Intl.message(
-      '删除配方失败',
+      'Delete Failed',
       name: 'editor_color_delete_pf_faild',
       desc: '',
       args: [],
     );
   }
 
-  /// `配方`
+  /// `Formula`
   String get editor_color_pf {
     return Intl.message(
-      '配方',
+      'Formula',
       name: 'editor_color_pf',
       desc: '',
       args: [],
     );
   }
 
-  /// `暂无配方`
+  /// `No Formula`
   String get editor_color_pf_no {
     return Intl.message(
-      '暂无配方',
+      'No Formula',
       name: 'editor_color_pf_no',
       desc: '',
       args: [],
     );
   }
 
-  /// `亮度`
+  /// `Brightness`
   String get editor_color_ld {
     return Intl.message(
-      '亮度',
+      'Brightness',
       name: 'editor_color_ld',
       desc: '',
       args: [],
     );
   }
 
-  /// `饱和度`
+  /// `Saturation`
   String get editor_color_bhd {
     return Intl.message(
-      '饱和度',
+      'Saturation',
       name: 'editor_color_bhd',
       desc: '',
       args: [],
     );
   }
 
-  /// `对比度`
+  /// `Contrast`
   String get editor_color_dbd {
     return Intl.message(
-      '对比度',
+      'Contrast',
       name: 'editor_color_dbd',
       desc: '',
       args: [],
     );
   }
 
-  /// `高光`
+  /// `Highlights`
   String get editor_color_gg {
     return Intl.message(
-      '高光',
+      'Highlights',
       name: 'editor_color_gg',
       desc: '',
       args: [],
     );
   }
 
-  /// `阴影`
+  /// `Shadows`
   String get editor_color_yy {
     return Intl.message(
-      '阴影',
+      'Shadows',
       name: 'editor_color_yy',
       desc: '',
       args: [],
     );
   }
 
-  /// `色温`
+  /// `Temperature`
   String get editor_color_sw {
     return Intl.message(
-      '色温',
+      'Temperature',
       name: 'editor_color_sw',
       desc: '',
       args: [],
     );
   }
 
-  /// `晕影`
+  /// `Vignette`
   String get editor_color_yying {
     return Intl.message(
-      '晕影',
+      'Vignette',
       name: 'editor_color_yying',
       desc: '',
       args: [],
     );
   }
 
-  /// `锐化`
+  /// `Sharpen`
   String get editor_color_rh {
     return Intl.message(
-      '锐化',
+      'Sharpen',
       name: 'editor_color_rh',
       desc: '',
       args: [],
     );
   }
 
-  /// `噪点`
+  /// `Noise`
   String get editor_color_zd {
     return Intl.message(
-      '噪点',
+      'Noise',
       name: 'editor_color_zd',
       desc: '',
       args: [],
     );
   }
 
-  /// `鲜艳度`
+  /// `Vividness`
   String get editor_color_xyd {
     return Intl.message(
-      '鲜艳度',
+      'Vividness',
       name: 'editor_color_xyd',
       desc: '',
       args: [],
     );
   }
 
-  /// `白平衡`
+  /// `Balance`
   String get editor_color_bph {
     return Intl.message(
-      '白平衡',
+      'Balance',
       name: 'editor_color_bph',
       desc: '',
       args: [],
     );
   }
 
-  /// `红色`
+  /// `Red`
   String get editor_color_bph_red {
     return Intl.message(
-      '红色',
+      'Red',
       name: 'editor_color_bph_red',
       desc: '',
       args: [],
     );
   }
 
-  /// `绿色`
+  /// `Green`
   String get editor_color_bph_green {
     return Intl.message(
-      '绿色',
+      'Green',
       name: 'editor_color_bph_green',
       desc: '',
       args: [],
     );
   }
 
-  /// `蓝色`
+  /// `Blue`
   String get editor_color_bph_blue {
     return Intl.message(
-      '蓝色',
+      'Blue',
       name: 'editor_color_bph_blue',
       desc: '',
       args: [],
     );
   }
 
-  /// `曝光`
+  /// `Exposure`
   String get editor_color_bg {
     return Intl.message(
-      '曝光',
+      'Exposure',
       name: 'editor_color_bg',
       desc: '',
       args: [],
     );
   }
 
-  /// `滤镜`
+  /// `Filter`
   String get editor_filter {
     return Intl.message(
-      '滤镜',
+      'Filter',
       name: 'editor_filter',
       desc: '',
       args: [],
     );
   }
 
-  /// `贴纸`
+  /// `Stickers`
   String get editor_sticker {
     return Intl.message(
-      '贴纸',
+      'Stickers',
       name: 'editor_sticker',
       desc: '',
       args: [],
     );
   }
 
-  /// `文字`
+  /// `Text`
   String get editor_text {
     return Intl.message(
-      '文字',
+      'Text',
       name: 'editor_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `字体`
+  /// `font`
   String get editor_text_font {
     return Intl.message(
-      '字体',
+      'font',
       name: 'editor_text_font',
       desc: '',
       args: [],
     );
   }
 
-  /// `样式`
+  /// `style`
   String get editor_text_style {
     return Intl.message(
-      '样式',
+      'style',
       name: 'editor_text_style',
       desc: '',
       args: [],
     );
   }
 
-  /// `透明`
+  /// `transparent`
   String get editor_text_style_alpha {
     return Intl.message(
-      '透明',
+      'transparent',
       name: 'editor_text_style_alpha',
       desc: '',
       args: [],
     );
   }
 
-  /// `粗体`
+  /// `bold`
   String get editor_text_style_ct {
     return Intl.message(
-      '粗体',
+      'bold',
       name: 'editor_text_style_ct',
       desc: '',
       args: [],
     );
   }
 
-  /// `斜体`
+  /// `italic`
   String get editor_text_style_xt {
     return Intl.message(
-      '斜体',
+      'italic',
       name: 'editor_text_style_xt',
       desc: '',
       args: [],
     );
   }
 
-  /// `下划线`
+  /// `underline`
   String get editor_text_style_xhx {
     return Intl.message(
-      '下划线',
+      'underline',
       name: 'editor_text_style_xhx',
       desc: '',
       args: [],
     );
   }
 
-  /// `对齐`
+  /// `align`
   String get editor_text_align {
     return Intl.message(
-      '对齐',
+      'align',
       name: 'editor_text_align',
       desc: '',
       args: [],
     );
   }
 
-  /// `字间距`
+  /// `word`
   String get editor_text_align_ws {
     return Intl.message(
-      '字间距',
+      'word',
       name: 'editor_text_align_ws',
       desc: '',
       args: [],
     );
   }
 
-  /// `行间距`
+  /// `line`
   String get editor_text_align_ls {
     return Intl.message(
-      '行间距',
+      'line',
       name: 'editor_text_align_ls',
       desc: '',
       args: [],
     );
   }
 
-  /// `居左`
+  /// `left`
   String get editor_text_align_left {
     return Intl.message(
-      '居左',
+      'left',
       name: 'editor_text_align_left',
       desc: '',
       args: [],
     );
   }
 
-  /// `居中`
+  /// `center`
   String get editor_text_align_center {
     return Intl.message(
-      '居中',
+      'center',
       name: 'editor_text_align_center',
       desc: '',
       args: [],
     );
   }
 
-  /// `居右`
+  /// `right`
   String get editor_text_align_right {
     return Intl.message(
-      '居右',
+      'right',
       name: 'editor_text_align_right',
       desc: '',
       args: [],
     );
   }
 
-  /// `边框`
+  /// `border`
   String get editor_frame {
     return Intl.message(
-      '边框',
+      'border',
       name: 'editor_frame',
       desc: '',
       args: [],
     );
   }
 
-  /// `购买会员`
+  /// `Buy VIP`
   String get editor_vip_action {
     return Intl.message(
-      '购买会员',
+      'Buy VIP',
       name: 'editor_vip_action',
       desc: '',
       args: [],
     );
   }
 
-  /// `放弃效果`
+  /// `Give up`
   String get editor_vip_cancel {
     return Intl.message(
-      '放弃效果',
+      'Give up',
       name: 'editor_vip_cancel',
       desc: '',
       args: [],
     );
   }
 
-  /// `会员已到期，开通即可使用专享素材功能`
+  /// `activate VIP to use exclusive material functions`
   String get editor_vip_limited_1 {
     return Intl.message(
-      '会员已到期，开通即可使用专享素材功能',
+      'activate VIP to use exclusive material functions',
       name: 'editor_vip_limited_1',
       desc: '',
       args: [],
     );
   }
 
-  /// `您使用了VIP滤镜，请在开通会员后保存滤镜效果？`
+  /// `You have used VIP filters. Please save the filter effects after activating VIP?`
   String get editor_vip_limited_2 {
     return Intl.message(
-      '您使用了VIP滤镜，请在开通会员后保存滤镜效果？',
+      'You have used VIP filters. Please save the filter effects after activating VIP?',
       name: 'editor_vip_limited_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `是否保存编辑的效果后退出？`
+  /// `Do you want to save the edited effects before exiting?`
   String get editor_exit_tip {
     return Intl.message(
-      '是否保存编辑的效果后退出？',
+      'Do you want to save the edited effects before exiting?',
       name: 'editor_exit_tip',
       desc: '',
       args: [],
     );
   }
 
-  /// `不保存`
+  /// `Cancel`
   String get editor_exit_no {
     return Intl.message(
-      '不保存',
+      'Cancel',
       name: 'editor_exit_no',
       desc: '',
       args: [],
     );
   }
 
-  /// `保存`
+  /// `Save`
   String get editor_exit_save {
     return Intl.message(
-      '保存',
+      'Save',
       name: 'editor_exit_save',
       desc: '',
       args: [],
     );
   }
 
-  /// `您使用了VIP素材，请在开通会员后保存效果？`
+  /// `You have used VIP materials. Please save the effects after activating membership?`
   String get editor_vip_limited_3 {
     return Intl.message(
-      '您使用了VIP素材，请在开通会员后保存效果？',
+      'You have used VIP materials. Please save the effects after activating membership?',
       name: 'editor_vip_limited_3',
       desc: '',
       args: [],
     );
   }
 
-  /// `透明度`
+  /// `Transparency`
   String get editor_text_style_alpha_2 {
     return Intl.message(
-      '透明度',
+      'Transparency',
       name: 'editor_text_style_alpha_2',
       desc: '',
       args: [],
     );
   }
 
-  /// `左右`
+  /// `Left and right`
   String get editor_color_yying_zy {
     return Intl.message(
-      '左右',
+      'Left and right',
       name: 'editor_color_yying_zy',
       desc: '',
       args: [],
     );
   }
 
-  /// `上下`
+  /// `Up and down`
   String get editor_color_yying_sx {
     return Intl.message(
-      '上下',
+      'Up and down',
       name: 'editor_color_yying_sx',
       desc: '',
       args: [],
     );
   }
 
-  /// `大小`
+  /// `Size`
   String get editor_color_yying_dx {
     return Intl.message(
-      '大小',
+      'Size',
       name: 'editor_color_yying_dx',
       desc: '',
       args: [],
     );
   }
 
-  /// `外延`
+  /// `Extension`
   String get editor_color_yying_wy {
     return Intl.message(
-      '外延',
+      'Extension',
       name: 'editor_color_yying_wy',
       desc: '',
       args: [],
     );
   }
 
-  /// `模糊`
+  /// `Blur`
   String get editor_blur {
     return Intl.message(
-      '模糊',
+      'Blur',
       name: 'editor_blur',
       desc: '',
       args: [],
     );
   }
 
-  /// `色调`
+  /// `Hue`
   String get editor_color_sd {
     return Intl.message(
-      '色调',
+      'Hue',
       name: 'editor_color_sd',
       desc: '',
       args: [],
     );
   }
 
-  /// `应用调色效果前是否要保存配方下次一键调用`
+  /// `Save the effect for one-click use next time before applying the color effect?`
   String get editor_color_effect_save_tip {
     return Intl.message(
-      '应用调色效果前是否要保存配方下次一键调用',
+      'Save the effect for one-click use next time before applying the color effect?',
       name: 'editor_color_effect_save_tip',
       desc: '',
       args: [],
     );
   }
 
-  /// `不保存配方`
+  /// `Cancel`
   String get editor_color_effect_save_no {
     return Intl.message(
-      '不保存配方',
+      'Cancel',
       name: 'editor_color_effect_save_no',
       desc: '',
       args: [],
     );
   }
 
-  /// `保存配方`
+  /// `Save`
   String get editor_color_effect_save_action {
     return Intl.message(
-      '保存配方',
+      'Save',
       name: 'editor_color_effect_save_action',
       desc: '',
       args: [],
     );
   }
 
-  /// `配方名称`
+  /// `Name`
   String get editor_color_effect_name {
     return Intl.message(
-      '配方名称',
+      'Name',
       name: 'editor_color_effect_name',
       desc: '',
       args: [],
     );
   }
 
-  /// `请输入配方名称`
+  /// `Please enter the effect name`
   String get editor_color_effect_save_action_tip {
     return Intl.message(
-      '请输入配方名称',
+      'Please enter the effect name',
       name: 'editor_color_effect_save_action_tip',
       desc: '',
       args: [],
     );
   }
 
-  /// `保存配方成功`
+  /// `Save effect successfully`
   String get editor_color_save_pf_successfully {
     return Intl.message(
-      '保存配方成功',
+      'Save effect successfully',
       name: 'editor_color_save_pf_successfully',
       desc: '',
       args: [],
     );
   }
 
-  /// `保存配方失败`
+  /// `Failed to save effect`
   String get editor_color_save_pf_faild {
     return Intl.message(
-      '保存配方失败',
+      'Failed to save effect',
       name: 'editor_color_save_pf_faild',
       desc: '',
       args: [],
@@ -746,10 +746,10 @@ class AppLocalizationDelegate extends LocalizationsDelegate<EditorLang> {
 
   List<Locale> get supportedLocales {
     return const <Locale>[
-      Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'ms'),
       Locale.fromSubtags(languageCode: 'th'),
+      Locale.fromSubtags(languageCode: 'zh', countryCode: 'CN'),
     ];
   }
 
